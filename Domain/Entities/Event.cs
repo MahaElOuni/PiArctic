@@ -8,7 +8,8 @@ namespace Domain.Entities
 {
     public class Event
     {
-        //farouuuuuuuk
+        //farouuuuuuuk*
+        //karim
         public int EventId { get; set; }
         public String Title { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
