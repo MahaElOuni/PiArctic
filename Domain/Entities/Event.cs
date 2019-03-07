@@ -11,6 +11,7 @@ namespace Domain.Entities
         //farouuuuuuuk*
         //karim
         //ioiiii
+        //ùù
         public int EventId { get; set; }
         public String Title { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
