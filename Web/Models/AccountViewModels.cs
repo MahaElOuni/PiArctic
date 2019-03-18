@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
@@ -70,6 +71,12 @@ namespace Web.Models
         public string Email { get; set; }
 
         [Required]
+        [MinLength(8)]
+        [MaxLength(8)]
+        [Display(Name = "CIN")]
+        public int CIN { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
@@ -79,6 +86,46 @@ namespace Web.Models
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
+        [Display(Name = "First Name")]
+
+        public string FName { get; set; }
+        [DataType(DataType.Text)]
+
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
+        [DataType(DataType.Text)]
+
+        [Display(Name = "Phone Number")]
+
+        public long PhoneNumber { get; set; }
+        [DataType(DataType.Text)]
+
+        [Display(Name = "Street Name")]
+        public string StreetName { get; set; }
+        [DataType(DataType.Text)]
+
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "id")]
+
+        public int id { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
+        [Display(Name = "image")]
+
+        public string ImagePersonnel { get; set; }
+        public string EntrepriseTranscripts { get; set; }
+        public string Photo { get; set; }
+        public string Poste { get; set; }
+        public string NomSociete { get; set; }
+        //recommandation 
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string Emailreco { get; set; }
+        public string Recommendation { get; set; }
+
+
+
     }
 
     public class ResetPasswordViewModel

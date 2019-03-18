@@ -8,6 +8,8 @@ namespace Domain.Entities
 {
     public class President:User
     {
-
+        public String EntrepriseTranscripts { get; set; }
+        public String photo { get; set; }
+        public String Recommendation { get; set; }
     }
 }

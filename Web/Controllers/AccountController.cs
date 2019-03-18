@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Service.IServices;
+using Service.Services;
 using Web.Models;
 
 namespace Web.Controllers
@@ -57,8 +62,15 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if(User.Identity .IsAuthenticated == false)
+            {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         //
@@ -76,7 +88,45 @@ namespace Web.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            IUserService iuser = new UserService();
+            User u = new User();
+            if (result == SignInStatus.Success)
+            {
+                if (u.role == "Participant")
+                {
+                    return RedirectToAction("", "");
+                }
+                else if (u.role == "President")
+                {
+                    return RedirectToAction("", "");
+                }
+                else if (u.role == "Organizer")
+                {
+                    return RedirectToAction("", "");
+                }
+                else if (u.role == "User")
+                {
+                    return RedirectToAction("", "");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else if (result == SignInStatus.LockedOut)
+            {
+                return View("Lockout");
+            }
+            else if (result == SignInStatus.RequiresVerification)
+            {
+                return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
+            /*switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
@@ -88,7 +138,7 @@ namespace Web.Controllers
                 default:
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
                     return View(model);
-            }
+            }*/
         }
 
         //
@@ -139,7 +189,15 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
         }
 
         //
@@ -147,29 +205,96 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel cm, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                DateTime today = DateTime.Today;
+                President p = new President();
+                p.StreetName = cm.StreetName;
+                p.City = cm.City;
+                p.CIN = cm.CIN;
+                p.Recommendation = cm.Recommendation;
+                p.FName = cm.FName;
+                p.LName = cm.LName;
+                p.BirthDate = cm.BirthDate;
+                p.Email = cm.Email;
+                p.role = "President";
+                p.UserName = cm.Email;
+                var FileName2 = "";
+                var FileName3 = "";
+                if (file2.ContentLength > 0)
+                {
+                    FileName2 = Path.GetFileName(file2.FileName);
+
+                    var path = Path.Combine(Server.MapPath("~/Content/Upload/"), file2.FileName);
+                    file2.SaveAs(path);
+                }
+                if (file3.ContentLength > 0)
+                {
+                    FileName3 = Path.GetFileName(file3.FileName);
+
+                    var path = Path.Combine(Server.MapPath("~/Content/Upload/"), file3.FileName);
+                    file3.SaveAs(path);
+                }
+                p.photo = file2.FileName;
+                var mp = "A" + RandomStringGenerator() + "-78";
+                p.password = mp;
+                p.EntrepriseTranscripts = file3.FileName;
+                var result = await UserManager.CreateAsync(p, mp);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Envoyer un message électronique avec ce lien
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    try
+                    {
+                        MailMessage message = new MailMessage("summerchart1@gmail.com", cm.Emailreco, "(President ) fait de Recommendation ", "Bonjour Mr " + cm.Nom + " " + cm.Prenom +
+                           "Le Président " + p.FName + " " + p.LName + "a posé une demande de recommendation auprés de vous. ");
+                        string schema = "\n  <a href='http://localhost:21514/Candidat/Recommender/'" + p.CIN + " />Recommendation</a>" + cm.Email;
+                        message.Body = message.Body + schema;
+                        message.IsBodyHtml = true;
+                        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                        client.EnableSsl = true;
+                        client.Credentials = new System.Net.NetworkCredential("summerchart1@gmail.com", "anisov-71");
+                        client.Send(message);
+                        MailMessage message2 = new MailMessage("summerchart1@gmail.com", cm.Email, "(Consultech)Registration Succeeded", "Bonjour Mr " + cm.FName + " " + cm.LName +
+                           "Your Registration has succeeded and your password is  " + mp);
+                        string schemaa = "\n  <h1> Consultech </h1>";
+                        message2.Body = message2.Body + schemaa;
+                        message2.IsBodyHtml = true;
+                        SmtpClient clientt = new SmtpClient("smtp.gmail.com", 587);
+                        client.EnableSsl = true;
+                        client.Credentials = new System.Net.NetworkCredential("summerchart1@gmail.com", "anisov-71");
+                        client.Send(message2);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
+            
+
+
+                /* var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
+                // Envoyer un message électronique avec ce lien
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);*/
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
-            return View(model);
+            //  return View(model);
+            return View(cm);
         }
 
         //
@@ -384,6 +509,12 @@ namespace Web.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+        public static String RandomStringGenerator()
+        {
+            String randomString = Path.GetRandomFileName();
+            randomString = randomString.Replace(".", string.Empty);
+            return randomString;
+        }
 
         //
         // POST: /Account/LogOff
@@ -392,7 +523,7 @@ namespace Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Account");
         }
 
         //
