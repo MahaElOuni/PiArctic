@@ -10,26 +10,29 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public enum cities
+    public enum Cities
     {
         Aryanah,Beja,BenArous,Bizerte,Dejrba,ElDjem,ElKef,Gabes,Gafsa,Jendouba,Kairouan,Kasserine,Kebili,Mahdia,Manouba,Medenine,
         Monastir, Nabeul,Sfax,Sidinibouzid,Siliana,Sousse,Tataouine, Tunis, Tozeur ,Zaghouan,Zarzis
     }
+   
         public class User : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         [MaxLength(8)]
         [MinLength(8)]
-        public int CIN { get; set; }
+        public String CIN { get; set; }
         public String FName { get; set; }
         public String LName { get; set; }
         public String StreetName { get; set; }
-        public String password { get; set; }
+        public String Password { get; set; }
         public override String Email { get; set; }
-        [EnumDataType(typeof(cities))]
+        [EnumDataType(typeof(Cities))]
         public String City { get; set; }
-        public String role { get; set; }
+        public String Role { get; set; }
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+        public String Photo { get; set; }
+        public String EntrepriseTranscripts { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
             // Note the authenticationType must match the one defined in

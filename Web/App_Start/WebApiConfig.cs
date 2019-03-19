@@ -9,6 +9,7 @@ namespace Web
     {
         public static void Register(HttpConfiguration config)
         {
+            
             // Configuration et services API Web
 
             // Itinéraires de l'API Web

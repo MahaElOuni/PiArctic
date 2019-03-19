@@ -74,7 +74,7 @@ namespace Web.Models
         [MinLength(8)]
         [MaxLength(8)]
         [Display(Name = "CIN")]
-        public int CIN { get; set; }
+        public string CIN { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
