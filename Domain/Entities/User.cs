@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
+    //lik enty ya farouk 
     public enum Cities
     {
         Aryanah,Beja,BenArous,Bizerte,Dejrba,ElDjem,ElKef,Gabes,Gafsa,Jendouba,Kairouan,Kasserine,Kebili,Mahdia,Manouba,Medenine,
