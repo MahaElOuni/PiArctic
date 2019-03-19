@@ -67,15 +67,10 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if(User.Identity .IsAuthenticated == false)
-            {
+            
             ViewBag.ReturnUrl = returnUrl;
             return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            
         }
 
         //
@@ -184,7 +179,7 @@ namespace Web.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Code non valide.");
+                    ModelState.AddModelError("", "Invalid code.");
                     return View(model);
             }
         }

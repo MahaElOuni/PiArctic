@@ -304,7 +304,6 @@
     <Compile Include="Entities\President.cs" />
     <Compile Include="Entities\Recommendation.cs" />
     <Compile Include="Entities\Repport.cs" />
-    <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\User.cs" />
