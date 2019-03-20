@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IServices\IBlogService.cs" />
     <Compile Include="IServices\IPresidentService.cs" />
     <Compile Include="IServices\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\PresidentService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
