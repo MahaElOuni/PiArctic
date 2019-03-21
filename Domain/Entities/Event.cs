@@ -18,6 +18,7 @@ namespace Domain.Entities
         public String OrganizedBy { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
         public virtual ICollection<Ticket> ListTickets { get; set; }
+        public virtual ICollection<Form> Forms { get; set; }
         public Event()
         {
 
