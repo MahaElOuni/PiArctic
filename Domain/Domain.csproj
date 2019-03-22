@@ -297,8 +297,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Blog.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Feedback.cs" />
+    <Compile Include="Entities\Form.cs" />
     <Compile Include="Entities\Organizer.cs" />
     <Compile Include="Entities\Participant.cs" />
     <Compile Include="Entities\President.cs" />
