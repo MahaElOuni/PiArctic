@@ -3,7 +3,7 @@ namespace Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class V1 : DbMigration
+    public partial class _10 : DbMigration
     {
         public override void Up()
         {
@@ -13,20 +13,30 @@ namespace Data.Migrations
                     {
                         EventId = c.Int(nullable: false, identity: true),
                         Title = c.String(),
+                        Address = c.String(),
+                        NumberPlaces = c.Int(nullable: false),
+                        Price = c.Single(nullable: false),
+                        Description = c.String(),
+                        Date = c.DateTime(nullable: false),
+                        OrganizedBy = c.String(),
                     })
                 .PrimaryKey(t => t.EventId);
             
             CreateTable(
-                "dbo.Recommendations",
+                "dbo.Forms",
                 c => new
                     {
-                        RecommendationNum = c.Int(nullable: false),
-                        UserId = c.Int(nullable: false),
+                        FormId = c.Int(nullable: false),
+                        Prenom = c.String(nullable: false, maxLength: 128),
+                        ParicipantId = c.Int(nullable: false),
+                        Nom = c.String(),
+                        Age = c.Int(nullable: false),
+                        Profession = c.String(),
+                        Mail = c.String(),
                         EventId = c.Int(nullable: false),
-                        State = c.Int(nullable: false),
                         Participant_Id = c.Int(),
                     })
-                .PrimaryKey(t => new { t.RecommendationNum, t.UserId, t.EventId })
+                .PrimaryKey(t => new { t.FormId, t.Prenom, t.ParicipantId })
                 .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.Participant_Id)
                 .Index(t => t.EventId)
@@ -58,10 +68,23 @@ namespace Data.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(),
+                        ParicipantId = c.Int(),
                         Recommendation = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Blogs",
+                c => new
+                    {
+                        BlogId = c.Int(nullable: false, identity: true),
+                        Contenu = c.String(),
+                        User_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.BlogId)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.CustomUserClaims",
@@ -98,9 +121,25 @@ namespace Data.Migrations
                         RoleId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.CustomRoles", t => t.Id, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.Id, cascadeDelete: true)
+                .ForeignKey("dbo.CustomRoles", t => t.Id, cascadeDelete: true)
                 .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.Recommendations",
+                c => new
+                    {
+                        RecommendationNum = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        EventId = c.Int(nullable: false),
+                        State = c.Int(nullable: false),
+                        Participant_Id = c.Int(),
+                    })
+                .PrimaryKey(t => new { t.RecommendationNum, t.UserId, t.EventId })
+                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.Participant_Id)
+                .Index(t => t.EventId)
+                .Index(t => t.Participant_Id);
             
             CreateTable(
                 "dbo.Tickets",
@@ -127,26 +166,34 @@ namespace Data.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.CustomUserRoles", "Id", "dbo.Users");
-            DropForeignKey("dbo.CustomUserLogins", "Id", "dbo.Users");
-            DropForeignKey("dbo.CustomUserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.CustomUserRoles", "Id", "dbo.CustomRoles");
             DropForeignKey("dbo.Tickets", "Event_EventId", "dbo.Events");
             DropForeignKey("dbo.Recommendations", "Participant_Id", "dbo.Users");
             DropForeignKey("dbo.Recommendations", "EventId", "dbo.Events");
+            DropForeignKey("dbo.Forms", "Participant_Id", "dbo.Users");
+            DropForeignKey("dbo.CustomUserRoles", "Id", "dbo.Users");
+            DropForeignKey("dbo.CustomUserLogins", "Id", "dbo.Users");
+            DropForeignKey("dbo.CustomUserClaims", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Blogs", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Forms", "EventId", "dbo.Events");
             DropIndex("dbo.Tickets", new[] { "Event_EventId" });
+            DropIndex("dbo.Recommendations", new[] { "Participant_Id" });
+            DropIndex("dbo.Recommendations", new[] { "EventId" });
             DropIndex("dbo.CustomUserRoles", new[] { "Id" });
             DropIndex("dbo.CustomUserLogins", new[] { "Id" });
             DropIndex("dbo.CustomUserClaims", new[] { "UserId" });
-            DropIndex("dbo.Recommendations", new[] { "Participant_Id" });
-            DropIndex("dbo.Recommendations", new[] { "EventId" });
+            DropIndex("dbo.Blogs", new[] { "User_Id" });
+            DropIndex("dbo.Forms", new[] { "Participant_Id" });
+            DropIndex("dbo.Forms", new[] { "EventId" });
             DropTable("dbo.CustomRoles");
             DropTable("dbo.Tickets");
+            DropTable("dbo.Recommendations");
             DropTable("dbo.CustomUserRoles");
             DropTable("dbo.CustomUserLogins");
             DropTable("dbo.CustomUserClaims");
+            DropTable("dbo.Blogs");
             DropTable("dbo.Users");
-            DropTable("dbo.Recommendations");
+            DropTable("dbo.Forms");
             DropTable("dbo.Events");
         }
     }
