@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.IServices
 {
-    interface IPresidentService : IService<President>
+    public interface IPresidentService : IService<President>
     {
     }
 }

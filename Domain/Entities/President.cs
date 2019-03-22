@@ -10,5 +10,7 @@ namespace Domain.Entities
     {
         
         public String Recommendation { get; set; }
+        public String Logo { get; set; }
+        public String PresidentName { get; set; }
     }
 }

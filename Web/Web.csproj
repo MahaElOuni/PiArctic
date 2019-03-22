@@ -198,6 +198,8 @@
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PresidentModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -434,6 +436,7 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\BlogDetail.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Home\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

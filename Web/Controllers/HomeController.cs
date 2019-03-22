@@ -38,5 +38,12 @@ namespace Web.Controllers
 
             return View();
         }
+
+        public ActionResult LogIn()
+        {
+            ViewBag.Message = "Blog Detail.";
+
+            return View();
+        }
     }
 }
