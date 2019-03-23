@@ -100,5 +100,20 @@ namespace Web.Controllers
                 return View();
             }
         }
+        // GET: Event/Create
+        public ActionResult MyCalendar()
+        {
+            return View();
+        }
+        public JsonResult GetEvents()
+        {
+           
+            Event dc = new Event();
+            
+                //var events = dc.ToList();
+                return new JsonResult { Data = dc, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
+        }
     }
+   
 }

@@ -3,7 +3,7 @@ namespace Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _10 : DbMigration
+    public partial class v10 : DbMigration
     {
         public override void Up()
         {
@@ -70,6 +70,8 @@ namespace Data.Migrations
                         UserName = c.String(),
                         ParicipantId = c.Int(),
                         Recommendation = c.String(),
+                        Logo = c.String(),
+                        PresidentName = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id);

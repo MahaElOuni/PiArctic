@@ -457,6 +457,7 @@
     <Content Include="Views\Home\BlogDetail.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\Event\MyCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
