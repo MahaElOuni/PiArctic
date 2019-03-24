@@ -14,7 +14,10 @@ namespace Domain.Entities
         public int NumberPlaces { get; set; }
         public float Price { get; set; }
         public String Description { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public String ThemeColor { get; set; }
+        public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
         public virtual ICollection<Ticket> ListTickets { get; set; }

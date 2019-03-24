@@ -17,7 +17,10 @@ namespace Data.Migrations
                         NumberPlaces = c.Int(nullable: false),
                         Price = c.Single(nullable: false),
                         Description = c.String(),
-                        Date = c.DateTime(nullable: false),
+                        Start = c.DateTime(nullable: false),
+                        End = c.DateTime(nullable: false),
+                        ThemeColor = c.String(),
+                        IsFullDay = c.Boolean(nullable: false),
                         OrganizedBy = c.String(),
                     })
                 .PrimaryKey(t => t.EventId);
