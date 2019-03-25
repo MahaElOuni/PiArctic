@@ -2,171 +2,222 @@
 @using Domain.Entities
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form by Colorlib</title>
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-image: -webkit-linear-gradient( 0deg, rgb(20,29,162) 0%, rgb(155,92,246) 100%);">
+            <div class="container box_1620" style="background-color:transparent">
+                <!-- Brand and toggle get grouped for better mobile display -->
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="~/Content/fonts1/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="~/Content/vendor/nouislider/nouislider.min.css">
+                <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="~/Content/css1/css/style.css">
-</head>
-<body>
-    <div class="main">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
 
-        <div class="container">
-            <div class="signup-content">
-                <div class="signup-img">
-                    <img src="~/img/form-img.jpg" alt="">
-                    <div class="signup-img-content">
-                        <h2>Register now </h2>
-                        <p>while seats are available !</p>
-                    </div>
-                </div>
-                <div class="signup-form">
-                    @*<form method="POST" class="register-form" id="register-form">*@
-                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-row">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <p style="color:#FF0000" ;>Please enter your infomation and proceed to next step so we can build your account</p>
-                            <div class="form-group">
-                                <div class="form-input">
-                                    <label for="first_name" class="required">First name</label>
-                                    @*@Html.TextBoxFor(m => m.FName, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="last_name" class="required">Last name</label>
-                                    @*@Html.TextBoxFor(m => m.LName, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="email" class="required">Email</label>
-                                    @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="email" class="required">Password</label>
-                                    @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="email" class="required">Confirm Password</label>
-                                    @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="phone_number" class="required">CIN</label>
-                                    @*@Html.TextBoxFor(m => m.CIN, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.CIN, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.CIN, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="phone_number" class="required">Phone number</label>
-                                    @*@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                                </div>
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a>
+                                @*<ul>
 
-                            </div>
-                            <div class="form-group">
+                                        <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
 
-                                <div class="form-input">
-                                    <label for="phone_number" class="required">Street Name</label>
-                                    @*@Html.TextBoxFor(m => m.StreetName, new { @class = "form-control" })*@
-                                    @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
-                                </div>
-                                @*<div class="form-select">
-                                    <div class="label-flex">
-                                          @*<label for="meal_preference">Cities</label>*@
-                                @*<div class="select-list">
-                                          <select name="Cities" id="Cities">
-                                               @Html.DropDownList("City", new SelectList(Enum.GetValues(typeof(Cities))),
-                                        new { @class = "mdb-select", @id = "City" })
-                                              @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                                          </select>
-                                         </div>
-                                      </div>
-                                    </div>*@
+                                    </ul>*@
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
 
-                                <div class="form-input">
-                                    <label for="phone_number" class="required">Birthday:</label>
-                                    @Html.EditorFor(m => m.BirthDate, new { @class = "datepicker", @type = "date" })
-                                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
-                                </div>
-                                <h3>Set Financial Goals</h3>
-                                <div class="form-input">
-                                    <label for="first_name" class="required">Societe Name</label>
-                                    @Html.EditorFor(model => model.NomSociete, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.NomSociete, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-input">
-                                    <label for="first_name" class="required">Poste</label>
-                                    @Html.EditorFor(model => model.Poste, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Poste, "", new { @class = "text-danger" })
-                                </div>
-
-                                <h3>Connect Bank Account</h3>
-                                <div class="fieldset-content">
-                                    @*<div class="editor-label">
-                                            @Html.LabelFor(model => model.Photo)
-                                        </div>*@
-                                    <div class="editor-field">
-                                        Upload a file
-                                        @Html.TextBox("file2", "", new { type = "file" })
-                                        @Html.ValidationMessageFor(model => model.Photo)
-                                    </div>
-                                </div>
-                                <div class="fieldset-content">
-                                    @*<div class="editor-label">
-                                            @Html.LabelFor(model => model.EntrepriseTranscripts)
-                                        </div>*@
-                                    @*<div class="editor-field">
-                                            Upload a file
-                                            @Html.TextBox("file3", "", new { type = "file" })
-                                            @Html.ValidationMessageFor(model => model.EntrepriseTranscripts)
-                                        </div>*@
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="tickets_btn" />
-                            </div>
-                        </div>
-                    }
-
-                    @*</form>*@
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
+        </nav>
     </div>
-    @if (TempData["Success"] != null)
-    {
-        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
-    }
+</header>
+<!--================End Menu Area =================-->
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">LogIn</a>
+                </div>
+                <h2>Log In</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!-- Font Icon -->
+<link rel="stylesheet" href="~/Content/fonts1/fonts/material-icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="~/Content/vendor/nouislider/nouislider.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet" href="~/Content/css1/css/style.css">
+
+<div class="main">
+
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-img">
+                <img src="~/img/form-img.jpg" alt="">
+                <div class="signup-img-content">
+                    <h2>Register now </h2>
+                    <p>while seats are available !</p>
+                </div>
+            </div>
+            <div class="signup-form">
+                @*<form method="POST" class="register-form" id="register-form">*@
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <p style="color:#FF0000" ;>Please enter your infomation and proceed to next step so we can build your account</p>
+                        <div class="form-group">
+                            <div class="form-input">
+                                <label for="first_name" class="required">First name</label>
+                                @*@Html.TextBoxFor(m => m.FName, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="last_name" class="required">Last name</label>
+                                @*@Html.TextBoxFor(m => m.LName, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="email" class="required">Email</label>
+                                @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="email" class="required">Password</label>
+                                @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="email" class="required">Confirm Password</label>
+                                @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="phone_number" class="required">CIN</label>
+                                @*@Html.TextBoxFor(m => m.CIN, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.CIN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CIN, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="phone_number" class="required">Phone number</label>
+                                @*@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <div class="form-input">
+                                <label for="phone_number" class="required">Street Name</label>
+                                @*@Html.TextBoxFor(m => m.StreetName, new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
+                            </div>
+                            @*<div class="form-select">
+                                <div class="label-flex">
+                                      @*<label for="meal_preference">Cities</label>*@
+                            @*<div class="select-list">
+                                      <select name="Cities" id="Cities">
+                                           @Html.DropDownList("City", new SelectList(Enum.GetValues(typeof(Cities))),
+                                    new { @class = "mdb-select", @id = "City" })
+                                          @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                      </select>
+                                     </div>
+                                  </div>
+                                </div>*@
+
+                            <div class="form-input">
+                                <label for="phone_number" class="required">Birthday:</label>
+                                @Html.EditorFor(m => m.BirthDate, new { @class = "datepicker", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                            </div>
+                            <h3>Set Financial Goals</h3>
+                            <div class="form-input">
+                                <label for="first_name" class="required">Societe Name</label>
+                                @Html.EditorFor(model => model.NomSociete, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NomSociete, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <label for="first_name" class="required">Poste</label>
+                                @Html.EditorFor(model => model.Poste, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Poste, "", new { @class = "text-danger" })
+                            </div>
+
+                            <h3>Connect Bank Account</h3>
+                            <div class="fieldset-content">
+                                @*<div class="editor-label">
+                                        @Html.LabelFor(model => model.Photo)
+                                    </div>*@
+                                <div class="editor-field">
+                                    Upload a file
+                                    @Html.TextBox("file2", "", new { type = "file" })
+                                    @Html.ValidationMessageFor(model => model.Photo)
+                                </div>
+                            </div>
+                            <div class="fieldset-content">
+                                @*<div class="editor-label">
+                                        @Html.LabelFor(model => model.EntrepriseTranscripts)
+                                    </div>*@
+                                @*<div class="editor-field">
+                                        Upload a file
+                                        @Html.TextBox("file3", "", new { type = "file" })
+                                        @Html.ValidationMessageFor(model => model.EntrepriseTranscripts)
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="tickets_btn" />
+                        </div>
+                    </div>
+                }
+
+                @*</form>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
     JS
-    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/vendor/nouislider/nouislider.min.js"></script>
-    <script src="~/Content/vendor/wnumb/wNumb.js"></script>
-    <script src="~/Content/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/Content/vendor/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="~/Content/js/main.js"></script>
-</body>
-</html>
+<script src="~/Content/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/vendor/nouislider/nouislider.min.js"></script>
+<script src="~/Content/vendor/wnumb/wNumb.js"></script>
+<script src="~/Content/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/Content/vendor/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/Content/js/main.js"></script>
