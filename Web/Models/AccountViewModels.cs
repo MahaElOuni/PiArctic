@@ -7,7 +7,7 @@ namespace Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Email/Username")]
         public string Email { get; set; }
     }
 
@@ -34,7 +34,7 @@ namespace Web.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Mémoriser ce navigateur ?")]
+        [Display(Name = "Remember this browser?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -43,23 +43,29 @@ namespace Web.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Email/Username")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Email/Username")]
         [EmailAddress]
         public string Email { get; set; }
+        //[Display(Name = "IsValid")]
+        //public bool IsValid { get; set; }
 
+        //[Display(Name = "IsBlocked")]
+        //public bool IsBlocked { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Mémoriser le mot de passe ?")]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+        [Display(Name = "Remember password?")]
         public bool RememberMe { get; set; }
     }
 
@@ -67,8 +73,15 @@ namespace Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Email/Username")]
         public string Email { get; set; }
+        [Display(Name = "First Name")]
+
+        public string FName { get; set; }
+        [DataType(DataType.Text)]
+
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
 
         [Required]
         [MinLength(8)]
@@ -77,27 +90,21 @@ namespace Web.Models
         public string CIN { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le mot de passe ")]
-        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Display(Name = "Confirm password ")]
+        [Compare("Password", ErrorMessage = "the new password and confirmation password don't match.")]
         public string ConfirmPassword { get; set; }
-        [Display(Name = "First Name")]
-
-        public string FName { get; set; }
-        [DataType(DataType.Text)]
-
-        [Display(Name = "Last Name")]
-        public string LName { get; set; }
+        
         [DataType(DataType.Text)]
 
         [Display(Name = "Phone Number")]
 
-        public long PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [DataType(DataType.Text)]
 
         [Display(Name = "Street Name")]
@@ -118,11 +125,6 @@ namespace Web.Models
         public string Photo { get; set; }
         public string Poste { get; set; }
         public string NomSociete { get; set; }
-        //recommandation 
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public string Emailreco { get; set; }
-        public string Recommendation { get; set; }
 
 
 
@@ -132,18 +134,18 @@ namespace Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "Email/Username")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le mot de passe")]
-        [Compare("Password", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "the new password and confirmation password don't match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

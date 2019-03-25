@@ -67,10 +67,17 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            
-            ViewBag.ReturnUrl = returnUrl;
+            if (User.Identity.IsAuthenticated == false)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                
+            }
             return View();
-            
+            /* else
+             {
+                 return RedirectToAction("Index", "Home");
+             }*/
+
         }
 
         //
@@ -88,57 +95,36 @@ namespace Web.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            IUserService iuser = new UserService();
-            User u = new User();
-            if (result == SignInStatus.Success)
-            {
-                if (u.Role == "Participant")
-                {
-                    return RedirectToAction("", "");
-                }
-                else if (u.Role == "President")
-                {
-                    return RedirectToAction("", "");
-                }
-                else if (u.Role == "Organizer")
-                {
-                    return RedirectToAction("", "");
-                }
-                else if (u.Role == "User")
-                {
-                    return RedirectToAction("", "");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            else if (result == SignInStatus.LockedOut)
-            {
-                return View("Lockout");
-            }
-            else if (result == SignInStatus.RequiresVerification)
-            {
-                return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid login attempt.");
-                return View(model);
-            }
-            /*switch (result)
+            var user = new User { UserName = model.Email, Email = model.Email, Role = model.Role };
+            
+            
+            switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    UserService us = new UserService();
+                    User user3 = us.FindRoleByName(user.UserName);
+                    if(user3.Role == "President")
+                    {
+                        return RedirectToAction("","");
+                    }
+                    else if(user3.Role == "Orgonizor")
+                    {
+                        return RedirectToAction("", "");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                   
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Tentative de connexion non valide.");
+                    ModelState.AddModelError("", "Invalid connection attempt.");
                     return View(model);
-            }*/
+            }
         }
 
         //
@@ -189,15 +175,16 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            if (User.Identity.IsAuthenticated == false)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
+            //if (User.Identity.IsAuthenticated == false)
+            //{
+                
+            //}
+            return View();
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
 
-            }
+            //}
         }
 
         //
@@ -205,75 +192,64 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase file2)
         {
             if (ModelState.IsValid)
+
             {
-                var FileName2 = "";
-                var FileName3 = "";
-                if (file2.ContentLength > 0)
-                {
-                    FileName2 = Path.GetFileName(file2.FileName);
-
-                    var path = Path.Combine(Server.MapPath("~/Content/Upload/"), file2.FileName);
-                    file2.SaveAs(path);
-                }
-                if (file3.ContentLength > 0)
-                {
-                    FileName3 = Path.GetFileName(file3.FileName);
-
-                    var path = Path.Combine(Server.MapPath("~/Content/Upload/"), file3.FileName);
-                    file3.SaveAs(path);
-                }
-                var user = new User { UserName = model.Email, Email = model.Email, StreetName = model.StreetName, City = model.City,
-                                      CIN = model.CIN,LName = model.LName, FName = model.FName,BirthDate = model.BirthDate,
-                                       Photo = file2.FileName, EntrepriseTranscripts = file3.FileName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
+                if (file2 != null && file2.ContentLength > 0)
                     try
                     {
-                        MailMessage message = new MailMessage("summerchart1@gmail.com", model.Emailreco, "Recommendation ", "Bonjour Mr " + model.Nom + " " + model.Prenom +
-                           "Le Participant à cette evenement " + user.FName + " " + user.LName + "a posé une demande de recommendation auprés de vous. ");
-                        string schema = "\n  <a href='http://localhost:21514/'" + user.CIN + " />Recommendation</a>" + model.Email;
-                        message.Body = message.Body + schema;
-                        message.IsBodyHtml = true;
-                        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-                        client.EnableSsl = true;
-                        client.Credentials = new System.Net.NetworkCredential("summerchart1@gmail.com", "anisov-71");
-                        client.Send(message);
-                        MailMessage message2 = new MailMessage("summerchart1@gmail.com", model.Email, "(Consultech)Registration Succeeded", "Bonjour Mr " + model.FName + " " + model.LName +
-                           "Your Registration has succeeded and your password is  " + model .Password);
-                        string schemaa = "\n  <h1> Consultech </h1>";
-                        message2.Body = message2.Body + schemaa;
-                        message2.IsBodyHtml = true;
-                        SmtpClient clientt = new SmtpClient("smtp.gmail.com", 587);
-                        client.EnableSsl = true;
-                        client.Credentials = new System.Net.NetworkCredential("summerchart1@gmail.com", "anisov-71");
-                        client.Send(message2);
+                        string path = Path.Combine(Server.MapPath("~/Images"),Path.GetFileName(file2.FileName));
+                        file2.SaveAs(path);
+                        ViewBag.Message = "Image uploaded successfully";
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.StackTrace);
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
                     }
+                else
+                {
+                    ViewBag.Message = "You have not specified a file.";
+                }
+                //if (file3 != null && file3.ContentLength > 0)
+                //    try
+                //    {
+                //        string path = Path.Combine(Server.MapPath("~/Files"), Path.GetFileName(file3.FileName));
+                //        file3.SaveAs(path);
+                //        ViewBag.Message = "File uploaded successfully";
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                //    }
+                //else
+                //{
+                //    ViewBag.Message = "You have not specified a file.";
+                //}
+                var user = new User
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    StreetName = model.StreetName,
+                    City = model.City,
+                    CIN = model.CIN,
+                    LName = model.LName,
+                    FName = model.FName,
+                    BirthDate = model.BirthDate,
+                    PhoneNumber=model.PhoneNumber,
+                    Password=model.Password,
+                    Role=model.Poste,
+                    Photo = file2.FileName,
+                    //EntrepriseTranscripts = file3.FileName
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
                     return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
-                //    var user = new User { UserName = model.Email, Email = model.Email, };
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                //    // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Envoyer un message électronique avec ce lien
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //AddErrors(result);
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
@@ -286,7 +262,7 @@ namespace Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(int userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId == default(int) || code == null)
             {
                 return View("Error");
             }
@@ -397,7 +373,7 @@ namespace Web.Controllers
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
+            if (userId == default(int))
             {
                 return View("Error");
             }

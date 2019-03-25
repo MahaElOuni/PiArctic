@@ -42,7 +42,9 @@ namespace Web
                        "~/Content/vendors/counter-up/jquery.counterup.js",
                        "~/Scripts/mail-script.js",
                        "~/Scripts/gmaps.min.js",
-                       "~/Scripts/theme.js"
+                       "~/Scripts/theme.js",
+                       "~/Content/js/khouloudtemplates.js"
+
                       ));
 
             bundles.Add(new StyleBundle("~/template/css").Include(
@@ -54,7 +56,8 @@ namespace Web
                       "~/Content/vendors/nice-select/css/nice-select.css",
                       "~/Content/vendors/animate-css/animate.css",
                       "~/Content/css/style.css",
-                      "~/Content/css/responsive.css"
+                      "~/Content/css/responsive.css",
+                      "~/Content/css/khouloudtemplate.css"
                      ));
 
             #endregion

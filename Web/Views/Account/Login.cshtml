@@ -1,10 +1,10 @@
 ﻿@using Web.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Connexion";
-}
+        ViewBag.Title = "Connexion";
+    }
 
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>*@
 <!--================Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -13,85 +13,104 @@
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">About</a>
+                    <a href="about-us.html">LogIn</a>
                 </div>
-                <h2>About Event</h2>
+                <h2>Log In</h2>
             </div>
         </div>
     </div>
 </section>
 <!--================End Home Banner Area =================-->
 
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Utilisez un compte local pour vous connecter.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10" data-validate="Please enter username ">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10" data-validate="Please enter password">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="text-right p-t-13 p-b-23">
-                            <span class="txt1">
-                                Forgot
-                            </span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="max-width:500px;margin:auto; align-content:center;align-self:center;">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h5 class="card-header info-color white-text text-center py-4" style="background-color:	indigo">
+                        <strong>Sign in</strong>
+                    </h5>
+                    <br /><br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <!--Card content-->
+                    <div class="card-body px-lg-5 pt-0">
+                        <!-- Form -->
+                        <form class="text-center">
+                            <!-- Email -->
+                            <div class="md-form">
+                                @*<input type="email" id="materialLoginFormEmail" class="form-control">*@
+                                <label for="materialLoginFormEmail">E-mail</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
-                            <a href="#" class="txt2">
-                                Username / Password?
-                            </a>
-                        </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Connexion" class="btn btn-default" />
-                    </div>
-                </div>
-                <div class="flex-col-c p-t-80 p-b-40">
-                    <span class="txt1 p-b-9">
-                        Don’t have an account?
-                    </span>
+                            </div>
+                            <!-- Password -->
+                            <div class="md-form">
+                                @*<input type="password" id="materialLoginFormPassword" class="form-control">*@
+                                <label for="materialLoginFormPassword">Password</label>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                    <a href="#" class="txt3">
-                        <p>
-                            @Html.ActionLink("Register as a new user", "Register")
-                        </p>
+                            </div>
+
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <!-- Remember me -->
+                                    <div class="form-check">
+                                        @*<input type="checkbox" class="form-check-input" id="materialLoginFormRemember">*@
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                        @*  <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Forgot password -->
+                                    <a href="#"></a>
+                                    @Html.ActionLink("Forget your password ?", "ForgotPassword")
+                                </div>
+                            </div>
+
+                            <!-- Sign in button -->
+                            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit style="background-color:indigo">Sign in</button>
+
+                            <!-- Register -->
+                            <p>
+                                Not a member?
+                                <a href="#"></a>
+                                @Html.ActionLink("Register as a new user", "Register")
+
+                            </p>
+
+                            @*Social login
+                    <p>or sign in with:</p>
+                    <a type="button" class="btn-floating btn-fb btn-sm">
+                        <i class="fab fa-facebook-f"></i>
                     </a>
-                </div>
-                @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
-                    <p>
-                        @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+                    <a type="button" class="btn-floating btn-tw btn-sm">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a type="button" class="btn-floating btn-li btn-sm">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a type="button" class="btn-floating btn-git btn-sm">
+                        <i class="fab fa-github"></i>
+                    </a>*@
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                        </form>
+
+                        <!-- Form -->
+
+                    </div>
+                }
+            </div>
+            <!-- Material form login -->
+        </div>
+        <br /><br />
+       @*<div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+       </div>*@
+    </div>
+    
