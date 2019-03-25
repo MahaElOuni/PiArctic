@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
+    public enum Cities
+    {
+        Aryanah, Beja, BenArous, Bizerte, Dejrba, ElDjem, ElKef, Gabes, Gafsa, Jendouba, Kairouan, Kasserine, Kebili, Mahdia, Manouba, Medenine,
+        Monastir, Nabeul, Sfax, Sidinibouzid, Siliana, Sousse, Tataouine, Tunis, Tozeur, Zaghouan, Zarzis
+    }
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -62,7 +67,7 @@ namespace Web.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
+        public int UserId { get; set; }
         [Display(Name = "Role")]
         public string Role { get; set; }
         [Display(Name = "Remember password?")]
@@ -75,11 +80,13 @@ namespace Web.Models
         [EmailAddress]
         [Display(Name = "Email/Username")]
         public string Email { get; set; }
+
+        [Required]
         [Display(Name = "First Name")]
-
         public string FName { get; set; }
-        [DataType(DataType.Text)]
 
+        [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LName { get; set; }
 
@@ -101,29 +108,34 @@ namespace Web.Models
         public string ConfirmPassword { get; set; }
         
         [DataType(DataType.Text)]
-
         [Display(Name = "Phone Number")]
-
         public string PhoneNumber { get; set; }
-        [DataType(DataType.Text)]
 
+        [DataType(DataType.Text)]
         [Display(Name = "Street Name")]
         public string StreetName { get; set; }
-        [DataType(DataType.Text)]
 
+        [DataType(DataType.Text)]
+        [EnumDataType(typeof(Cities))]
         [Display(Name = "City")]
         public string City { get; set; }
-        [Display(Name = "id")]
 
+        [Display(Name = "id")]
         public int id { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
-        [Display(Name = "image")]
 
+        [Display(Name = "image")]
         public string ImagePersonnel { get; set; }
+
         public string EntrepriseTranscripts { get; set; }
+
+        [Display(Name = "photot")]
         public string Photo { get; set; }
+
         public string Poste { get; set; }
+
         public string NomSociete { get; set; }
 
 
