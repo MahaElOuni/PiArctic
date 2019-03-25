@@ -95,7 +95,7 @@ namespace Web.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var user = new User { UserName = model.Email, Email = model.Email, Role = model.Role };
+            var user = new User { Id = model.UserId,UserName = model.Email, Email = model.Email, Role = model.Role };
             
             
             switch (result)
@@ -483,7 +483,7 @@ namespace Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Account");
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
 
         //

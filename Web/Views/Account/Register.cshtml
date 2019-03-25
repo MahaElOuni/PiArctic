@@ -1,29 +1,6 @@
 ﻿@model Web.Models.RegisterViewModel
 @using Domain.Entities
-@*<section class="banner_area">
-        <div class="banner_inner d-flex align-items-center">
-            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-            <div class="container">
-                <div class="banner_content text-center">
-                    <div class="page_link">
-                        <a href="index.html">Home</a>
-                        <a href="about-us.html">About</a>
-                    </div>
-                    <h2>About Event</h2>
-                </div>
-            </div>
-        </div>
-    </section>*@
-@*@{
-    ViewBag.Title = "Register";
-}
 
-<h2>Register</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-}*@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -114,17 +91,17 @@
                                     @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
                                 </div>
                                 @*<div class="form-select">
-                                  <div class="label-flex">
-                                        @*<label for="meal_preference">Cities</label>*@
-                                     @*<div class="select-list">
-                                      <select name="Cities" id="Cities">
-                                           @Html.DropDownList("City", new SelectList(Enum.GetValues(typeof(Cities))),
-                                    new { @class = "mdb-select", @id = "City" })
-                                          @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                                      </select>
-                                     </div>
-                                  </div>
-                                </div>*@
+                                    <div class="label-flex">
+                                          @*<label for="meal_preference">Cities</label>*@
+                                @*<div class="select-list">
+                                          <select name="Cities" id="Cities">
+                                               @Html.DropDownList("City", new SelectList(Enum.GetValues(typeof(Cities))),
+                                        new { @class = "mdb-select", @id = "City" })
+                                              @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                          </select>
+                                         </div>
+                                      </div>
+                                    </div>*@
 
                                 <div class="form-input">
                                     <label for="phone_number" class="required">Birthday:</label>
@@ -146,8 +123,8 @@
                                 <h3>Connect Bank Account</h3>
                                 <div class="fieldset-content">
                                     @*<div class="editor-label">
-                @Html.LabelFor(model => model.Photo)
-            </div>*@
+                                            @Html.LabelFor(model => model.Photo)
+                                        </div>*@
                                     <div class="editor-field">
                                         Upload a file
                                         @Html.TextBox("file2", "", new { type = "file" })
@@ -156,20 +133,20 @@
                                 </div>
                                 <div class="fieldset-content">
                                     @*<div class="editor-label">
-                @Html.LabelFor(model => model.EntrepriseTranscripts)
-            </div>*@
+                                            @Html.LabelFor(model => model.EntrepriseTranscripts)
+                                        </div>*@
                                     @*<div class="editor-field">
-                Upload a file
-                @Html.TextBox("file3", "", new { type = "file" })
-                @Html.ValidationMessageFor(model => model.EntrepriseTranscripts)
-            </div>*@
+                                            Upload a file
+                                            @Html.TextBox("file3", "", new { type = "file" })
+                                            @Html.ValidationMessageFor(model => model.EntrepriseTranscripts)
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                                <input type="submit" value="Create" class="tickets_btn" />
                             </div>
                         </div>
                     }
@@ -193,6 +170,3 @@
     <script src="~/Content/js/main.js"></script>
 </body>
 </html>
-
-
-
