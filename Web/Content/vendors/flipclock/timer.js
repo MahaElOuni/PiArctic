@@ -3,6 +3,7 @@ var today = new Date();
 var timer = function() {};
 timer.countdownDate = new Date();
 
+
 // set date to 10 days in the future for testing purposes
 timer.countdownDate.setDate( timer.countdownDate.getDate() + 10 );
 
@@ -47,7 +48,8 @@ timer.update = function() {
     timer.timer.style.opacity = 1;
   }
   
-  timer.currentDate = new Date();
+    timer.currentDate = new Date();
+ 
   timer.difference = timer.countdownDate - timer.currentDate;
   
   timer.days.innerHTML = timer.getTimeRemaining(timer.times.day, 1);

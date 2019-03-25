@@ -12,18 +12,48 @@ namespace Web.Controllers
 {
     public class EventController : Controller
     {
-        EventService es = new EventService();
+        EventService eventService = new EventService();
 
         // GET: Event
         public ActionResult Index()
         {
-            return View();
+            List<EventViewModel> listEvent = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            foreach(var i in eventt)
+            {
+                if (i.Start >= DateTime.Today) { 
+                EventViewModel eventModel = new EventViewModel();
+                eventModel.EventId = i.EventId;
+                eventModel.Title = i.Title;
+                eventModel.Start = i.Start;
+                eventModel.Description = i.Description;
+                eventModel.Address = i.Address;
+                eventModel.OrganizedBy = i.OrganizedBy;
+                    listEvent.Add(eventModel);
+                }
+            }
+            return View(listEvent);
         }
 
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            EventViewModel eventModel = new EventViewModel();
+            var eventt = eventService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.EventId==id)
+                {
+                   
+                    eventModel.Title = i.Title;
+                    eventModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
+                    eventModel.Description = i.Description;
+                    eventModel.Address = i.Address;
+                    eventModel.OrganizedBy = i.OrganizedBy;
+                    
+                }
+            }
+            return View(eventModel);
         }
 
         // GET: Event/Create
@@ -47,8 +77,8 @@ namespace Web.Controllers
             e.ThemeColor = evm.ThemeColor;
             e.IsFullDay = evm.IsFullDay;
             e.OrganizedBy = evm.OrganizedBy;
-            es.Add(e);
-            es.Commit();
+            eventService.Add(e);
+            eventService.Commit();
             try
             {
                 // TODO: Add insert logic here
@@ -111,7 +141,7 @@ namespace Web.Controllers
         }
         public JsonResult GetEvents()
         {
-            var e = es.GetAll();
+            var e = eventService.GetAll();
 
 
            return new JsonResult { Data = e, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

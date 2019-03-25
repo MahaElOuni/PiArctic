@@ -307,6 +307,8 @@
     <Content Include="img\favicon.png" />
     <Content Include="img\fb.png" />
     <Content Include="img\home-banner.jpg" />
+    <Content Include="img\icons\iconCalendar.png" />
+    <Content Include="img\icons\locationIcon.png" />
     <Content Include="img\insta.png" />
     <Content Include="img\instagram\Image-01.jpg" />
     <Content Include="img\instagram\Image-02.jpg" />
@@ -327,6 +329,7 @@
     <Content Include="img\team\team-2.jpg" />
     <Content Include="img\team\team-3.jpg" />
     <Content Include="img\team\team-4.jpg" />
+    <Content Include="img\testEvent.jpg" />
     <Content Include="img\twit.png" />
     <Content Include="img\welcome-1.jpg" />
     <Content Include="Content\vendors\animate-css\animate.css" />
@@ -458,6 +461,8 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Event\MyCalendar.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,7 @@ namespace Web.Models
 {
     public class EventViewModel
     {
+        public int EventId { get; set; }
         public String Title { get; set; }
         public String Address { get; set; }
         [Display(Name = "Number of places")]
@@ -24,6 +25,7 @@ namespace Web.Models
         public String ThemeColor { get; set; }
         public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
+        public String DateString { get; set; }
         public EventViewModel()
         {
 
