@@ -5,392 +5,380 @@
 
     ViewBag.Title = "Create";
 }
+< <!--================Header Menu Area =================-->
+<header class="header_area" style="background-color:transparent">
+    <div class="main_menu" style="background-color:transparent" >
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-image: -webkit-linear-gradient( 0deg, rgb(20,29,162) 0%, rgb(155,92,246) 100%);">
+            <div class="container box_1620" style="background-color:transparent">
+                <!-- Brand and toggle get grouped for better mobile display -->
 
-<!DOCTYPE html>
-<html lang="en">
+                <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="background-color:transparent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="colorlib.com">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form</title>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
+                                <li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
+                                <li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
+                                <li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
+                            </ul>
+                        </li>
 
-    <!-- Font Icon -->
-    
-        <link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")fonts/material-icon/css/material-design-iconic-font.min.css">
-        <link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")vendor/nouislider/nouislider.min.css">
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("BlogDetail","Home")">Blog Details</a></li>
+                            </ul>
+                        </li>
 
-        <!-- Main css -->
-        <link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")css/ss.css">
-    
-</head>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-<body>
+                        @if (User.Identity.IsAuthenticated)
+                        {
 
-    <div class="main">
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
 
-       
-            @using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "signup-form", role = "form", @id = "signup-form", enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
 
-                <div>
-                    <h3>Personal info</h3>
-                    <fieldset>
-                        <h2>Personal information</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
+<!--================Welcome Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container" style="background-color:transparent">
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">LogIn</a>
+                </div>
+                <h2>Log In</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!-- Font Icon -->
+
+<link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")fonts/material-icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")vendor/nouislider/nouislider.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")css/ss.css">
+
+<div class="main">
+    @using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "signup-form", role = "form", @id = "signup-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="background-color:#6f42c1">
+            <h3>Personal info</h3>
+            <fieldset>
+                <h2>Personal information</h2>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <div class="fieldset-content">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
 
 
-                            <div class="form-row">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label" })
-                                <div class="form-flex">
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.OrganizedBy, new { @class = "form-control", @id = "first_name" })
-                                        <span class="text-input">First</span>
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.ThemeColor, new { @class = "form-control", @id = "last_name" })
-                                        <span class="text-input">Last</span>
-                                    </div>
-                                </div>
-                            </div>
-
-
+                    <div class="form-row">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label" })
+                        <div class="form-flex">
                             <div class="form-group">
-                                @Html.LabelFor(m => m.IsFullDay, new { @class = "form-label", @for = "email" })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "email" })
-                                <span class="text-input">Example  :<span>  Jeff@gmail.com</span></span>
+                                @Html.TextBoxFor(m => m.OrganizedBy, new { @class = "form-control", @id = "first_name" })
+                                <span class="text-input">First</span>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "CIN" })
-                                <span class="text-input">Identity :<span>  </span></span>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "phone" })
-                                <span class="text-input">Number :<span>  55303692</span></span>
-                            </div>
-                            <div class="form-row">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label" })
-                                <div class="form-flex">
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "StreetName" })
-                                        <span class="text-input">Street Name</span>
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "City" })
-                                        <span class="text-input">City</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @*  <div class="form-group">
-                                                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                                <div class="col-md-10">
-
-                                                                    @Html.DropDownList("Country",
-                                new SelectList(Enum.GetValues(typeof(Title))),
-                                new { @class = "mdb-select", @id = "Country" })
-                                                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                                                                </div>
-                                                            </div>*@
-                            <div class="form-group">
-                                @Html.EditorFor(m => m.Title, new { @class = "datepicker", @type = "date" })
-                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-                                <span class="text-input">Birth Date :<span> </span></span>
+                                @Html.TextBoxFor(m => m.ThemeColor, new { @class = "form-control", @id = "last_name" })
+                                <span class="text-input">Last</span>
                             </div>
                         </div>
+                    </div>
 
 
-                    </fieldset>
-
-                    <h3>Motivations</h3>
-                    <fieldset>
-                        <h2>Motivations</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.IsFullDay, new { @class = "form-label", @for = "email" })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "email" })
+                        <span class="text-input">Example  :<span>  Jeff@gmail.com</span></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "CIN" })
+                        <span class="text-input">Identity :<span>  </span></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "phone" })
+                        <span class="text-input">Number :<span>  55303692</span></span>
+                    </div>
+                    <div class="form-row">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label" })
+                        <div class="form-flex">
                             <div class="form-group">
-                                <label for="find_bank" class="form-label">Que'est ce que vous allez ajouter a LEVIO:</label>
-
-
-                                <div class="form-find">
-                                    @Html.TextAreaFor(m => m.Title, new { @class = "form-control", @id = "ValeurAjoute" })
-                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-                                    <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </fieldset>
-                    <h3>Recommendation</h3>
-
-                    <fieldset>
-                        <h2>Motivations</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            <div class="form-group">
-                                <label for="find_bank" class="form-label">Que'est ce que vous allez ajouter a LEVIO:</label>
-                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-
-
-                                <div class="form-find">
-                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-                                    <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-
-
-                                <div class="form-find">
-                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-                                    <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-
-
-                                <div class="form-find">
-                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-                                    <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </fieldset>
-
-                    <h3>Set Financial Goals</h3>
-                    <fieldset>
-                        <h2>Set Financial Goals</h2>
-                        <p class="desc">Set up your money limit to reach the future plan</p>
-                        <div class="fieldset-content">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "nomsoc" })
-                                <span class="text-input">Example  :<span>  SGCIB</span></span>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label", })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "poste" })
-                                <span class="text-input">Example :<span>  Directeur</span></span>
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "StreetName" })
+                                <span class="text-input">Street Name</span>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "duree" })
-                                <span class="text-input">Example :<span>  6 MOIS</span></span>
-                            </div>
-                            <div class="form-group">
-                                @Html.HiddenFor(m => m.Title, new { @class = "form-control", @id = "experiences", @hidden = "true" })
-                                <span class="text-input">Example :<span>  6 MOIS</span></span>
-                            </div>
-
-
-
-                            <a OnClick="addition()">Add</a>
-
-                            <table class="table table-dark" id="tab">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">nomsociete</th>
-                                        <th scope="col">poste</th>
-                                        <th scope="col">duree</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </fieldset>
-                    <h3>Connect Bank Account</h3>
-                    <fieldset>
-                        <h2>Connect Bank Account</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Title)
-                            </div>
-                            <div class="editor-field">
-                                Upload a file
-                                @Html.TextBox("file2", "", new { type = "file" })
-
-
-                                @Html.ValidationMessageFor(model => model.Title)
-                            </div>
-
-                        </div>
-                        <div class="fieldset-content">
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Title)
-                            </div>
-                            <div class="editor-field">
-                                Upload a file
-                                @Html.TextBox("file3", "", new { type = "file" })
-
-
-                                @Html.ValidationMessageFor(model => model.Title)
-                            </div>
-
-                        </div>
-                        <div class="fieldset-content">
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Title)
-                            </div>
-                            <div class="editor-field">
-                                Upload a file
-                                @Html.TextBox("file4", "", new { type = "file" })
-
-
-                                @Html.ValidationMessageFor(model => model.Title)
-                            </div>
-
-                        </div>
-                        <div class="fieldset-content">
-                            <div class="editor-label">
-                                @Html.LabelFor(model => model.Title)
-                            </div>
-                            <div class="editor-field">
-                                Upload a file
-                                @Html.TextBox("file5", "", new { type = "file" })
-
-
-                                @Html.ValidationMessageFor(model => model.Title)
-                            </div>
-                            @*<script>
-                                    $("#btn").click(function() {
-                                        //Loop through the Table rows and build a JSON array.
-                                        var Experiences = new Array();
-                                        var App = {};
-
-
-                                        var i;  // on déclare notre variable
-                                        alert(document.getElementById("tab").rows.length);
-                                        for (i = 1; i < document.getElementById("tab").rows.length-1; i++) {
-                                            var Candidat = {};
-                                            Candidat.NomSociete = $('#tab').find("tbody").find("tr").eq(i).find("td").eq(0).html();
-                                            Candidat.poste = $('#tab').find("tbody").find("tr").eq(i).find("td").eq(1).html();
-                                            alert(Candidat.poste);
-
-                                            Candidat.duree = $('#tab').find("tbody").find("tr").eq(i).find("td").eq(2).html();
-
-                                            Experiences.push(Candidat);
-                                        }
-                                        App.FName = document.getElementById("first_name").value
-                                        App.LName = document.getElementById("last_name").value;
-                                        alert(App.LName);
-
-                                        App.email = document.getElementById("email").value;
-                                        alert(App.email);
-
-                                        App.PhoneNumber = document.getElementById("phone").value;
-                                        alert(App.PhoneNumber);
-
-                                        App.StreetName = document.getElementById("StreetName").value;
-                                        App.BirthDate = document.getElementById("BirthDate").value;
-                                        App.valeurAjoute = document.getElementById("ValeurAjoute").value;
-                                        App.City = document.getElementById("City").value;
-                                        App.coverLetter = document.getElementById("CoverLetter").value;
-
-
-                                        App.CIN = document.getElementById("CIN").value;
-                                        alert(App.valeurAjoute);
-
-                                        App.photo = document.getElementById("ImagePerso").value;
-                                        alert(App.photo);
-
-                                        App.CV = document.getElementById("Resume").value;
-                                        App.academicrtanscripts = document.getElementById("AcademicTranscripts").value;
-                                        var Apps = new Array();
-                                        Apps.push(App);
-
-
-
-
-
-
-
-
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "/Candidat/CreateWork",
-                                            data: JSON.stringify({ Experiences, Apps}),
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function (r) {
-                                                alert(r + " record(s) inserted.");
-                                            }
-                                        });
-                                    });
-                                </script>*@
-                            <div class="form-group">
-                                <input type="submit" id="btn" class="btn btn-outline-warning btn-rounded" value="Confirmer">
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "City" })
+                                <span class="text-input">City</span>
                             </div>
                         </div>
+                    </div>
 
-                    </fieldset>
+
+                    <div class="form-group">
+                        @Html.EditorFor(m => m.Title, new { @class = "datepicker", @type = "date" })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                        <span class="text-input">Birth Date :<span> </span></span>
+                    </div>
                 </div>
 
-            }
-        
 
-    </div>
-    @if (TempData["Success"] != null)
-    {
-        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+            </fieldset>
+
+            <h3>Motivations</h3>
+            <fieldset>
+                <h2>Motivations</h2>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <div class="fieldset-content">
+                    <div class="form-group">
+                        <label for="find_bank" class="form-label">Que'est ce que vous allez ajouter a LEVIO:</label>
+
+
+                        <div class="form-find">
+                            @Html.TextAreaFor(m => m.Title, new { @class = "form-control", @id = "ValeurAjoute" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                            <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </fieldset>
+            <h3>Recommendation</h3>
+
+            <fieldset>
+                <h2>Motivations</h2>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <div class="fieldset-content">
+                    <div class="form-group">
+                        <label for="find_bank" class="form-label">Que'est ce que vous allez ajouter a LEVIO:</label>
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                        <div class="form-find">
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                            <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
+                        </div>
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                        <div class="form-find">
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                            <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
+                        </div>
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                        <div class="form-find">
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                            <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </fieldset>
+
+            <h3>Set Financial Goals</h3>
+            <fieldset>
+                <h2>Set Financial Goals</h2>
+                <p class="desc">Set up your money limit to reach the future plan</p>
+                <div class="fieldset-content">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "nomsoc" })
+                        <span class="text-input">Example  :<span>  SGCIB</span></span>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label", })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "poste" })
+                        <span class="text-input">Example :<span>  Directeur</span></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, new { @class = "form-label", @type = "number" })
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @id = "duree" })
+                        <span class="text-input">Example :<span>  6 MOIS</span></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.Title, new { @class = "form-control", @id = "experiences", @hidden = "true" })
+                        <span class="text-input">Example :<span>  6 MOIS</span></span>
+                    </div>
+
+
+
+                    <a OnClick="addition()">Add</a>
+
+                    <table class="table table-dark" id="tab">
+                        <thead>
+                            <tr>
+                                <th scope="col">nomsociete</th>
+                                <th scope="col">poste</th>
+                                <th scope="col">duree</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+            <h3>Connect Bank Account</h3>
+            <fieldset>
+                <h2>Connect Bank Account</h2>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <div class="fieldset-content">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        Upload a file
+                        @Html.TextBox("file2", "", new { type = "file" })
+
+
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                </div>
+                <div class="fieldset-content">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        Upload a file
+                        @Html.TextBox("file3", "", new { type = "file" })
+
+
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                </div>
+                <div class="fieldset-content">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        Upload a file
+                        @Html.TextBox("file4", "", new { type = "file" })
+
+
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                </div>
+                <div class="fieldset-content">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        Upload a file
+                        @Html.TextBox("file5", "", new { type = "file" })
+
+
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" id="btn" class="btn btn-outline-warning btn-rounded" value="Confirmer">
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
     }
-    @section Scripts{
-        <script>
-            function addition() {
-                var socie = document.getElementById("nomsoc").value;
-                var poste = document.getElementById("poste").value;
-                var duree = document.getElementById("duree").value;
-
-                $('#tab tr:last').after("<tr><td>" + socie + "</td><td>" + poste + "</td><td>" + duree + "</td>");
-                document.getElementById("experiences").value = document.getElementById("experiences").value + socie + "-" + poste + "-" + duree + "/"
 
 
+</div>
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+@section Scripts{
+    <script>
+        function addition() {
+            var socie = document.getElementById("nomsoc").value;
+            var poste = document.getElementById("poste").value;
+            var duree = document.getElementById("duree").value;
 
-            }
-        </script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery/jquery.min.js"></script>
-
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/popper.min.js"></script>
-
-        <!-- JS -->
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-validation/dist/additional-methods.min.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-steps/jquery.steps.min.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/minimalist-picker/dobpicker.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/nouislider/nouislider.min.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")vendor/wnumb/wNumb.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")js.js"></script>
-        <script src="@Url.Content("~/Content/mytemplate/")js/bootstrap.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/mdb.min.js"></script>
+            $('#tab tr:last').after("<tr><td>" + socie + "</td><td>" + poste + "</td><td>" + duree + "</td>");
+            document.getElementById("experiences").value = document.getElementById("experiences").value + socie + "-" + poste + "-" + duree + "/"
 
 
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/modules/card-reveal.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/modules/cards.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
-      
-    }
-</body>
-</html>
+
+        }
+    </script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/popper.min.js"></script>
+
+    <!-- JS -->
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/minimalist-picker/dobpicker.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/nouislider/nouislider.min.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")vendor/wnumb/wNumb.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")js.js"></script>
+    <script src="@Url.Content("~/Content/mytemplate/")js/bootstrap.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/mdb.min.js"></script>
+
+
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/modules/card-reveal.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/modules/cards.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+
+}
+
