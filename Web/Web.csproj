@@ -912,10 +912,10 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Event\MyCalendar.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
-=======
+
     <Content Include="scss\common\extend.scss" />
     <Content Include="scss\common\fonts.scss" />
     <Content Include="scss\common\global.scss" />
@@ -923,7 +923,7 @@
     <Content Include="scss\common\variables.scss" />
     <Content Include="scss\layouts\main.scss" />
     <Content Include="scss\layouts\responsive.scss" />
->>>>>>> 4a2ac929f3b20057c96c85384b8c34330c952962
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
