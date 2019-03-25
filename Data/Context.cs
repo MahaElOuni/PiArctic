@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Data.Conventions;
+using Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,10 @@ namespace Data
         {
             //convention et configuration
             //strategie d'heritage TPT...
+            modelBuilder.Conventions.Add(new DateTimeConvention());
             modelBuilder.Entity<CustomUserRole>().HasKey(t => t.UserId);
             modelBuilder.Entity<CustomUserLogin>().HasKey(t => t.UserId);
+            modelBuilder.Conventions.Add(new KeyConvention());
         }
         public static Context Create()
         {

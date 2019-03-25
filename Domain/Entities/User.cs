@@ -34,6 +34,8 @@ namespace Domain.Entities
         public DateTime BirthDate { get; set; }
         public String Photo { get; set; }
         public String EntrepriseTranscripts { get; set; }
+        //public bool IsBlocked { get; set; }
+        //public bool IsValid { get; set; }
         public virtual ICollection<Blog>  Blogs { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
