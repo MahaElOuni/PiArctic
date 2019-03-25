@@ -16,7 +16,18 @@ namespace Web.Models
         public String Description { get; set; }
         [Display(Name = "Date")]
         [DataType(DataType.DateTime)]
-        public DateTime  Date { get; set; }
+        public DateTime Start { get; set; }
+        [Display(Name = "End")]
+        [DataType(DataType.DateTime)]
+        public DateTime End { get; set; }
+        [Display(Name = "End")]
+        public String ThemeColor { get; set; }
+        public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
+        public EventViewModel()
+        {
+
+        }
     }
+
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Newtonsoft.Json;
 using Service.Services;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,10 @@ namespace Web.Controllers
             e.NumberPlaces = evm.NumberPlaces;
             e.Price = evm.Price;
             e.Description = evm.Description;
-            e.Date = evm.Date;
+            e.Start = evm.Start;
+            e.End= evm.End;
+            e.ThemeColor = evm.ThemeColor;
+            e.IsFullDay = evm.IsFullDay;
             e.OrganizedBy = evm.OrganizedBy;
             es.Add(e);
             es.Commit();
@@ -107,12 +111,12 @@ namespace Web.Controllers
         }
         public JsonResult GetEvents()
         {
+            var e = es.GetAll();
+
+
+           return new JsonResult { Data = e, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
            
-            Event dc = new Event();
-            
-                //var events = dc.ToList();
-                return new JsonResult { Data = dc, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            
+
         }
     }
    
