@@ -53,22 +53,22 @@
     <Compile Include="IServices\IEventService.cs" />
     <Compile Include="IServices\IFormService.cs" />
     <Compile Include="IServices\IPresidentService.cs" />
-<<<<<<< HEAD
+
     <Compile Include="IServices\ISchedulerService.cs" />
-=======
+
     <Compile Include="IServices\IRewardService.cs" />
->>>>>>> 210cfa1dc45422b12a86f18eece4662ad81c2287
+
     <Compile Include="IServices\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\FormService.cs" />
     <Compile Include="Services\PresidentService.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Services\SchedulerService.cs" />
-=======
+
     <Compile Include="Services\RewardService.cs" />
->>>>>>> 210cfa1dc45422b12a86f18eece4662ad81c2287
+
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

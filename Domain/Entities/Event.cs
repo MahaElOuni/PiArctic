@@ -22,12 +22,12 @@ namespace Domain.Entities
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
         public virtual ICollection<Ticket> ListTickets { get; set; }
         public virtual ICollection<Form> Forms { get; set; }
-<<<<<<< HEAD
+
         public virtual ICollection<Scheduler> ListScheduler { get; set; }
-=======
+
         public virtual ICollection<Reward> Rewards { get; set; }
 
->>>>>>> 210cfa1dc45422b12a86f18eece4662ad81c2287
+
         public Event()
         {
 
