@@ -1,4 +1,5 @@
-﻿using Data.Conventions;
+﻿using Data.Configurations;
+using Data.Conventions;
 using Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -25,6 +26,7 @@ namespace Data
             modelBuilder.Entity<CustomUserRole>().HasKey(t => t.UserId);
             modelBuilder.Entity<CustomUserLogin>().HasKey(t => t.UserId);
             modelBuilder.Conventions.Add(new KeyConvention());
+            modelBuilder.Configurations.Add(new FormConfiguration());
         }
         public static Context Create()
         {
