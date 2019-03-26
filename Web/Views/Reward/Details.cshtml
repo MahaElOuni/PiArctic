@@ -1,15 +1,14 @@
-﻿@using Web.Models
-@model LoginViewModel
+﻿@model Web.Models.RewardViewModel
+
 @{
-    ViewBag.Title = "Connexion";
+    ViewBag.Title = "Details";
 }
 
-@*<h2>@ViewBag.Title.</h2>*@
-<!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container box_1620">
+< <!--================Header Menu Area =================-->
+<header class="header_area" style="background-color:transparent">
+    <div class="main_menu" style="background-color:transparent">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-image: -webkit-linear-gradient( 0deg, rgb(20,29,162) 0%, rgb(155,92,246) 100%);">
+            <div class="container box_1620" style="background-color:transparent">
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
@@ -19,24 +18,42 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="background-color:transparent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
+                                <li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
+                                <li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
+                                <li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("BlogDetail","Home")">Blog Details</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
-                        @if (!User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)
                         {
 
                             <li class="nav-item submenu dropdown">
-                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a>
-                                @*<ul>
-                                    
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
                                     <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
 
-                                </ul>*@
+                                </ul>
                             </li>
                         }
                         else
@@ -51,115 +68,73 @@
     </div>
 </header>
 <!--================End Menu Area =================-->
-<!--================Home Banner Area =================-->
+<!--================Welcome Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-        <div class="container">
+        <div class="container" style="background-color:transparent">
             <div class="banner_content text-center">
-                <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="about-us.html">LogIn</a>
-                </div>
-                <h2>Log In</h2>
+
+                <h2>Creat Price</h2>
             </div>
         </div>
     </div>
 </section>
 <!--================End Home Banner Area =================-->
-<br /><br />
-<div class="row">
-    <div class="col-md-12">
-        <div class="card" style="max-width:500px;margin:auto; align-content:center;align-self:center;">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h5 class="card-header info-color white-text text-center py-4" style="background-color:	indigo">
-                    <strong>Sign in</strong>
-                </h5>
-                <br /><br />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <!--Card content-->
-                <div class="card-body px-lg-5 pt-0">
-                    <!-- Form -->
-                    <form class="text-center">
-                        <!-- Email -->
-                        <div class="md-form">
-                            @*<input type="email" id="materialLoginFormEmail" class="form-control">*@
-                            <label for="materialLoginFormEmail">E-mail</label>
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<!-- Font Icon -->
 
-                        </div>
-                        <!-- Password -->
-                        <div class="md-form">
-                            @*<input type="password" id="materialLoginFormPassword" class="form-control">*@
-                            <label for="materialLoginFormPassword">Password</label>
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                        </div>
+<div>
+    <h4>RewardViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdReward)
+        </dt>
 
-                        <div class="d-flex justify-content-around">
-                            <div>
-                                <!-- Remember me -->
-                                <div class="form-check">
-                                    @*<input type="checkbox" class="form-check-input" id="materialLoginFormRemember">*@
-                                    @Html.CheckBoxFor(m => m.RememberMe)
-                                    @Html.LabelFor(m => m.RememberMe)
-                                    @*  <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>*@
-                                </div>
-                            </div>
-                            <div>
-                                <!-- Forgot password -->
-                                <a href="#"></a>
-                                @Html.ActionLink("Forget your password ?", "ForgotPassword")
-                            </div>
-                        </div>
+        <dd>
+            @Html.DisplayFor(model => model.IdReward)
+        </dd>
 
-                        <!-- Sign in button -->
-                        <a class="main_btn" href="@Url.Action("Index", "Home")">Login</a>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price1)
+        </dt>
 
-                        <!-- Register -->
-                        <p>
-                            Not a member?
-                            <a href="#"></a>
-                            @Html.ActionLink("Register as a new user", "Register")
+        <dd>
+            @Html.DisplayFor(model => model.Price1)
+        </dd>
 
-                        </p>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price2)
+        </dt>
 
-                        @*Social login
-                            <p>or sign in with:</p>
-                            <a type="button" class="btn-floating btn-fb btn-sm">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a type="button" class="btn-floating btn-tw btn-sm">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a type="button" class="btn-floating btn-li btn-sm">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a type="button" class="btn-floating btn-git btn-sm">
-                                <i class="fab fa-github"></i>
-                            </a>*@
+        <dd>
+            @Html.DisplayFor(model => model.Price2)
+        </dd>
 
-                    </form>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price3)
+        </dt>
 
-                    <!-- Form -->
+        <dd>
+            @Html.DisplayFor(model => model.Price3)
+        </dd>
 
-                </div>
-            }
-        </div>
-        <!-- Material form login -->
-    </div>
-    <br /><br />
-    @*<div class="col-md-4">
-                 <section id="socialLoginForm">
-                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                 </section>
-        </div>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titre)
+        </dd>
+
+    </dl>
 </div>
-<br /><br />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<!--================End Team Area =================-->
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">

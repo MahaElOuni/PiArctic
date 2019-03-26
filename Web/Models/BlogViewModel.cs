@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Domain.Entities
+namespace Web.Models
 {
-    public class Blog
+    public class BlogViewModel
     {
         public int BlogId { get; set; }
         public String Contenu { get; set; }
-        public String Titre { get; set; }
         public String Photo { get; set; }
         public DateTime DatePost { get; set; }
-        public User User { get; set; }
-
+        public String Titre { get; set; }
     }
 }
