@@ -37,14 +37,16 @@ namespace Web.Controllers
         {
             DateTime now = DateTime.Now;
             Blog b = new Blog();
-            b.Titre = bvm.Titre;
             b.Contenu = bvm.Contenu;
-            b.Photo = bvm.Photo;
+            b.Titre = bvm.Titre;
             b.DatePost = now;
+            b.Photo = bvm.Photo;
+            blogService.Add(b);
+            blogService.Commit();
 
-            
-                return View();
-           
+            return View();
+
+
         }
 
         // GET: Blog/Edit/5
