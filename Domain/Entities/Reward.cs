@@ -13,11 +13,16 @@ namespace Domain.Entities
         [Key, Column(Order = 0)]
         public int IdReward { get; set; }
 
-        public int Price { get; set; }
+        public int Price1 { get; set; }
 
-        public  Event Event { get; set; }
-
-
+        public int Price2 { get; set; }
+        public int Price3 { get; set; }
+       
         public String titre { get; set; }
+
+        public Event Event { get; set; }
+
+        public virtual ICollection<User> ListOrganisateur { get; set; }
+
     }
 }

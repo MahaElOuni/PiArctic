@@ -14,15 +14,33 @@ namespace Web.Controllers
 
         RewardService rewardService = new RewardService();
         // GET: Reward
+
+
+      
         public ActionResult Index()
         {
+            
             return View();
         }
 
         // GET: Reward/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            RewardViewModel rewardModel = new RewardViewModel();
+            var rewards = rewardService.GetAll();
+            foreach (var i in rewards)
+            {
+               
+
+                rewardModel.Price1 = i.Price1;
+                rewardModel.Price2 = i.Price2;
+                rewardModel.Price3 = i.Price3;
+                rewardModel.titre = i.titre;
+                rewardModel.ListOrganisateur = i.ListOrganisateur;
+
+                
+            }
+            return View(rewardModel);
         }
 
         // GET: Reward/Create
@@ -38,7 +56,9 @@ namespace Web.Controllers
             Reward r = new Reward();
 
             r.IdReward = rvm.IdReward;
-            r.Price = rvm.Price;
+            r.Price1 = rvm.Price1;
+            r.Price2 = rvm.Price2;
+            r.Price3 = rvm.Price3;
             r.titre = rvm.titre;
             rewardService.Add(r);
             rewardService.Commit();
