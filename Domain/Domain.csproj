@@ -306,7 +306,11 @@
     <Compile Include="Entities\President.cs" />
     <Compile Include="Entities\Recommendation.cs" />
     <Compile Include="Entities\Repport.cs" />
+<<<<<<< HEAD
     <Compile Include="Entities\Scheduler.cs" />
+=======
+    <Compile Include="Entities\Reward.cs" />
+>>>>>>> 210cfa1dc45422b12a86f18eece4662ad81c2287
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\User.cs" />
