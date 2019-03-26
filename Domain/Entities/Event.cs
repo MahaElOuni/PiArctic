@@ -22,6 +22,8 @@ namespace Domain.Entities
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
         public virtual ICollection<Ticket> ListTickets { get; set; }
         public virtual ICollection<Form> Forms { get; set; }
+        public virtual ICollection<Reward> Rewards { get; set; }
+
         public Event()
         {
 
