@@ -64,19 +64,20 @@ namespace Web.Controllers
 
         // POST: Event/Create
         [HttpPost]
-        public ActionResult Create(EventViewModel evm)
+        public ActionResult Create(EventSchedulerViewModel evm)
         {
-            Event e = new Event();
-            e.Title = evm.Title;
-            e.Address = evm.Address;
-            e.NumberPlaces = evm.NumberPlaces;
-            e.Price = evm.Price;
-            e.Description = evm.Description;
-            e.Start = evm.Start;
-            e.End= evm.End;
-            e.ThemeColor = evm.ThemeColor;
-            e.IsFullDay = evm.IsFullDay;
-            e.OrganizedBy = evm.OrganizedBy;
+            Event e = new Event(); 
+            e.Title = evm.EventModel.Title;
+            e.Address = evm.EventModel.Address;
+            e.NumberPlaces = evm.EventModel.NumberPlaces;
+            e.Price = evm.EventModel.Price;
+            e.Description = evm.EventModel.Description;
+            e.Start = evm.EventModel.Start;
+            e.End= evm.EventModel.End;
+            e.ThemeColor = evm.EventModel.ThemeColor;
+            e.IsFullDay = evm.EventModel.IsFullDay;
+            e.OrganizedBy = evm.EventModel.OrganizedBy;
+            
             eventService.Add(e);
             eventService.Commit();
             try

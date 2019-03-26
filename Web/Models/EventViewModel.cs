@@ -26,6 +26,7 @@ namespace Web.Models
         public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
         public String DateString { get; set; }
+        public ICollection<SchedulerViewModel> listScheduler { get; set; }
         public EventViewModel()
         {
 
