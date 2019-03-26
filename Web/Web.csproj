@@ -928,7 +928,11 @@
     <Content Include="scss\layouts\responsive.scss" />
     <Content Include="Views\Demarage\Index.cshtml" />
     <Content Include="Views\Reward\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Blog\Create.cshtml" />
+=======
+    <Content Include="Views\Reward\Details.cshtml" />
+>>>>>>> 60a5c4a5832977c99a4ca737720407fe8d3aa075
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
