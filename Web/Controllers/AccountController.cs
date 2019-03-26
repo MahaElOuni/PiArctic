@@ -95,7 +95,7 @@ namespace Web.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var user = new User { Id = model.UserId,UserName = model.Email, Email = model.Email, Role = model.Role };
+            var user = new User {UserName = model.Email, Email = model.Email, Role = model.Role };
             
             
             switch (result)
@@ -200,7 +200,7 @@ namespace Web.Controllers
                 if (file2 != null && file2.ContentLength > 0)
                     try
                     {
-                        string path = Path.Combine(Server.MapPath("~/Images"),Path.GetFileName(file2.FileName));
+                        string path = Path.Combine(Server.MapPath("~/Images/"),Path.GetFileName(file2.FileName));
                         file2.SaveAs(path);
                         ViewBag.Message = "Image uploaded successfully";
                     }
@@ -212,21 +212,7 @@ namespace Web.Controllers
                 {
                     ViewBag.Message = "You have not specified a file.";
                 }
-                //if (file3 != null && file3.ContentLength > 0)
-                //    try
-                //    {
-                //        string path = Path.Combine(Server.MapPath("~/Files"), Path.GetFileName(file3.FileName));
-                //        file3.SaveAs(path);
-                //        ViewBag.Message = "File uploaded successfully";
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                //    }
-                //else
-                //{
-                //    ViewBag.Message = "You have not specified a file.";
-                //}
+               
                 var user = new User
                 {
                     UserName = model.Email,
@@ -246,7 +232,7 @@ namespace Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
+                    
                     return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
@@ -292,8 +278,9 @@ namespace Web.Controllers
                 {
                     // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
                     return View("ForgotPasswordConfirmation");
+                
                 }
-
+             
                 // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
                 // Envoyer un message électronique avec ce lien
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
