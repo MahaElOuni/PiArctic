@@ -300,6 +300,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\FormConfiguration.cs" />
     <Compile Include="Configurations\RecommendationConfiguration.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Conventions\DateTimeConvention.cs" />
