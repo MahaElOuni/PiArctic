@@ -16,13 +16,41 @@ namespace Web.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            return View();
+            List<BlogViewModel> list = new List<BlogViewModel>();
+            var a = blogService.GetAll();
+            foreach (var i in a)
+            {
+                BlogViewModel bvm = new BlogViewModel();
+                bvm.BlogId = i.BlogId;
+                bvm.Titre = i.Titre;
+                bvm.Contenu = i.Contenu;
+                bvm.Photo = i.Photo;
+                bvm.DatePost = i.DatePost; 
+                list.Add(bvm);
+            }
+            
+            return View(list);
         }
 
         // GET: Blog/Details/5
+        
         public ActionResult Details(int id)
         {
-            return View();
+            BlogViewModel bvm = new BlogViewModel();
+            var blogs = blogService.GetAll();
+            foreach (var i in blogs)
+            {
+                if (i.BlogId == id)
+                {
+                    bvm.BlogId = i.BlogId;
+                    bvm.Titre= i.Titre;
+                    bvm.DatePost= i.DatePost;
+                    bvm.Contenu= i.Contenu;
+                    bvm.Photo= i.Photo;
+
+                }
+            }
+            return View(bvm);
         }
 
         // GET: Blog/Create
@@ -44,7 +72,7 @@ namespace Web.Controllers
             blogService.Add(b);
             blogService.Commit();
 
-            return View();
+            return RedirectToAction("Index");
 
 
         }
@@ -57,7 +85,7 @@ namespace Web.Controllers
 
         // POST: Blog/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, BlogViewModel bvm )
         {
             try
             {
@@ -79,8 +107,9 @@ namespace Web.Controllers
 
         // POST: Blog/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id,BlogViewModel bvm )
         {
+
             try
             {
                 // TODO: Add delete logic here
