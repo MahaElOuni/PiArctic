@@ -2118,6 +2118,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
+    <Folder Include="Views\Form\" />
     <Folder Include="Views\President\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

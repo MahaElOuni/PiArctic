@@ -9,62 +9,153 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class FormController: Controller
+    public class FormController : Controller
     {
-
         FormService Fs = new FormService();
-
-        // GET: Event
+        UserService Us = new UserService();
+        EventService Es = new EventService();
+        // GET: Form
         public ActionResult Index()
         {
-            return View();
+            List<FormViewModel> lists = new List<FormViewModel>();
+            foreach (var item in Fs.GetAll())
+            {
+                FormViewModel dvm = new FormViewModel();
+                dvm.EventView.Title = item.Event.Title;
+                dvm.UserModel.FName = item.User.FName;
+                dvm.UserModel.LName = item.User.LName;
+                dvm.Sex = (Web.Models.Sex)item.Sex;
+                dvm.Age = item.Age;
+                dvm.Profession = item.Profession;
+                dvm.Mail = item.Mail;
+                dvm.Countrie = (Web.Models.Countries)item.Countrie;
+                dvm.Address = item.Address;
+            }
+            return View(lists);
         }
 
-        // GET: Event/Details/5
+
+
+        [HttpPost]
+        public ActionResult Index(string searchString, string id)
+        {
+
+            List<FormViewModel> lists = new List<FormViewModel>();
+            foreach (var item in Fs.GetAll())
+            {
+                FormViewModel dvm = new FormViewModel();
+                dvm.EventView.Title = item.Event.Title;
+                dvm.UserModel.FName = item.User.FName;
+                dvm.UserModel.LName = item.User.LName;
+                dvm.Sex = (Web.Models.Sex)item.Sex;
+                dvm.Age = item.Age;
+                dvm.Profession = item.Profession;
+                dvm.Mail = item.Mail;
+                dvm.Countrie = (Web.Models.Countries)item.Countrie;
+                dvm.Address = item.Address;
+
+            }
+            // return View(lists);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lists = lists.Where(m => m.EventView.Title.Contains(searchString)).ToList();
+            }
+            if (!String.IsNullOrEmpty(id.ToString()))
+            {
+                lists = lists.Where(m => m.UserModel.CIN == id).ToList();
+            }
+
+            return View(lists);
+        }
+
+        // GET: Form/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+
+            var form = Fs.GetById(id);
+
+
+            FormViewModel fvm = new FormViewModel();
+            fvm.EventView.Title = form.Event.Title;
+            fvm.UserModel.FName = form.User.FName;
+            fvm.UserModel.LName = form.User.LName;
+            fvm.Sex = (Web.Models.Sex)form.Sex;
+            fvm.Age = form.Age;
+            fvm.Profession = form.Profession;
+            fvm.Mail = form.Mail;
+            fvm.Countrie = (Web.Models.Countries)form.Countrie;
+            fvm.Address = form.Address;
+
+
+
+            return View(fvm);
+
         }
 
-        // GET: Event/Create
+        // GET: Form/Create
         public ActionResult Create()
         {
+
+
+            var form = Fs.GetAll();
+            List<EventViewModel> lbvm = new List<EventViewModel>();
+            foreach (var item in form)
+            {
+                FormViewModel bvm = new FormViewModel();
+                //bvm.EventId = item.EventId;
+                //bvm.UserId = item.UserId;
+                bvm.EventView.Title = item.Event.Title;
+                bvm.UserModel.FName = item.User.FName;
+                bvm.UserModel.LName = item.User.LName;
+                bvm.Sex = (Web.Models.Sex)item.Sex;
+                bvm.Age = item.Age;
+                bvm.Profession = item.Profession;
+                bvm.Mail = item.Mail;
+                bvm.Countrie = (Web.Models.Countries)item.Countrie;
+                bvm.Address = item.Address;
+
+            }
+
+            //ViewData["Events"] = new SelectList(lbvm, "Title", "Title");
+            return View();
+
+        }
+
+        // POST: Form/Create
+        [HttpPost]
+        public ActionResult Create(FormViewModel DVM, int idEvent, int idUser )
+        {
+            var Event = Es.GetById(idEvent);
+            var User = Us.GetById(idUser);
+            Form d = new Form() { Sex = (Domain.Entities.Sex)DVM.Sex };
+
+            d.FormId = DVM.FormId;
+            d.UserId = DVM.UserId;
+            d.EventId = DVM.EventId;
+
+            //d.Titre = DVM.Titre;
+            //d.Categorie = DVM.Categorie;
+            ////d.BibliothequeFK = DVM.BibliothequeFK;
+            //d.Bibliotheque = new Bibliotheque { BibliothequeCode = DVM.BibliothequeFK };
+
+            //DS.Add(d);
+            //DS.Commit();
+            //return RedirectToAction("Index");
+
+
+
+
             return View();
         }
 
-        // POST: Event/Create
-        [HttpPost]
-        public ActionResult Create(FormViewModel evm)
-        {
-            Form f = new Form();
-            //e.Title = evm.Title;
-            //e.Address = evm.Address;
-            //e.NumberPlaces = evm.NumberPlaces;
-            //e.Price = evm.Price;
-            //e.Description = evm.Description;
-            //e.Date = evm.Date;
-            //e.OrganizedBy = evm.OrganizedBy;
-            //es.Add(e);
-            //es.Commit();
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Event/Edit/5
+        // GET: Form/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Event/Edit/5
+        // POST: Form/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -80,13 +171,13 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Event/Delete/5
+        // GET: Form/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Event/Delete/5
+        // POST: Form/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -102,5 +193,4 @@ namespace Web.Controllers
             }
         }
     }
-
 }
