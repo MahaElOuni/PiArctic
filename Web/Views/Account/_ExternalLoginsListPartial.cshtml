@@ -18,8 +18,22 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption">@p.AuthenticationType</button>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (loginProviders.Equals("Twitter"))
+                        {<button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
+                                 value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption">
+                                <img src="~/img/twit.png" />@p.AuthenticationType
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
+                                    value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption">
+                                <img src="~/img/fb.png" />@p.AuthenticationType
+                            </button>
+                        }
+                        
                     }
                 </p>
             </div>
