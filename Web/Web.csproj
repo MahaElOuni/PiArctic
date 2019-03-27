@@ -1885,6 +1885,7 @@
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Form\Create.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
