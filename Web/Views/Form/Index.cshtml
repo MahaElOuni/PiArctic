@@ -71,6 +71,33 @@
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
+
+
+
+@using (Html.BeginForm())
+{
+
+    @*Un seul bouton pour les deux recherches*@
+    <table>
+        <tr>
+            <td>
+                <div>
+
+                    Recherche par UserId: @Html.TextBox("searchString")
+                    Recherche par EventId:  @Html.TextBox("id")
+
+
+
+
+
+
+                </div>
+            </td>
+            <td> <input type="submit" value="Rechercher" id="recherche" /> </td>
+        </tr>
+
+    </table>
+}
 <table class="table">
     <tr>
         <th>

@@ -38,7 +38,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(string searchString, string id)
+        public ActionResult Index(int EventId, int UserId)
         {
 
             List<FormViewModel> lists = new List<FormViewModel>();
@@ -57,13 +57,13 @@ namespace Web.Controllers
 
             }
             // return View(lists);
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(EventId.ToString()))
             {
-                lists = lists.Where(m => m.EventView.Title.Contains(searchString)).ToList();
+                lists = lists.Where(m => m.EventId.Equals(EventId)).ToList();
             }
-            if (!String.IsNullOrEmpty(id.ToString()))
+            if (!String.IsNullOrEmpty(UserId.ToString()))
             {
-                lists = lists.Where(m => m.UserModel.CIN == id).ToList();
+                lists = lists.Where(m => m.UserId == UserId).ToList();
             }
 
             return View(lists);
