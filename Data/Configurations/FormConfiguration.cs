@@ -10,9 +10,11 @@ namespace Data.Configurations
 {
     class FormConfiguration:EntityTypeConfiguration<Form>
     {
+
         public FormConfiguration()
         {
             HasKey(e => new { e.FormId, e.UserId, e.EventId });
         }
+
     }
 }
