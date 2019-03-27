@@ -94,35 +94,7 @@ namespace Web.Controllers
 
         }
 
-        //// GET: Form/Create
-        //public ActionResult Create()
-        //{
-
-
-        //    var form = Fs.GetAll();
-        //    List<EventViewModel> lbvm = new List<EventViewModel>();
-        //    foreach (var item in form)
-        //    {
-        //        FormViewModel bvm = new FormViewModel();
-        //        //bvm.EventId = item.EventId;
-        //        //bvm.UserId = item.UserId;
-        //        bvm.EventView.Title = item.Event.Title;
-        //        bvm.UserModel.FName = item.User.FName;
-        //        bvm.UserModel.LName = item.User.LName;
-        //        bvm.Sex = (Web.Models.Sex)item.Sex;
-        //        bvm.Age = item.Age;
-        //        bvm.Profession = item.Profession;
-        //        bvm.Mail = item.Mail;
-        //        bvm.Countrie = (Web.Models.Countries)item.Countrie;
-        //        bvm.Address = item.Address;
-
-        //    }
-
-        //    //ViewData["Events"] = new SelectList(lbvm, "Title", "Title");
-        //    return View();
-
-        //}
-
+        
 
 
 
@@ -132,13 +104,18 @@ namespace Web.Controllers
         {
             var Event = Es.GetAll();
             List<EventViewModel> lbvm = new List<EventViewModel>();
-            foreach (var item in Event)
+            foreach (var i in Event)
             {
-                EventViewModel bvm = new EventViewModel();
-                bvm.EventId = item.EventId;
-                bvm.Title = item.Title;
-                
-                lbvm.Add(bvm);
+                EventViewModel eventModel = new EventViewModel();
+                eventModel.EventId = i.EventId;
+                eventModel.Title = i.Title;
+                eventModel.Start = i.Start;
+                eventModel.Description = i.Description;
+                eventModel.Address = i.Address;
+                eventModel.OrganizedBy = i.OrganizedBy;
+
+
+                lbvm.Add(eventModel);
 
             }
 
@@ -156,17 +133,16 @@ namespace Web.Controllers
 
             Form d = new Form() { Sex = (Domain.Entities.Sex)FVM.Sex, Countrie= (Domain.Entities.Countries)FVM.Countrie };
 
-            d.Event.Title =FVM.EventView.Title;
-            d.User.FName = FVM.UserModel.FName;
-            d.User.LName = FVM.UserModel.LName;
+            //d.Event.Title =FVM.EventView.Title;
+            //d.User.FName = FVM.UserModel.FName;
+            //d.User.LName = FVM.UserModel.LName;
 
             d.Age = FVM.Age;
             d.Profession = FVM.Profession;
             d.Mail = FVM.Mail;
-            //fvm.Countrie = (Web.Models.Countries)form.Countrie;
             d.Address = FVM.Address;
 
-            d.Event.Title =  new Event { Title = FVM.EventView.Title }.ToString();
+            d.Event =  new Event { EventId = FVM.EventId };
 
             Fs.Add(d);
             Fs.Commit();
