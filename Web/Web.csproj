@@ -1884,11 +1884,11 @@
     <Content Include="Views\Reward\Create.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Reward\Details.cshtml" />
+    <Content Include="Views\Form\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
-    <Folder Include="Views\Form\" />
     <Folder Include="Views\President\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

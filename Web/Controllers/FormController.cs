@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Service.IServices;
 using Service.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Web.Controllers
 {
     public class FormController : Controller
     {
-        FormService Fs = new FormService();
+        IFormService Fs = new FormService();
         UserService Us = new UserService();
         EventService Es = new EventService();
         // GET: Form
@@ -93,60 +94,84 @@ namespace Web.Controllers
 
         }
 
+        //// GET: Form/Create
+        //public ActionResult Create()
+        //{
+
+
+        //    var form = Fs.GetAll();
+        //    List<EventViewModel> lbvm = new List<EventViewModel>();
+        //    foreach (var item in form)
+        //    {
+        //        FormViewModel bvm = new FormViewModel();
+        //        //bvm.EventId = item.EventId;
+        //        //bvm.UserId = item.UserId;
+        //        bvm.EventView.Title = item.Event.Title;
+        //        bvm.UserModel.FName = item.User.FName;
+        //        bvm.UserModel.LName = item.User.LName;
+        //        bvm.Sex = (Web.Models.Sex)item.Sex;
+        //        bvm.Age = item.Age;
+        //        bvm.Profession = item.Profession;
+        //        bvm.Mail = item.Mail;
+        //        bvm.Countrie = (Web.Models.Countries)item.Countrie;
+        //        bvm.Address = item.Address;
+
+        //    }
+
+        //    //ViewData["Events"] = new SelectList(lbvm, "Title", "Title");
+        //    return View();
+
+        //}
+
+
+
+
         // GET: Form/Create
+        
         public ActionResult Create()
         {
-
-
-            var form = Fs.GetAll();
+            var Event = Es.GetAll();
             List<EventViewModel> lbvm = new List<EventViewModel>();
-            foreach (var item in form)
+            foreach (var item in Event)
             {
-                FormViewModel bvm = new FormViewModel();
-                //bvm.EventId = item.EventId;
-                //bvm.UserId = item.UserId;
-                bvm.EventView.Title = item.Event.Title;
-                bvm.UserModel.FName = item.User.FName;
-                bvm.UserModel.LName = item.User.LName;
-                bvm.Sex = (Web.Models.Sex)item.Sex;
-                bvm.Age = item.Age;
-                bvm.Profession = item.Profession;
-                bvm.Mail = item.Mail;
-                bvm.Countrie = (Web.Models.Countries)item.Countrie;
-                bvm.Address = item.Address;
+                EventViewModel bvm = new EventViewModel();
+                bvm.EventId = item.EventId;
+                bvm.Title = item.Title;
+                
+                lbvm.Add(bvm);
 
             }
 
-            //ViewData["Events"] = new SelectList(lbvm, "Title", "Title");
+            ViewData["Biblio"] = new SelectList(lbvm, "EventId", "EventId");
             return View();
-
         }
+
+
+
 
         // POST: Form/Create
         [HttpPost]
-        public ActionResult Create(FormViewModel DVM, int idEvent, int idUser )
+        public ActionResult Create(FormViewModel FVM, int idEvent, int idUser )
         {
-            var Event = Es.GetById(idEvent);
-            var User = Us.GetById(idUser);
-            Form d = new Form() { Sex = (Domain.Entities.Sex)DVM.Sex };
 
-            d.FormId = DVM.FormId;
-            d.UserId = DVM.UserId;
-            d.EventId = DVM.EventId;
+            Form d = new Form() { Sex = (Domain.Entities.Sex)FVM.Sex, Countrie= (Domain.Entities.Countries)FVM.Countrie };
 
-            //d.Titre = DVM.Titre;
-            //d.Categorie = DVM.Categorie;
-            ////d.BibliothequeFK = DVM.BibliothequeFK;
-            //d.Bibliotheque = new Bibliotheque { BibliothequeCode = DVM.BibliothequeFK };
+            d.Event.Title =FVM.EventView.Title;
+            d.User.FName = FVM.UserModel.FName;
+            d.User.LName = FVM.UserModel.LName;
 
-            //DS.Add(d);
-            //DS.Commit();
-            //return RedirectToAction("Index");
+            d.Age = FVM.Age;
+            d.Profession = FVM.Profession;
+            d.Mail = FVM.Mail;
+            //fvm.Countrie = (Web.Models.Countries)form.Countrie;
+            d.Address = FVM.Address;
 
+            d.Event.Title =  new Event { Title = FVM.EventView.Title }.ToString();
 
+            Fs.Add(d);
+            Fs.Commit();
+            return RedirectToAction("Index");
 
-
-            return View();
         }
 
         // GET: Form/Edit/5
