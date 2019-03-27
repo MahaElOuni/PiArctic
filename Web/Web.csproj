@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1884,6 +1885,8 @@
     <Content Include="Views\Reward\Create.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Reward\Details.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Scheduler\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
