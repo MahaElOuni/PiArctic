@@ -1,5 +1,8 @@
 ﻿@model Web.Models.RewardViewModel
 
+@{
+    ViewBag.Title = "Delete";
+}
 <!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
@@ -65,69 +68,66 @@
 </header>
 <!--================End Menu Area =================-->
 <!--================Welcome Home Banner Area =================-->
-<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)">
-   
-</section>
+<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)"></section>
+<!--================End Home Banner Area =================-->
 <!--================End Home Banner Area =================-->
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>RewardViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdReward, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdReward, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdReward, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h4>RewardViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdReward)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdReward)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
@@ -202,8 +202,4 @@
             </div>*@
     </div>
 </footer>
-<!--================ End footer Area  =================-->
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<!--================ End footer Area  =================--

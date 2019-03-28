@@ -1887,6 +1887,8 @@
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Scheduler\Create.cshtml" />
+    <Content Include="Views\Reward\Delete.cshtml" />
+    <Content Include="Views\Reward\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
