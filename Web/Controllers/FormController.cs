@@ -23,7 +23,6 @@ namespace Web.Controllers
             {
                 FormViewModel dvm = new FormViewModel();
                 dvm.EventView.Title = item.Event.Title;
-                dvm.ParticipantId= item.ParticipantId;
                 
                 dvm.Sex = (Web.Models.Sex)item.Sex;
                 dvm.Age = item.Age;
@@ -38,7 +37,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(int EventId, int ParticipantId)
+        public ActionResult Index(int EventId)
         {
 
             List<FormViewModel> lists = new List<FormViewModel>();
@@ -46,7 +45,6 @@ namespace Web.Controllers
             {
                 FormViewModel dvm = new FormViewModel();
                 dvm.EventView.Title = item.Event.Title;
-                dvm.ParticipantId = item.ParticipantId;
                 dvm.Sex = (Web.Models.Sex)item.Sex;
                 dvm.Age = item.Age;
                 dvm.Profession = item.Profession;
@@ -60,11 +58,7 @@ namespace Web.Controllers
             {
                 lists = lists.Where(m => m.EventId.Equals(EventId)).ToList();
             }
-            if (!String.IsNullOrEmpty(ParticipantId.ToString()))
-            {
-                lists = lists.Where(m => m.ParticipantId == ParticipantId).ToList();
-            }
-
+            
             return View(lists);
         }
 
@@ -78,7 +72,6 @@ namespace Web.Controllers
 
             FormViewModel fvm = new FormViewModel();
             fvm.EventView.Title = form.Event.Title;
-            fvm.ParticipantId=form.ParticipantId;
             fvm.Sex = (Web.Models.Sex)form.Sex;
             fvm.Age = form.Age;
             fvm.Profession = form.Profession;

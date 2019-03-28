@@ -255,11 +255,8 @@ public class Form
         public Countries Countrie { get; set; }
         public String Address { get; set; }
 
-        public Participant Participant { get; set; }
-        [Key, Column(Order = 1)]
-        public int ParticipantId { get; set; }
         public Event Event { get; set; }
-        [Key, Column(Order = 2)]
+        [Key, Column(Order = 1)]
         public int EventId { get; set; }
 
 

@@ -9,7 +9,6 @@ namespace Web.Models
     {
         public int ParicipantId { get; set; }
         public virtual ICollection<RecommendationViewModel> listRecommdendation { get; set; }
-        public virtual ICollection<FormViewModel> Forms { get; set; }
 
     }
 }
