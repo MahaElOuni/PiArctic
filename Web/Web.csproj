@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\SatisfactionController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +227,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PresidentModel.cs" />
+    <Compile Include="Models\SatisfactionViewModel.cs" />
     <Compile Include="Models\SchedulerViewModel.cs" />
     <Compile Include="Models\RewardViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -1894,6 +1896,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Views\President\" />
+    <Folder Include="Views\Satisfaction\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
