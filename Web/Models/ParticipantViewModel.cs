@@ -5,7 +5,11 @@ using System.Web;
 
 namespace Web.Models
 {
-    public class ParticipantViewModel
+    public class ParticipantViewModel:UserModel
     {
+        public int ParicipantId { get; set; }
+        public virtual ICollection<RecommendationViewModel> listRecommdendation { get; set; }
+        public virtual ICollection<FormViewModel> Forms { get; set; }
+
     }
 }

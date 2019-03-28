@@ -242,6 +242,7 @@ public class Form
     {
         [Key, Column(Order = 0)]
         public int FormId { get; set; }
+        public String photo { get; set; }
         [EnumDataType(typeof(Sex))]
         public Sex Sex { get; set; }
         
@@ -254,9 +255,9 @@ public class Form
         public Countries Countrie { get; set; }
         public String Address { get; set; }
 
-        public User User { get; set; }
+        public Participant Participant { get; set; }
         [Key, Column(Order = 1)]
-        public int UserId { get; set; }
+        public int ParticipantId { get; set; }
         public Event Event { get; set; }
         [Key, Column(Order = 2)]
         public int EventId { get; set; }
