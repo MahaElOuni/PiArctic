@@ -253,8 +253,8 @@ namespace Web.Models
         public Countries Countrie { get; set; }
         public String Address { get; set; }
 
-        public UserModel UserModel { get; set; }
-        public int UserId { get; set; }
+        public ParticipantViewModel Participant { get; set; }
+        public int ParticipantId { get; set; }
         public EventViewModel EventView { get; set; }
         public int EventId { get; set; }
 

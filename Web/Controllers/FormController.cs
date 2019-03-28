@@ -13,7 +13,7 @@ namespace Web.Controllers
     public class FormController : Controller
     {
         IFormService Fs = new FormService();
-        UserService Us = new UserService();
+        ParticipantService Us = new ParticipantService();
         EventService Es = new EventService();
         // GET: Form
         public ActionResult Index()
@@ -23,8 +23,8 @@ namespace Web.Controllers
             {
                 FormViewModel dvm = new FormViewModel();
                 dvm.EventView.Title = item.Event.Title;
-                dvm.UserModel.FName = item.User.FName;
-                dvm.UserModel.LName = item.User.LName;
+                dvm.ParticipantId= item.ParticipantId;
+                
                 dvm.Sex = (Web.Models.Sex)item.Sex;
                 dvm.Age = item.Age;
                 dvm.Profession = item.Profession;
@@ -38,7 +38,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(int EventId, int UserId)
+        public ActionResult Index(int EventId, int ParticipantId)
         {
 
             List<FormViewModel> lists = new List<FormViewModel>();
@@ -46,8 +46,7 @@ namespace Web.Controllers
             {
                 FormViewModel dvm = new FormViewModel();
                 dvm.EventView.Title = item.Event.Title;
-                dvm.UserModel.FName = item.User.FName;
-                dvm.UserModel.LName = item.User.LName;
+                dvm.ParticipantId = item.ParticipantId;
                 dvm.Sex = (Web.Models.Sex)item.Sex;
                 dvm.Age = item.Age;
                 dvm.Profession = item.Profession;
@@ -61,9 +60,9 @@ namespace Web.Controllers
             {
                 lists = lists.Where(m => m.EventId.Equals(EventId)).ToList();
             }
-            if (!String.IsNullOrEmpty(UserId.ToString()))
+            if (!String.IsNullOrEmpty(ParticipantId.ToString()))
             {
-                lists = lists.Where(m => m.UserId == UserId).ToList();
+                lists = lists.Where(m => m.ParticipantId == ParticipantId).ToList();
             }
 
             return View(lists);
@@ -79,8 +78,7 @@ namespace Web.Controllers
 
             FormViewModel fvm = new FormViewModel();
             fvm.EventView.Title = form.Event.Title;
-            fvm.UserModel.FName = form.User.FName;
-            fvm.UserModel.LName = form.User.LName;
+            fvm.ParticipantId=form.ParticipantId;
             fvm.Sex = (Web.Models.Sex)form.Sex;
             fvm.Age = form.Age;
             fvm.Profession = form.Profession;
