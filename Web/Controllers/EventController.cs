@@ -81,9 +81,9 @@ namespace Web.Controllers
                 e.OrganizedBy = evm.EventModel.OrganizedBy;
             foreach(Scheduler scheduler in listScheduler)
             {
-                scheduler.Event.EventId=e.EventId;
-               /* schedulerService.Add(scheduler);
-                schedulerService.Commit();*/
+                scheduler.Event=e;
+                schedulerService.Add(scheduler);
+                schedulerService.Commit();
             }
                 
                 eventService.Add(e);
@@ -165,14 +165,15 @@ namespace Web.Controllers
         public void getAllScheduler(String duration,String proName)
         {
             
-            Scheduler scheduler = new Scheduler();
+            
+                    Scheduler scheduler = new Scheduler();
             scheduler.Duration = duration;
             scheduler.ProgramName = proName;
-           // scheduler.Event = eventService.GetById(1);
-            
-             schedulerService.Add(scheduler);
+            listScheduler.Add(scheduler);
+
+                schedulerService.Add(scheduler);
              schedulerService.Commit();
-           
+
 
 
 

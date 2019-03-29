@@ -213,7 +213,9 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
+    <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,7 +229,9 @@
     <Compile Include="Models\FormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ParticipantViewModel.cs" />
     <Compile Include="Models\PresidentModel.cs" />
+    <Compile Include="Models\RecommendationViewModel.cs" />
     <Compile Include="Models\SchedulerViewModel.cs" />
     <Compile Include="Models\RewardViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -1820,7 +1824,9 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\stellar.js" />
     <Content Include="Scripts\theme.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1888,16 +1894,24 @@
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Scheduler\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Blog\Delete.cshtml" />
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+=======
+    <Content Include="Views\Form\Index.cshtml" />
+>>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
+<<<<<<< HEAD
     <Folder Include="Views\Comment\" />
+=======
+    <Folder Include="Views\Participant\" />
+>>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
     <Folder Include="Views\President\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
