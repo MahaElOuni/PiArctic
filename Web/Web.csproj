@@ -1894,24 +1894,18 @@
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Scheduler\Create.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Blog\Delete.cshtml" />
-    <Content Include="Views\Blog\Edit.cshtml" />
-    <Content Include="Views\Blog\Create.cshtml" />
-    <Content Include="Views\Blog\Details.cshtml" />
-    <Content Include="Views\Blog\Index.cshtml" />
-=======
     <Content Include="Views\Form\Index.cshtml" />
->>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Blog\Delete.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
-<<<<<<< HEAD
-    <Folder Include="Views\Comment\" />
-=======
     <Folder Include="Views\Participant\" />
->>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
     <Folder Include="Views\President\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

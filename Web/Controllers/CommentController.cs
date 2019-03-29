@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Entities;
+using Service.Services;
+using Web.Models;
 
 namespace Web.Controllers
 {
     public class CommentController : Controller
     {
+        CommentService commentService = new CommentService();
+        CommentViewModel cvm = new CommentViewModel();
         // GET: Comment
         public ActionResult Index()
         {
@@ -27,19 +32,17 @@ namespace Web.Controllers
         }
 
         // POST: Comment/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [HttpGet]
+        public ActionResult Create(int id,CommentViewModel cvm)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Comment b = new Comment();
+            b.BlogId = id;
+            b.Contenu = cvm.Contenu;
+            b.NbrLike = 0;
+            commentService.Add(b);
+            commentService.Commit();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Comment/Edit/5
