@@ -1,4 +1,9 @@
-﻿ <!--================Header Menu Area =================-->
+﻿@model Web.Models.RewardViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+<!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -23,7 +28,6 @@
                                 <li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
                                 <li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
                                 <li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
-                                <li class="nav-item"><a class="nav-link" href="elements.html">Satisfaction</a></li>
                             </ul>
                         </li>
 
@@ -64,163 +68,67 @@
 </header>
 <!--================End Menu Area =================-->
 <!--================Welcome Home Banner Area =================-->
-<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)">
-    <div class="banner_inner">
-        <div class="container">
-
-            <div class="banner_content">
-                <h2>International Digital <br />Business Event</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-                <a class="banner_btn" href="#">View More Details</a>
-            </div>
-        </div>
-    </div>
-</section>
+<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)"></section>
+<!--================End Home Banner Area =================-->
 <!--================End Home Banner Area =================-->
 
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RewardViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdReward)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.IdReward)
+        </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Price1)
+        </dt>
 
-<!--================Event Time Area =================-->
-<section class="event_time_area">
-    <div class="container">
-        <div class="event_time_inner">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="event_text">
-                        <h3>Next Event will Start in</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="timer_inner">
-                        <div id="timer" class="timer">
-                            <div class="timer__section days">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">days</div>
-                            </div>
-                            <div class="timer__section hours">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">hours</div>
-                            </div>
-                            <div class="timer__section minutes">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">Minutes</div>
-                            </div>
-                            <div class="timer__section seconds">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">seconds</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <dd>
+            @Html.DisplayFor(model => model.Price1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
-    </div>
-</section>
-<!--================End Event Time Area =================-->
-<!--================Welcome Area =================-->
-<section class="welcome_area pad_btm">
-    <div class="container">
-        <div class="welcome_inner row">
-            <div class="col-lg-5">
-                <div class="welcome_img">
-                    <img class="img-fluid" src="~/img/welcome-1.jpg" alt="">
-
-                </div>
-            </div>
-            <div class="col-lg-6 offset-lg-1">
-                <div class="welcome_text">
-                    <h3>Welcome to the world of events</h3>
-                    <p>The <strong>ConsultTech</strong> is a specialized startup company which built its image on the success of your events within its human dimension or completely unreasonable</p>
-                    <a class="main_btn" href="#">READ MORE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Welcome Area =================-->
-<!--================Team Area =================-->
-<section class="team_area p_120">
-    <div class="container">
-        <div class="main_title">
-            <h2>Meet Head Speakers</h2>
-            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
-        </div>
-        <div class="row team_inner">
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-1.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-2.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-3.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-4.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Team Area =================-->
-
-
-
-
-
+    }
+</div>
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
@@ -294,4 +202,4 @@
             </div>*@
     </div>
 </footer>
-<!--================ End footer Area  =================-->
+<!--================ End footer Area  =================--

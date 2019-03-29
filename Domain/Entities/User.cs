@@ -37,7 +37,12 @@ namespace Domain.Entities
         //public bool IsBlocked { get; set; }
         //public bool IsValid { get; set; }
         public virtual ICollection<Blog>  Blogs { get; set; }
+<<<<<<< HEAD
         public virtual ICollection<Comment>  Comments { get; set; }
+=======
+        public virtual ICollection<Reward> Rewards { get; set; }
+        public virtual ICollection<Satisfaction> Satisfaction { get; set; }
+>>>>>>> caefa8c6c2f94ae43e73c5b1cb723d3c4679ff6a
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
             // Note the authenticationType must match the one defined in

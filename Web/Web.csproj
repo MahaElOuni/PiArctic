@@ -217,6 +217,7 @@
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\SatisfactionController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,7 +232,11 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ParticipantViewModel.cs" />
     <Compile Include="Models\PresidentModel.cs" />
+<<<<<<< HEAD
+    <Compile Include="Models\SatisfactionViewModel.cs" />
+=======
     <Compile Include="Models\RecommendationViewModel.cs" />
+>>>>>>> a5979da02b2eb394f7f43eaa29d85fda3a919f2f
     <Compile Include="Models\SchedulerViewModel.cs" />
     <Compile Include="Models\RewardViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -1894,6 +1899,7 @@
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Scheduler\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Form\Index.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
@@ -1901,12 +1907,29 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\Delete.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
+=======
+<<<<<<< HEAD
+    <Content Include="Views\Reward\Delete.cshtml" />
+    <Content Include="Views\Reward\Index.cshtml" />
+=======
+<<<<<<< HEAD
+    <Content Include="Views\Blog\Delete.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+=======
+    <Content Include="Views\Form\Index.cshtml" />
+>>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
+>>>>>>> a5979da02b2eb394f7f43eaa29d85fda3a919f2f
+>>>>>>> caefa8c6c2f94ae43e73c5b1cb723d3c4679ff6a
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Views\Participant\" />
     <Folder Include="Views\President\" />
+    <Folder Include="Views\Satisfaction\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
