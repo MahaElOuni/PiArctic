@@ -55,18 +55,12 @@
     <Compile Include="IServices\IFormService.cs" />
     <Compile Include="IServices\IParticipantService.cs" />
     <Compile Include="IServices\IPresidentService.cs" />
-<<<<<<< HEAD
+
     <Compile Include="IServices\IRecommandationService.cs" />
-=======
-<<<<<<< HEAD
+
     <Compile Include="IServices\ISatisfactionService.cs" />
-=======
-<<<<<<< HEAD
-=======
+
     <Compile Include="IServices\IRecommandationService.cs" />
->>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
->>>>>>> a5979da02b2eb394f7f43eaa29d85fda3a919f2f
->>>>>>> caefa8c6c2f94ae43e73c5b1cb723d3c4679ff6a
     <Compile Include="IServices\ISchedulerService.cs" />
     <Compile Include="IServices\IRewardService.cs" />
     <Compile Include="IServices\IUserService.cs" />
@@ -77,18 +71,12 @@
     <Compile Include="Services\FormService.cs" />
     <Compile Include="Services\ParticipantService.cs" />
     <Compile Include="Services\PresidentService.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Services\RecommandationService.cs" />
-=======
-<<<<<<< HEAD
+
     <Compile Include="Services\SatisfactionService.cs" />
-=======
-<<<<<<< HEAD
-=======
+
     <Compile Include="Services\RecommandationService.cs" />
->>>>>>> 8279654485517cd7f1c2f20367debab70e12d0bb
->>>>>>> a5979da02b2eb394f7f43eaa29d85fda3a919f2f
->>>>>>> caefa8c6c2f94ae43e73c5b1cb723d3c4679ff6a
     <Compile Include="Services\SchedulerService.cs" />
     <Compile Include="Services\RewardService.cs" />
     <Compile Include="Services\UserService.cs" />
