@@ -64,10 +64,11 @@ namespace Web.Controllers
 
         // POST: Reward/Create
         [HttpPost]
-        public ActionResult Create(RewardViewModel rvm)
+        public ActionResult Create(RewardViewModel rvm, int id)
         {
             Reward r = new Reward();
-            //r.Event.EventId = 1 ;
+
+           // r.Event.EventId = rewardService.GetById(id);
             r.IdReward = rvm.IdReward;
             r.Price1 = rvm.Price1;
             r.Price2 = rvm.Price2;
