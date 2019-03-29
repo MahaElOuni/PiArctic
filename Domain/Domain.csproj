@@ -298,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Blog.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\Form.cs" />
@@ -306,7 +307,10 @@
     <Compile Include="Entities\President.cs" />
     <Compile Include="Entities\Recommendation.cs" />
     <Compile Include="Entities\Repport.cs" />
+<<<<<<< HEAD
     <Compile Include="Entities\Satisfaction.cs" />
+=======
+>>>>>>> a5979da02b2eb394f7f43eaa29d85fda3a919f2f
     <Compile Include="Entities\Scheduler.cs" />
     <Compile Include="Entities\Reward.cs" />
     <Compile Include="Entities\Team.cs" />

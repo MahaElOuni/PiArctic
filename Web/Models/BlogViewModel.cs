@@ -11,6 +11,8 @@ namespace Web.Models
         public String Contenu { get; set; }
         public String Photo { get; set; }
         public DateTime DatePost { get; set; }
+        public int NbrLike { get; set; }
+        public int NbrComment { get; set; }
         public String Titre { get; set; }
     }
 }

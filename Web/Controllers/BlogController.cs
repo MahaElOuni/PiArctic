@@ -12,17 +12,49 @@ namespace Web.Controllers
     public class BlogController : Controller
     {
         BlogService blogService = new BlogService();
-        
+        BlogViewModel bvm = new BlogViewModel();
+
         // GET: Blog
         public ActionResult Index()
         {
-            return View();
+            List<BlogViewModel> list = new List<BlogViewModel>();
+            var a = blogService.GetAll();
+            foreach (var i in a)
+            {
+                BlogViewModel bvm = new BlogViewModel();
+                bvm.BlogId = i.BlogId;
+                bvm.NbrLike = i.NbrLike;
+                bvm.NbrComment = i.NbrComment;
+                bvm.Titre = i.Titre;
+                bvm.Contenu = i.Contenu;
+                bvm.Photo = i.Photo;
+                bvm.DatePost = i.DatePost;
+                list.Add(bvm);
+            }
+
+            return View(list);
         }
 
         // GET: Blog/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            
+            var blogs = blogService.GetAll();
+            foreach (var i in blogs)
+            {
+                if (i.BlogId == id)
+                {
+                    bvm.BlogId = i.BlogId;
+                    bvm.Titre = i.Titre;
+                    bvm.NbrLike = i.NbrLike;
+                    bvm.NbrComment = i.NbrComment;
+                    bvm.DatePost = i.DatePost;
+                    bvm.Contenu = i.Contenu;
+                    bvm.Photo = i.Photo;
+
+                }
+            }
+            return View(bvm);
         }
 
         // GET: Blog/Create
@@ -39,12 +71,14 @@ namespace Web.Controllers
             Blog b = new Blog();
             b.Contenu = bvm.Contenu;
             b.Titre = bvm.Titre;
+            b.NbrComment = 0;
+            b.NbrLike = 0;
             b.DatePost = now;
             b.Photo = bvm.Photo;
             blogService.Add(b);
             blogService.Commit();
 
-            return View();
+            return RedirectToAction("Index");
 
 
         }
@@ -57,23 +91,37 @@ namespace Web.Controllers
 
         // POST: Blog/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id,BlogViewModel bvm)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Blog b = new Blog();
+            b.BlogId = id;
+            b.Contenu = bvm.Contenu;
+            b.Titre = bvm.Titre;
+            b.Photo = bvm.Photo;
+            b.DatePost = bvm.DatePost;
+            blogService.Update(b);
+            blogService.Commit();
+            return RedirectToAction("Index");
         }
 
         // GET: Blog/Delete/5
         public ActionResult Delete(int id)
         {
+            var blogs = blogService.GetAll();
+            foreach (var i in blogs)
+            {
+                if (i.BlogId == id)
+                {
+                    bvm.BlogId = i.BlogId;
+                    bvm.Titre = i.Titre;
+                    bvm.DatePost = i.DatePost;
+                    bvm.Contenu = i.Contenu;
+                    bvm.Photo = i.Photo;
+                    blogService.Delete(i);
+                    blogService.Commit();
+                }
+            }
+            
             return View();
         }
 
