@@ -161,6 +161,11 @@
                             @Html.EditorFor(model => model.EventModel.Description, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EventModel.Description, "", new { @class = "text-danger" })
                         </div>
+                        <div class="form-group">
+                            Orgonized By
+                            @Html.EditorFor(model => model.EventModel.OrganizedBy, new { htmlAttributes = new { @class = "form-control", @id = "orgonizedBy" } })
+                            @Html.ValidationMessageFor(model => model.EventModel.OrganizedBy, "", new { @class = "text-danger" })
+                        </div>
 
                     </div>
                 </div>
@@ -176,14 +181,14 @@
                 <div class="fieldset-content">
                     <div class="form-group">
                         Duration
-                        @Html.EditorFor(model => model.SchedulerModel.Duration, new { htmlAttributes = new { @class = "form-control", @id = "nomsoc", @name = "nomsoc" } })
+                        @Html.EditorFor(model => model.SchedulerModel.Duration, new { htmlAttributes = new { @class = "form-control", @id = "duration", @name = "duration" } })
                         @Html.ValidationMessageFor(model => model.SchedulerModel.Duration, "", new { @class = "text-danger" })
                         <span class="text-input">Example  :<span>  SGCIB</span></span>
                     </div>
 
                     <div class="form-group">
                         Program name
-                        @Html.EditorFor(model => model.SchedulerModel.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "poste", @name = "progName" } })
+                        @Html.EditorFor(model => model.SchedulerModel.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "progName", @name = "progName" } })
                         @Html.ValidationMessageFor(model => model.SchedulerModel.ProgramName, "", new { @class = "text-danger" })
                         <span class="text-input">Example :<span>  Directeur</span></span>
                     </div>
@@ -191,20 +196,14 @@
                     <a class="main_btn" OnClick="addition()">Add</a>
                     <script>
                         function addition() {
-                            var socie = document.getElementById("nomsoc").value;
-                            var poste = document.getElementById("poste").value;
-
-
-
-
-                            $('#tab tr:last').after("<tr><td>" + socie + "</td><td>" + poste + "</td>");
-
-
+                            var duration = document.getElementById("duration").value;
+                            var progName = document.getElementById("progName").value;
+                            $('#tab tr:last').after("<tr><td>" + duration + "</td><td>" + progName + "</td>");
                             $.ajax({
                                 url: "/Event/getAllScheduler",
                                 type: "POST",
                                 data: {
-                                    'duration': socie, 'proName': poste
+                                    'duration': duration, 'proName': progName
                                 }
                             });
 
@@ -305,13 +304,13 @@
 
 
 
-    </div>
+</div>
 @if (TempData["Success"] != null)
-     {
+{
     <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
 }
 @section Scripts{
-    
+
     <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery/jquery.min.js"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/popper.min.js"></script>
