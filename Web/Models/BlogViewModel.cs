@@ -15,6 +15,6 @@ namespace Web.Models
         public int NbrLike { get; set; }
         public int NbrComment { get; set; }
         public String Titre { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentViewModel> Comments { get; set; }
     }
 }

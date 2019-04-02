@@ -72,9 +72,10 @@ namespace Web.Controllers
 
         // POST: Event/Create
         [HttpPost]
-        public ActionResult Create(EventSchedulerViewModel evm)
+        public ActionResult Create(EventSchedulerViewModel evm,int userId)
         {
             Event e = new Event();
+            e.UserId = userId;
             e.Title = evm.EventModel.Title;
             e.Address = evm.EventModel.Address;
             e.NumberPlaces = evm.EventModel.NumberPlaces;
