@@ -26,6 +26,7 @@ namespace Data
             modelBuilder.Entity<CustomUserRole>().HasKey(t => t.UserId);
           //  modelBuilder.Entity<CustomUserLogin>().HasKey(t => t.UserId);
             modelBuilder.Conventions.Add(new KeyConvention());
+            modelBuilder.Entity<Scheduler>().HasOptional(c => c.Event).WithMany(s=>s.ListScheduler).HasForeignKey(i=>i.EventId);
             modelBuilder.Configurations.Add(new CommentConfig());
         }
         public static Context Create()

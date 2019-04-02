@@ -11,6 +11,7 @@ namespace Domain.Entities
         public int SchedulerId { get; set; }
         public String ProgramName { get; set; }
         public String Duration { get; set; }
+        public int? EventId { get; set; }
         public virtual Event Event { get; set; }
     }
 }
