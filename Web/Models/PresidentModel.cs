@@ -5,12 +5,20 @@ using System.Web;
 
 namespace Web.Models
 {
-    public class PresidentModel :UserModel
+    public class PresidentModel : UserModel
     {
-        public int Id;
-        public String PhoneNumber { get; set; }
+        public int Id ;
         public String Logo { get; set; }
         public String Email { get; set; }
-        public String PresidentName { get; set; }
+        public String FName { get; set; }
+        public String LName { get; set; }
+        public String PhoneNumber { get; set; }
+        public String StreetName { get; set; }
+        public  String Password { get; set; }
+        public  String City { get; set; }
+        public String Role { get; set; }
+        public DateTime BirthDate { get; set; }
+        public String Photo { get; set; }
+        public String EntrepriseTranscripts { get; set; }
     }
 }

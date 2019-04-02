@@ -42,7 +42,7 @@ namespace Web.Controllers
             var eventt = eventService.GetAll();
             foreach (var i in eventt)
             {
-                if (i.EventId==id)
+                if (i.EventId ==id)
                 {
                    
                     eventModel.Title = i.Title;

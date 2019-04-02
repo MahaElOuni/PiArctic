@@ -3,7 +3,7 @@ namespace Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Ks : DbMigration
+    public partial class k1 : DbMigration
     {
         public override void Up()
         {
@@ -30,18 +30,21 @@ namespace Data.Migrations
                 c => new
                     {
                         FormId = c.Int(nullable: false),
-                        Prenom = c.String(nullable: false, maxLength: 128),
-                        ParicipantId = c.Int(nullable: false),
-                        Nom = c.String(),
+                        UserId = c.Int(nullable: false),
+                        EventId = c.Int(nullable: false),
+                        Sex = c.Int(nullable: false),
                         Age = c.Int(nullable: false),
                         Profession = c.String(),
                         Mail = c.String(),
-                        EventId = c.Int(nullable: false),
+                        Countrie = c.Int(nullable: false),
+                        Address = c.String(),
                         Participant_Id = c.Int(),
                     })
-                .PrimaryKey(t => new { t.FormId, t.Prenom, t.ParicipantId })
+                .PrimaryKey(t => new { t.FormId, t.UserId, t.EventId })
                 .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.Participant_Id)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
                 .Index(t => t.EventId)
                 .Index(t => t.Participant_Id);
             
@@ -111,14 +114,14 @@ namespace Data.Migrations
                 "dbo.CustomUserLogins",
                 c => new
                     {
-                        UserId = c.Int(nullable: false, identity: true),
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         LoginProvider = c.String(),
                         ProviderKey = c.String(),
+                        UserId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.Users", t => t.Id, cascadeDelete: true)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.CustomUserRoles",
@@ -204,11 +207,12 @@ namespace Data.Migrations
             DropForeignKey("dbo.Rewards", "Event_EventId", "dbo.Events");
             DropForeignKey("dbo.Tickets", "Event_EventId", "dbo.Events");
             DropForeignKey("dbo.Schedulers", "Event_EventId", "dbo.Events");
+            DropForeignKey("dbo.Forms", "UserId", "dbo.Users");
             DropForeignKey("dbo.Recommendations", "Participant_Id", "dbo.Users");
             DropForeignKey("dbo.Recommendations", "EventId", "dbo.Events");
             DropForeignKey("dbo.Forms", "Participant_Id", "dbo.Users");
             DropForeignKey("dbo.CustomUserRoles", "Id", "dbo.Users");
-            DropForeignKey("dbo.CustomUserLogins", "Id", "dbo.Users");
+            DropForeignKey("dbo.CustomUserLogins", "UserId", "dbo.Users");
             DropForeignKey("dbo.CustomUserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.Blogs", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Forms", "EventId", "dbo.Events");
@@ -218,11 +222,12 @@ namespace Data.Migrations
             DropIndex("dbo.Recommendations", new[] { "Participant_Id" });
             DropIndex("dbo.Recommendations", new[] { "EventId" });
             DropIndex("dbo.CustomUserRoles", new[] { "Id" });
-            DropIndex("dbo.CustomUserLogins", new[] { "Id" });
+            DropIndex("dbo.CustomUserLogins", new[] { "UserId" });
             DropIndex("dbo.CustomUserClaims", new[] { "UserId" });
             DropIndex("dbo.Blogs", new[] { "User_Id" });
             DropIndex("dbo.Forms", new[] { "Participant_Id" });
             DropIndex("dbo.Forms", new[] { "EventId" });
+            DropIndex("dbo.Forms", new[] { "UserId" });
             DropTable("dbo.CustomRoles");
             DropTable("dbo.Rewards");
             DropTable("dbo.Tickets");

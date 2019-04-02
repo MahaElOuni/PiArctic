@@ -6,8 +6,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Web.Facebook;
 using Web.Models;
 
 namespace Web
@@ -62,12 +64,22 @@ namespace Web
             app.UseFacebookAuthentication(
                appId: ConfigurationManager.AppSettings["FacebookAppId"],
                appSecret: ConfigurationManager.AppSettings["FacebookAppSecret"]);
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //var facebookOptions = new FacebookAuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //    AppId = "276112173307066",
+            //    AppSecret = "c99229bc287790bdc33639f61218c48e",
+            //    BackchannelHttpHandler = new FacebookBackChannelHandler(),
+            //    UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,email"
+
+            //};
+            //facebookOptions.Scope.Add("email");
+            //app.UseFacebookAuthentication(facebookOptions);
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "523629142846-qe4ucatevtbqbatgcsk2stcrf5ndvoql.apps.googleusercontent.com",
+                ClientSecret = "gBEo6AkV8sMzRQt25LiyiQp9"
+            });
         }
     }
 }

@@ -1,4 +1,10 @@
 ﻿@model Web.Models.UserModel
+
+@*@{
+        ViewBag.Title = "Details";
+    }*@
+
+
 <!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
@@ -30,14 +36,14 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("BlogDetail","Home")">Blog Details</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
 
                         @if (User.Identity.IsAuthenticated)
@@ -46,13 +52,10 @@
                             <li class="nav-item submenu dropdown">
                                 <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
                                 <ul>
-                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">Show Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
 
                                 </ul>
                             </li>
-
-                            @*<li>@Html.DisplayFor(model => model.Email)</li>*@
-                           @* <div>@Html.DisplayFor(model => model.Email)</div>*@
                         }
                         else
                         {
@@ -66,155 +69,224 @@
     </div>
 </header>
 <!--================End Menu Area =================-->
-<!--================Welcome Home Banner Area =================-->
-<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)">
-    <div class="banner_inner">
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
-
-            <div class="banner_content">
-                <h2>International Digital <br />Business Event</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-                <a class="banner_btn" href="#">View More Details</a>
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">LogIn</a>
+                </div>
+                <h2>Log In</h2>
             </div>
         </div>
     </div>
 </section>
 <!--================End Home Banner Area =================-->
-<!--================Event Time Area =================-->
-<section class="event_time_area">
-    <div class="container">
-        <div class="event_time_inner">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="event_text">
-                        <h3>Next Event will Start in</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+<h2>My Account</h2>
+<hr />
+<div class="container-fluid">
+    <section class="section" style="display: flex;justify-content: center; align-items: center;">
+        <div class="row">
+            <div class="col-lg-12 mb-r">
+                <div class="card card-cascade narrower" style="height:300px;width:200px">
+                    <div class="view gardient-card-header info-color ">
+                        <h4 class="mb-0" style="align-content:center">Account's Photo</h4>
+                    </div>
+                    <div class="card-body text-center mb-4" style="height:10px">
+                        <img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(model => model.Photo)" style="height:250px; width:150px" />
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="timer_inner">
-                        <div id="timer" class="timer">
-                            <div class="timer__section days">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">days</div>
-                            </div>
-                            <div class="timer__section hours">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">hours</div>
-                            </div>
-                            <div class="timer__section minutes">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">Minutes</div>
-                            </div>
-                            <div class="timer__section seconds">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">seconds</div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-6 mb-r">
+            <div class="card card-cascade narrower">
+                <div class="view gardient-card-header info-color">
+                    <h4 class="mb-0"> My Account informations</h4>
+                </div>
+                <div class="card-body text-center">
+                    <form style="align-items:flex-end">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="card-title"><strong>@Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)</strong></h1>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Event Time Area =================-->
-<!--================Welcome Area =================-->
-<section class="welcome_area pad_btm">
-    <div class="container">
-        <div class="welcome_inner row">
-            <div class="col-lg-5">
-                <div class="welcome_img">
-                    <img class="img-fluid" src="~/img/welcome-1.jpg" alt="">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Email: </strong> @Html.DisplayFor(model => model.Email)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Phone Number: </strong> @Html.DisplayFor(model => model.PhoneNumber)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">CIN: </strong> @Html.DisplayFor(model => model.CIN)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Address: </strong> @Html.DisplayFor(model => model.StreetName),@Html.DisplayFor(model => model.City)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Password: </strong>  @Html.DisplayFor(model => model.Password)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Post: </strong>   @Html.DisplayFor(model => model.Role)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">Birthday : </strong>@Html.DisplayFor(model => model.BirthDate)</h4>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-0"> <strong class="text-success">EntrepriseTranscripts : </strong>@Html.DisplayFor(model => model.EntrepriseTranscripts)</h4>
+                            </div>
+                        </div>
+
+                    </form>
 
                 </div>
+
             </div>
-            <div class="col-lg-6 offset-lg-1">
-                <div class="welcome_text">
-                    <h3>Welcome to the world of events</h3>
-                    <p>The <strong>ConsultTech</strong> is a specialized startup company which built its image on the success of your events within its human dimension or completely unreasonable</p>
-                    <a class="main_btn" href="#">READ MORE</a>
-                </div>
-            </div>
+
         </div>
-    </div>
-</section>
-<!--================End Welcome Area =================-->
-<!--================Team Area =================-->
-<section class="team_area p_120">
-    <div class="container">
-        <div class="main_title">
-            <h2>Meet Head Speakers</h2>
-            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
-        </div>
-        <div class="row team_inner">
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-1.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-2.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-3.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="~/img/team/team-4.jpg" alt="">
-                        <div class="hover">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="team_name">
-                        <h4>Ethel Davis</h4>
-                        <p>Managing Director (Sales)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Team Area =================-->
+    </section>
+</div>
+@*<div>
+        <h4>UserModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CIN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CIN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StreetName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StreetName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Photo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Photo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EntrepriseTranscripts)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EntrepriseTranscripts)
+            </dd>
+
+        </dl>
+    </div>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">

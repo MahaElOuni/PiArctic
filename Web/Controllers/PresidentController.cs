@@ -16,14 +16,14 @@ namespace Web.Controllers
 {
     public class PresidentController : Controller
     {
-        IPresidentService Ps = new PresidentService();
+        PresidentService Ps = new PresidentService();
         UserManager<User, int> _userManager = new UserManager<User, int>(new CustomUserStore(new Context()));
         public String RoleUser()
         {
             IUserService Us = new UserService();
             User u = new User();
             var id = Int16.Parse(User.Identity.GetUserId());
-            return Ps.Get(t => t.Id == id).Role;
+            return Us.Get(t => t.Id == id).Role;
         }
         // GET: President
         public ActionResult Index()
@@ -35,7 +35,8 @@ namespace Web.Controllers
                 {
                     PresidentModel Pm = new PresidentModel();
                     Pm.Id = item.Id;
-                    Pm.PresidentName = item.PresidentName;
+                    Pm.FName = item.FName;
+                    Pm.LName = item.LName;
                     Pm.Email = item.Email;
                     Pm.PhoneNumber = item.PhoneNumber;
                     Pm.StreetName = item.StreetName;
@@ -57,13 +58,15 @@ namespace Web.Controllers
         // GET: President/Details/5
         public ActionResult Details(int id)
         {
-            if(RoleUser() == "User")
+            if (RoleUser() == "User")
             {
                 President P = new President();
+               
                 P = Ps.Get(t => t.Id == id);
                 PresidentModel Pm = new PresidentModel();
                 Pm.Id = P.Id;
-                Pm.PresidentName = P.PresidentName;
+                Pm.FName = P.FName;
+                Pm.LName = P.LName;
                 Pm.Email = P.Email;
                 Pm.PhoneNumber = P.PhoneNumber;
                 Pm.StreetName = P.StreetName;
@@ -76,7 +79,23 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            
+            //PresidentModel PM = new PresidentModel();
+            //var president = Ps.GetAll();
+            //foreach (var i in president)
+            //{
+            //    if (i.Id == id)
+            //    {
+
+            //        PM.FName = i.FName;
+            //        PM.LName = i.LName;
+            //        PM.Email = i.Email;
+            //        PM.StreetName = i.StreetName;
+            //        PM.PhoneNumber = i.PhoneNumber;
+
+            //    }
+            //}
+            //return View(PM);
+
         }
         public ActionResult ProfilePresident()
         {
@@ -87,7 +106,8 @@ namespace Web.Controllers
                 P = Ps.Get(t => t.Id == id);
                 PresidentModel Pm = new PresidentModel();
                 Pm.Id = P.Id;
-                Pm.PresidentName = P.PresidentName;
+                Pm.FName = P.FName;
+                Pm.LName = P.LName;
                 Pm.Email = P.Email;
                 Pm.PhoneNumber = P.PhoneNumber;
                 Pm.StreetName = P.StreetName;
@@ -115,12 +135,12 @@ namespace Web.Controllers
             if (RoleUser() == "User")
             {
                 President P = new President();
-                P.PresidentName = Pm.PresidentName;
+                P.FName = Pm.FName;
+                P.FName = Pm.LName;
                 P.Email = Pm.Email;
                 P.PhoneNumber = Pm.PhoneNumber;
                 P.StreetName = Pm.StreetName;
                 P.City = Pm.City;
-                P.Logo = "Logo.jpg";
                 P.Photo = Pm.Photo;
                 P.Role = "President";
                 var mp = RandomStringGenerator();
@@ -128,22 +148,22 @@ namespace Web.Controllers
                 P.PasswordHash = _userManager.PasswordHasher.HashPassword(mp);
                 P.LockoutEnabled = true;
                 P.SecurityStamp = Guid.NewGuid().ToString();
-                /********Mail*****/
-                try
-                {
-                    MailMessage message = new MailMessage("smakhouloud@gmail.com", Pm.Email, "Hello", "Compte créé votre mail est : " + Pm.Email + ", Votre mp est: " + mp);
-                    message.IsBodyHtml = true;
-                    SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-                    client.EnableSsl = true;
-                    client.Credentials = new System.Net.NetworkCredential("smakhouloud@gmail.com", "0720MB2326");
-                    client.Send(message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.StackTrace);
-                }
+                ///********Mail*****/
+                //try
+                //{
+                //    MailMessage message = new MailMessage("smakhouloud@gmail.com", Pm.Email, "Hello", "Compte créé votre mail est : " + Pm.Email + ", Votre mp est: " + mp);
+                //    message.IsBodyHtml = true;
+                //    SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                //    client.EnableSsl = true;
+                //    client.Credentials = new System.Net.NetworkCredential("smakhouloud@gmail.com", "0720MB2326");
+                //    client.Send(message);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Console.WriteLine(ex.StackTrace);
+                //}
 
-                /*********Mail***********/
+                ///*********Mail***********/
                 Ps.Add(P);
                 Ps.Commit();
                 return RedirectToAction("index");
@@ -166,12 +186,12 @@ namespace Web.Controllers
                 P = Ps.Get(t => t.Id == id);
                 PresidentModel Pm = new PresidentModel();
                 Pm.Id = id;
-                Pm.PresidentName = P.PresidentName;
+                Pm.FName = P.FName;
+                Pm.LName = P.LName;
                 Pm.Email = P.Email;
                 Pm.PhoneNumber = P.PhoneNumber;
                 Pm.StreetName = P.StreetName;
                 Pm.City = P.City;
-                Pm.Logo = P.Logo;
                 Pm.Photo = P.Photo;
 
                 return View(Pm);
@@ -191,13 +211,13 @@ namespace Web.Controllers
                 President P = new President();
                 P = Ps.Get(t => t.Id == id);
 
-                Pm.PresidentName = P.PresidentName;
+                Pm.FName = P.FName;
+                Pm.LName = P.LName;
                 Pm.Email = P.Email;
                 P.UserName = Pm.Email;
                 Pm.PhoneNumber = P.PhoneNumber;
                 Pm.StreetName = P.StreetName;
                 Pm.City = P.City;
-                Pm.Logo = P.Logo;
                 Pm.Photo = P.Photo;
 
                 Ps.Update(P);
@@ -222,7 +242,7 @@ namespace Web.Controllers
             {
                 fileName = Path.GetFileName(file.FileName);
 
-                var path = Path.Combine(Server.MapPath("~/Content/Upload/"), file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), file.FileName);
                 file.SaveAs(path);
             }
 
@@ -242,7 +262,8 @@ namespace Web.Controllers
                 P = Ps.Get(t => t.Id == id);
                 PresidentModel Pm = new PresidentModel();
                 Pm.Id = id;
-                Pm.PresidentName = P.PresidentName;
+                Pm.FName = P.FName;
+                Pm.LName = P.LName;
                 Pm.Email = P.Email;
                 P.UserName = Pm.Email;
                 Pm.PhoneNumber = P.PhoneNumber;

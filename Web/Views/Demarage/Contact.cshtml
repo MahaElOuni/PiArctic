@@ -1,9 +1,4 @@
-﻿@model Web.Models.ExternalLoginConfirmationViewModel
-@*@{
-        ViewBag.Title = "Register";
-    }*@
-@*<h2>@ViewBag.Title.</h2*@>
-<!--================Header Menu Area =================-->
+﻿<!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -19,27 +14,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Demarage")">Home</a></li>
+
+        
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Demarage")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Demarage")">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-
-                            <li class="nav-item submenu dropdown">
-                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a>
-                                @*<ul>
-
-                                        <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
-
-                                    </ul>*@
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+                        
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
 
                         <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
                     </ul>
@@ -49,73 +34,78 @@
     </div>
 </header>
 <!--================End Menu Area =================-->
-<!--================Home Banner Area =================-->
-<section class="banner_area">
-    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+<!--================Welcome Home Banner Area =================-->
+<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)">
+    <div class="banner_inner">
         <div class="container">
-            <div class="banner_content text-center">
-                <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="about-us.html">ExternalLoginConfirmation</a>
-                </div>
-                <h2>EXTERNAL LOGIN CONFIRMATION</h2>
+
+            <div class="banner_content">
+                <h2>International Digital <br />Business Event</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+                <a class="banner_btn" href="#">View More Details</a>
             </div>
         </div>
     </div>
 </section>
 <!--================End Home Banner Area =================-->
-<br /><br />
-<h3>Link your account @ViewBag.LoginProvider.</h3>
-
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-
-    @*<h4>Association Form</h4>*@
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="text-info">
-        You've successfully authenticated with your account <strong>@ViewBag.LoginProvider</strong>.
-        Please enter a user name for this site below and click the Register button to finish
-        logging in.
-    </p>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<!--================Contact Area =================-->
+<section class="contact_area p_120">
+    <div class="container">
+        @*<div id="mapBox" class="mapBox"
+             data-lat="40.701083"
+             data-lon="-74.1522848"
+             data-zoom="13"
+             data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
+             data-mlat="40.701083"
+             data-mlon="-74.1522848">
+        </div>*@
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="contact_info">
+                    <div class="info_item">
+                        <i class="lnr lnr-home"></i>
+                        <h6>The Berges Du Lac II, Tunise</h6>
+                        <p>Near the craftsman's palace</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-phone-handset"></i>
+                        <h6><a href="#">00 (216) 52017580</a></h6>
+                        <p>Mon to Fri 9am to 6 pm</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-envelope"></i>
+                        <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                        <p>Send us your query anytime!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.FName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.FName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.LName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.LName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @**@<div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-        @*<a class="main_btn" href="@Url.Action("Index", "Home")">Register</a>*@
-    </div>
-}
-<br /><br />
+</section>
+<!--================Contact Area =================-->
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
@@ -137,7 +127,7 @@
                 </div>
             </div>
             @*<div class="col-lg-1  col-md-6 col-sm-6">
-                </div>*@
+            </div>*@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="single-footer-widget news_widgets">
                     <h6 class="footer_title">CONTACT INFORMATION</h6>

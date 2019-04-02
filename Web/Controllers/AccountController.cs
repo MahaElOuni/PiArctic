@@ -19,6 +19,7 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using System.Net.Mail;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Routing;
 
 namespace Web.Controllers
 {
@@ -105,7 +106,7 @@ namespace Web.Controllers
                     User user3 = us.FindRoleByName(user.UserName);
                     if(user3.Role == "President")
                     {
-                        return RedirectToAction("","");
+                        return RedirectToAction("Index", "Home", new { email =user.Email });
                     }
                     else if(user3.Role == "Orgonizor")
                     {
@@ -113,7 +114,7 @@ namespace Web.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new RouteValueDictionary(new { cin = user.CIN }));
                     }
                    
                 case SignInStatus.LockedOut:
@@ -200,7 +201,7 @@ namespace Web.Controllers
                 if (file2 != null && file2.ContentLength > 0)
                     try
                     {
-                        string path = Path.Combine(Server.MapPath("~/Images/"),Path.GetFileName(file2.FileName));
+                        string path = Path.Combine(Server.MapPath("~/Content/Upload"),Path.GetFileName(file2.FileName));
                         file2.SaveAs(path);
                         ViewBag.Message = "Image uploaded successfully";
                     }
@@ -212,7 +213,7 @@ namespace Web.Controllers
                 {
                     ViewBag.Message = "You have not specified a file.";
                 }
-               
+
                 var user = new User
                 {
                     UserName = model.Email,
@@ -223,10 +224,11 @@ namespace Web.Controllers
                     LName = model.LName,
                     FName = model.FName,
                     BirthDate = model.BirthDate,
-                    PhoneNumber=model.PhoneNumber,
-                    Password=model.Password,
-                    Role=model.Poste,
+                    PhoneNumber = model.PhoneNumber,
+                    Password = model.Password,
+                    Role = model.Poste,
                     Photo = file2.FileName,
+                    //Etat ="Encours"
                     //EntrepriseTranscripts = file3.FileName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -439,7 +441,7 @@ namespace Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email , FName= model.FName, LName= model.LName};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

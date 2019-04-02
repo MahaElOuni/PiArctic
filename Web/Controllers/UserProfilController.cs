@@ -1,32 +1,55 @@
-﻿using System;
+﻿using Service.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Models;
 
 namespace Web.Controllers
 {
-    public class DemarageController : Controller
+    public class UserProfilController : Controller
     {
-        // GET: Demarage
+        UserService userService = new UserService();
+        // GET: UserProfil
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Demarage/Details/5
+        // GET: UserProfil/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            UserModel userModel = new UserModel();
+            var user = userService.GetAll();
+            foreach (var i in user)
+            {
+                if (i.Id==id)
+                {
+
+                    userModel.UserId = i.Id;
+                    userModel.FName = i.FName;
+                    userModel.LName = i.LName;
+                    userModel.StreetName = i.StreetName;
+                    userModel.PhoneNumber = i.PhoneNumber;
+                    userModel.Email = i.Email;
+                    userModel.CIN = i.CIN;
+                    userModel.Role = i.Role;
+                    userModel.Photo = i.Photo;
+
+                }
+            }
+
+            return View(userModel);
         }
 
-        // GET: Demarage/Create
+        // GET: UserProfil/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Demarage/Create
+        // POST: UserProfil/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -42,13 +65,13 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Demarage/Edit/5
+        // GET: UserProfil/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Demarage/Edit/5
+        // POST: UserProfil/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -64,13 +87,13 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Demarage/Delete/5
+        // GET: UserProfil/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Demarage/Delete/5
+        // POST: UserProfil/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -84,19 +107,6 @@ namespace Web.Controllers
             {
                 return View();
             }
-        }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

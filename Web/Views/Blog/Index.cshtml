@@ -24,6 +24,12 @@
             @Html.DisplayNameFor(model => model.DatePost)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.NbrLike)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbrComment)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Titre)
         </th>
         <th></th>
@@ -44,12 +50,18 @@
             @Html.DisplayFor(modelItem => item.DatePost)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.NbrLike)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NbrComment)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Titre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id=item.BlogId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BlogId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
         </td>
     </tr>
 }

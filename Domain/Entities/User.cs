@@ -36,6 +36,7 @@ namespace Domain.Entities
         public String EntrepriseTranscripts { get; set; }
         //public bool IsBlocked { get; set; }
         //public bool IsValid { get; set; }
+        //public String Etat { get; set; }
         public virtual ICollection<Blog>  Blogs { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {

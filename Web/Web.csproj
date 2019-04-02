@@ -398,6 +398,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DemarageController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EventSchedulerController.cs" />
@@ -406,12 +407,15 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\UserProfilController.cs" />
+    <Compile Include="Facebook\FacebookBackChannelHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\EventSchedulerViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\EventSchedulerViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -1211,6 +1215,8 @@
     <Content Include="Content\mytemplate\vendor\select2\select2.min.css" />
     <Content Include="Content\mytemplate\vendor\select2\select2.min.js" />
     <Content Include="Content\mytemplate\vendor\wnumb\wNumb.js" />
+    <Content Include="Content\Upload\43117037_1825690054196868_60776849550082048_n.jpg" />
+    <Content Include="Content\Upload\50583762_567757327034370_8467231224643977216_n.jpg" />
     <Content Include="Content\vendors\jquery-validation\dist\additional-methods.js" />
     <Content Include="Content\vendors\jquery-validation\dist\additional-methods.min.js" />
     <Content Include="Content\vendors\jquery-validation\dist\jquery.validate.js" />
@@ -2103,7 +2109,6 @@
     <Content Include="Views\EventScheduler\Create.cshtml" />
     <Content Include="Views\Demarage\Index.cshtml" />
     <Content Include="Views\Reward\Create.cshtml" />
-    <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -2114,12 +2119,19 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Demarage\About.cshtml" />
+    <Content Include="Views\Demarage\Contact.cshtml" />
+    <Content Include="Views\President\Details.cshtml" />
+    <Content Include="Views\UserProfil\Details.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Blog\Delete.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Upload\" />
     <Folder Include="Views\Form\" />
-    <Folder Include="Views\President\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

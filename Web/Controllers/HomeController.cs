@@ -10,9 +10,34 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        UserService userService = new UserService();
+        UserModel userModel = new UserModel();
+        [HttpPost]
+        public void getId(String email, String password)
         {
-            return View();
+            int id = 0;
+            var users = userService.GetAll();
+            foreach (var i in users)
+            {
+                if (i.Email.Equals(email) && i.Password.Equals(password))
+                {
+                    id = i.Id;
+                }
+
+            }
+           
+        }
+        public ActionResult Index(String email)
+        {
+            var users = userService.GetAll();
+           
+            foreach (var i in users)
+            {
+                if (i.Email.Equals(email)) {
+                userModel.UserId = i.Id;
+                }
+            }
+                return View(userModel);
         }
 
         public ActionResult About()
@@ -47,6 +72,7 @@ namespace Web.Controllers
 
             return View();
         }
-        
+
+      
     }
 }

@@ -12,8 +12,14 @@ namespace Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email/Username")]
+        [Display(Name = "Username")]
         public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+        [Display(Name = "First Name")]
+        public string FName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
     }
 
     public class ExternalLoginListViewModel
