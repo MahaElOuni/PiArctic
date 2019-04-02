@@ -14,6 +14,7 @@
                 <h2>International Digital <br />Business Event</h2>
 
                 <a class="main_btn" href="#">Participate</a>
+
             </div>
         </div>
     </div>
@@ -240,7 +241,27 @@
 </section>
 <!--================End Event Schedule Area =================-->
 <div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
-
+<section class="event_schedule_area p_120">
+    <div class="container">
+        <div class="main_title">
+            <h2>Satisfactions</h2>
+            <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
+            <a class="main_btn" href="#">J'aime</a>
+            <a class="main_btn" href="#">J'aime pas</a>
+        </div>
+    </div>
+</section>
+<div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
+<section class="event_schedule_area p_120">
+    <div class="container">
+        <div class="main_title">
+            <h2>Pozer Votre commentaire de  Satisfaction</h2>
+            <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
+            <a class="main_btn" href="#">Ajouter Commentaire</a>
+            <a class="main_btn" href="#">Affichier Commenatire</a>
+        </div>
+    </div>
+</section>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
@@ -251,14 +272,14 @@
 
         console.log(m);
         var today = new Date(m);
-        
-        
+
+
         var timer = function () { };
         timer.countdownDate = new Date(m);
 
 
         // set date to 10 days in the future for testing purposes
-        timer.countdownDate.setDate(timer.countdownDate.getDate() );
+        timer.countdownDate.setDate(timer.countdownDate.getDate());
 
         /*
         * Get thing started
@@ -302,7 +323,7 @@
             }
 
             timer.currentDate = new Date();
-           
+
 
             timer.difference = timer.countdownDate - timer.currentDate;
 
@@ -335,6 +356,6 @@
             timer.init();
         });
 
-      
+
     </script>
 }

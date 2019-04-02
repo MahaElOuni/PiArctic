@@ -321,6 +321,10 @@
     <Compile Include="Migrations\201904021500126_faroukint.Designer.cs">
       <DependentUpon>201904021500126_faroukint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904021537267_karim.cs" />
+    <Compile Include="Migrations\201904021537267_karim.Designer.cs">
+      <DependentUpon>201904021537267_karim.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -340,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904021500126_faroukint.resx">
       <DependentUpon>201904021500126_faroukint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904021537267_karim.resx">
+      <DependentUpon>201904021537267_karim.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
