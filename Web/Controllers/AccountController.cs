@@ -114,7 +114,7 @@ namespace Web.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home", new RouteValueDictionary(new { cin = user.CIN }));
+                        return RedirectToAction("Index", "Home", new { email = user.Email });
                     }
                    
                 case SignInStatus.LockedOut:
@@ -234,7 +234,15 @@ namespace Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    
+                    //result = await UserManager.AddToRoleAsync(user.Id);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Envoyer un message électronique avec ce lien
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
                     return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
@@ -275,20 +283,20 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
                     return View("ForgotPasswordConfirmation");
                 
                 }
-             
+
                 // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
                 // Envoyer un message électronique avec ce lien
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
@@ -322,7 +330,7 @@ namespace Web.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Ne révélez pas que l'utilisateur n'existe pas
