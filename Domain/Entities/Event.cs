@@ -28,9 +28,6 @@ namespace Domain.Entities
         public virtual ICollection<Reward> Rewards { get; set; }
 
 
-        public Event()
-        {
-
-        }
+       
     }
 }

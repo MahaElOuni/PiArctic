@@ -27,10 +27,7 @@ namespace Web.Models
         public String OrganizedBy { get; set; }
         public String DateString { get; set; }
         public ICollection<SchedulerViewModel> listScheduler { get; set; }
-        public EventViewModel()
-        {
-
-        }
+        
     }
 
 }
