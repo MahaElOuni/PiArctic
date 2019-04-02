@@ -114,12 +114,13 @@ namespace Web.Controllers
             eventService.Add(e);
             eventService.Commit();
 
-            foreach (Scheduler scheduler in listScheduler)
+            foreach (Scheduler scheduler in schedulerService.GetAll())
             {
-
+                if (scheduler.EventId == null) { 
                 Scheduler s = new Scheduler() { Duration = scheduler.Duration, ProgramName = scheduler.ProgramName, EventId = e.EventId };
                 schedulerService.Add(s);
                 schedulerService.Commit();
+                }
             }
             try
             {
@@ -195,16 +196,16 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public List<Scheduler> getAllScheduler(String duration, String proName)
+        public void getAllScheduler(String duration, String proName)
         {
 
-            Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName };
-            //Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName, EventId = 2 };
+            //Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName };
+            Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName};
 
-            /* schedulerService.Add(scheduler);
-             schedulerService.Commit();*/
-            listScheduler.Add(scheduler);
-            return listScheduler;
+             schedulerService.Add(scheduler);
+             schedulerService.Commit();
+           /* listScheduler.Add(scheduler);
+            return listScheduler;*/
         }
 
 
