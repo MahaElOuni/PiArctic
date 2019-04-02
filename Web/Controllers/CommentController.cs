@@ -22,6 +22,8 @@ namespace Web.Controllers
         }
         public ActionResult ComBlog(int id)
         {
+            CommentService commentService = new CommentService();
+            CommentViewModel cvm = new CommentViewModel();
             List<CommentViewModel> lcmv = new List<CommentViewModel>();
             List<Comment> lc = new List<Comment>();
             lc = commentService.BlogComment(id);

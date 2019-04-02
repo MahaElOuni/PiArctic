@@ -34,10 +34,24 @@ namespace Web.Controllers
 
             return View(list);
         }
+        public List<CommentViewModel> Affiche(int id)
+        {
+            List<CommentViewModel> lc = new List<CommentViewModel>();
+            Blog b = blogService.GetById(id);
+            foreach(Comment c in b.Comments)
+            {
+                CommentViewModel cvm = new CommentViewModel();
+                cvm.Contenu = c.Contenu;
+                lc.Add(cvm);
+            }
+            return lc;
+
+        }
 
         // GET: Blog/Details/5
         public ActionResult Details(int id)
         {
+            BlogViewModel bvm = new BlogViewModel();
 
             var blogs = blogService.GetAll();
             foreach (var i in blogs)
@@ -51,7 +65,7 @@ namespace Web.Controllers
                     bvm.DatePost = i.DatePost;
                     bvm.Contenu = i.Contenu;
                     bvm.Photo = i.Photo;
-
+                    bvm.Comments = Affiche(id);
                 }
             }
             return View(bvm);
