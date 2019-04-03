@@ -128,13 +128,37 @@ namespace Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Event e = eventService.GetById(id);
+            EventViewModel eventModel = new EventViewModel();
+            eventModel.Title = e.Title;
+            eventModel.Address = e.Address;
+            eventModel.NumberPlaces = e.NumberPlaces;
+            eventModel.Start = e.Start;
+            eventModel.End = e.End;
+            eventModel.Price = e.Price;
+            eventModel.Description = e.Description;
+            eventModel.OrganizedBy = e.OrganizedBy;
+
+            return View(eventModel);
         }
 
         // POST: Event/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, EventViewModel eventModel)
         {
+            Event e = eventService.GetById(id);
+            e.Title=eventModel.Title;
+            e.Address=eventModel.Address;
+            e.NumberPlaces=eventModel.NumberPlaces;
+            e.Start=eventModel.Start;
+            e.End=eventModel.End;
+            e.Price=eventModel.Price ;
+            e.Description=eventModel.Description;
+            e.OrganizedBy=eventModel.OrganizedBy;
+            eventService.Update(e);
+            eventService.Commit();
+
+
             try
             {
                 // TODO: Add update logic here
