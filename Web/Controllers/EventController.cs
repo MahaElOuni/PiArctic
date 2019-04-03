@@ -234,7 +234,7 @@ namespace Web.Controllers
             var eventt = eventService.GetAll();
             foreach (var i in eventt)
             {
-                if (i.UserId==2 )
+                if (i.UserId==idUser )
                 {
                     EventViewModel eventModel = new EventViewModel();
                     eventModel.EventId = i.EventId;
