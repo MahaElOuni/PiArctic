@@ -42,54 +42,26 @@ namespace Web.Controllers
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
-            EventViewModel eventSchedulerModel = new EventViewModel();
-            List<EventViewModel> listEventScheduler = new List<EventViewModel>();
-            int idEvent = 0;
-            var eventt = eventService.GetAll();
-            var schedulers = schedulerService.GetAll();
-            foreach (var i in eventt)
-            {
-                if (i.EventId == id)
-                {
-                    //idEvent = id;
-                    eventSchedulerModel.Title = i.Title;
-                    eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
-                    eventSchedulerModel.Description = i.Description;
-                    eventSchedulerModel.Address = i.Address;
-                    eventSchedulerModel.OrganizedBy = i.OrganizedBy;
-                    foreach (Scheduler j in schedulers)
-                    {
-
-                        SchedulerViewModel se = new SchedulerViewModel() { Duration = "mmmm", ProgramName = "mmmmm" };
-                        /* se.Duration = j.Duration;
-                         se.ProgramName = j.ProgramName;*/
-                        eventSchedulerModel.listScheduler.Add(se);
-
-                    }
-
-                    //listEventScheduler.Add(i.ListScheduler);
-                    /* foreach(var j in i.ListScheduler)
-                     {
-                         eventSchedulerModel.SchedulerModel.Duration = j.Duration;
-                         eventSchedulerModel.SchedulerModel.ProgramName = j.ProgramName;
-
-
-                     }*/
-
-
-                }
-
-            }
-            /* foreach(var i in schedulers)
-             {
-                 if (i.EventId == idEvent)
-                 {
-                     eventSchedulerModel.SchedulerModel.Duration = i.Duration;
-                     eventSchedulerModel.SchedulerModel.ProgramName = i.ProgramName;
-                 }
-             }*/
-
-            return View(eventSchedulerModel);
+            
+           EventViewModel eventSchedulerModel = new EventViewModel();
+              List<EventViewModel> listEventScheduler = new List<EventViewModel>();
+              var eventt = eventService.GetAll();
+              var schedulers = schedulerService.GetAll();
+              foreach (var i in eventt)
+              {
+                  if (i.EventId == id)
+                  {
+                    eventSchedulerModel.EventId = i.EventId;
+                      eventSchedulerModel.Title = i.Title;
+                      eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
+                      eventSchedulerModel.Description = i.Description;
+                      eventSchedulerModel.Address = i.Address;
+                      eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                      eventSchedulerModel.listScheduler = Affiche(id);
+                      
+                   }
+              }
+              return View(eventSchedulerModel);
         }
 
         // GET: Event/Create
@@ -102,7 +74,23 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(EventSchedulerViewModel evm)
         {
+            int idUser=0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+               if (i.UserName.Equals(User.Identity.Name))
+               {
+                    idUser = i.Id;
+                   i.Role = "President";
+                    userService.Update(i);
+                   userService.Commit();
+            
+              }
+          }
             Event e = new Event();
+            
+            e.UserId = idUser;
             e.Title = evm.EventModel.Title;
             e.Address = evm.EventModel.Address;
             e.NumberPlaces = evm.EventModel.NumberPlaces;
@@ -210,21 +198,55 @@ namespace Web.Controllers
 
 
 
-        public ActionResult Affiche()
+        public List<SchedulerViewModel> Affiche(int id)
         {
-            //List<EventViewModel> listEvent = new List<EventViewModel>();
-            var eventt = eventService.GetById(2);
+            List<SchedulerViewModel> listEvent = new List<SchedulerViewModel>();
 
-            EventViewModel eventModel = new EventViewModel();
-            eventModel.EventId = eventt.EventId;
-            eventModel.Title = eventt.Title;
-            eventModel.Start = eventt.Start;
-            eventModel.Description = eventt.Description;
-            eventModel.Address = eventt.Address;
-            eventModel.OrganizedBy = eventt.OrganizedBy;
-            // listEvent.Add(eventModel);
+            Event e1 = eventService.GetById(id);
+            
+            foreach(Scheduler s in e1.ListScheduler)
+            {
+                SchedulerViewModel sv = new SchedulerViewModel();
+                
+                sv.Duration = s.Duration;
+                sv.ProgramName = s.ProgramName;
+                listEvent.Add(sv);
+            }
+          
 
-            return View(eventModel);
+            return listEvent;
+        }
+        public ActionResult MyEvent()
+        {
+            int idUser = 0;
+           
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                   
+
+                }
+            }
+            List<EventViewModel> listEvent = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.UserId==idUser )
+                {
+                    EventViewModel eventModel = new EventViewModel();
+                    eventModel.EventId = i.EventId;
+                    eventModel.Title = i.Title;
+                    eventModel.Start = i.Start;
+                    eventModel.Description = i.Description;
+                    eventModel.Address = i.Address;
+                    eventModel.OrganizedBy = i.OrganizedBy;
+                    listEvent.Add(eventModel);
+                }
+            }
+            return View(listEvent);
         }
     }
 

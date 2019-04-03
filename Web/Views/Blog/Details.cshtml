@@ -74,6 +74,15 @@
     @Html.ActionLink("add comment", "../Comment/Create", new { id = Model.BlogId })
     <br />
     <br />
+    @foreach (var item in Model.Comments)
+    {
+        <div class="media">
+           
+            <div class="media-body">
+                <h5> @Html.DisplayFor(modelItem => item.Contenu)</h5>
+    </div>
+    </div>
+}
     <br />
     @Html.ActionLink("allcom comment", "../Comment/ComBlog", new { id = Model.BlogId })
-</p>
+    </p>

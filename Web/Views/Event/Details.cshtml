@@ -80,56 +80,19 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
+                    @foreach (var item in Model.listScheduler)
+                    {
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="img/schedule-1.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5> @Html.DisplayFor(modelItem => item.Duration)</h5>
+                                <h4>@Html.DisplayFor(modelItem => item.ProgramName)</h4>
+                                <p>Speech by: Mark weins</p>
+                            </div>
                         </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="media">
@@ -259,6 +222,16 @@
             <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
             <a class="main_btn" href="#">Ajouter Commentaire</a>
             <a class="main_btn" href="#">Affichier Commenatire</a>
+        </div>
+    </div>
+</section>
+<div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
+<section class="event_schedule_area p_120">
+    <div class="container">
+        <div class="main_title">
+            
+            <a class="main_btn" href="@Url.Action("Index", "Reward", new {  id=Model.EventId })">Affichier rewards</a>
+           
         </div>
     </div>
 </section>

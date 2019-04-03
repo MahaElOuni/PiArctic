@@ -14,16 +14,17 @@ namespace Web.Controllers
 
         RewardService rewardService = new RewardService();
         // GET: Reward
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             List<RewardViewModel> list = new List<RewardViewModel>();
             var r = rewardService.GetAll();
             foreach (var i in r)
             {
                 RewardViewModel rewardModel = new RewardViewModel();
-                if (i.IdReward == 1)
+                if (i.EventId==id)
                 {
-
+                    rewardModel.RewardId = i.RewardId;
+                    rewardModel.EventId = i.EventId;
                     rewardModel.Price1 = i.Price1;
                     rewardModel.Price2 = i.Price2;
                     rewardModel.Price3 = i.Price3;
@@ -31,6 +32,7 @@ namespace Web.Controllers
                     list.Add(rewardModel);
 
                 }
+                
             }
             return View(list);
         }
@@ -42,7 +44,7 @@ namespace Web.Controllers
             var r = rewardService.GetAll();
             foreach (var i in r)
             {
-                if (i.IdReward == id)
+                if (i.RewardId == id)
                 {
 
                     rewardModel.Price1 = i.Price1;
@@ -55,20 +57,22 @@ namespace Web.Controllers
             }
             return View(rewardModel);
         }
+        
 
         // GET: Reward/Create
         public ActionResult Create(int id,RewardViewModel rvm )
         {
             Reward r = new Reward();
 
-            r.Eventid = rvm.Eventid = id;
+            r.EventId = rvm.EventId = id;
             r.Price1 = rvm.Price1;
             r.Price2 = rvm.Price2;
             r.Price3 = rvm.Price3;
             r.titre = rvm.titre;
+            
             rewardService.Add(r);
             rewardService.Commit();
-
+    
             return View(rvm);
         }
 
@@ -78,14 +82,14 @@ namespace Web.Controllers
         {
             Reward r = new Reward();
 
-            r.Eventid = rvm.Eventid=id;
+            r.EventId = rvm.EventId=id;
             r.Price1 = rvm.Price1;
             r.Price2 = rvm.Price2;
             r.Price3 = rvm.Price3;
             r.titre = rvm.titre;
             rewardService.Add(r);
             rewardService.Commit();
-
+            
 
           
                 return View(rvm);
@@ -94,24 +98,38 @@ namespace Web.Controllers
 
         // GET: Reward/Edit/5
         public ActionResult Edit(int id)
+
         {
-            return View();
+            Reward r = new Reward();
+           r = rewardService.GetById(id);
+            Reward rw = new Reward();
+            rw.Price1 = r.Price1;
+            rw.Price2 = r.Price2;
+            rw.Price3 = r.Price3;
+            rw.titre = r.titre;
+            rewardService.Update(r);
+            rewardService.Commit();
+
+            return View(rw);
         }
 
         // POST: Reward/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Reward rw)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Reward r = new Reward();
+            r = rewardService.GetById(id);
+            
+            rw.Price1 = r.Price1;
+            rw.Price2 = r.Price2;
+            rw.Price3 = r.Price3;
+            rw.titre = r.titre;
+            rewardService.Update(r);
+            rewardService.Commit();
+
+            return View("Index");
+
         }
 
         // GET: Reward/Delete/5
@@ -119,20 +137,24 @@ namespace Web.Controllers
         public ActionResult Delete(int id)
         {
             RewardViewModel rewardModel = new RewardViewModel();
-           
-            Reward rp = rewardService.GetById(id);
-            Reward r = new Reward();
+
+            var Rewards = rewardService.GetAll();
+            foreach (var rp in Rewards)
             {
-               
-                   
-                    r.Price1 = rp.Price1;
-                    r.Price2 = rp.Price2;
-                    r.Price3 = rp.Price3;
-                    r.titre = rp.titre;
-                    rewardService.Delete(rewardService.GetById(id));
+                if (rp.RewardId == id)
+                {
+                    rewardModel.RewardId = rp.RewardId;
+                    rewardModel.EventId = rp.EventId;
+                    rewardModel.Price1 = rp.Price1;
+                    rewardModel.Price2 = rp.Price2;
+                    rewardModel.Price3 = rp.Price3;
+                    rewardModel.titre = rp.titre;
+                    rewardService.Delete(rp);
                     rewardService.Commit();
                 }
-            return View(r);
+            }
+
+             return View(); 
         }
 
            

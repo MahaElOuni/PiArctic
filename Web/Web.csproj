@@ -407,6 +407,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISatisfactionService.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrganizerController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
@@ -2126,7 +2127,6 @@
     <Content Include="Views\UserProfil\Details.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Blog\Delete.cshtml" />
-    <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
@@ -2140,13 +2140,26 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
+
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Approve.cshtml" />
     <Content Include="Views\Admin\Reject.cshtml" />
+
+
+    <Content Include="Views\Blog\Details.cshtml" />
+
+    <Content Include="Views\Event\MyEvent.cshtml" />
+
+    <Content Include="Views\Reward\Edit.cshtml" />
+
+
+
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Form\" />
+    <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

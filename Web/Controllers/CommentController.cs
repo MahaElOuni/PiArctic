@@ -22,6 +22,8 @@ namespace Web.Controllers
         }
         public ActionResult ComBlog(int id)
         {
+            CommentService commentService = new CommentService();
+            CommentViewModel cvm = new CommentViewModel();
             List<CommentViewModel> lcmv = new List<CommentViewModel>();
             List<Comment> lc = new List<Comment>();
             lc = commentService.BlogComment(id);
@@ -59,7 +61,7 @@ namespace Web.Controllers
             commentService.Add(b);
             commentService.Commit();
 
-            return RedirectToAction("../Blog/Index");
+            return RedirectToAction("../Blog/Details", new { id = b.BlogId });
         }
 
         // GET: Comment/Edit/5

@@ -19,6 +19,8 @@ namespace Domain.Entities
         public String ThemeColor { get; set; }
         public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
+        public int? UserId { get; set; }
+        public virtual President President { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
         public virtual ICollection<Ticket> ListTickets { get; set; }
         public virtual ICollection<Form> Forms { get; set; }
@@ -28,9 +30,6 @@ namespace Domain.Entities
         public virtual ICollection<Reward> Rewards { get; set; }
 
 
-        public Event()
-        {
-
-        }
+       
     }
 }
