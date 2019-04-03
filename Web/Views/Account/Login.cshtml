@@ -68,6 +68,19 @@
 </section>
 <!--================End Home Banner Area =================-->
 <br /><br />
+@if (ViewBag.state == "Pending")
+{
+      <div class="alert alert-danger" role="alert">
+          Thank you our dear visitor, your request is in court of treatment.
+      </div>
+}
+else if (ViewBag.state == "Rejected")
+{
+      <div class="alert alert-danger" role="alert">
+          Thank you our dear visitor, your request is rejected.
+      </div>
+}
+<br /><br />
 <div class="row">
     <div class="col-md-12">
         <div class="card" style="max-width:500px;margin:auto; align-content:center;align-self:center;">
@@ -155,7 +168,7 @@
                         </section>
                     </div>
                 </div>
-            }
+                }
         </div>
         <!-- Material form login -->
     </div>

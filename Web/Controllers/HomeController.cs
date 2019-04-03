@@ -27,17 +27,25 @@ namespace Web.Controllers
             }
            
         }
-        public ActionResult Index(String email)
+        public ActionResult Index(String email ,int id)
         {
             var users = userService.GetAll();
-           
-            foreach (var i in users)
+
+            if (email != null)
             {
-                if (i.Email.Equals(email)) {
-                userModel.UserId = i.Id;
+                foreach (var i in users)
+                {
+                    if (i.Email.Equals(email))
+                    {
+                        userModel.UserId = i.Id;
+                    }
                 }
-            }
                 return View(userModel);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult About()

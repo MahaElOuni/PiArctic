@@ -20,6 +20,7 @@ using Microsoft.AspNet.Identity;
 using System.Net.Mail;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Routing;
+using System.Collections.Generic;
 
 namespace Web.Controllers
 {
@@ -66,12 +67,24 @@ namespace Web.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl,string state)
         {
             if (User.Identity.IsAuthenticated == false)
             {
                 ViewBag.ReturnUrl = returnUrl;
                 
+            }
+            if (state != null)
+            {
+                if (state.Equals("Pending"))
+                {
+                    ViewBag.state = "Pending";
+                }
+
+                else if (state.Equals("Rejected"))
+                {
+                    ViewBag.state = "Rejected";
+                }
             }
             return View();
             /* else
@@ -104,19 +117,37 @@ namespace Web.Controllers
                 case SignInStatus.Success:
                     UserService us = new UserService();
                     User user3 = us.FindRoleByName(user.UserName);
-                    if(user3.Role == "President")
+                    User u = us.getUserByEmailAndPassword(user.Email,model.Password);
+                    if (u.Etat.Equals("Pending"))
                     {
-                        return RedirectToAction("Index", "Home", new { email =user.Email });
+                        return RedirectToAction("Login", "Account" , new { state= "Pending" });
                     }
-                    else if(user3.Role == "Orgonizor")
+                    else if (u.Etat.Equals("Rejected"))
                     {
-                        return RedirectToAction("", "");
+                        return RedirectToAction("Login", "Account", new { state = "Rejected" });
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home", new { email = user.Email });
+
+
+                        if (user3.Role == "President")
+                        {
+                            return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
+                        }
+                        else if (user3.Role == "Orgonizor")
+                        {
+                            return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
+                        }
+                        else if (user3.Role == "Admin")
+                        {
+                            return RedirectToAction("Index", "Admin", new { email = user.Email, id = user.Id });
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
+                        }
                     }
-                   
+                    
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -178,8 +209,15 @@ namespace Web.Controllers
         {
             //if (User.Identity.IsAuthenticated == false)
             //{
-                
+
             //}
+            List<SelectListItem> items = new List<SelectListItem>();
+                
+            items.Add(new SelectListItem { Text ="President", Value = "President" });
+            items.Add(new SelectListItem { Text = "Orgonizor", Value = "Orgonizor" });
+            items.Add(new SelectListItem { Text = "Participant", Value = "Participant" });
+
+            ViewBag.pst = items;
             return View();
             //else
             //{
@@ -228,14 +266,14 @@ namespace Web.Controllers
                     Password = model.Password,
                     Role = model.Poste,
                     Photo = file2.FileName,
-                    //Etat ="Encours"
+                    Etat ="Pending"
                     //EntrepriseTranscripts = file3.FileName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //result = await UserManager.AddToRoleAsync(user.Id);
-                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                  //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien

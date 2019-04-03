@@ -325,6 +325,10 @@
     <Compile Include="Migrations\201904021537267_karim.Designer.cs">
       <DependentUpon>201904021537267_karim.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904031507239_mig3.cs" />
+    <Compile Include="Migrations\201904031507239_mig3.Designer.cs">
+      <DependentUpon>201904031507239_mig3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -347,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904021537267_karim.resx">
       <DependentUpon>201904021537267_karim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904031507239_mig3.resx">
+      <DependentUpon>201904031507239_mig3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

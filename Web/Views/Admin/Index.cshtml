@@ -1,15 +1,9 @@
-﻿@model Web.Models.UserModel
-
-@*@{
-        ViewBag.Title = "Details";
-    }*@
-
-
-<!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container box_1620">
+﻿@model ICollection<Domain.Entities.User>
+< <!--================Header Menu Area =================-->
+<header class="header_area" style="background-color:transparent">
+    <div class="main_menu" style="background-color:transparent">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-image: -webkit-linear-gradient( 0deg, rgb(20,29,162) 0%, rgb(155,92,246) 100%);">
+            <div class="container box_1620" style="background-color:transparent">
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
@@ -19,9 +13,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="background-color:transparent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = Model.Email, id = Model.UserId })">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
@@ -69,224 +63,59 @@
     </div>
 </header>
 <!--================End Menu Area =================-->
-<!--================Home Banner Area =================-->
+<!--================Welcome Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-        <div class="container">
+        <div class="container" style="background-color:transparent">
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">LogIn</a>
+                    <a href="about-us.html">Registre</a>
                 </div>
-                <h2>Log In</h2>
+                <h2>REGISTRE</h2>
             </div>
         </div>
     </div>
 </section>
 <!--================End Home Banner Area =================-->
-<h2>My Account</h2>
-<hr />
-<div class="container-fluid">
-    <section class="section" style="display: flex;justify-content: center; align-items: center;">
-        <div class="row">
-            <div class="col-lg-12 mb-r">
-                <div class="card card-cascade narrower" style="height:300px;width:200px">
-                    <div class="view gardient-card-header info-color ">
-                        <h4 class="mb-0" style="align-content:center">Account's Photo</h4>
-                    </div>
-                    <div class="card-body text-center mb-4" style="height:10px">
-                        <img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(model => model.Photo)" style="height:250px; width:150px" />
-                    </div>
-                </div>
 
-            </div>
 
-        </div>
-        <div class="col-lg-6 mb-r">
-            <div class="card card-cascade narrower">
-                <div class="view gardient-card-header info-color">
-                    <h4 class="mb-0"> My Account informations</h4>
-                </div>
-                <div class="card-body text-center">
-                    <form style="align-items:flex-end">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="card-title"><strong>@Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)</strong></h1>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Email: </strong> @Html.DisplayFor(model => model.Email)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Phone Number: </strong> @Html.DisplayFor(model => model.PhoneNumber)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">CIN: </strong> @Html.DisplayFor(model => model.CIN)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Address: </strong> @Html.DisplayFor(model => model.StreetName),@Html.DisplayFor(model => model.City)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Password: </strong>  @Html.DisplayFor(model => model.Password)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Post: </strong>   @Html.DisplayFor(model => model.Role)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">Birthday : </strong>@Html.DisplayFor(model => model.BirthDate)</h4>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-0"> <strong class="text-success">EntrepriseTranscripts : </strong>@Html.DisplayFor(model => model.EntrepriseTranscripts)</h4>
-                            </div>
-                        </div>
 
-                    </form>
+<table class="table " border="1">
+    <thead>
+        <tr class="bg-primary">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Poste</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
 
-                </div>
+    <tr>
 
-            </div>
+        <td>@Html.DisplayFor(modelItem => item.FName)</td>
+        <td>@Html.DisplayFor(modelItem => item.LName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+        <td>@Html.DisplayFor(modelItem => item.Role)</td>
+        <td>
+            <input type="button" class="btn-success" value="Approve" onclick="location.href='@Url.Action("Approve", "Admin", new { id=@item.Id })'" />
+            <input type="button" class="btn-danger"  value="Reject" onclick="location.href='@Url.Action("Reject", "Admin", new { id=@item.Id })'" />
 
-        </div>
-    </section>
-</div>
-@*<div>
-        <h4>UserModel</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.UserId)
-            </dt>
+        </td>
 
-            <dd>
-                @Html.DisplayFor(model => model.UserId)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CIN)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CIN)
-            </dd>
+    </tr>
+       
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FName)
-            </dt>
+    }
+</table>
 
-            <dd>
-                @Html.DisplayFor(model => model.FName)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.LName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.StreetName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.StreetName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Role)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Role)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BirthDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Photo)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Photo)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.EntrepriseTranscripts)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.EntrepriseTranscripts)
-            </dd>
-
-        </dl>
-    </div>*@
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
