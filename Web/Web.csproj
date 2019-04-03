@@ -406,6 +406,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISatisfactionService.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrganizerController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
@@ -2144,6 +2145,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Form\" />
+    <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
