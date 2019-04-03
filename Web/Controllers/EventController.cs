@@ -72,10 +72,25 @@ namespace Web.Controllers
 
         // POST: Event/Create
         [HttpPost]
-        public ActionResult Create(EventSchedulerViewModel evm,int userId)
+        public ActionResult Create(EventSchedulerViewModel evm)
         {
+            int idUser=0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    i.Role = "President";
+                    userService.Update(i);
+                    userService.Commit();
+
+                }
+            }
             Event e = new Event();
-            e.UserId = userId;
+            
+            e.UserId = idUser;
             e.Title = evm.EventModel.Title;
             e.Address = evm.EventModel.Address;
             e.NumberPlaces = evm.EventModel.NumberPlaces;
@@ -200,6 +215,38 @@ namespace Web.Controllers
           
 
             return listEvent;
+        }
+        public ActionResult MyEvent()
+        {
+            int idUser = 0;
+           
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                   
+
+                }
+            }
+            List<EventViewModel> listEvent = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.UserId==2 )
+                {
+                    EventViewModel eventModel = new EventViewModel();
+                    eventModel.EventId = i.EventId;
+                    eventModel.Title = i.Title;
+                    eventModel.Start = i.Start;
+                    eventModel.Description = i.Description;
+                    eventModel.Address = i.Address;
+                    eventModel.OrganizedBy = i.OrganizedBy;
+                    listEvent.Add(eventModel);
+                }
+            }
+            return View(listEvent);
         }
     }
 

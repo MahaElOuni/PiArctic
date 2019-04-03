@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Web.Models.EventViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<!--================Welcome Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">Events</a>
+                </div>
+                <br />
+                <h2>The events that may interests you</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<br />
+
+@foreach (var item in Model)
+{
+    <!--================Welcome Area =================-->
+    <section class="welcome_area pad_btm">
+        <div class="container">
+            <div class="welcome_inner row">
+                <div class="col-lg-5">
+                    <div class="welcome_img">
+                        <img class="img-fluid" src="~/img/welcome-1.jpg" alt="">
+
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="welcome_text">
+
+                        <div class="media-body">
+                            <h3> @Html.DisplayFor(modelItem => item.Title)</h3>
+                            <div class="media">
+                                <img src="~/img/icons/iconCalendar.png" style="height:30px;width:30px;">
+                                <p><strong>@Html.DisplayFor(modelItem => item.Start)</strong></p>
+                                <label style="color:white">Hello</label>
+                                <img src="~/img/icons/locationIcon.png" style="height:27px;width:30px;">
+                                <p><strong>@Html.DisplayFor(modelItem => item.Address)</strong></p>
+                            </div>
+
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                            <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
+                        </div>
+
+                        <a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>
+                        <a class="main_btn" href="@Url.Action("Create", "Reward", new {  id=item.EventId })">Ajouter Rewards</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Welcome Area =================-->
+
+
+}
+
+
