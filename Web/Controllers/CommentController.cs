@@ -61,7 +61,7 @@ namespace Web.Controllers
             commentService.Add(b);
             commentService.Commit();
 
-            return RedirectToAction("../Blog/Index");
+            return RedirectToAction("../Blog/Details", new { id = b.BlogId });
         }
 
         // GET: Comment/Edit/5
