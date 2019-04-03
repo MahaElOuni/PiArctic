@@ -27,5 +27,13 @@ namespace Domain.Entities
         public virtual Participant Participant { get; set; }
         public virtual Event Event { get; set; }
       
+
+        public String Nom { get; set; }
+        public String Prenom { get; set; }
+       
+        public virtual ICollection<User> User { get; set; }
+
+
     }
 }
+

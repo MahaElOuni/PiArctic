@@ -20,5 +20,7 @@ namespace Web.Models
         public virtual User User { get; set; }
 
         public String titre { get; set; }
+        public int RecommendationId { get; set; }
+        public Recommendation Recommendation { get; set; }
     }
 }

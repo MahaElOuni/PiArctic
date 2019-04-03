@@ -22,5 +22,7 @@ namespace Domain.Entities
         public virtual ICollection<User> User { get; set; }
 
         public String titre { get; set; }
+ 
+        
     }
 }
