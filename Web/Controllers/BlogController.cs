@@ -22,6 +22,7 @@ namespace Web.Controllers
             foreach (var i in a)
             {
                 BlogViewModel bvm = new BlogViewModel();
+               
                 bvm.BlogId = i.BlogId;
                 bvm.NbrLike = i.NbrLike;
                 bvm.NbrComment = i.NbrComment;
@@ -36,21 +37,36 @@ namespace Web.Controllers
         }
         public List<CommentViewModel> Affiche(int id)
         {
+            BlogService blogService = new BlogService();
+            BlogViewModel bvm = new BlogViewModel();
+
             List<CommentViewModel> lc = new List<CommentViewModel>();
+            lc.Clear();
             Blog b = blogService.GetById(id);
-            foreach(Comment c in b.Comments)
+            if(b.Comments != null)
             {
-                CommentViewModel cvm = new CommentViewModel();
-                cvm.Contenu = c.Contenu;
-                lc.Add(cvm);
+                foreach (Comment c in b.Comments)
+                {
+                   
+                    CommentViewModel cvm = new CommentViewModel();
+                    cvm.Contenu = c.Contenu;
+                    lc.Add(cvm);
+                }
+
             }
+               
             return lc;
+
+        }
+        public void like(int id)
+        {
 
         }
 
         // GET: Blog/Details/5
         public ActionResult Details(int id)
         {
+            BlogService blogService = new BlogService();
             BlogViewModel bvm = new BlogViewModel();
 
             var blogs = blogService.GetAll();
@@ -83,6 +99,7 @@ namespace Web.Controllers
         {
             DateTime now = DateTime.Now;
             Blog b = new Blog();
+           
             b.Contenu = bvm.Contenu;
             b.Titre = bvm.Titre;
             b.NbrComment = 0;
