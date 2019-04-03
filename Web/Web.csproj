@@ -397,6 +397,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DemarageController.cs" />
@@ -2139,10 +2140,26 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
+
+
+
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Approve.cshtml" />
+    <Content Include="Views\Admin\Reject.cshtml" />
+
+
+
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
+
     <Content Include="Views\Event\Edit.cshtml" />
+
+
+
+
+
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

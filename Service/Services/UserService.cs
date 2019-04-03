@@ -30,5 +30,29 @@ namespace Service.Services
             }
             return c;
         }
+
+        public void ChangeStateById(int id,String state)
+        {
+            User u = this.GetById(id);
+            u.Etat = state;
+            this.Update(u);
+            this.Commit();
+        }
+
+        public User getUserByEmailAndPassword(String email,String password)
+        {
+           ICollection<User> lu = this.GetAll().ToArray();
+            
+
+            foreach (User u in lu)
+            {
+                if (u.Email.Equals(email) && (u.Password.Equals(password)))
+                {
+                    return u;
+                }
+            }
+
+            return new User();
+        }
     }
 }
