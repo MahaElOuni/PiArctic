@@ -59,8 +59,9 @@
             @Html.DisplayFor(modelItem => item.Titre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BlogId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.BlogId }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.BlogId }) |
+            <a class="main_btn" href="@Url.Action("Details", "Blog", new {  id=item.BlogId })">View More Details</a>|
+
             @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
         </td>
     </tr>
