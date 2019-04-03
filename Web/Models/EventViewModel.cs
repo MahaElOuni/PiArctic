@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace Web.Models
         public String OrganizedBy { get; set; }
         public String DateString { get; set; }
         public ICollection<SchedulerViewModel> listScheduler { get; set; }
-        
+        public int RewardId { get; set; }
+
     }
 
 }

@@ -2140,6 +2140,7 @@
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
+    <Content Include="Views\Reward\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

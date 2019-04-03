@@ -11,12 +11,12 @@ namespace Domain.Entities
     public class Reward
     {
         [Key, Column(Order = 0)]
-        public int IdReward { get; set; }
+        public int RewardId { get; set; }
 
         public int Price1 { get; set; }
         public int Price2 { get; set; }
         public int Price3 { get; set; }
-        public int Eventid { get; set; }
+        public int EventId { get; set; }
         public  Event Event { get; set; }
        
         public virtual ICollection<User> User { get; set; }

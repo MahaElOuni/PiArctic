@@ -51,7 +51,7 @@ namespace Web.Controllers
               {
                   if (i.EventId == id)
                   {
-                      
+                    eventSchedulerModel.EventId = i.EventId;
                       eventSchedulerModel.Title = i.Title;
                       eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
                       eventSchedulerModel.Description = i.Description;
@@ -79,15 +79,15 @@ namespace Web.Controllers
             UserService userService = new UserService();
             foreach (User i in userService.GetAll())
             {
-                if (i.UserName.Equals(User.Identity.Name))
-                {
+               if (i.UserName.Equals(User.Identity.Name))
+               {
                     idUser = i.Id;
-                    i.Role = "President";
+                   i.Role = "President";
                     userService.Update(i);
-                    userService.Commit();
-
-                }
-            }
+                   userService.Commit();
+            
+              }
+          }
             Event e = new Event();
             
             e.UserId = idUser;
