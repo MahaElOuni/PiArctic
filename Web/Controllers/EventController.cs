@@ -317,24 +317,15 @@ namespace Web.Controllers
             return View(eventSchedulerModel);
         }
         [HttpPost]
-        public ActionResult EditScheduler(SchedulerViewModel svm)
+        public void EditScheduler(String id,String duration,String progName)
         {
             var scheduler = schedulerService.GetById(3);
-            scheduler.Duration = svm.Duration;
-            scheduler.ProgramName = svm.ProgramName;
+            scheduler.Duration = duration;
+            scheduler.ProgramName = progName;
             schedulerService.Update(scheduler);
             schedulerService.Commit();
             //return RedirectToAction("Index","Event");
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
 
     }

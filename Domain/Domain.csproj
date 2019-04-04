@@ -311,6 +311,7 @@
     <Compile Include="Entities\Reward.cs" />
     <Compile Include="Entities\Satisfaction.cs" />
     <Compile Include="Entities\Scheduler.cs" />
+    <Compile Include="Entities\Tasks.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\User.cs" />

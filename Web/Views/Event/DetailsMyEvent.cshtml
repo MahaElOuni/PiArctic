@@ -90,46 +90,46 @@
                             <div class="media-body">
                                 <div class="row">
                                     <div>
-                                        <h5> @Html.DisplayFor(modelItem => item.Duration)</h5>
+                                        <h5 id="OldDuration"> @Html.DisplayFor(modelItem => item.Duration)</h5>
                                         <h4>@Html.DisplayFor(modelItem => item.ProgramName)</h4>
                                         <p>Speech by: Mark weins</p>
                                     </div>
                                     <div>
-                                        <a class="main_btn" href="@Url.Action("Edit", "Scheduler", new {  id=3 })">Edit</a>
-                                        @* <a class="main_btn" data-toggle="modal" data-target=".bootstrapmodal">Edit</a>*@
+                                        @*<a class="main_btn" href="@Url.Action("Edit", "Scheduler", new {  id=3 })">Edit</a>*@
+                                        <a class="main_btn" data-toggle="modal" data-target=".bootstrapmodal">Edit</a>
                                     </div>
                                 </div>
-                                @using (Html.BeginForm("EditScheduler", "Event"))
-                                {
-                                    <div class="modal fade bootstrapmodal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="model-header">
-                                                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                                                    <div class="modal-title"><h2>Edit The Program</h2></div>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Duration:
-                                                    @Html.EditorFor(modelItem => item.Duration, new { htmlAttributes = new { @class = "form-control", @id = "duration" } })
-                                                    @Html.ValidationMessageFor(modelItem => item.Duration, "", new { @class = "text-danger" })
-                                                    Program Name:
-                                                    @Html.EditorFor(modelItem => item.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "progName" } })
-                                                    @Html.ValidationMessageFor(modelItem => item.ProgramName, "", new { @class = "text-danger" })
-                                                    <div style="display:none">@Html.EditorFor(modelItem => item.SchedulerId, new { htmlAttributes = new { @class = "form-control", @id = "schedulerId" } })</div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="form-group">
-                                                        <div class="col-md-offset-2 col-md-10">
-                                                            <input type="submit" value="Create" class="btn btn-default" />
-                                                        </div>
-                                                    </div>
-                                                    @* <a class="main_btn" OnClick="addition()">Update</a>*@
-                                                    <button class="btn btn-default" data-dismiss="modal">cancel</button>
-                                                </div>
+                                @*  @using (Html.BeginForm("EditScheduler", "Event"))
+        {*@
+                                <div class="modal fade bootstrapmodal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="model-header">
+                                                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                                                <div class="modal-title"><h2>Edit The Program</h2></div>
+                                            </div>
+                                            <div class="modal-body">
+                                                Duration:
+                                                @Html.EditorFor(modelItem => item.Duration, new { htmlAttributes = new { @class = "form-control", @id = "duration" } })
+                                                @Html.ValidationMessageFor(modelItem => item.Duration, "", new { @class = "text-danger" })
+                                                Program Name:
+                                                @Html.EditorFor(modelItem => item.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "progName" } })
+                                                @Html.ValidationMessageFor(modelItem => item.ProgramName, "", new { @class = "text-danger" })
+                                                <div style="display:none">@Html.EditorFor(modelItem => item.SchedulerId, new { htmlAttributes = new { @class = "form-control", @id = "schedulerId" } })</div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                @*<div class="form-group">
+                           <div class="col-md-offset-2 col-md-10">
+                                   <input type="submit" value="Create" class="btn btn-default" />
+                           </div>
+                        </div>*@
+                                                <a class="main_btn" OnClick="addition()">Update</a>
+                                                <button class="btn btn-default" data-dismiss="modal">cancel</button>
                                             </div>
                                         </div>
                                     </div>
-                                }
+                                </div>
+
                             </div>
                         </div>
 
@@ -382,7 +382,7 @@
             console.log(progName);
             console.log(schedulerId);
             console.log(window.location.href);
-            
+            String d;
             $.ajax({
                 url: "/Event/EditScheduler",
                 type: "POST",
@@ -392,14 +392,22 @@
                 success: function () {
                     $(window).load(duration);
                   //  window.location.href = "http://localhost:57884/Event/MyEvent";  // replace
-                    //window.location.reload();
+                    console.log(document.getElementById("OldDuration").value);
+                    d = duration;
+                   
+                  
+                    window.location.reload();
+                    
+                    
                     /*$(document).ajaxStop(function () {
                         window.location.reload();
                     });*/
                 }
             });
+            console.log(d);
+            document.getElementById("OldDuration").value = d;
             //$(window).load(duration);
-            console.log("test1");
+            
 
 
         }
