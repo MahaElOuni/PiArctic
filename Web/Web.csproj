@@ -2140,6 +2140,12 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
+
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Event\MyEvent.cshtml" />
+    <Content Include="Views\Reward\Edit.cshtml" />
+    <Content Include="Views\Recommandation\Index.cshtml" />
+
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Approve.cshtml" />
     <Content Include="Views\Admin\Reject.cshtml" />
@@ -2147,8 +2153,11 @@
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
+
     <Content Include="Views\Event\DetailsMyEvent.cshtml" />
     <Content Include="Views\Scheduler\Edit.cshtml" />
+
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

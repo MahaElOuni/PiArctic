@@ -235,6 +235,16 @@
         </div>
     </div>
 </section>
+<section class="event_schedule_area p_120">
+    <div class="container">
+        <div class="main_title">
+
+            <a class="main_btn" href="@Url.Action("Create", "Recommandation", new {  id=Model.EventId })">Ajouter Recommendation</a>
+            <a class="main_btn" href="@Url.Action("Index", "Recommandation", new {  id=Model.EventId })">Affichier Recommendation</a>
+
+        </div>
+    </div>
+</section>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")

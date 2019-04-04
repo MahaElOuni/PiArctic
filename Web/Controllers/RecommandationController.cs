@@ -15,9 +15,26 @@ namespace Web.Controllers
     {
         RecommandationService rs = new RecommandationService();
         // GET: Recommandation
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+
+
+            List<RecommendationViewModel> list = new List<RecommendationViewModel>();
+            var r = rs.GetAll();
+            foreach (var i in r)
+            {
+                RecommendationViewModel recommendationModel = new RecommendationViewModel();
+                if (i.EventId == id)
+                {
+                    recommendationModel.EmailParticipent = i.EmailParticipent;
+                    recommendationModel.Nom = i.Nom;
+                    recommendationModel.Prenom = i.Prenom;
+                    list.Add(recommendationModel);
+
+                }
+
+            }
+            return View(list);
         }
 
         // GET: Recommandation/Details/5
@@ -27,18 +44,28 @@ namespace Web.Controllers
         }
 
         // GET: Recommandation/Create
-        public ActionResult Create()
+        public ActionResult Create(int id, RecommendationViewModel rvm)
         {
 
+            int i = 0;
+            Recommendation r = new Recommendation();
+            r.RecommendationId = rvm.RecommendationId;
+            r.RecommendationNum = 1;
+            //  r.Status = rvm.Status.;
+            r.UserId = 1;
+            r.EventId = rvm.EventId = id;
+            r.Nom = rvm.Nom;
+            r.Prenom = rvm.Prenom;
+            r.EmailParticipent = rvm.EmailParticipent;
+          
+            rs.Add(r);
+            rs.Commit();
+            return View(rvm);
 
-
-
-            return View();
         }
-
         // POST: Recommandation/Create
         [HttpPost]
-        public ActionResult Create(RecommendationViewModel rvm)
+        public ActionResult Create(RecommendationViewModel rvm,int id)
         {
             int i = 0;
             Recommendation r = new Recommendation();
@@ -46,33 +73,19 @@ namespace Web.Controllers
             r.RecommendationNum = 1;
           //  r.Status = rvm.Status.;
             r.UserId = 1;
-            r.EventId = 1;
+            r.EventId = rvm.EventId = id;
+            r.Nom = rvm.Nom;
+            r.Prenom = rvm.Prenom;
             r.EmailParticipent = rvm.EmailParticipent;
             SendingMail("levio.lmp@gmail.com", r.EmailParticipent, "Request levio", "we accept with enevt ");
             rs.Add(r);
             rs.Commit();
 
-            return View();
+            return View(rvm);
 
         }
 
-        public ActionResult Createref(RecommendationViewModel rvm)
-        {
-            int i = 0;
-            Recommendation r = new Recommendation();
-            r.RecommendationId = rvm.RecommendationId;
-            r.RecommendationNum = 0;
-            //  r.Status = rvm.Status.;
-            r.UserId = 1;
-            r.EventId = 1;
-            r.EmailParticipent = rvm.EmailParticipent;
-            SendingMail("levio.lmp@gmail.com", r.EmailParticipent, "Request levio", "we reff with enevt ");
-            rs.Add(r);
-            rs.Commit();
-
-            return View();
-
-        }
+      
 
         public void SendingMail(string From, string To, string Subject, string Body)
         {
