@@ -14,17 +14,17 @@ namespace Domain.Entities
     }
     public class Recommendation
     {
-        [Key, Column(Order = 1)]
+        
         public int RecommendationId { get; set; }
         public int RecommendationNum { get; set; }
         public State Status { get; set; }
         //prop de navigation
-        [Key, Column(Order = 2)]
+     
         public int UserId { get; set; }
-        [Key, Column(Order = 3)]
-        public int EventId { get; set; }
+
         public String EmailParticipent { get; set; }
         public virtual Participant Participant { get; set; }
+        public int? EventId { get; set; }
         public virtual Event Event { get; set; }
       
 

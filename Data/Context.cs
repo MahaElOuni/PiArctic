@@ -28,6 +28,9 @@ namespace Data
             modelBuilder.Conventions.Add(new KeyConvention());
             modelBuilder.Entity<Scheduler>().HasOptional(c => c.Event).WithMany(s=>s.ListScheduler).HasForeignKey(i=>i.EventId);
             modelBuilder.Entity<Event>().HasOptional(c => c.President).WithMany(s => s.ListEvent).HasForeignKey(i => i.UserId);
+            modelBuilder.Entity<Recommendation>().HasOptional(c => c.Event).WithMany(s => s.listRecommdendation).HasForeignKey(i => i.EventId);
+            modelBuilder.Entity<Reward>().HasOptional(c => c.Event).WithMany(s => s.Rewards).HasForeignKey(i => i.EventId);
+
             modelBuilder.Configurations.Add(new CommentConfig());
         }
         public static Context Create()
