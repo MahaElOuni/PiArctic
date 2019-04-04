@@ -51,7 +51,7 @@
                             <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
                         </div>
 
-                        <a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>
+                        <a class="main_btn" href="@Url.Action("DetailsMyEvent", "Event", new {  id=item.EventId })">View More Details</a>
                         <a class="main_btn" href="@Url.Action("Edit", "Event", new {  id=item.EventId })">Edit</a>
                     </div>
                 </div>

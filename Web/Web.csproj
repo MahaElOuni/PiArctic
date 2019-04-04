@@ -411,6 +411,7 @@
     <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\SatisfactionController.cs" />
+    <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Controllers\UserProfilController.cs" />
     <Compile Include="Facebook\FacebookBackChannelHandler.cs" />
     <Compile Include="Global.asax.cs">
@@ -2146,6 +2147,8 @@
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\DetailsMyEvent.cshtml" />
+    <Content Include="Views\Scheduler\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
