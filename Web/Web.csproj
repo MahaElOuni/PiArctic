@@ -81,6 +81,12 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.38.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
@@ -301,6 +307,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -2034,6 +2041,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.ajaxchimp.min.js" />
     <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2140,12 +2149,10 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
-
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Recommandation\Index.cshtml" />
-
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Approve.cshtml" />
     <Content Include="Views\Admin\Reject.cshtml" />
@@ -2153,11 +2160,8 @@
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
-
     <Content Include="Views\Event\DetailsMyEvent.cshtml" />
     <Content Include="Views\Scheduler\Edit.cshtml" />
-
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
