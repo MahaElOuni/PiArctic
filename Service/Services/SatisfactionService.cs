@@ -19,6 +19,15 @@ namespace Service.Services
         {
 
         }
+        public List<Satisfaction> GetByIdEvent(int id)
+        {
+
+            List<Satisfaction> list = uow.getRepository<Satisfaction>().GetAll().ToList();
+            list = list.FindAll(x => x.EventId.Equals(id)).ToList();
+            return list;
+
+
+        }
     
     }
 }
