@@ -28,8 +28,9 @@ namespace Domain.Entities
         public virtual ICollection<Scheduler> ListScheduler { get; set; }
 
         public virtual ICollection<Reward> Rewards { get; set; }
+        public virtual ICollection<Tasks> ListTask { get; set; }
 
 
-       
+
     }
 }

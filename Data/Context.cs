@@ -32,6 +32,7 @@ namespace Data
             modelBuilder.Entity<Recommendation>().HasOptional(c => c.Event).WithMany(s => s.listRecommdendation).HasForeignKey(i => i.EventId);
             modelBuilder.Entity<Reward>().HasOptional(c => c.Event).WithMany(s => s.Rewards).HasForeignKey(i => i.EventId);
             modelBuilder.Entity<Tasks>().HasOptional(c => c.Organizer).WithMany(s => s.ListTask).HasForeignKey(i => i.UserId);
+            modelBuilder.Entity<Tasks>().HasOptional(c => c.Event).WithMany(s => s.ListTask).HasForeignKey(i => i.EventId);
 
             modelBuilder.Configurations.Add(new CommentConfig());
         }

@@ -50,9 +50,85 @@
                             <p>@Html.DisplayFor(modelItem => item.Description)</p>
                             <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
                         </div>
-
-                        <a class="main_btn" href="@Url.Action("DetailsMyEvent", "Event", new {  id=item.EventId })">View More Details</a>
+                        <div style="display:none">@Html.EditorFor(modelItem => item.EventId, new { htmlAttributes = new { @class = "form-control", @id = "eventId", @name = "eventId" } })</div>
+                        <a class="main_btn" href="@Url.Action("DetailsMyEvent", "Event", new {  id=item.EventId })">View Details</a>
                         <a class="main_btn" href="@Url.Action("Edit", "Event", new {  id=item.EventId })">Edit</a>
+
+
+
+                        <!--============================ Welcome Add Organizer ====================================-->
+                        <a class="main_btn" data-toggle="modal" data-target=".bootstrapmodal">Edit</a>
+
+
+                        <div class="modal fade bootstrapmodal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="model-header">
+                                        <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                                        <div class="modal-title"><h2>Designates an Organizer</h2></div>
+                                    </div>
+                                    <div class="modal-body">
+
+
+                                        <div class="switch-wrap d-flex justify-content-between">
+                                            <input placeholder="Organizer Email" type="email" id="email" />
+                                            <select class="default-select" id="TaskId" name="TaskId">
+                                                <option>Select Task</option>
+                                                <option>Create Form</option>
+                                                <option>Create Ticketing System</option>
+                                                <option>Add Information</option>
+                                                <option>Fix Rewards</option>
+                                                <option>Satisfaction Survey</option>
+                                            </select>
+                                            <button class="btn sub-btn" OnClick="addition()">+</button>
+                                            <script>
+                                                function addition() {
+                                                    var email = document.getElementById("email").value;
+                                                    var taskId = document.getElementById("TaskId");
+                                                    var task = taskId.options[taskId.selectedIndex].value;
+                                                    var eventId = document.getElementById("eventId").value;
+                                                    console.log(email);
+                                                    console.log(taskId);
+                                                    console.log(task);
+                                                    console.log(eventId);
+                                                    $('#tab tr:last').after("<tr><td>" + email + "</td><td> "  +"  -  "+ task +  "</td>");
+                                                    $.ajax({
+                                                        url: "/Tasks/AddTask",
+                                                        type: "POST",
+                                                        data: {
+                                                            'id': eventId, 'email': email, 'taskName': task
+                                                        }
+                                                    });
+
+
+                                                }
+                                            </script>
+
+                                        </div>
+                                        <table id="tab">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Organizer</th>
+                                                   
+                                                    <th scope="col">Task</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                            <div class="modal-footer">
+                                                
+                                               
+                                                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                        <!--============================ Welcome Add Organizer ====================================-->
                     </div>
                 </div>
             </div>

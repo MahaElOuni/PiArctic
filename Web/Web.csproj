@@ -419,6 +419,7 @@
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\SatisfactionController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserProfilController.cs" />
     <Compile Include="Facebook\FacebookBackChannelHandler.cs" />
     <Compile Include="Global.asax.cs">
@@ -2168,6 +2169,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Form\" />
     <Folder Include="Views\Organizer\" />
+    <Folder Include="Views\Tasks\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
