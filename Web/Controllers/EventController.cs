@@ -46,8 +46,11 @@ namespace Web.Controllers
             
            EventViewModel eventSchedulerModel = new EventViewModel();
               List<EventViewModel> listEventScheduler = new List<EventViewModel>();
-              var eventt = eventService.GetAll();
-              var schedulers = schedulerService.GetAll();
+            List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
+            EventService eventService = new EventService();
+           
+            var eventt = eventService.GetAll();
+             
               foreach (var i in eventt)
               {
                   if (i.EventId == id)
@@ -58,7 +61,16 @@ namespace Web.Controllers
                       eventSchedulerModel.Description = i.Description;
                       eventSchedulerModel.Address = i.Address;
                       eventSchedulerModel.OrganizedBy = i.OrganizedBy;
-                      eventSchedulerModel.listScheduler = Affiche(id);
+                    foreach (Scheduler s in i.ListScheduler)
+                    {
+                        SchedulerViewModel sv = new SchedulerViewModel();
+                        sv.SchedulerId = s.SchedulerId;
+                        sv.Duration = s.Duration;
+                        sv.ProgramName = s.ProgramName;
+                        listScheduer.Add(sv);
+                    }
+
+                    eventSchedulerModel.listScheduler = listScheduer;
                       
                    }
               }
@@ -241,7 +253,7 @@ namespace Web.Controllers
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MyEvent");
             }
             catch
             {
@@ -309,7 +321,7 @@ namespace Web.Controllers
             foreach(Scheduler s in e1.ListScheduler)
             {
                 SchedulerViewModel sv = new SchedulerViewModel();
-                
+                sv.SchedulerId = s.SchedulerId;
                 sv.Duration = s.Duration;
                 sv.ProgramName = s.ProgramName;
                 listEvent.Add(sv);
@@ -320,7 +332,7 @@ namespace Web.Controllers
         }
         public ActionResult MyEvent()
         {
-            int idUser = 0;
+            int idUser = 1;
            
             UserService userService = new UserService();
             foreach (User i in userService.GetAll())
@@ -351,6 +363,52 @@ namespace Web.Controllers
             return View(listEvent);
         }
 
+
+
+
+        public ActionResult DetailsMyEvent(int id)
+        {
+            List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
+            EventViewModel eventSchedulerModel = new EventViewModel();
+            List<EventViewModel> listEventScheduler = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            var schedulers = schedulerService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.EventId == id)
+                {
+                    eventSchedulerModel.EventId = i.EventId;
+                    eventSchedulerModel.Title = i.Title;
+                    eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
+                    eventSchedulerModel.Description = i.Description;
+                    eventSchedulerModel.Address = i.Address;
+                    eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                    foreach (Scheduler s in i.ListScheduler)
+                    {
+                        SchedulerViewModel sv = new SchedulerViewModel();
+                        sv.SchedulerId = s.SchedulerId;
+                        sv.Duration = s.Duration;
+                        sv.ProgramName = s.ProgramName;
+                        listScheduer.Add(sv);
+                    }
+
+                    eventSchedulerModel.listScheduler = listScheduer;
+
+                }
+            }
+            return View(eventSchedulerModel);
+        }
+        [HttpPost]
+        public void EditScheduler(String id,String duration,String progName)
+        {
+            var scheduler = schedulerService.GetById(3);
+            scheduler.Duration = duration;
+            scheduler.ProgramName = progName;
+            schedulerService.Update(scheduler);
+            schedulerService.Commit();
+            //return RedirectToAction("Index","Event");
+            
+        }
 
 
     }
