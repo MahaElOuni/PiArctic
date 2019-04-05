@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Service.Services;
 using System;
@@ -75,6 +76,83 @@ namespace Web.Controllers
               }
               return View(eventSchedulerModel);
         }
+
+        public ActionResult liker(int id)
+        {
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel svm = new SatisfactionViewModel();
+            Satisfaction s = new Satisfaction();
+            s.UserId= User.Identity.GetUserId<int>();
+            s.EventId = id;
+            s.status = 1;
+
+            ss.Add(s);
+            ss.Commit();
+            
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult disliker(int id)
+        {
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel svm = new SatisfactionViewModel();
+            Satisfaction s = new Satisfaction();
+            s.UserId = User.Identity.GetUserId<int>();
+            s.EventId = id;
+            s.status = 2;
+
+            ss.Add(s);
+            ss.Commit();
+
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult statitique(int id)
+        {
+            double likes = 0;
+            double dislikes = 0;
+
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel r = new SatisfactionViewModel();
+            foreach (var item in ss.GetByIdEvent(id))
+            {
+                if (item.status == 1) { likes++; }
+                else if (item.status == 2) { dislikes++; }
+
+            }
+
+            r.likes = 5;
+            r.dislikes = 3;
+
+            return View(r);
+        }
+
+        public ActionResult statittotal()
+        {
+            double likes = 0;
+            double dislikes = 0;
+            int nbr = 0;
+
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel r = new SatisfactionViewModel();
+            foreach (var item in ss.GetAll())
+            {
+                if (item.status == 1) { likes ++; }
+                else if (item.status == 2) { dislikes ++; }
+
+            }
+
+            nbr = ss.GetAll().Count();
+
+            r.likes = Math.Round((likes / nbr) * 100);
+            r.dislikes = Math.Round((dislikes / nbr) * 100);
+
+
+            return View();
+        }
+
+
 
         // GET: Event/Create
         public ActionResult Create()
@@ -284,6 +362,10 @@ namespace Web.Controllers
             }
             return View(listEvent);
         }
+
+
+
+
         public ActionResult DetailsMyEvent(int id)
         {
             List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
@@ -317,25 +399,17 @@ namespace Web.Controllers
             return View(eventSchedulerModel);
         }
         [HttpPost]
-        public ActionResult EditScheduler(SchedulerViewModel svm)
+        public void EditScheduler(String id,String duration,String progName)
         {
             var scheduler = schedulerService.GetById(3);
-            scheduler.Duration = svm.Duration;
-            scheduler.ProgramName = svm.ProgramName;
+            scheduler.Duration = duration;
+            scheduler.ProgramName = progName;
             schedulerService.Update(scheduler);
             schedulerService.Commit();
             //return RedirectToAction("Index","Event");
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
+
 
     }
 

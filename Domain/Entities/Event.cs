@@ -29,7 +29,14 @@ namespace Domain.Entities
 
         public virtual ICollection<Reward> Rewards { get; set; }
 
+        public virtual ICollection<Satisfaction> Satisfaction { get; set; }
 
-       
+
+
+        public virtual ICollection<Tasks> ListTask { get; set; }
+
+
+
+
     }
 }

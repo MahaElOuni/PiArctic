@@ -419,6 +419,7 @@
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\SatisfactionController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserProfilController.cs" />
     <Compile Include="Facebook\FacebookBackChannelHandler.cs" />
     <Compile Include="Global.asax.cs">
@@ -431,6 +432,7 @@
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MaclasseViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PresidentModel.cs" />
     <Compile Include="Models\RecommendationViewModel.cs" />
@@ -438,6 +440,7 @@
     <Compile Include="Models\SatisfactionViewModel.cs" />
     <Compile Include="Models\SchedulerViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="NotificationHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2147,8 +2150,13 @@
     <Content Include="Views\Reward\Delete.cshtml" />
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Reward\Index.cshtml" />
+
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
+
+
+    <Content Include="Views\Blog\Details.cshtml" />
+
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Recommandation\Index.cshtml" />
@@ -2158,14 +2166,20 @@
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
+
+    <Content Include="Views\Event\statitique.cshtml" />
+
     <Content Include="Views\Event\DetailsMyEvent.cshtml" />
     <Content Include="Views\Scheduler\Edit.cshtml" />
+
     <Content Include="Views\Blog\Details.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Form\" />
     <Folder Include="Views\Organizer\" />
+    <Folder Include="Views\Tasks\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
