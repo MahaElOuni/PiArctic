@@ -2,7 +2,6 @@
 @using Microsoft.Owin.Security
 
 <h4>Use another service to log in.</h4>
-<hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0)
@@ -23,24 +22,18 @@
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders)
                     {
-                        if (loginProviders.Equals("Twitter"))
+                        if (p.Caption.Equals("Facebook"))
                         {<button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
                                  value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption">
-                                <img src="~/img/twit.png" />@p.AuthenticationType
+                                <img src="~/img/fb.png" />
                             </button>
                         }
-                        else if (loginProviders.Equals("Google"))
-                        {
-                            <button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
-                                    value="@p.AuthenticationType">
-                                <img src="~/img/google.png" />Google++
-                            </button>
-                        }
+                      
                         else
                         {
                             <button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
                                     value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption">
-                                <img src="~/img/fb.png" />@p.AuthenticationType
+                                <img src="~/img/go.png" />
                             </button>
                         }
 
