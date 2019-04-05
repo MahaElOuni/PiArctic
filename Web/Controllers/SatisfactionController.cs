@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Service.Services;
 using System;
 using System.Collections.Generic;
@@ -12,31 +13,82 @@ namespace Web.Controllers
     public class SatisfactionController : Controller
     {
         SatisfactionService satisfactionService = new SatisfactionService();
+
+        EventService eventService = new EventService();
+        SchedulerService schedulerService = new SchedulerService();
+
+        List<Scheduler> listScheduler = new List<Scheduler>();
         // GET: Satisfaction
         public ActionResult Index()
         {
-            List<SatisfactionViewModel> list = new List<SatisfactionViewModel>();
-            var r = satisfactionService.GetAll();
-            foreach (var i in r)
+            List<EventViewModel> listEvent = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            foreach (var i in eventt)
             {
-                SatisfactionViewModel satisfactionModel = new SatisfactionViewModel();
-
-
-                    satisfactionModel.Contenu = i.Contenu;
-                    satisfactionModel.DatePost = i.DatePost;
-                    
-                    list.Add(satisfactionModel);
-
-                
+                if (i.Start >= DateTime.Today)
+                {
+                    EventViewModel eventModel = new EventViewModel();
+                    eventModel.EventId = i.EventId;
+                    eventModel.Title = i.Title;
+                    eventModel.Start = i.Start;
+                    eventModel.Description = i.Description;
+                    eventModel.Address = i.Address;
+                    eventModel.OrganizedBy = i.OrganizedBy;
+                    listEvent.Add(eventModel);
+                }
             }
-            return View(list);
+            return View(listEvent);
+
+
         }
 
-        // GET: Satisfaction/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            EventViewModel eventSchedulerModel = new EventViewModel();
+            List<EventViewModel> listEventScheduler = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            var schedulers = schedulerService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.EventId == id)
+                {
+                    eventSchedulerModel.EventId = i.EventId;
+                    eventSchedulerModel.Title = i.Title;
+                    eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
+                    eventSchedulerModel.Description = i.Description;
+                    eventSchedulerModel.Address = i.Address;
+                    eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                   
+
+                }
+            }
+            return View(eventSchedulerModel);
         }
+
+        public ActionResult liker(int id)
+        {
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel svm = new SatisfactionViewModel();
+            Satisfaction s = new Satisfaction();
+            s.UserId = User.Identity.GetUserId<int>();
+            s.EventId = id;
+            s.status = 1;
+
+            ss.Add(s);
+            ss.Commit();
+
+            return RedirectToAction("Details");
+
+        }
+
+
+
+       
+
+
+
+
 
         // GET: Satisfaction/Create
         public ActionResult Create()
@@ -48,12 +100,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(SatisfactionViewModel svm)
         {
-            Satisfaction s = new Satisfaction();
-            s.Contenu = svm.Contenu;
-            s.DatePost = svm.DatePost;
-            satisfactionService.Add(s);
-            satisfactionService.Commit();
-
+          
 
             return View();
             
@@ -103,28 +150,6 @@ namespace Web.Controllers
             }
         }
 
-        public ActionResult StatRequest()
-        {
-            double aimee = 0;
-            double naimepase = 0;
-           
-            int nbr = 0;
-
-            SatisfactionViewModel r = new SatisfactionViewModel();
-            foreach (var item in satisfactionService.GetAll())
-            {
-                if (item.statuss == 2) { aimee++; }
-                else if (item.statuss == 1) { naimepase++; }
-                
-            }
-
-            nbr = satisfactionService.GetAll().Count();
-
-            r.aime = Math.Round((aimee / nbr) * 100);
-            r.naimepas = Math.Round((naimepase / nbr) * 100);
-           
-
-            return View(r);
-        }
+       
     }
 }

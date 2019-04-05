@@ -8,6 +8,7 @@ namespace Domain.Entities
 {
     public class Organizer:User
     {
-        
+        public ICollection<Tasks> ListTask { get; set; }
+
     }
 }

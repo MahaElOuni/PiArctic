@@ -1,70 +1,168 @@
 ﻿@model IEnumerable<Web.Models.BlogViewModel>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<!--================Welcome Home Banner Area =================-->
+<section class="banner_area">
+	<div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+		<div class="container">
+			<div class="banner_content text-center">
+				<div class="page_link">
+					<a href="index.html">Home</a>
+					<a href="about-us.html">Blog</a>
+				</div>
+				<br />
+				<h2>Welcome to the Blogs</h2>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Home Banner Area =================-->
+<header class="header_area">
+	<div class="main_menu">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container box_1620">
+				<!-- Brand and toggle get grouped for better mobile display -->
 
+				<a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
+								<li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
+								<li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
+								<li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
+							</ul>
+						</li>
+
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
+								
+							</ul>
+						</li>
+
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item"><a href="@Url.Action("Login","Account")" class="tickets_btn">Log In</a></li>
+						<li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
 <p>
-    @Html.ActionLink("Create New", "Create")
+	<div class="col-sm-4 md-form">
+		<a class="main_btn" href="@Url.Action("Create", "Blog")">Create</a>
+	</div>
+
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contenu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DatePost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NbrLike)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NbrComment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Titre)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlogId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contenu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DatePost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NbrLike)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NbrComment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BlogId }) |
-            <a class="main_btn" href="@Url.Action("Details", "Blog", new {  id=item.BlogId })">View More Details</a>|
+<section class="blog_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="blog_left_sidebar">
+					@foreach (var item in Model)
+					{
 
-            @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
-        </td>
-    </tr>
-}
+						<article class="row blog_item">
+							<div class="col-md-3">
+								<div class="blog_info text-right">
+									<ul class="blog_meta list">
+										<li>User        <i class="lnr lnr-user"></i></li>
+										<li>@Html.DisplayFor(modelItem => item.DatePost)          <i class="lnr lnr-calendar-full"></i></li>
+										<li>06 Comments         <i class="lnr lnr-bubble"></i></li>
+										<li>@Html.DisplayFor(modelItem => item.NbrLike)   <i class="lnr lnr-heart"></i></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div class="blog_post">
+									<img src="~/img/blog/main-blog/m-blog-1.jpg" alt="">
+									<div class="blog_details">
+										<a href="single-blog.html"><h2>@Html.DisplayFor(modelItem => item.Titre)</h2></a>
+										<p>@Html.DisplayFor(modelItem => item.Contenu)</p>
+										<a href="@Url.Action("Details","Blog", new {id=item.BlogId })" class="blog_btn">View More</a>
+									</div>
+								</div>
+							</div>
+						</article>
 
-</table>
+					}
+					<nav class="blog-pagination justify-content-center d-flex">
+						<ul class="pagination">
+							<li class="page-item">
+								<a href="#" class="page-link" aria-label="Previous">
+									<span aria-hidden="true">
+										<span class="lnr lnr-chevron-left"></span>
+									</span>
+								</a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link">01</a></li>
+							<li class="page-item active"><a href="#" class="page-link">02</a></li>
+							<li class="page-item"><a href="#" class="page-link">03</a></li>
+							<li class="page-item"><a href="#" class="page-link">04</a></li>
+							<li class="page-item"><a href="#" class="page-link">09</a></li>
+							<li class="page-item">
+								<a href="#" class="page-link" aria-label="Next">
+									<span aria-hidden="true">
+										<span class="lnr lnr-chevron-right"></span>
+									</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="blog_right_sidebar">
+					<aside class="single_sidebar_widget search_widget">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search Posts">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+							</span>
+						</div><!-- /input-group -->
+						<div class="br"></div>
+					</aside>
+					
+					<aside class="single_sidebar_widget popular_post_widget">
+						<h3 class="widget_title">Popular Posts</h3>
+						<div class="media post_item">
+							<img src="~/img/blog/popular-post/post1.jpg" alt="post">
+							<div class="media-body">
+								<a href="blog-details.html"><h3>Space The Final Frontier</h3></a>
+								<p>02 Hours ago</p>
+							</div>
+						</div>
+						
+						<div class="br"></div>
+					</aside>
+					@*POPULLAR POSt*@
+					<aside class="single_sidebar_widget ads_widget">
+						<a href="#"><img class="img-fluid" src="~/img/blog/add.jpg" alt=""></a>
+						<div class="br"></div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

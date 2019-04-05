@@ -10,24 +10,16 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class SatisfactionService : Service<Satisfaction>, ISatisfactionService
+    public class TasksService : Service<Tasks>, ITasksService
     {
         private static IDatabaseFactory dbfactor = new DatabaseFactory();
         private static IUnitOfWork uow = new UnitOfWork(dbfactor);
         IDatabaseFactory dbfactory = null;
-        public SatisfactionService() : base(uow)
+        public TasksService() : base(uow)
         {
 
         }
-        public List<Satisfaction> GetByIdEvent(int id)
-        {
-
-            List<Satisfaction> list = uow.getRepository<Satisfaction>().GetAll().ToList();
-            list = list.FindAll(x => x.EventId.Equals(id)).ToList();
-            return list;
-
-
-        }
+    
     
     }
 }

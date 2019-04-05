@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Web.Models.EventViewModel>
+﻿
+@model IEnumerable<Web.Models.EventViewModel>
+
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +15,7 @@
                     <a href="index.html">Home</a>
                     <a href="about-us.html">Events</a>
                 </div>
-                <br/>
+                <br />
                 <h2>The events that may interests you</h2>
             </div>
         </div>
@@ -53,6 +55,18 @@
 
                         <a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>
                         <a id="btn" class="main_btn" href="@Url.Action("Create", "Reward", new {  id=item.EventId })">Ajouter Rewards</a>
+
+                        <a class="main_btn" href="@Url.Action("disliker", "Event", new {  id=item.EventId  })">dislike</a>
+
+                        <a class="main_btn" href="@Url.Action("liker", "Event", new {  id=item.EventId  })">like</a>
+                        <a class="main_btn" href="@Url.Action("statitique", "Event", new {  id=item.EventId  })">stat</a>
+
+
+
+
+
+
+
                     </div>
                 </div>
             </div>

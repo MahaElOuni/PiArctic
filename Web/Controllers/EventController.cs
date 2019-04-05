@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Service.Services;
 using System;
@@ -45,8 +46,11 @@ namespace Web.Controllers
             
            EventViewModel eventSchedulerModel = new EventViewModel();
               List<EventViewModel> listEventScheduler = new List<EventViewModel>();
-              var eventt = eventService.GetAll();
-              var schedulers = schedulerService.GetAll();
+            List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
+            EventService eventService = new EventService();
+           
+            var eventt = eventService.GetAll();
+             
               foreach (var i in eventt)
               {
                   if (i.EventId == id)
@@ -57,12 +61,98 @@ namespace Web.Controllers
                       eventSchedulerModel.Description = i.Description;
                       eventSchedulerModel.Address = i.Address;
                       eventSchedulerModel.OrganizedBy = i.OrganizedBy;
-                      eventSchedulerModel.listScheduler = Affiche(id);
+                    foreach (Scheduler s in i.ListScheduler)
+                    {
+                        SchedulerViewModel sv = new SchedulerViewModel();
+                        sv.SchedulerId = s.SchedulerId;
+                        sv.Duration = s.Duration;
+                        sv.ProgramName = s.ProgramName;
+                        listScheduer.Add(sv);
+                    }
+
+                    eventSchedulerModel.listScheduler = listScheduer;
                       
                    }
               }
               return View(eventSchedulerModel);
         }
+
+        public ActionResult liker(int id)
+        {
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel svm = new SatisfactionViewModel();
+            Satisfaction s = new Satisfaction();
+            s.UserId= User.Identity.GetUserId<int>();
+            s.EventId = id;
+            s.status = 1;
+
+            ss.Add(s);
+            ss.Commit();
+            
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult disliker(int id)
+        {
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel svm = new SatisfactionViewModel();
+            Satisfaction s = new Satisfaction();
+            s.UserId = User.Identity.GetUserId<int>();
+            s.EventId = id;
+            s.status = 2;
+
+            ss.Add(s);
+            ss.Commit();
+
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult statitique(int id)
+        {
+            double likes = 0;
+            double dislikes = 0;
+
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel r = new SatisfactionViewModel();
+            foreach (var item in ss.GetByIdEvent(id))
+            {
+                if (item.status == 1) { likes++; }
+                else if (item.status == 2) { dislikes++; }
+
+            }
+
+            r.likes = 5;
+            r.dislikes = 3;
+
+            return View(r);
+        }
+
+        public ActionResult statittotal()
+        {
+            double likes = 0;
+            double dislikes = 0;
+            int nbr = 0;
+
+            SatisfactionService ss = new SatisfactionService();
+            SatisfactionViewModel r = new SatisfactionViewModel();
+            foreach (var item in ss.GetAll())
+            {
+                if (item.status == 1) { likes ++; }
+                else if (item.status == 2) { dislikes ++; }
+
+            }
+
+            nbr = ss.GetAll().Count();
+
+            r.likes = Math.Round((likes / nbr) * 100);
+            r.dislikes = Math.Round((dislikes / nbr) * 100);
+
+
+            return View();
+        }
+
+
 
         // GET: Event/Create
         public ActionResult Create()
@@ -128,18 +218,42 @@ namespace Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Event e = eventService.GetById(id);
+            EventViewModel eventModel = new EventViewModel();
+            eventModel.Title = e.Title;
+            eventModel.Address = e.Address;
+            eventModel.NumberPlaces = e.NumberPlaces;
+            eventModel.Start = e.Start;
+            eventModel.End = e.End;
+            eventModel.Price = e.Price;
+            eventModel.Description = e.Description;
+            eventModel.OrganizedBy = e.OrganizedBy;
+
+            return View(eventModel);
         }
 
         // POST: Event/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, EventViewModel eventModel)
         {
+            Event e = eventService.GetById(id);
+            e.Title=eventModel.Title;
+            e.Address=eventModel.Address;
+            e.NumberPlaces=eventModel.NumberPlaces;
+            e.Start=eventModel.Start;
+            e.End=eventModel.End;
+            e.Price=eventModel.Price ;
+            e.Description=eventModel.Description;
+            e.OrganizedBy=eventModel.OrganizedBy;
+            eventService.Update(e);
+            eventService.Commit();
+
+
             try
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MyEvent");
             }
             catch
             {
@@ -207,7 +321,7 @@ namespace Web.Controllers
             foreach(Scheduler s in e1.ListScheduler)
             {
                 SchedulerViewModel sv = new SchedulerViewModel();
-                
+                sv.SchedulerId = s.SchedulerId;
                 sv.Duration = s.Duration;
                 sv.ProgramName = s.ProgramName;
                 listEvent.Add(sv);
@@ -218,7 +332,7 @@ namespace Web.Controllers
         }
         public ActionResult MyEvent()
         {
-            int idUser = 0;
+            int idUser = 1;
            
             UserService userService = new UserService();
             foreach (User i in userService.GetAll())
@@ -248,6 +362,55 @@ namespace Web.Controllers
             }
             return View(listEvent);
         }
+
+
+
+
+        public ActionResult DetailsMyEvent(int id)
+        {
+            List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
+            EventViewModel eventSchedulerModel = new EventViewModel();
+            List<EventViewModel> listEventScheduler = new List<EventViewModel>();
+            var eventt = eventService.GetAll();
+            var schedulers = schedulerService.GetAll();
+            foreach (var i in eventt)
+            {
+                if (i.EventId == id)
+                {
+                    eventSchedulerModel.EventId = i.EventId;
+                    eventSchedulerModel.Title = i.Title;
+                    eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
+                    eventSchedulerModel.Description = i.Description;
+                    eventSchedulerModel.Address = i.Address;
+                    eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                    foreach (Scheduler s in i.ListScheduler)
+                    {
+                        SchedulerViewModel sv = new SchedulerViewModel();
+                        sv.SchedulerId = s.SchedulerId;
+                        sv.Duration = s.Duration;
+                        sv.ProgramName = s.ProgramName;
+                        listScheduer.Add(sv);
+                    }
+
+                    eventSchedulerModel.listScheduler = listScheduer;
+
+                }
+            }
+            return View(eventSchedulerModel);
+        }
+        [HttpPost]
+        public void EditScheduler(String id,String duration,String progName)
+        {
+            var scheduler = schedulerService.GetById(3);
+            scheduler.Duration = duration;
+            scheduler.ProgramName = progName;
+            schedulerService.Update(scheduler);
+            schedulerService.Commit();
+            //return RedirectToAction("Index","Event");
+            
+        }
+
+
     }
 
 }

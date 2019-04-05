@@ -1,6 +1,8 @@
 ﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,15 +11,19 @@ namespace Web.Models
     public class SatisfactionViewModel
     {
 
-        public int SatisfactionId { get; set; }
-        public String Contenu { get; set; }
 
-        public DateTime DatePost { get; set; }
-        public User User { get; set; }
+        [Key]
+        public int SatisfactionId { get; set; }
+        public int? EventId { get; set; }
         public Event Event { get; set; }
-        public int statuss { get; set; }
-        public double aime { get; set; }
-        public double naimepas { get; set; }
-       
+
+        public int UserId { get; set; }
+        [DefaultValue(0)]
+        public int status { get; set; }
+        public double likes { get; set; }
+        public double dislikes { get; set; }
+
+
+
     }
 }
