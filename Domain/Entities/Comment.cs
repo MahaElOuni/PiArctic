@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Comment
-    {
-        public int CommentId { get; set; }
-        public int NbrLike { get; set; }
-        public String Contenu { get; set; }
-        public User User { get; set; }
-        public Blog Blog { get; set; }
-        public int BlogId { get; set; }
+	public class Comment
+	{
+		public int CommentId { get; set; }
+		public int NbrLike { get; set; }
+		public String Contenu { get; set; }
+		public User User { get; set; }
+		public Blog Blog { get; set; }
+		public int BlogId { get; set; }
 
-    }
+	}
 }
