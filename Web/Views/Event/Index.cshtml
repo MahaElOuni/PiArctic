@@ -23,24 +23,45 @@
 </section>
 <!--================End Home Banner Area =================-->
 <br />
+<div class="col-lg-4" style="background-color:transparent;margin-left:1050px">
+    <div class="blog_right_sidebar" style="background-color:transparent;border:thin">
+        <aside class="single_sidebar_widget search_widget" style="background-color:transparent">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" id="Search">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                </span>
+            </div><!-- /input-group -->
+            <div class="br"></div>
+        </aside>
+     </div>
+</div>
 
 @foreach (var item in Model)
 {
     <!--================Welcome Area =================-->
+<div class="Search">
     <section class="welcome_area pad_btm">
         <div class="container">
-            <div class="welcome_inner row">
-                <div class="col-lg-5">
-                    <div class="welcome_img">
-                        <img class="img-fluid" src="~/img/welcome-1.jpg" alt="">
-
+            <div class="welcome_inner row"  >
+                <div class="col-lg-5" style="width:300%;">
+                    <div class="categories_post">
+                        <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" alt="post" style="height:350px;width:450px"> 
+                        <div class="categories_details">
+                            <div class="categories_text">
+                                <a href="@Url.Action("Details", "Event", new {  id=item.EventId })"><h5>@Html.DisplayFor(modelItem => item.Type)</h5></a>
+                                <div class="border_line"></div>
+                                <p>@Html.DisplayFor(modelItem => item.Slogan)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 offset-lg-1">
-                    <div class="welcome_text">
+                    <div>
 
                         <div class="media-body">
-                            <h3> @Html.DisplayFor(modelItem => item.Title)</h3>
+                            <h2 style="color:black"> <span> @Html.DisplayFor(modelItem => item.Title)</span></h2>
+                            <br />
                             <div class="media">
                                 <img src="~/img/icons/iconCalendar.png" style="height:30px;width:30px;">
                                 <p><strong>@Html.DisplayFor(modelItem => item.Start)</strong></p>
@@ -72,9 +93,32 @@
             </div>
         </div>
     </section>
+</div>
     <!--================End Welcome Area =================-->
 
 
 }
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one,text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            console.log(searchText);
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(),searchText)) {
+                    $(this).hide();
 
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+
+    });
+</script>
 

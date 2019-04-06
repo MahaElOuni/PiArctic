@@ -19,6 +19,9 @@ namespace Domain.Entities
         public String ThemeColor { get; set; }
         public Boolean IsFullDay { get; set; }
         public String OrganizedBy { get; set; }
+        public String  Photo { get; set; }
+        public String  Slogan { get; set; }
+        public String Type { get; set; }
         public int? UserId { get; set; }
         public virtual President President { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
