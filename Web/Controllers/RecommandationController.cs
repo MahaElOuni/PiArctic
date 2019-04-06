@@ -44,35 +44,38 @@ namespace Web.Controllers
         }
 
         // GET: Recommandation/Create
-        public ActionResult Create(int id, RecommendationViewModel rvm)
+        public ActionResult Create()
         {
 
-            int i = 0;
-            Recommendation r = new Recommendation();
-            r.RecommendationId = rvm.RecommendationId;
-            r.RecommendationNum = 1;
-            //  r.Status = rvm.Status.;
-            r.UserId = 1;
-            r.EventId = rvm.EventId = id;
-            r.Nom = rvm.Nom;
-            r.Prenom = rvm.Prenom;
-            r.EmailParticipent = rvm.EmailParticipent;
-          
-            rs.Add(r);
-            rs.Commit();
-            return View(rvm);
+            
+            
+            return View();
 
         }
         // POST: Recommandation/Create
         [HttpPost]
         public ActionResult Create(RecommendationViewModel rvm,int id)
         {
-            int i = 0;
+           
             Recommendation r = new Recommendation();
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    i.Role = "Orgonizor";
+                    userService.Update(i);
+                    userService.Commit();
+
+                }
+            }
+
+            r.UserId = idUser;
             r.RecommendationId = rvm.RecommendationId;
             r.RecommendationNum = 1;
-          //  r.Status = rvm.Status.;
-            r.UserId = 1;
             r.EventId = rvm.EventId = id;
             r.Nom = rvm.Nom;
             r.Prenom = rvm.Prenom;

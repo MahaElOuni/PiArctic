@@ -18,6 +18,7 @@ namespace Web.Controllers
         {
             List<RewardViewModel> list = new List<RewardViewModel>();
             var r = rewardService.GetAll();
+
             foreach (var i in r)
             {
                 RewardViewModel rewardModel = new RewardViewModel();
@@ -60,20 +61,11 @@ namespace Web.Controllers
         
 
         // GET: Reward/Create
-        public ActionResult Create(int id,RewardViewModel rvm )
+        public ActionResult Create()
         {
-            Reward r = new Reward();
-
-            r.EventId = rvm.EventId = id;
-            r.Price1 = rvm.Price1;
-            r.Price2 = rvm.Price2;
-            r.Price3 = rvm.Price3;
-            r.titre = rvm.titre;
-            
-            rewardService.Add(r);
-            rewardService.Commit();
+           
     
-            return View(rvm);
+            return View();
         }
 
         // POST: Reward/Create
@@ -81,7 +73,21 @@ namespace Web.Controllers
         public ActionResult Create(RewardViewModel rvm,int id  )
         {
             Reward r = new Reward();
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    i.Role = "Orgonizor";
+                    userService.Update(i);
+                    userService.Commit();
 
+                }
+            }
+            r.UserId = idUser;
             r.EventId = rvm.EventId=id;
             r.Price1 = rvm.Price1;
             r.Price2 = rvm.Price2;

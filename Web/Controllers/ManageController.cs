@@ -226,6 +226,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            UserModel userModel = new UserModel();
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -238,7 +239,7 @@ namespace Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("ProfilePresident", "President");
+                return RedirectToAction("Details", "UserProfil" ,new { id = userModel.UserId});
             }
             AddErrors(result);
             return View(model);

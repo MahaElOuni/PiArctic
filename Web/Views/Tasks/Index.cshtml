@@ -1,6 +1,4 @@
-﻿
-@model IEnumerable<Web.Models.EventViewModel>
-
+﻿@model IEnumerable<Web.Models.EventViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -23,30 +21,18 @@
 </section>
 <!--================End Home Banner Area =================-->
 <br />
-<div class="col-lg-4" style="background-color:transparent;margin-left:1050px">
-    <div class="blog_right_sidebar" style="background-color:transparent;border:thin">
-        <aside class="single_sidebar_widget search_widget" style="background-color:transparent">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" id="Search">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                </span>
-            </div><!-- /input-group -->
-            <div class="br"></div>
-        </aside>
-     </div>
-</div>
-
+<br/>
 @foreach (var item in Model)
 {
+
+  
     <!--================Welcome Area =================-->
-<div class="Search">
     <section class="welcome_area pad_btm">
         <div class="container">
-            <div class="welcome_inner row"  >
-                <div class="col-lg-5" style="width:300%;">
+            <div class="welcome_inner row">
+                <div class="col-lg-4">
                     <div class="categories_post">
-                        <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" alt="post" style="height:350px;width:450px"> 
+                        <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" alt="post" style="height:350px;width:450px">
                         <div class="categories_details">
                             <div class="categories_text">
                                 <a href="@Url.Action("Details", "Event", new {  id=item.EventId })"><h5>@Html.DisplayFor(modelItem => item.Type)</h5></a>
@@ -56,9 +42,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 offset-lg-1">
+                
+                <div class="col-lg-5 offset-lg-1">
                     <div>
-
+                        <br />
+                        <br />
                         <div class="media-body">
                             <h2 style="color:black"> <span> @Html.DisplayFor(modelItem => item.Title)</span></h2>
                             <br />
@@ -72,53 +60,42 @@
 
                             <p>@Html.DisplayFor(modelItem => item.Description)</p>
                             <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
+
+
+
+
+
                         </div>
-
-                        <a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>
-                        <a id="btn" class="main_btn" href="@Url.Action("Create", "Reward", new {  id=item.EventId })">Ajouter Rewards</a>
-
-                        <a class="main_btn" href="@Url.Action("disliker", "Event", new {  id=item.EventId  })">dislike</a>
-
-                        <a class="main_btn" href="@Url.Action("liker", "Event", new {  id=item.EventId  })">like</a>
-                        <a class="main_btn" href="@Url.Action("statitique", "Event", new {  id=item.EventId  })">stat</a>
-
-
-
-
-
-
-
                     </div>
                 </div>
+                <div class="blog_info text-sm-left">
+                    <div class="post_tag">
+                        
+                        <br />
+                        <h4 style="color:darkred">Your Tasks</h4>
+
+                    </div>
+                    <ul class="blog_meta list">
+                        @foreach (var i in item.ListTask)
+                        {
+                            if(i.TaskTitle.Equals("Fix Rewards")) {
+                        <a href="@Url.Action("Create", "Reward", new {  id=item.EventId })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a>
+                                }
+                        }
+                        @*<li><i class="lnr lnr-user"></i><a href="#">Mark wien</a></li>
+        <li><i class="lnr lnr-calendar-full"></i><a href="#">12 Dec, 2017</a></li>
+        <li><i class="lnr lnr-eye"></i><a href="#">1.2M Views</a></li>
+        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                        *@
+                    </ul>
+
+                </div>
+
             </div>
+
         </div>
-    </section>
-</div>
+</section>
     <!--================End Welcome Area =================-->
-
-
 }
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        function Contains(text_one,text_two) {
-            if (text_one.indexOf(text_two) != -1)
-                return true;
-        }
-        $("#Search").keyup(function () {
-            var searchText = $("#Search").val().toLowerCase();
-            console.log(searchText);
-            $(".Search").each(function () {
-                if (!Contains($(this).text().toLowerCase(),searchText)) {
-                    $(this).hide();
 
-                }
-                else {
-                    $(this).show();
-                }
-            });
-        });
-
-    });
-</script>
 

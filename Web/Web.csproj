@@ -1515,6 +1515,7 @@
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-700italic.svg" />
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-italic.svg" />
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
+    <Content Include="img\back .png" />
     <Content Include="img\banner\banner-2.jpg" />
     <Content Include="img\banner\banner-map.png" />
     <Content Include="img\banner\banner.jpg" />
@@ -1552,6 +1553,7 @@
     <Content Include="img\clients-logo\c-logo-3.png" />
     <Content Include="img\clients-logo\c-logo-4.png" />
     <Content Include="img\clients-logo\c-logo-5.png" />
+    <Content Include="img\contact-banner.jpg" />
     <Content Include="img\elements\a.jpg" />
     <Content Include="img\elements\a2.jpg" />
     <Content Include="img\elements\d.jpg" />
@@ -1579,11 +1581,16 @@
     <Content Include="img\elements\success-radio.png" />
     <Content Include="img\elements\user1.png" />
     <Content Include="img\elements\user2.png" />
+    <Content Include="img\empl.jpg" />
+    <Content Include="img\esprit.png" />
+    <Content Include="img\eventkk.PNG" />
     <Content Include="img\favicon.png" />
     <Content Include="img\fb.png" />
     <Content Include="img\form-img.jpg" />
+    <Content Include="img\go.png" />
     <Content Include="img\google.png" />
     <Content Include="img\home-banner.jpg" />
+    <Content Include="img\IBM-Logo.png" />
     <Content Include="img\icons\iconCalendar.png" />
     <Content Include="img\icons\locationIcon.png" />
     <Content Include="img\insta.png" />
@@ -1596,18 +1603,24 @@
     <Content Include="img\instagram\Image-07.jpg" />
     <Content Include="img\instagram\Image-08.jpg" />
     <Content Include="img\link.png" />
+    <Content Include="img\linkedin.png" />
+    <Content Include="img\logo-tmpl.png" />
     <Content Include="img\logo1.png" />
     <Content Include="img\logo2.png" />
     <Content Include="img\map-bg.png" />
     <Content Include="img\schedule-1.jpg" />
     <Content Include="img\slider-1.jpg" />
     <Content Include="img\slider-2.jpg" />
+    <Content Include="img\sort-down-64.png" />
     <Content Include="img\team\team-1.jpg" />
     <Content Include="img\team\team-2.jpg" />
     <Content Include="img\team\team-3.jpg" />
     <Content Include="img\team\team-4.jpg" />
     <Content Include="img\testEvent.jpg" />
+    <Content Include="img\tun.PNG" />
+    <Content Include="img\Tunisia.png" />
     <Content Include="img\twit.png" />
+    <Content Include="img\website.png" />
     <Content Include="img\welcome-1.jpg" />
     <Content Include="Content\vendors\animate-css\animate.css" />
     <Content Include="Content\vendors\animate-css\wow.min.js" />
@@ -1639,6 +1652,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\zara.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -2114,7 +2128,6 @@
     <Content Include="scss\_variables.scss" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\BlogDetail.cshtml" />
-    <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="scss\common\extend.scss" />
     <Content Include="scss\common\fonts.scss" />
     <Content Include="scss\common\global.scss" />
@@ -2152,6 +2165,9 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Satisfaction\Create.cshtml" />
     <Content Include="Views\Satisfaction\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Approve.cshtml" />
+    <Content Include="Views\Admin\Reject.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
@@ -2165,12 +2181,14 @@
     <Content Include="Views\Event\statitique.cshtml" />
     <Content Include="Views\Event\DetailsMyEvent.cshtml" />
     <Content Include="Views\Scheduler\Edit.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\MyTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Form\" />
     <Folder Include="Views\Organizer\" />
-    <Folder Include="Views\Tasks\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

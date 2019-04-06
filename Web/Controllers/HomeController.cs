@@ -38,6 +38,7 @@ namespace Web.Controllers
                     if (i.Email.Equals(email))
                     {
                         userModel.UserId = i.Id;
+                        userModel.Role = i.Role;
                     }
                 }
                 return View(userModel);

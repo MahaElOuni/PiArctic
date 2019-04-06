@@ -102,9 +102,9 @@
         @Html.AntiForgeryToken()
 
         <div style="background-color:#6f42c1">
-            <h3>Personal info</h3>
+            <h3>Event info</h3>
             <fieldset>
-                <h2>Personal information</h2>
+                <h2>Event information</h2>
                 <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
                 <div class="fieldset-content">
                     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -131,6 +131,9 @@
                             @Html.EditorFor(model => model.EventModel.NumberPlaces, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EventModel.NumberPlaces, "", new { @class = "text-danger" })
 
+                        </div>
+                        <div class="form-group">
+                            <input type="text" value="9/23/2009" style="width: 100px;" readonly="readonly" name="Date" id="Date" class="hasDatepicker" />
                         </div>
 
                         <div class="form-row">
@@ -183,14 +186,14 @@
                         Duration
                         @Html.EditorFor(model => model.SchedulerModel.Duration, new { htmlAttributes = new { @class = "form-control", @id = "duration", @name = "duration" } })
                         @Html.ValidationMessageFor(model => model.SchedulerModel.Duration, "", new { @class = "text-danger" })
-                        <span class="text-input">Example  :<span>  SGCIB</span></span>
+                        <span class="text-input">Example  :<span>  8-9h</span></span>
                     </div>
 
                     <div class="form-group">
                         Program name
                         @Html.EditorFor(model => model.SchedulerModel.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "progName", @name = "progName" } })
                         @Html.ValidationMessageFor(model => model.SchedulerModel.ProgramName, "", new { @class = "text-danger" })
-                        <span class="text-input">Example :<span>  Directeur</span></span>
+                        <span class="text-input">Example :<span>  Workshop</span></span>
                     </div>
 
                     <a class="main_btn" OnClick="addition()">Add</a>
@@ -226,76 +229,54 @@
                             <tr></tr>
                         </tbody>
                     </table>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
-                    </div>
+                  
                 </div>
             </fieldset>
 
 
 
 
-            <h3>Connect Bank Account</h3>
+            <h3>Finish Event Info</h3>
             <fieldset>
-                <h2>Connect Bank Account</h2>
+                <h2>Finish Your Event Information</h2>
                 <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
                 <div class="fieldset-content">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.EventModel.Title)
+
+                    Make your slogan
+                    <div class="form-flex">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.EventModel.Title, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
+                            @Html.ValidationMessageFor(model => model.EventModel.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    Type's Event
+                    <div class="form-flex">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.EventModel.Title, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
+                            @Html.ValidationMessageFor(model => model.EventModel.Title, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                     <div class="editor-field">
-                        Upload a file
+                        Upload Image
                         @Html.TextBox("file2", "", new { type = "file" })
 
 
-                        @Html.ValidationMessageFor(model => model.EventModel.Title)
+                        @Html.ValidationMessageFor(model => model.EventModel.Photo)
                     </div>
 
-                </div>
-                <div class="fieldset-content">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.EventModel.Title)
-                    </div>
-                    <div class="editor-field">
-                        Upload a file
-                        @Html.TextBox("file3", "", new { type = "file" })
-
-
-                        @Html.ValidationMessageFor(model => model.EventModel.Title)
-                    </div>
-
-                </div>
-                <div class="fieldset-content">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.EventModel.Title)
-                    </div>
-                    <div class="editor-field">
-                        Upload a file
-                        @Html.TextBox("file4", "", new { type = "file" })
-
-
-                        @Html.ValidationMessageFor(model => model.EventModel.Title)
-                    </div>
-
-                </div>
-                <div class="fieldset-content">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.EventModel.Title)
-                    </div>
-                    <div class="editor-field">
-                        Upload a file
-                        @Html.TextBox("file5", "", new { type = "file" })
-
-
-                        @Html.ValidationMessageFor(model => model.EventModel.Title)
-                    </div>
-
+                    <br />
+                    <br />
+                    <br />
                     <div class="form-group">
-                        <input type="submit" id="btn" class="btn btn-outline-warning btn-rounded" value="Confirmer">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="submit" value="Create" class="btn btn-default" style="background-image:linear-gradient(to right, #2c28b1 0%, #9b5cf6 51%, #2c28b1 100%)" />
+                        </div>
                     </div>
                 </div>
+               
+
+
+
 
             </fieldset>
         </div>
@@ -311,6 +292,8 @@
 }
 @section Scripts{
 
+    <script src="~/Scripts/jquery-3.3.1.min.js" language="javascript" type="text/javascript" />
+    <script src="../../Scripts/jquery-ui-1.7.1.custom.min.js" type="text/javascript" />
     <script src="@Url.Content("~/Content/mytemplate/")vendor/jquery/jquery.min.js"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/mytemplate/")js/popper.min.js"></script>

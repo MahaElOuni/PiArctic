@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Service.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +35,9 @@ namespace Web.Controllers
                     eventModel.Description = i.Description;
                     eventModel.Address = i.Address;
                     eventModel.OrganizedBy = i.OrganizedBy;
+                    eventModel.Photo = i.Photo;
+                    eventModel.Slogan = i.Slogan;
+                    eventModel.Type = i.Type;
                     listEvent.Add(eventModel);
                 }
             }
@@ -122,8 +126,8 @@ namespace Web.Controllers
 
             }
 
-            r.likes = 5;
-            r.dislikes = 3;
+            r.likes = likes;
+            r.dislikes = dislikes;
 
             return View(r);
         }
@@ -162,7 +166,7 @@ namespace Web.Controllers
 
         // POST: Event/Create
         [HttpPost]
-        public ActionResult Create(EventSchedulerViewModel evm)
+        public ActionResult Create(EventSchedulerViewModel evm,HttpPostedFileBase file2)
         {
             int idUser=0;
             User u = new User();
@@ -178,6 +182,21 @@ namespace Web.Controllers
             
               }
           }
+            if (file2 != null && file2.ContentLength > 0)
+                try
+                {
+                    string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
+                    file2.SaveAs(path);
+                    ViewBag.Message = "Image uploaded successfully";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
             Event e = new Event();
             
             e.UserId = idUser;
@@ -189,6 +208,9 @@ namespace Web.Controllers
             e.Start = evm.EventModel.Start;
             e.End = evm.EventModel.End;
             e.OrganizedBy = evm.EventModel.OrganizedBy;
+            e.Photo = file2.FileName;
+            e.Slogan = evm.EventModel.Slogan;
+            e.Type = evm.EventModel.Type;
             eventService.Add(e);
             eventService.Commit();
 
