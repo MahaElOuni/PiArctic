@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -12,10 +13,46 @@ namespace Web.Controllers
     {
         TasksService taskService = new TasksService();
         UserService userService = new UserService();
+        EventService eventService = new EventService();
         // GET: Tasks
         public ActionResult Index()
         {
-            return View();
+
+           
+            int idOrganizer=0;
+
+            UserService userService = new UserService();
+           // userService.FindRoleByName(user.UserName);
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idOrganizer = i.Id;
+                   
+
+
+                }
+            }
+            List<EventViewModel> listEvent = new List<EventViewModel>();
+            var eventt = eventService.OrganizerEvents(idOrganizer);
+            foreach (var i in eventt)
+            {
+                
+                    EventViewModel eventModel = new EventViewModel();
+                    eventModel.EventId = i.EventId;
+                    eventModel.Title = i.Title;
+                    eventModel.Start = i.Start;
+                    eventModel.Description = i.Description;
+                    eventModel.Address = i.Address;
+                    eventModel.OrganizedBy = i.OrganizedBy;
+                    eventModel.Photo = i.Photo;
+                    eventModel.Slogan = i.Slogan;
+                    eventModel.Type = i.Type;
+                    eventModel.ListTask = eventService.OrganizerTasks(i.EventId, idOrganizer);
+                    listEvent.Add(eventModel);
+                
+            }
+            return View(listEvent);
         }
 
         // GET: Tasks/Details/5
@@ -105,5 +142,11 @@ namespace Web.Controllers
             taskService.Commit();
         }
 
+
+        public ActionResult MyTask()
+        {
+
+            return View();
+        }
     }
 }

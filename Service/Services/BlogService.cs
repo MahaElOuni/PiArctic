@@ -10,15 +10,15 @@ using ServicePattern;
 
 namespace Service.Services
 {
-    public class BlogService : Service<Blog>, IBlogService
-    {
-        private static IDatabaseFactory dbfactor = new DatabaseFactory();
-        private static IUnitOfWork wow = new UnitOfWork(dbfactor);
-        IDatabaseFactory dbfactory = null;
-        public BlogService() : base(wow)
-        {
+	public class BlogService : Service<Blog>, IBlogService
+	{
+		private static IDatabaseFactory dbfactor = new DatabaseFactory();
+		private static IUnitOfWork wow = new UnitOfWork(dbfactor);
+		IDatabaseFactory dbfactory = null;
+		public BlogService() : base(wow)
+		{
 
-        }
-        
-    }
+		}
+
+	}
 }
