@@ -47,12 +47,26 @@ namespace Web.Controllers
         public ActionResult Create(int id, RecommendationViewModel rvm)
         {
 
-            int i = 0;
+            
             Recommendation r = new Recommendation();
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    i.Role = "Orgonizor";
+                    userService.Update(i);
+                    userService.Commit();
+
+                }
+            }
+
+            r.UserId = idUser;
             r.RecommendationId = rvm.RecommendationId;
             r.RecommendationNum = 1;
-            //  r.Status = rvm.Status.;
-            r.UserId = 1;
             r.EventId = rvm.EventId = id;
             r.Nom = rvm.Nom;
             r.Prenom = rvm.Prenom;
@@ -67,12 +81,26 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(RecommendationViewModel rvm,int id)
         {
-            int i = 0;
+           
             Recommendation r = new Recommendation();
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    i.Role = "Orgonizor";
+                    userService.Update(i);
+                    userService.Commit();
+
+                }
+            }
+
+            r.UserId = idUser;
             r.RecommendationId = rvm.RecommendationId;
             r.RecommendationNum = 1;
-          //  r.Status = rvm.Status.;
-            r.UserId = 1;
             r.EventId = rvm.EventId = id;
             r.Nom = rvm.Nom;
             r.Prenom = rvm.Prenom;

@@ -18,8 +18,9 @@ namespace Domain.Entities
         public int Price3 { get; set; }
         public int? EventId { get; set; }
         public  Event Event { get; set; }
-       
-        public virtual ICollection<User> User { get; set; }
+        public int? UserId { get; set; }
+
+        public virtual Organizer Organizer { get; set; }
 
         public String titre { get; set; }
  
