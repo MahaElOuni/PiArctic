@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Web.Models.EventViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<!--================Welcome Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">Events</a>
+                </div>
+                <br />
+                <h2>The events that may interests you</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<br />
+<br/>
+@foreach (var item in Model)
+{
+
+  
+    <!--================Welcome Area =================-->
+    <section class="welcome_area pad_btm">
+        <div class="container">
+            <div class="welcome_inner row">
+                <div class="col-lg-4">
+                    <div class="categories_post">
+                        <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" alt="post" style="height:350px;width:450px">
+                        <div class="categories_details">
+                            <div class="categories_text">
+                                <a href="@Url.Action("Details", "Event", new {  id=item.EventId })"><h5>@Html.DisplayFor(modelItem => item.Type)</h5></a>
+                                <div class="border_line"></div>
+                                <p>@Html.DisplayFor(modelItem => item.Slogan)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 offset-lg-1">
+                    <div>
+                        <br />
+                        <br />
+                        <div class="media-body">
+                            <h2 style="color:black"> <span> @Html.DisplayFor(modelItem => item.Title)</span></h2>
+                            <br />
+                            <div class="media">
+                                <img src="~/img/icons/iconCalendar.png" style="height:30px;width:30px;">
+                                <p><strong>@Html.DisplayFor(modelItem => item.Start)</strong></p>
+                                <label style="color:white">Hello</label>
+                                <img src="~/img/icons/locationIcon.png" style="height:27px;width:30px;">
+                                <p><strong>@Html.DisplayFor(modelItem => item.Address)</strong></p>
+                            </div>
+
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                            <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="blog_info text-sm-left">
+                    <div class="post_tag">
+                        
+                        <br />
+                        <h4 style="color:darkred">Your Tasks</h4>
+
+                    </div>
+                    <ul class="blog_meta list">
+                        @foreach (var i in item.ListTask)
+                        {
+                            if(i.TaskTitle.Equals("Fix Rewards")) {
+                        <a href="@Url.Action("Create", "Reward", new {  id=item.EventId })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a>
+                                }
+                        }
+                        @*<li><i class="lnr lnr-user"></i><a href="#">Mark wien</a></li>
+        <li><i class="lnr lnr-calendar-full"></i><a href="#">12 Dec, 2017</a></li>
+        <li><i class="lnr lnr-eye"></i><a href="#">1.2M Views</a></li>
+        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                        *@
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+</section>
+    <!--================End Welcome Area =================-->
+}
+
+

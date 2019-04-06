@@ -19,6 +19,33 @@ namespace Service.Services
         {
 
         }
+        public List<Tasks> OrganizerTasks(int eventId,int organizerId)
+        {
+            Event e = this.GetById(eventId);
+            List<Tasks> tasks = new List<Tasks>();
+            foreach(Tasks t in e.ListTask)
+            {
+                if (t.UserId== organizerId)
+                {
+                    tasks.Add(t);
+                }
+            }
+            return tasks;
+        }
+        public IEnumerable<Event> OrganizerEvents(int organizerId)
+        {
+            List<Event> e = new List<Event>();
+            
+            TasksService taskService = new TasksService();
+            var eventsId=taskService.GetMany().Where(o => o.UserId== organizerId).Select(o=>o.EventId).Distinct();
+            foreach(var i in eventsId)
+            {
+                e.Add(this.GetById(i.Value));
+
+            }
+            return e;
+            
+        }
     
     }
 }

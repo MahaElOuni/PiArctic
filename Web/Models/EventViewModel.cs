@@ -34,6 +34,7 @@ namespace Web.Models
         public String Type { get; set; }
         public ICollection<SchedulerViewModel> listScheduler { get; set; }
         public int RewardId { get; set; }
+        public virtual ICollection<Tasks> ListTask { get; set; }
 
     }
 
