@@ -22,7 +22,7 @@ namespace Web.Controllers
 			foreach (var i in a)
 			{
 				BlogViewModel bvm = new BlogViewModel();
-
+				bvm.ne = i.ne; 
 				bvm.BlogId = i.BlogId;
 				bvm.NbrLike = i.NbrLike;
 				bvm.NbrComment = i.NbrComment;
@@ -50,6 +50,8 @@ namespace Web.Controllers
 
 					CommentViewModel cvm = new CommentViewModel();
 					cvm.Contenu = c.Contenu;
+					cvm.DateCom = c.DateCom;
+					cvm.nom = c.nom;
 					lc.Add(cvm);
 				}
 
@@ -74,6 +76,7 @@ namespace Web.Controllers
 			{
 				if (i.BlogId == id)
 				{
+					bvm.ne = i.ne;
 					bvm.BlogId = i.BlogId;
 					bvm.Titre = i.Titre;
 					bvm.NbrLike = i.NbrLike;
@@ -83,6 +86,7 @@ namespace Web.Controllers
 					bvm.Photo = i.Photo;
 					bvm.Comments = Affiche(id);
 				}
+				
 			}
 			return View(bvm);
 		}
@@ -97,9 +101,22 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Create(BlogViewModel bvm)
 		{
+			String e ="" ;
+			int idUser = 0;
+			User u = new User();
+			UserService userService = new UserService();
+			foreach (User i in userService.GetAll())
+			{
+				if (i.UserName.Equals(User.Identity.Name))
+				{
+					idUser = i.Id;
+					e = i.FName;
+				}
+			}
 			DateTime now = DateTime.Now;
 			Blog b = new Blog();
-
+			b.ne = e;
+			b.UserId = idUser;
 			b.Contenu = bvm.Contenu;
 			b.Titre = bvm.Titre;
 			b.NbrComment = 0;

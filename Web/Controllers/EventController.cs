@@ -126,8 +126,8 @@ namespace Web.Controllers
 
             }
 
-            r.likes = 5;
-            r.dislikes = 3;
+            r.likes = likes;
+            r.dislikes = dislikes;
 
             return View(r);
         }

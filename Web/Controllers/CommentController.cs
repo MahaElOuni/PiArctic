@@ -54,7 +54,25 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Create(int id, CommentViewModel cvm)
 		{
+			DateTime nowc = DateTime.Now;
+			int idUser = 0;
+			String e = ""; 
+			User u = new User();
+			UserService userService = new UserService();
+			foreach (User i in userService.GetAll())
+			{
+				if (i.UserName.Equals(User.Identity.Name))
+				{
+					idUser = i.Id;
+					e = i.FName;
+					userService.Update(i);
+					userService.Commit();
+				}
+			}
 			Comment b = new Comment();
+			b.nom = e;
+			b.DateCom = nowc;
+			b.UserId = idUser;
 			b.BlogId = id;
 			b.Contenu = cvm.Contenu;
 			b.NbrLike = 0;

@@ -17,6 +17,8 @@ namespace Domain.Entities
 		public String Titre { get; set; }
 		public String Photo { get; set; }
 		public DateTime DatePost { get; set; }
+		public int? UserId { get; set; }
+		public String ne { get; set; }
 		public User User { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
 
