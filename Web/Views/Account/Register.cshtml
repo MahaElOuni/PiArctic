@@ -113,45 +113,45 @@
                             <div class="form-input">
                                 <label for="first_name" class="required">First name</label>
                                 @*@Html.TextBoxFor(m => m.FName, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Khouloud" } })
+                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Name" } })
                                 @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
 
                             </div>
                             <div class="form-input">
                                 <label for="last_name" class="required">Last name</label>
                                 @*@Html.TextBoxFor(m => m.LName, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "SMA" } })
+                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Last Name" } })
                                 @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-input">
                                 <label for="email" class="required">Email</label>
                                 @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "smakhouloud@gmail.com" } })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "consultteck2019@gmail.com" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
                             </div>
                             <div class="form-input">
                                 <label for="email" class="required">Password</label>
                                 @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "******************" } })
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "*******" } })
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-input">
                                 <label for="email" class="required">Confirm Password</label>
                                 @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "******************" } })
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "*******" } })
                                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-input">
                                 <label for="phone_number" class="required">CIN</label>
                                 @*@Html.TextBoxFor(m => m.CIN, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.CIN, new { htmlAttributes = new { @class = "form-control", @placeholder = "12808955" } })
+                                @Html.EditorFor(model => model.CIN, new { htmlAttributes = new { @class = "form-control", @placeholder = "128 089 55" } })
                                 @Html.ValidationMessageFor(model => model.CIN, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-input">
                                 <label for="phone_number" class="required">Phone number</label>
                                 @*@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "52017580" } })
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "52 017 580" } })
                                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                             </div>
 
@@ -159,9 +159,9 @@
                         <div class="form-group">
 
                             <div class="form-input">
-                                <label for="phone_number" class="required">Address</label>
+                                <label for="phone_number" class="required"> Full Address</label>
                                 @*@Html.TextBoxFor(m => m.StreetName, new { @class = "form-control" })*@
-                                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control", @placeholder = "7 Rue Chadly Mahjoub M'saken-Souuse" } })
+                                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control", @placeholder = "7 Rue Chadly Mahjoub M'saken-Sousse" } })
                                 @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
                             </div>
                             @*<div class="form-select">
@@ -185,13 +185,13 @@
                             <h3>Profession Information</h3>
                             <div class="form-input">
                                 <label for="first_name" class="required">Societe Name</label>
-                                @Html.EditorFor(model => model.NomSociete, new { htmlAttributes = new { @class = "form-control", @placeholder = "ESPRIT" } })
+                                @Html.EditorFor(model => model.NomSociete, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your Compagnie Name" } })
                                 @Html.ValidationMessageFor(model => model.NomSociete, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-input">
                                 <label for="first_name" class="required">Poste</label>
-                                @Html.EditorFor(model => model.Poste, new { htmlAttributes = new { @class = "form-control", @placeholder = "Only Like:President/Orgonizor/Participant" } })
+                                @Html.EditorFor(model => model.Poste, new { htmlAttributes = new { @class = "form-control", @placeholder = "Only:President/Orgonizor/Participant" } })
                                 @Html.ValidationMessageFor(model => model.Poste, "", new { @class = "text-danger" })
                             </div>
 

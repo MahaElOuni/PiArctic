@@ -66,9 +66,7 @@
 </section>
 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
 
@@ -106,6 +104,7 @@
                 @Html.DisplayFor(modelItem => item.titre)
             </td>
             <td>
+
                 @Html.ActionLink("Edit", "Edit", new { id = item.RewardId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.RewardId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.RewardId })

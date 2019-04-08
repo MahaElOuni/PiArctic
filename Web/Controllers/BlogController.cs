@@ -153,12 +153,12 @@ namespace Web.Controllers
 		}
 
 		// GET: Blog/Delete/5
-		public ActionResult Delete(int id)
+		public ActionResult Delete(int id, int userid)
 		{
 			var blogs = blogService.GetAll();
 			foreach (var i in blogs)
 			{
-				if (i.BlogId == id)
+				if (i.BlogId == id && i.UserId== userid)
 				{
 					bvm.BlogId = i.BlogId;
 					bvm.Titre = i.Titre;
