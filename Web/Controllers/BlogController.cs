@@ -4,6 +4,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Service.Services;
 using Web.Models;
 
@@ -22,7 +23,8 @@ namespace Web.Controllers
 			foreach (var i in a)
 			{
 				BlogViewModel bvm = new BlogViewModel();
-				bvm.ne = i.ne; 
+				bvm.ne = i.ne;
+				bvm.Des = i.Des;
 				bvm.BlogId = i.BlogId;
 				bvm.NbrLike = i.NbrLike;
 				bvm.NbrComment = i.NbrComment;
@@ -39,7 +41,16 @@ namespace Web.Controllers
 		{
 			BlogService blogService = new BlogService();
 			BlogViewModel bvm = new BlogViewModel();
-
+			String p = "";
+			User u = new User();
+			UserService userService = new UserService();
+			foreach (User i in userService.GetAll())
+			{
+				if (i.UserName.Equals(User.Identity.Name))
+				{
+					p = i.Photo;
+				}
+			}
 			List<CommentViewModel> lc = new List<CommentViewModel>();
 			lc.Clear();
 			Blog b = blogService.GetById(id);
@@ -52,6 +63,7 @@ namespace Web.Controllers
 					cvm.Contenu = c.Contenu;
 					cvm.DateCom = c.DateCom;
 					cvm.nom = c.nom;
+					cvm.Photoc = p;
 					lc.Add(cvm);
 				}
 
@@ -79,11 +91,13 @@ namespace Web.Controllers
 					bvm.ne = i.ne;
 					bvm.BlogId = i.BlogId;
 					bvm.Titre = i.Titre;
+					bvm.Des = i.Des;
 					bvm.NbrLike = i.NbrLike;
 					bvm.NbrComment = i.NbrComment;
 					bvm.DatePost = i.DatePost;
 					bvm.Contenu = i.Contenu;
 					bvm.Photo = i.Photo;
+					
 					bvm.Comments = Affiche(id);
 				}
 				
@@ -99,7 +113,7 @@ namespace Web.Controllers
 
 		// POST: Blog/Create
 		[HttpPost]
-		public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase file2)
+		public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase Image)
 		{
 			String e ="" ;
 			int idUser = 0;
@@ -113,27 +127,15 @@ namespace Web.Controllers
 					e = i.FName;
 				}
 			}
-			if (file2 != null && file2.ContentLength > 0)
-				try
-				{
-					string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
-					file2.SaveAs(path);
-					ViewBag.Message = "Image uploaded successfully";
-				}
-				catch (Exception ex)
-				{
-					ViewBag.Message = "ERROR:" + ex.Message.ToString();
-				}
-			else
-			{
-				ViewBag.Message = "You have not specified a file.";
-			}
+			var path = Path.Combine(Server.MapPath("~/Content/Upload/"), Image.FileName);
+			Image.SaveAs(path);
 			DateTime now = DateTime.Now;
 			Blog b = new Blog();
 			b.ne = e;
-			b.UserId = idUser;
+			b.UserId = User.Identity.GetUserId<int>();
 			b.Contenu = bvm.Contenu;
-			b.Photo = file2.FileName;
+			b.Photo = Image.FileName;
+			b.Des = bvm.Des; 
 			b.Titre = bvm.Titre;
 			b.NbrComment = 0;
 			b.NbrLike = 0;

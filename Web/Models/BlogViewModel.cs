@@ -14,6 +14,8 @@ namespace Web.Models
 		public DateTime DatePost { get; set; }
 		public int NbrLike { get; set; }
 		public int NbrComment { get; set; }
+
+		public String Des { get; set; }
 		public String Titre { get; set; }
 		public int? UserId { get; set; }
 		public String ne { get; set; }

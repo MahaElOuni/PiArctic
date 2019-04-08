@@ -14,6 +14,7 @@ namespace Domain.Entities
 		public String Contenu { get; set; }
 		public int NbrLike { get; set; }
 		public int NbrComment { get; set; }
+		public String Des { get; set; }
 		public String Titre { get; set; }
 		public String Photo { get; set; }
 		public DateTime DatePost { get; set; }
