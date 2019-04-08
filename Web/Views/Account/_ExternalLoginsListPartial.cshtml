@@ -23,18 +23,18 @@
                     @foreach (AuthenticationDescription p in loginProviders)
                     {
                         if (p.Caption.Equals("Facebook"))
-                        {<button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
-                                 value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption" style="background-image:linear-gradient(to right, #2c28b1 0%, #9b5cf6 51%, #2c28b1 100%)">
-                                <img src="~/img/fb.png" />
+                        {<button type="submit" class="col-md-5" id="@p.AuthenticationType" name="provider" 
+                                 value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption" style="background-color:darkslateblue;color:white">
+                               <img src="~/img/fb.png" style="margin-right:100px"/> 
                             </button>
                         }
                       
                         else
                         {
-                            <button type="submit" class="align-items-md-center" id="@p.AuthenticationType" name="provider"
-                                    value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption" style="background-image:linear-gradient(to right, #2c28b1 0%, #9b5cf6 51%, #2c28b1 100%)">
-                                <img src="~/img/go.png" />
-                            </button>
+                         <button type="submit" class="col-md-5" id="@p.AuthenticationType" name="provider"
+                                 value="@p.AuthenticationType" title="Connexion avec votre compte @p.Caption" style="background-color:orangered">
+                             <img src="~/img/go.png" style="margin-right:100px"/>
+                         </button>
                         }
 
                     }

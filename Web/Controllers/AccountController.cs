@@ -324,22 +324,44 @@ namespace Web.Controllers
                 var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
+                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
-                
                 }
 
-                // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
-                // Envoyer un message électronique avec ce lien
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
+        //public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await UserManager.FindByEmailAsync(model.Email);
+        //        if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+        //        {
+        //            // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
+        //            return View("ForgotPasswordConfirmation");
+
+        //        }
+
+        //        // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
+        //        // Envoyer un message électronique avec ce lien
+        //        string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+        //        var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //        await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+        //        return RedirectToAction("ForgotPasswordConfirmation", "Account");
+        //    }
+
+        //    // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+        //    return View(model);
+        //}
 
         //
         // GET: /Account/ForgotPasswordConfirmation
