@@ -10,6 +10,8 @@ namespace Web.Models
         public int SchedulerId { get; set; }
         public String ProgramName { get; set; }
         public String Duration { get; set; }
+        public String Speaker { get; set; }
+        public String Photo { get; set; }
         public int? EventId { get; set; }
         public EventViewModel Event { get; set; }
     }

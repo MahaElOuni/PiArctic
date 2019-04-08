@@ -19,6 +19,11 @@ namespace Service.Services
         {
 
         }
+       /* public void GetSchedulesByEvent(int eventId)
+        {
+            EventService eventService = new EventService();
+            eventService.GetById(eventId);
+        }*/
 
     }
     

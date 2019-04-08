@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
@@ -65,12 +67,17 @@ namespace Web.Controllers
                       eventSchedulerModel.Description = i.Description;
                       eventSchedulerModel.Address = i.Address;
                       eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                    eventSchedulerModel.Photo = i.Photo;
+                    eventSchedulerModel.Slogan = i.Slogan;
+                    eventSchedulerModel.Type = i.Type;
                     foreach (Scheduler s in i.ListScheduler)
                     {
                         SchedulerViewModel sv = new SchedulerViewModel();
                         sv.SchedulerId = s.SchedulerId;
                         sv.Duration = s.Duration;
                         sv.ProgramName = s.ProgramName;
+                        sv.Speaker = s.Speaker;
+                        sv.Photo = s.Photo;
                         listScheduer.Add(sv);
                     }
 
@@ -168,70 +175,85 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(EventSchedulerViewModel evm,HttpPostedFileBase file2)
         {
-            int idUser=0;
+
+            int idUser=1;
+           
             User u = new User();
             UserService userService = new UserService();
-            foreach (User i in userService.GetAll())
-            {
-               if (i.UserName.Equals(User.Identity.Name))
-               {
-                    idUser = i.Id;
-                   i.Role = "President";
-                    userService.Update(i);
-                   userService.Commit();
-            
-              }
-          }
-            if (file2 != null && file2.ContentLength > 0)
-                try
-                {
-                    string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
-                    file2.SaveAs(path);
-                    ViewBag.Message = "Image uploaded successfully";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
-            }
-            Event e = new Event();
-            
-            e.UserId = idUser;
-            e.Title = evm.EventModel.Title;
-            e.Address = evm.EventModel.Address;
-            e.NumberPlaces = evm.EventModel.NumberPlaces;
-            e.Price = evm.EventModel.Price;
-            e.Description = evm.EventModel.Description;
-            e.Start = evm.EventModel.Start;
-            e.End = evm.EventModel.End;
-            e.OrganizedBy = evm.EventModel.OrganizedBy;
-            e.Photo = file2.FileName;
-            e.Slogan = evm.EventModel.Slogan;
-            e.Type = evm.EventModel.Type;
-            eventService.Add(e);
-            eventService.Commit();
+            if (ModelState.IsValid)
 
-            foreach (Scheduler scheduler in schedulerService.GetAll())
             {
-                if (scheduler.EventId == null) { 
-                Scheduler s = new Scheduler() { Duration = scheduler.Duration, ProgramName = scheduler.ProgramName, EventId = e.EventId };
-                schedulerService.Add(s);
-                schedulerService.Commit();
-                }
-            }
-            try
-            {
-                // TODO: Add insert logic here
+                foreach (User i in userService.GetAll())
+                {
+                    if (i.UserName.Equals(User.Identity.Name))
+                    {
+                        idUser = i.Id;
+                        i.Role = "President";
+                        userService.Update(i);
+                        userService.Commit();
+                        evm.EventModel.UserId = i.Id;
+                        evm.EventModel.President.Email = i.Email;
+                        evm.EventModel.President.Role = "President";
 
-                return RedirectToAction("Index");
+                    }
+                }
+                if (file2 != null && file2.ContentLength > 0 /*&& file1 != null && file1.ContentLength > 0*/)
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
+                        //string path1 = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file1.FileName));
+                        file2.SaveAs(path);
+                        //file1.SaveAs(path1);
+                        ViewBag.Message = "Image uploaded successfully";
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                else
+                {
+                    ViewBag.Message = "You have not specified a file.";
+                }
+
+                Event e = new Event();
+
+                e.UserId = idUser;
+              
+                e.Title = evm.EventModel.Title;
+                e.Address = evm.EventModel.Address;
+                e.NumberPlaces = evm.EventModel.NumberPlaces;
+                e.Price = evm.EventModel.Price;
+                e.Description = evm.EventModel.Description;
+                e.Start = evm.EventModel.Start;
+                e.End = evm.EventModel.End;
+                e.OrganizedBy = evm.EventModel.OrganizedBy;
+                e.Photo = file2.FileName;
+                e.Slogan = evm.EventModel.Slogan;
+                e.Type = evm.EventModel.Type;
+                eventService.Add(e);
+                eventService.Commit();
+
+                foreach (Scheduler scheduler in schedulerService.GetAll())
+                {
+                    if (scheduler.EventId == null)
+                    {
+                        scheduler.EventId = e.EventId;
+                        //scheduler.Photo = file1.FileName;
+
+                        schedulerService.Update(scheduler);
+                        schedulerService.Commit();
+                    }
+                }
+                foreach (User user in userService.GetParticipants())
+                {
+                    SendEmail("levio.lmp@gmail.com", user.Email, "New Event: " + e.Title, "There is new event may interest you Organized by: " + e.OrganizedBy + "  you can participate to this event by connecting to your account in ConsultTeck. Thank you for your trust");
+                }
+
+
             }
-            catch
-            {
-                return View();
-            }
+
+                    return RedirectToAction("Index");
+            
 
 
         }
@@ -286,10 +308,13 @@ namespace Web.Controllers
         // GET: Event/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            eventService.Delete(eventService.GetById(id));
+            eventService.Commit();
+            return View("Index");
         }
 
         // POST: Event/Delete/5
+       
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -320,11 +345,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public void getAllScheduler(String duration, String proName)
+        public void getAllScheduler(String duration, String proName,String speaker,String filePath)
         {
 
             //Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName };
-            Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName};
+            string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(speaker));
+           
+            Scheduler scheduler = new Scheduler() { Duration = duration, ProgramName = proName,Speaker= speaker,Photo= Path.GetFileName(filePath) };
 
              schedulerService.Add(scheduler);
              schedulerService.Commit();
@@ -379,6 +406,9 @@ namespace Web.Controllers
                     eventModel.Description = i.Description;
                     eventModel.Address = i.Address;
                     eventModel.OrganizedBy = i.OrganizedBy;
+                    eventModel.Photo = i.Photo;
+                    eventModel.Slogan = i.Slogan;
+                    eventModel.Type = i.Type;
                     listEvent.Add(eventModel);
                 }
             }
@@ -430,6 +460,14 @@ namespace Web.Controllers
             schedulerService.Commit();
             //return RedirectToAction("Index","Event");
             
+        }
+        public void SendEmail(string From, string To, string Subject, string Body)
+        {
+            MailMessage mail = new MailMessage(From, To, Subject, Body);
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("levio.lmp@gmail.com", "eudfdldhubmzuscf");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
         }
 
 

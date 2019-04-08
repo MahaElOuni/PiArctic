@@ -1548,6 +1548,7 @@
     <Content Include="img\blog\post-img1.jpg" />
     <Content Include="img\blog\post-img2.jpg" />
     <Content Include="img\blog\prev.jpg" />
+    <Content Include="img\calender.png" />
     <Content Include="img\clients-logo\c-logo-1.png" />
     <Content Include="img\clients-logo\c-logo-2.png" />
     <Content Include="img\clients-logo\c-logo-3.png" />
@@ -1591,6 +1592,9 @@
     <Content Include="img\google.png" />
     <Content Include="img\home-banner.jpg" />
     <Content Include="img\IBM-Logo.png" />
+    <Content Include="img\iconEdit.png" />
+    <Content Include="img\iconDelere.png" />
+    <Content Include="img\iconOgranizer.png" />
     <Content Include="img\icons\iconCalendar.png" />
     <Content Include="img\icons\locationIcon.png" />
     <Content Include="img\insta.png" />
@@ -1612,8 +1616,8 @@
     <Content Include="img\slider-1.jpg" />
     <Content Include="img\slider-2.jpg" />
     <Content Include="img\sort-down-64.png" />
-    <Content Include="img\team\team-1.jpg" />
-    <Content Include="img\team\team-2.jpg" />
+    <Content Include="Content\Upload\team-1.jpg" />
+    <Content Include="Content\Upload\team-2.jpg" />
     <Content Include="img\team\team-3.jpg" />
     <Content Include="img\team\team-4.jpg" />
     <Content Include="img\testEvent.jpg" />
@@ -2183,7 +2187,6 @@
     <Content Include="Views\Scheduler\Edit.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Tasks\MyTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

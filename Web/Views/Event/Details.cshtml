@@ -60,11 +60,10 @@
 </section>
 <!--================End Event Time Area =================-->
 <!--================Event Schedule Area =================-->
-<section class="event_schedule_area p_120">
+
     <div class="container">
         <div class="main_title">
             <h2>Event Schedule</h2>
-            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
         </div>
         <div class="event_schedule_inner">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -84,12 +83,13 @@
                     {
                         <div class="media">
                             <div class="d-flex">
-                                <img src="img/schedule-1.jpg" alt="">
+                                <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" style="height:100px;width:100px">
                             </div>
                             <div class="media-body">
+                                
                                 <h5> @Html.DisplayFor(modelItem => item.Duration)</h5>
                                 <h4>@Html.DisplayFor(modelItem => item.ProgramName)</h4>
-                                <p>Speech by: Mark weins</p>
+                                <p>Speech by: @Html.DisplayFor(modelItem => item.Speaker)</p>
                             </div>
                         </div>
                     }
@@ -201,8 +201,147 @@
             </div>
         </div>
     </div>
-</section>
+
 <!--================End Event Schedule Area =================-->
+
+<!--====================Event Speakers=========================-->
+<div class="container">
+    <div class="main_title">
+        <h2>Meet Head Speakers</h2>
+        <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
+    </div>
+    <div class="row team_inner">
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-1.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-2.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-3.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-4.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-1.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-2.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-3.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="team_item">
+                <div class="team_img">
+                    <img class="img-fluid" src="img/team/team-4.jpg" alt="">
+                    <div class="hover">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="team_name">
+                    <h4>Ethel Davis</h4>
+                    <p>Managing Director (Sales)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--====================End Event Speakers===================------>
 <div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
 <section class="event_schedule_area p_120">
     <div class="container">
