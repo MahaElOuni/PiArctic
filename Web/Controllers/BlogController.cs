@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Entities;
@@ -99,7 +99,7 @@ namespace Web.Controllers
 
 		// POST: Blog/Create
 		[HttpPost]
-		public ActionResult Create(BlogViewModel bvm)
+		public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase file2)
 		{
 			String e ="" ;
 			int idUser = 0;
@@ -113,16 +113,31 @@ namespace Web.Controllers
 					e = i.FName;
 				}
 			}
+			if (file2 != null && file2.ContentLength > 0)
+				try
+				{
+					string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
+					file2.SaveAs(path);
+					ViewBag.Message = "Image uploaded successfully";
+				}
+				catch (Exception ex)
+				{
+					ViewBag.Message = "ERROR:" + ex.Message.ToString();
+				}
+			else
+			{
+				ViewBag.Message = "You have not specified a file.";
+			}
 			DateTime now = DateTime.Now;
 			Blog b = new Blog();
 			b.ne = e;
 			b.UserId = idUser;
 			b.Contenu = bvm.Contenu;
+			b.Photo = file2.FileName;
 			b.Titre = bvm.Titre;
 			b.NbrComment = 0;
 			b.NbrLike = 0;
 			b.DatePost = now;
-			b.Photo = bvm.Photo;
 			blogService.Add(b);
 			blogService.Commit();
 
