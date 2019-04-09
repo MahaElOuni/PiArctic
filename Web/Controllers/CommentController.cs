@@ -26,7 +26,6 @@ namespace Web.Controllers
 			CommentViewModel cvm = new CommentViewModel();
 			List<CommentViewModel> lcmv = new List<CommentViewModel>();
 			List<Comment> lc = new List<Comment>();
-			lc = commentService.BlogComment(id);
 			Icm = new CommentService();
 			foreach (var i in lc)
 			{
