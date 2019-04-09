@@ -11,5 +11,8 @@ namespace Web.Models
         [Required(ErrorMessage = "You forgot to enter event title")]
         public EventViewModel EventModel { get; set; }
         public SchedulerViewModel SchedulerModel { get; set; }
+        public int UserId { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
     }
 }

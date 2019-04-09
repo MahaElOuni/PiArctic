@@ -4,62 +4,133 @@
     ViewBag.Title = "Details";
 }
 
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
 
+                <img src="~/img/logo2.png" sizes="100px" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = Model.UserEmail, id = Model.UserId })">Home</a></li>
 
-<section class="home_banner_area" style="background-image:url(../../img/testEvent.jpg);font-size:medium">
-    <div class="banner_inner">
-        <div class="container">
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+                                    @if (Model.UserRole.Equals("Organizor"))
+                                    {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
+                                }
 
-            <div class="banner_content">
-                <h2>International Digital <br />Business Event</h2>
+                                </ul>
+                            </li>
 
-                <a class="main_btn" href="#">Participate</a>
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                                </ul>
+                            </li>
 
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Home Banner Area =================-->
-<!--================Event Time Area =================-->
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                        </ul>
 
-<section class="event_time_area">
-    <div class="container">
-        <div class="event_time_inner">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="event_text">
-                        <h3>This Event will Start in</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <li class="nav-item submenu dropdown">
+                                    <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">Show Profile</a></li>
+
+                                    </ul>
+                                </li>
+
+                                @*<li>@Html.DisplayFor(model => model.Email)</li>*@
+                                @* <div>@Html.DisplayFor(model => model.Email)</div>*@
+                            }
+                            else
+                            {
+                                <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                            <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="timer_inner">
-                        <div id="timer" class="timer">
-                            <div class="timer__section days">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">days</div>
-                            </div>
-                            <div class="timer__section hours">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">hours</div>
-                            </div>
-                            <div class="timer__section minutes">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">Minutes</div>
-                            </div>
-                            <div class="timer__section seconds">
-                                <div class="timer__number"></div>
-                                <div class="timer__label">seconds</div>
+            </nav>
+        </div>
+    </header>
+    <!--================End Menu Area =================-->
+
+    <section class="home_banner_area" style="background-image:url(../../img/testEvent.jpg);font-size:medium">
+        <div class="banner_inner">
+            <div class="container">
+
+                <div class="banner_content">
+                    <h2>International Digital <br />Business Event</h2>
+
+                    <a class="main_btn" href="#">Participate</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Event Time Area =================-->
+
+    <section class="event_time_area">
+        <div class="container">
+            <div class="event_time_inner">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="event_text">
+                            <h3>This Event will Start in</h3>
+                            <p>@Html.DisplayFor(modelItem => Model.Description)</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="timer_inner">
+                            <div id="timer" class="timer">
+                                <div class="timer__section days">
+                                    <div class="timer__number"></div>
+                                    <div class="timer__label">days</div>
+                                </div>
+                                <div class="timer__section hours">
+                                    <div class="timer__number"></div>
+                                    <div class="timer__label">hours</div>
+                                </div>
+                                <div class="timer__section minutes">
+                                    <div class="timer__number"></div>
+                                    <div class="timer__label">Minutes</div>
+                                </div>
+                                <div class="timer__section seconds">
+                                    <div class="timer__number"></div>
+                                    <div class="timer__label">seconds</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--================End Event Time Area =================-->
-<!--================Event Schedule Area =================-->
+    </section>
+    <!--================End Event Time Area =================-->
+    <!--================Event Schedule Area =================-->
 
     <div class="container">
         <div class="main_title">
@@ -68,14 +139,9 @@
         <div class="event_schedule_inner">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Day 01</a>
+                    <a style="align-content:center" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Event Schedule</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Day 02</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Day 03</a>
-                </li>
+                
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -86,7 +152,7 @@
                                 <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" style="height:100px;width:100px">
                             </div>
                             <div class="media-body">
-                                
+
                                 <h5> @Html.DisplayFor(modelItem => item.Duration)</h5>
                                 <h4>@Html.DisplayFor(modelItem => item.ProgramName)</h4>
                                 <p>Speech by: @Html.DisplayFor(modelItem => item.Speaker)</p>
@@ -94,392 +160,151 @@
                         </div>
                     }
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="d-flex">
-                            <img src="img/schedule-1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
 
-<!--================End Event Schedule Area =================-->
-
-<<<<<<< HEAD
-<!--====================Event Speakers=========================-->
-<div class="container">
-    <div class="main_title">
-        <h2>Meet Head Speakers</h2>
-        <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
-    </div>
-    <div class="row team_inner">
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-1.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
+    <!--================End Event Schedule Area =================-->
+  
+   
+    <div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
+    <section class="event_schedule_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Satisfactions</h2>
+                <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
+                <a class="main_btn" href="#">J'aime</a>
+                <a class="main_btn" href="#">J'aime pas</a>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-2.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
+    </section>
+    <div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
+    <section class="event_schedule_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Pozer Votre commentaire de  Satisfaction</h2>
+                <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
+                <a class="main_btn" href="#">Ajouter Commentaire</a>
+                <a class="main_btn" href="#">Affichier Commenatire</a>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-3.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
+    </section>
+
+    <div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
+    <section class="event_schedule_area p_120">
+        <div class="container">
+            <div class="main_title">
+
+                <a class="main_btn" href="@Url.Action("Index", "Reward", new {  id=Model.EventId })">Affichier rewards</a>
+
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-4.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
+    </section>
+    <section class="event_schedule_area p_120">
+        <div class="container">
+            <div class="main_title">
+
+                <a class="main_btn" href="@Url.Action("Create", "Recommandation", new {  id=Model.EventId })">Ajouter Recommendation</a>
+                <a class="main_btn" href="@Url.Action("Index", "Recommandation", new {  id=Model.EventId })">Affichier Recommendation</a>
+
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-1.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-2.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-3.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="team_item">
-                <div class="team_img">
-                    <img class="img-fluid" src="img/team/team-4.jpg" alt="">
-                    <div class="hover">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="team_name">
-                    <h4>Ethel Davis</h4>
-                    <p>Managing Director (Sales)</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--====================End Event Speakers===================------>
-<div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
-<section class="event_schedule_area p_120">
-    <div class="container">
-        <div class="main_title">
-            <h2>Satisfactions</h2>
-            <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
-            <a class="main_btn" href="#">J'aime</a>
-            <a class="main_btn" href="#">J'aime pas</a>
-        </div>
-    </div>
-</section>
-<div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
-<section class="event_schedule_area p_120">
-    <div class="container">
-        <div class="main_title">
-            <h2>Pozer Votre commentaire de  Satisfaction</h2>
-            <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
-            <a class="main_btn" href="#">Ajouter Commentaire</a>
-            <a class="main_btn" href="#">Affichier Commenatire</a>
-        </div>
-    </div>
-</section>
+    </section>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    @section Scripts{
+        <script>
+            var m = document.getElementById('dateEdit').innerHTML;
 
-<div id="dateEdit" style="display:none">@Html.DisplayFor(model => model.DateString)</div>
-<section class="event_schedule_area p_120">
-    <div class="container">
-        <div class="main_title">
-            
-            <a class="main_btn" href="@Url.Action("Index", "Reward", new {  id=Model.EventId })">Affichier rewards</a>
-           
-        </div>
-    </div>
-</section>
-<section class="event_schedule_area p_120">
-    <div class="container">
-        <div class="main_title">
-
-            <a class="main_btn" href="@Url.Action("Create", "Recommandation", new {  id=Model.EventId })">Ajouter Recommendation</a>
-            <a class="main_btn" href="@Url.Action("Index", "Recommandation", new {  id=Model.EventId })">Affichier Recommendation</a>
-
-        </div>
-    </div>
-</section>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-@section Scripts{
-    <script>
-        var m = document.getElementById('dateEdit').innerHTML;
-
-        console.log(m);
-        var today = new Date(m);
+            console.log(m);
+            var today = new Date(m);
 
 
-        var timer = function () { };
-        timer.countdownDate = new Date(m);
+            var timer = function () { };
+            timer.countdownDate = new Date(m);
 
 
-        // set date to 10 days in the future for testing purposes
-        timer.countdownDate.setDate(timer.countdownDate.getDate());
+            // set date to 10 days in the future for testing purposes
+            timer.countdownDate.setDate(timer.countdownDate.getDate());
 
-        /*
-        * Get thing started
-        */
-        timer.init = function () {
-            timer.getReferences();
+            /*
+            * Get thing started
+            */
+            timer.init = function () {
+                timer.getReferences();
 
 
-            timer.getTimes();
-            setInterval(function () { timer.update() }, 1000);
-        }
-
-        /*
-        * Save references of timer section
-        */
-        timer.getReferences = function () {
-            timer.timer = document.getElementById("timer");
-            timer.days = timer.timer.querySelectorAll(".days .timer__number")[0];
-            timer.hours = timer.timer.querySelectorAll(".hours .timer__number")[0];
-            timer.minutes = timer.timer.querySelectorAll(".minutes .timer__number")[0];
-            timer.seconds = timer.timer.querySelectorAll(".seconds .timer__number")[0];
-        }
-
-        /*
-        * remember time units for later use
-        */
-        timer.getTimes = function () {
-            timer.times = {};
-            timer.times.second = 1000;
-            timer.times.minute = timer.times.second * 60;
-            timer.times.hour = timer.times.minute * 60;
-            timer.times.day = timer.times.hour * 24;
-        }
-
-        /*
-        * Update the countdown
-        */
-        timer.update = function () {
-            if (timer.timer.style.opacity !== 1) {
-                timer.timer.style.opacity = 1;
+                timer.getTimes();
+                setInterval(function () { timer.update() }, 1000);
             }
 
-            timer.currentDate = new Date();
-
-
-            timer.difference = timer.countdownDate - timer.currentDate;
-
-            timer.days.innerHTML = timer.getTimeRemaining(timer.times.day, 1);
-            timer.hours.innerHTML = timer.getTimeRemaining(timer.times.hour, 24);
-            timer.minutes.innerHTML = timer.getTimeRemaining(timer.times.minute, 60);
-            timer.seconds.innerHTML = timer.getTimeRemaining(timer.times.second, 60);
-        }
-
-        /*
-        * calculate remaining time based on a unit of time
-        */
-        timer.getTimeRemaining = function (timeUnit, divisor) {
-            var n;
-            if (divisor == 1) {
-                n = Math.floor(timer.difference / timeUnit);
-            }
-            else {
-                n = Math.floor((timer.difference / timeUnit) % divisor);
+            /*
+            * Save references of timer section
+            */
+            timer.getReferences = function () {
+                timer.timer = document.getElementById("timer");
+                timer.days = timer.timer.querySelectorAll(".days .timer__number")[0];
+                timer.hours = timer.timer.querySelectorAll(".hours .timer__number")[0];
+                timer.minutes = timer.timer.querySelectorAll(".minutes .timer__number")[0];
+                timer.seconds = timer.timer.querySelectorAll(".seconds .timer__number")[0];
             }
 
-            if (String(n).length < 2) {
-                n = "0" + n;
+            /*
+            * remember time units for later use
+            */
+            timer.getTimes = function () {
+                timer.times = {};
+                timer.times.second = 1000;
+                timer.times.minute = timer.times.second * 60;
+                timer.times.hour = timer.times.minute * 60;
+                timer.times.day = timer.times.hour * 24;
             }
 
-            return n;
-        }
+            /*
+            * Update the countdown
+            */
+            timer.update = function () {
+                if (timer.timer.style.opacity !== 1) {
+                    timer.timer.style.opacity = 1;
+                }
 
-        window.addEventListener("load", function () {
-            timer.init();
-        });
+                timer.currentDate = new Date();
 
 
-    </script>
-}
+                timer.difference = timer.countdownDate - timer.currentDate;
+
+                timer.days.innerHTML = timer.getTimeRemaining(timer.times.day, 1);
+                timer.hours.innerHTML = timer.getTimeRemaining(timer.times.hour, 24);
+                timer.minutes.innerHTML = timer.getTimeRemaining(timer.times.minute, 60);
+                timer.seconds.innerHTML = timer.getTimeRemaining(timer.times.second, 60);
+            }
+
+            /*
+            * calculate remaining time based on a unit of time
+            */
+            timer.getTimeRemaining = function (timeUnit, divisor) {
+                var n;
+                if (divisor == 1) {
+                    n = Math.floor(timer.difference / timeUnit);
+                }
+                else {
+                    n = Math.floor((timer.difference / timeUnit) % divisor);
+                }
+
+                if (String(n).length < 2) {
+                    n = "0" + n;
+                }
+
+                return n;
+            }
+
+            window.addEventListener("load", function () {
+                timer.init();
+            });
+
+
+        </script>
+    }
