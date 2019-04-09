@@ -13,7 +13,6 @@ namespace Domain.Entities
     public class Ticket
     {
         public int TicketId { get; set; }
-        public Method Method { get; set; }
         public virtual Event Event { get; set; }
     }
 }

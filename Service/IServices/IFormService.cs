@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.IServices
 {
-    interface IFormService:IService<Form>
+    public interface IFormService:IService<Form>
     {
     }
 }
