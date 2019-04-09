@@ -1,4 +1,7 @@
 ﻿@model Web.Models.RewardViewModel
+
+
+
 <!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
@@ -15,223 +18,228 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home" , new { email = Model.UserEmail, id = Model.UserId } )">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = Model.UserEmail, id = Model.UserId })">Home</a></li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
-                                    @*@if (Model.UserRole.Equals("Organizor"))
+                                    @if (Model.UserRole.Equals("Organizor"))
                                     {
                                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
-                                }*@
-                                </ul>
-                        </li>
-
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-
-                            <li class="nav-item submenu dropdown">
-                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
-                                <ul>
-                                    <li class="nav-item"><a class="nav-link" href="#">Show Profile</a></li>
+                                }
 
                                 </ul>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
-						}
 
-                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
-                    </ul>
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <li class="nav-item submenu dropdown">
+                                    <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                    <ul>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">Show Profile</a></li>
+
+                                    </ul>
+                                </li>
+
+                                @*<li>@Html.DisplayFor(model => model.Email)</li>*@
+                                @* <div>@Html.DisplayFor(model => model.Email)</div>*@
+                            }
+                            else
+                            {
+                                <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                            <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-</header>
-<!--================End Menu Area =================-->
-<section class="banner_area">
-    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-        <div class="container">
-            <div class="banner_content text-center">
-                <div class="page_link">
-                    @*<a href="index.html">Home</a>
-                        <a href="about-us.html">F</a>*@
-                    <p style="color:white">EVENT<img src="~/img/back .png" /> FIX REWARDS</p>
+            </nav>
+        </div>
+    </header>
+    <!--================End Menu Area =================-->
+
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <div class="page_link">
+                        @*<a href="index.html">Home</a>
+                            <a href="about-us.html">F</a>*@
+                        <p style="color:white">EVENT<img src="~/img/back .png" /> FIX REWARDS</p>
+                    </div>
+                    <br />
+                    <h2>FIX REWARDS</h2>
                 </div>
-                <br />
-                <h2>FIX REWARDS</h2>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<br /><br />
+    <br /><br />
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container register-form">
-    <div class="form">
-        <div class="note" style="text-align: center; height: 80px; background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <div class="container register-form">
+        <div class="form">
+            <div class="note" style="text-align: center; height: 80px; background: -webkit-linear-gradient(left, #0072ff, #8811c5);
                                  color: #fff; font-weight: bold; line-height: 80px;">
 
-            <h3><img src="~/img/reward.png" />For this event we Fixed three rewards<img src="~/img/reward.png" /> </h3>
+                <h3><img src="~/img/reward.png" />For this event we Fixed three rewards<img src="~/img/reward.png" /> </h3>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-content" style="padding: 5%;border: 1px solid #ced4da; margin-bottom: 2%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @* @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <label for="first_name" class="required">Description</label>
+                                <div class="col-md-10" style="margin-left:110px">
+                                    @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="first_name" class="required"><img src="~/img/rew.png" />First Price</label>
+                                <div class="col-md-10" style="margin-left:110px">
+                                    @Html.EditorFor(model => model.Price1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Price1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="first_name" class="required" style="margin-left:120px"><img src="~/img/rew.png" />Second Price</label>
+                                <div class="col-md-10" style="margin-left:180px">
+                                    @Html.EditorFor(model => model.Price2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Price2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="first_name" class="required" style="margin-left:350px"><img src="~/img/rew.png" />Third Price</label>
+                                <div class="col-md-10" style="margin-left:350px">
+                                    @Html.EditorFor(model => model.Price3, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Price3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Attribute" class="tickets_btn" style="margin-left:450px" />
+                        </div>
+                    </div>
+                </div>
+
+            }
+
         </div>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-content" style="padding: 5%;border: 1px solid #ced4da; margin-bottom: 2%;">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            @* @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label for="first_name" class="required">Description</label>
-                            <div class="col-md-10" style="margin-left:110px">
-                                @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="first_name" class="required"><img src="~/img/rew.png"/>First Price</label>
-                            <div class="col-md-10" style="margin-left:110px">
-                                @Html.EditorFor(model => model.Price1, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Price1, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="first_name" class="required" style="margin-left:120px"><img src="~/img/rew.png"/>Second Price</label>
-                            <div class="col-md-10" style="margin-left:180px">
-                                @Html.EditorFor(model => model.Price2, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Price2, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="first_name" class="required" style="margin-left:350px"><img src="~/img/rew.png"/>Third Price</label>
-                            <div class="col-md-10" style="margin-left:350px">
-                                @Html.EditorFor(model => model.Price3, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Price3, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Attribute" class="tickets_btn" style="margin-left:450px" />
-                    </div>
-                </div>
-            </div>
-
-        }
-
     </div>
-</div>
 
 
 
-<!--================ start footer Area  =================-->
-<footer class="footer-area p_120">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3  col-md-6 col-sm-6">
-                <div class="single-footer-widget tp_widgets">
-                    <h6 class="footer_title">ABOUT US</h6>
-                    <div>
-                        <p>
-                            ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area p_120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h6 class="footer_title">ABOUT US</h6>
+                        <div>
+                            <p>
+                                ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
 
-                            We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
-                            Fin de la discussion
-                            Écrivez un message...
+                                We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
+                                Fin de la discussion
+                                Écrivez un message...
 
 
-                        </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-lg-1  col-md-6 col-sm-6">
+                    </div>*@
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="single-footer-widget news_widgets">
+                        <h6 class="footer_title">CONTACT INFORMATION</h6>
+                        <p>To join us, or for simple information do not hesitate to contact us </p>
+                        <div class="col-lg-6">
+                            <div class="contact_info">
+                                <div class="info_item">
+                                    <i class="lnr lnr-home"></i>
+                                    <h6>The Berges Du Lac II, Tunise</h6>
+                                    <p>Near the craftsman's palace</p>
+                                </div>
+                                <div class="info_item">
+                                    <i class="lnr lnr-phone-handset"></i>
+                                    <h6><a href="#">00 (216) 52017580</a></h6>
+                                    <p>Mon to Fri 9am to 6 pm</p>
+                                </div>
+                                <div class="info_item">
+                                    <i class="lnr lnr-envelope"></i>
+                                    <h6><a href="#">Consultteck@gmail.com</a></h6>
+                                    <p>Send us your query anytime!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 footer-social">
+                    <div class="single-footer-widget instafeed">
+                        <h6 class="footer_title">FOLLOW US</h6>
+                        <a href="#"><img src="~/img/fb.png" /></a>
+                        <a href="#"><img src="~/img/twit.png" /></a>
+                        <a href="#"><img src="~/img/insta.png" /></a>
+                        <a href="#"><img src="~/img/link.png" /></a>
                     </div>
                 </div>
             </div>
-            @*<div class="col-lg-1  col-md-6 col-sm-6">
+            @*<div class="row footer-bottom d-flex justify-content-between align-items-center">
+                    <p class="col-lg-8 col-md-8 footer-text m-0">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                    <div class="col-lg-4 col-md-4 footer-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-behance"></i></a>
+                    </div>
                 </div>*@
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="single-footer-widget news_widgets">
-                    <h6 class="footer_title">CONTACT INFORMATION</h6>
-                    <p>To join us, or for simple information do not hesitate to contact us </p>
-                    <div class="col-lg-6">
-                        <div class="contact_info">
-                            <div class="info_item">
-                                <i class="lnr lnr-home"></i>
-                                <h6>The Berges Du Lac II, Tunise</h6>
-                                <p>Near the craftsman's palace</p>
-                            </div>
-                            <div class="info_item">
-                                <i class="lnr lnr-phone-handset"></i>
-                                <h6><a href="#">00 (216) 52017580</a></h6>
-                                <p>Mon to Fri 9am to 6 pm</p>
-                            </div>
-                            <div class="info_item">
-                                <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@gmail.com</a></h6>
-                                <p>Send us your query anytime!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 footer-social">
-                <div class="single-footer-widget instafeed">
-                    <h6 class="footer_title">FOLLOW US</h6>
-                    <a href="#"><img src="~/img/fb.png" /></a>
-                    <a href="#"><img src="~/img/twit.png" /></a>
-                    <a href="#"><img src="~/img/insta.png" /></a>
-                    <a href="#"><img src="~/img/link.png" /></a>
-                </div>
-            </div>
         </div>
-        @*<div class="row footer-bottom d-flex justify-content-between align-items-center">
-                <p class="col-lg-8 col-md-8 footer-text m-0">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </p>
-                <div class="col-lg-4 col-md-4 footer-social">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                    <a href="#"><i class="fa fa-behance"></i></a>
-                </div>
-            </div>*@
-    </div>
-</footer>
-<!--================ End footer Area  =================-->
-
+    </footer>
+    <!--================ End footer Area  =================-->
