@@ -225,6 +225,7 @@
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentityAPIController.cs" />
+    <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\UserProfilAPIController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
