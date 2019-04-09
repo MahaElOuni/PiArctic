@@ -22,6 +22,7 @@ namespace Domain.Entities
         public String  Photo { get; set; }
         public String  Slogan { get; set; }
         public String Type { get; set; }
+        public int? NumberPlaceReserve { get; set; }
         public int? UserId { get; set; }
         public virtual President President { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }

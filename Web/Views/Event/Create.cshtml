@@ -109,7 +109,7 @@
             <h3>Event info</h3>
             <fieldset>
                 <h2>Event information</h2>
-                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your event</p>
                 <div class="fieldset-content">
                     @Html.ValidationSummary("", new { @class = "text-danger" })
 
@@ -183,7 +183,7 @@
 
             <fieldset>
                 <h2>Add your scheduler</h2>
-                <p class="desc">Set up your money limit to reach the future plan</p>
+                <p class="desc">Set up your scheduler plan</p>
                 <div class="fieldset-content">
                     <div class="form-group">
                         Duration
@@ -209,7 +209,7 @@
                         @Html.TextBox("file1", "", new { type = "file",id="imagePath"})
                         @Html.ValidationMessageFor(model => model.SchedulerModel.Photo)
                     </div>
-
+                    <br />
                     <a class="main_btn" OnClick="addition()">Add</a>
                     <script>
                         function addition() {
@@ -256,9 +256,9 @@
             <h3>Finish Event Info</h3>
             <fieldset>
                 <h2>Finish Your Event Information</h2>
-                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                
                 <div class="fieldset-content">
-
+                    <br />
                     Make your slogan
                     <div class="form-flex">
                         <div class="form-group">
@@ -274,7 +274,7 @@
                         </div>
                     </div>
                     <div class="editor-field">
-                        Upload Image
+                        Upload your Event Image
                         @Html.TextBox("file2", "", new { type = "file" })
 
 
