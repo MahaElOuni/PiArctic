@@ -18,6 +18,9 @@ namespace Service.Services
         public RewardService() : base(uow)
         {
 
+          
         }
+
+       
     }
 }
