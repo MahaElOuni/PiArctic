@@ -19,6 +19,14 @@ namespace Service.Services
         {
 
         }
+
+        public IEnumerable<Recommendation> ListOrgazateur(int id)
+        {
+            var list = GetAll().OrderByDescending(t => t.EventId==id);
+           
+                return list;
+        }
        
+
     }
 }

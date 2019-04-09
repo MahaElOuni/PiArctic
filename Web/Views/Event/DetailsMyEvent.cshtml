@@ -224,10 +224,10 @@
     <section class="event_schedule_area p_120">
         <div class="container">
             <div class="main_title">
-                <h2>Pozer Votre commentaire de  Satisfaction</h2>
-                <p>Ajouter votre taux de Statisfaction pour  l'evenment .</p>
-                <a class="main_btn" href="#">Ajouter Commentaire</a>
-                <a class="main_btn" href="#">Affichier Commenatire</a>
+
+                <a class="main_btn" href="@Url.Action("Create", "Recommandation", new {  id=Model.EventId })">Ajouter Recommendation</a>
+                <a class="main_btn" href="@Url.Action("Index", "Recommandation", new {  id=Model.EventId })">Affichier Recommendation</a>
+
             </div>
         </div>
     </section>

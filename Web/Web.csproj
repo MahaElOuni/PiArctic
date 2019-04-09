@@ -304,8 +304,15 @@
     <Reference Include="SgmlReaderDll, Version=1.8.11.0, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
       <HintPath>..\packages\SgmlReader.1.8.11\lib\4.0\SgmlReaderDll.dll</HintPath>
     </Reference>
+    <Reference Include="Stripe.net, Version=25.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.25.4.0\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -905,6 +912,7 @@
     <Content Include="Content\fonts\roboto\Roboto-Regular.ttf" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\fonts\roboto\Roboto-ThinItalic.ttf" />
+    <Content Include="appsettings.json" />
     <None Include="Content\mytemplate\js\jquery.validate-vsdoc.js" />
     <Content Include="Content\mytemplate\js\jquery.validate.js" />
     <Content Include="Content\mytemplate\js\jquery.validate.min.js" />
@@ -2194,6 +2202,7 @@
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\gmaps.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2325,11 +2334,21 @@
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
+    <Content Include="Views\Form\Charge.cshtml" />
+    <Content Include="Views\Form\Confirmation.cshtml" />
+    <Content Include="Views\Form\Create.cshtml" />
+    <Content Include="Views\Form\Custom.cshtml" />
+    <Content Include="Views\Form\Delete.cshtml" />
+    <Content Include="Views\Form\full.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Form\Index2.cshtml" />
+    <Content Include="Views\Form\Index3.cshtml" />
+    <Content Include="Views\Form\Participant.cshtml" />
+    <Content Include="Views\Form\PartivipantEnAttente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Karim\" />
-    <Folder Include="Views\Form\" />
     <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
