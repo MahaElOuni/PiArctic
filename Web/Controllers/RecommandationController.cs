@@ -46,10 +46,22 @@ namespace Web.Controllers
         // GET: Recommandation/Create
         public ActionResult Create()
         {
+            RecommendationViewModel evm = new RecommendationViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
 
-            
-            
-            return View();
+
+                }
+            }
+
+
+            return View(evm);
 
         }
         // POST: Recommandation/Create
