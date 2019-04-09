@@ -158,12 +158,24 @@
                             {
                                 <li><a href="@Url.Action("statitique", "Event", new {  id=item.EventId  })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a></li>
                             }
+                            if (i.TaskTitle.Equals("Display rewards"))
+                            {
+                                <li><a href="@Url.Action("Index", "Reward", new {  id=item.EventId })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a></li>
+                            }
+                            if (i.TaskTitle.Equals("Add Recommendation"))
+                            {
+                                <li><a href="@Url.Action("Create", "Recommandation", new {  id=item.EventId })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a></li>
+                            }
+                            if (i.TaskTitle.Equals("Display Recommendation"))
+                            {
+                                <li><a href="@Url.Action("Index", "Recommandation", new {  id=item.EventId })" class="genric-btn default-border circle arrow">@Html.DisplayFor(modelItem => i.TaskTitle)<span class="lnr lnr-arrow-right"></span></a></li>
+                            }
 
                         }
                         @*<li><i class="lnr lnr-user"></i><a href="#">Mark wien</a></li>
-                            <li><i class="lnr lnr-calendar-full"></i><a href="#">12 Dec, 2017</a></li>
-                            <li><i class="lnr lnr-eye"></i><a href="#">1.2M Views</a></li>
-                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+        <li><i class="lnr lnr-calendar-full"></i><a href="#">12 Dec, 2017</a></li>
+        <li><i class="lnr lnr-eye"></i><a href="#">1.2M Views</a></li>
+        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
                         *@
                     </ul>
 
