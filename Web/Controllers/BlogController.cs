@@ -7,6 +7,9 @@ using Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Service.Services;
 using Web.Models;
+using PagedList;
+using PagedList.Mvc;
+using System.Linq;
 
 namespace Web.Controllers
 {
@@ -16,7 +19,7 @@ namespace Web.Controllers
 		BlogViewModel bvm = new BlogViewModel();
 
 		// GET: Blog
-		public ActionResult Index()
+		public ActionResult Index(int? page)
 		{
 			List<BlogViewModel> list = new List<BlogViewModel>();
 			var a = blogService.GetAll();
@@ -34,8 +37,8 @@ namespace Web.Controllers
 				bvm.DatePost = i.DatePost;
 				list.Add(bvm);
 			}
-
-			return View(list);
+			
+			return View(list.ToList().ToPagedList(page ?? 1,3));
 		}
 		public List<CommentViewModel> Affiche(int id)
 		{

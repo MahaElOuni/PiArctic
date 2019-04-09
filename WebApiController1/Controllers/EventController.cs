@@ -15,7 +15,7 @@ namespace WebApiController1.Controllers
         // GET: api/Event
         public IEnumerable<Event> Get()
         {
-            return eventService.GetAll();
+			return eventService.GetAll();
         }
 
         // GET: api/Event/5
