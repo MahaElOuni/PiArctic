@@ -13,9 +13,14 @@ namespace WebApiController1.Controllers
     {
         EventService eventService = new EventService();
         // GET: api/Event
+        [HttpGet]
         public IEnumerable<Event> Get()
         {
+
             return eventService.GetAll();
+
+			
+
         }
 
         // GET: api/Event/5
@@ -27,13 +32,30 @@ namespace WebApiController1.Controllers
         // POST: api/Event
         public void Post([FromBody]Event eventt)
         {
-            eventService.Add(eventt);
+            Event e1 = new Event();
+            e1.Title = eventt.Title;
+            e1.Start = eventt.Start;
+            e1.End = eventt.End;
+            eventService.Add(e1);
             eventService.Commit();
         }
 
         // PUT: api/Event/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Event eventt)
         {
+            Event e = eventService.GetById(id);
+            e.Title = eventt.Title;
+            e.Description = eventt.Description;
+            e.Start = eventt.Start;
+            e.End = eventt.End;
+            e.IsFullDay = eventt.IsFullDay;
+            e.OrganizedBy = eventt.OrganizedBy;
+            e.Price = eventt.Price;
+            e.Slogan = eventt.Slogan;
+            e.NumberPlaces = eventt.NumberPlaces;
+            e.ThemeColor = eventt.ThemeColor;
+            eventService.Update(e);
+            eventService.Commit();
         }
 
         // DELETE: api/Event/5

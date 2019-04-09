@@ -259,6 +259,9 @@ namespace Web.Controllers
                 e.Photo = file2.FileName;
                 e.Slogan = evm.EventModel.Slogan;
                 e.Type = evm.EventModel.Type;
+                e.NumberPlaceReserve = 1;
+                e.IsFullDay = false;
+                e.ThemeColor = "red";
                 eventService.Add(e);
                 eventService.Commit();
                 foreach (User user in userService.GetParticipants())
@@ -378,10 +381,8 @@ namespace Web.Controllers
         }
         public JsonResult GetEvents()
         {
-            var e = eventService.GetAll();
-
-
-            return new JsonResult { Data = e, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
+            return new JsonResult { Data = eventService.getEventParticipate(User.Identity.Name), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
 
         }
