@@ -17,6 +17,10 @@ namespace Web.Models
         public int? EventId { get; set; }
         public Event Event { get; set; }
         public int? UserId { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
+
+
 
         public virtual Organizer Organizer { get; set; }
 

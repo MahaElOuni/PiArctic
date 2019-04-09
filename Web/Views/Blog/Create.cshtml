@@ -25,13 +25,11 @@
 		</div>
 	</div>
 
-	<div class="editor-field">
-		Upload Image
-		@Html.TextBox("file", "", new { type = "file" })
-
-
-		@Html.ValidationMessageFor(model => model.Photo)
-	</div>
+    <div class="editor-field">
+        Upload your photo
+        @Html.TextBox("file2", "", new { type = "file" })
+        @Html.ValidationMessageFor(model => model.Photo)
+    </div>
 
 	<div class="form-group">
 		@Html.LabelFor(model => model.Titre, htmlAttributes: new { @class = "control-label col-md-2" })
