@@ -27,6 +27,9 @@ namespace Web.Models
         public String Nom { get; set; }
         public String Prenom { get; set; }
         public int? UserId { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
+
 
         public virtual Organizer Organizer { get; set; }
         
