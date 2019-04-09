@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +11,53 @@ namespace WebApiController1.Controllers
 {
     public class RewardController : ApiController
     {
+        RewardService rewardService = new RewardService();
         // GET: api/Reward
-        public IEnumerable<string> Get()
+        public IEnumerable<Reward> Get()
         {
-            return new string[] { "value1", "value2" };
+            return rewardService.GetAll();
         }
 
         // GET: api/Reward/5
-        public string Get(int id)
+        public Reward Get(int id)
         {
-            return "value";
+            return rewardService.GetById(id);
         }
 
         // POST: api/Reward
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Reward r )
         {
+            Reward rd = new Reward();
+            rd.Price1 = r.Price1;
+            rd.Price2 = r.Price2;
+            rd.Price3 = r.Price3;
+            rd.titre = r.titre;
+            rewardService.Add(rd);
+            rewardService.Commit();
+
+
         }
 
         // PUT: api/Reward/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Reward r)
         {
+            Reward rd = rewardService.GetById(id);
+            rd.Price1 = r.Price1;
+            rd.Price2 = r.Price2;
+            rd.Price3 = r.Price3;
+            rd.titre = r.titre;
+            rewardService.Update(rd);
+            rewardService.Commit();
+
         }
 
         // DELETE: api/Reward/5
         public void Delete(int id)
         {
+            rewardService.Delete(rewardService.GetById(id));
+            rewardService.Commit();
+            
+
         }
     }
 }
