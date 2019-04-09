@@ -38,6 +38,7 @@ namespace Web.Controllers
             }
             return View(list);
         }
+       
         
         // GET: Reward/Details/5
         public ActionResult Details(int id)
