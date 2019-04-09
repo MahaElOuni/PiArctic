@@ -20,6 +20,9 @@ namespace Web.Models
 
         public String par { get; set; }
         public Boolean? Participant { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+
         public int FormId { get; set; }
         [Required]
         public string Pseudo { get; set; }
