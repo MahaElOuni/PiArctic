@@ -291,8 +291,21 @@ namespace Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
+
             Event e = eventService.GetById(id);
             EventViewModel eventModel = new EventViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    eventModel.UserId = i.Id;
+                    eventModel.UserEmail = i.Email;
+                    eventModel.UserRole = i.Role;
+
+
+                }
+            }
             eventModel.Title = e.Title;
             eventModel.Address = e.Address;
             eventModel.NumberPlaces = e.NumberPlaces;
@@ -454,6 +467,18 @@ namespace Web.Controllers
             List<EventViewModel> listEventScheduler = new List<EventViewModel>();
             var eventt = eventService.GetAll();
             var schedulers = schedulerService.GetAll();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    eventSchedulerModel.UserId = i.Id;
+                    eventSchedulerModel.UserEmail = i.Email;
+                    eventSchedulerModel.UserRole = i.Role;
+
+
+                }
+            }
             foreach (var i in eventt)
             {
                 if (i.EventId == id)
@@ -464,6 +489,8 @@ namespace Web.Controllers
                     eventSchedulerModel.Description = i.Description;
                     eventSchedulerModel.Address = i.Address;
                     eventSchedulerModel.OrganizedBy = i.OrganizedBy;
+                    eventSchedulerModel.Photo = i.Photo;
+                    eventSchedulerModel.Type = i.Type;
                     foreach (Scheduler s in schedulerService.GetSchedulesByEvent(id))
                     {
                         SchedulerViewModel sv = new SchedulerViewModel();

@@ -79,9 +79,9 @@
                 <div class="banner_content text-center">
                     <div class="page_link">
                         <a href="index.html">Home</a>
-                        <a href="about-us.html">LogIn</a>
+                        <a href="about-us.html">Edit Event</a>
                     </div>
-                    <h2>Log In</h2>
+                    <h2>Edit Your Event "@Html.DisplayFor(modelItem => Model.Title)"</h2>
                 </div>
             </div>
         </div>
@@ -105,8 +105,8 @@
             <div style="background-color:#6f42c1">
                 <h3>Edit Your Event</h3>
                 <fieldset>
-                    <h2>Personal information</h2>
-                    <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                    <h2>Event information</h2>
+                    <p class="desc">Please enter your infomation and proceed to next step so we can edit your event</p>
                     <div class="fieldset-content">
                         @Html.ValidationSummary("", new { @class = "text-danger" })
 

@@ -36,7 +36,7 @@ namespace Data
 
 
             modelBuilder.Entity<Tasks>().HasOptional(c => c.Organizer).WithMany(s => s.ListTask).HasForeignKey(i => i.UserId);
-            modelBuilder.Entity<Tasks>().HasOptional(c => c.Event).WithMany(s => s.ListTask).HasForeignKey(i => i.EventId).WillCascadeOnDelete(true); ;
+            modelBuilder.Entity<Tasks>().HasOptional(c => c.Event).WithMany(s => s.ListTask).HasForeignKey(i => i.EventId).WillCascadeOnDelete(true); 
 
             modelBuilder.Configurations.Add(new CommentConfig());
         }
