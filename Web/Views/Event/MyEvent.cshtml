@@ -152,6 +152,7 @@
 
                         <li><img src="~/img/iconEdit.png" style="height:20px;width:20px" /><a href="@Url.Action("Edit", "Event", new { id = item.EventId })" class="genric-btn default-border circle arrow">Edit Event<span class="lnr lnr-arrow-right"></span></a></li>
                         <li><img src="~/img/iconOgranizer.png" style="height:20px;width:20px" /><a class="genric-btn default-border circle arrow" data-toggle="modal" data-target=".bootstrapmodal">Add Organizer<span class="lnr lnr-arrow-right"></span></a></li>
+                        <li><img src="~/img/iconOgranizer.png" style="height:20px;width:20px" /><a href="@Url.Action("Index", "Form")" class="genric-btn default-border circle arrow" >Participant List<span class="lnr lnr-arrow-right"></span></a></li>
                         <li><img src="~/img/iconDelere.png" style="height:20px;width:20px" /><button class="genric-btn default-border circle arrow">@Html.ActionLink("Delete Event", "Delete", "Event", new { id = item.EventId }, new { onclick = "return confirm('Are sure wants to delete?');" })</button></li>
                     </ul>
 

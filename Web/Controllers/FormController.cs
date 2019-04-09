@@ -20,6 +20,7 @@ namespace Web.Controllers
         
         IEventService ES = new Service.Services.EventService();
         IFormService FS = new FormService();
+        FormService FS1 = new FormService();
 
         // GET: Form
         public ActionResult Index(string searchString, string searchString2)
@@ -221,11 +222,12 @@ namespace Web.Controllers
                 //Response.Write("<script>alert('Your request has been sent')</script>");
                 return RedirectToAction("full");
             }
-
+            
 
             Form dvm = new Form
             {
                 // EventId=e.EventId,
+                
                 Title = e.Title,
                 EventId = e.EventId,
 
@@ -384,7 +386,7 @@ namespace Web.Controllers
                 Currency = "usd",
                 CustomerId = customer.Id
             });
-
+            
             return RedirectToAction("Index");
         }
 
