@@ -13,11 +13,21 @@ namespace Service.Services
 	public class LikeService : Service<Like>, ILikeService
 	{
 		private static IDatabaseFactory dbfactor = new DatabaseFactory();
-		private static IUnitOfWork wow = new UnitOfWork(dbfactor);
+		private static IUnitOfWork uow = new UnitOfWork(dbfactor);
 		IDatabaseFactory dbfactory = null;
-		public LikeService() : base(wow)
+		public LikeService() : base(uow)
 		{
 
 		}
+		public List<Like> nbrLike(int id)
+		{
+
+			List<Like> list = uow.getRepository<Like>().GetAll().ToList();
+			list = list.FindAll(x => x.BlogId.Equals(id)).ToList();
+			return list;
+
+
+		}
+
 	}
 }

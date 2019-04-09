@@ -269,11 +269,15 @@ namespace Web.Controllers
                 return RedirectToAction("Index3");
             }
             SendMailAtt(dvm.Mail);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewConf");
 
 
         }
 
+        public ActionResult ViewConf()
+        {
+            return View();
+        }
         // GET: Form/Edit/5
         public ActionResult Edit(int id)
         {
