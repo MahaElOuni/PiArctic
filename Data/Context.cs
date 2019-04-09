@@ -29,10 +29,11 @@ namespace Data
             modelBuilder.Conventions.Add(new KeyConvention());
             modelBuilder.Entity<Scheduler>().HasOptional(c => c.Event).WithMany(s=>s.ListScheduler).HasForeignKey(i=>i.EventId).WillCascadeOnDelete(true);
             modelBuilder.Entity<Event>().HasOptional(c => c.President).WithMany(s => s.ListEvent).HasForeignKey(i => i.UserId);
-            modelBuilder.Entity<Recommendation>().HasOptional(c => c.Event).WithMany(s => s.listRecommdendation).HasForeignKey(i => i.EventId);
-            modelBuilder.Entity<Reward>().HasOptional(c => c.Event).WithMany(s => s.Rewards).HasForeignKey(i => i.EventId);
+            modelBuilder.Entity<Recommendation>().HasOptional(c => c.Event).WithMany(s => s.listRecommdendation).HasForeignKey(i => i.EventId).WillCascadeOnDelete(true);
+			modelBuilder.Entity<Reward>().HasOptional(c => c.Event).WithMany(s => s.Rewards).HasForeignKey(i => i.EventId).WillCascadeOnDelete(true);
+			modelBuilder.Entity<Blog>().HasOptional(c => c.User).WithMany(s => s.Blogs).HasForeignKey(i => i.UserId);
 
-            modelBuilder.Entity<Satisfaction>().HasOptional(c => c.Event).WithMany(s => s.Satisfaction).HasForeignKey(i => i.EventId);
+            modelBuilder.Entity<Satisfaction>().HasOptional(c => c.Event).WithMany(s => s.Satisfaction).HasForeignKey(i => i.EventId).WillCascadeOnDelete(true);
 
 
             modelBuilder.Entity<Tasks>().HasOptional(c => c.Organizer).WithMany(s => s.ListTask).HasForeignKey(i => i.UserId);

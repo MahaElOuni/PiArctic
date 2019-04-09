@@ -25,7 +25,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             List<EventViewModel> listEvent = new List<EventViewModel>();
-            var eventt = eventService.GetAll();
+            var eventt = eventService.getEventsDesc();
             foreach (var i in eventt)
             {
                 if (i.Start >= DateTime.Today)

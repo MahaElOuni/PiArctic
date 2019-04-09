@@ -10,6 +10,6 @@ namespace Service.IServices
 {
     public interface ICommentService : IService<Comment>
     {
-         List<Comment> BlogComment(int id);
+         
     }
 }

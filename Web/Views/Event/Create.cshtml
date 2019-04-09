@@ -29,20 +29,20 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
-                        @if (Model.UserRole.Equals("Organizor"))
-                        {
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
-                        }
-                            </ul>
+                                    @if (Model.UserRole.Equals("Organizor"))
+                                    {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
+                                }
+                                </ul>
                         </li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("BlogDetail","Home")">Blog Details</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
                             </ul>
                         </li>
 
@@ -141,13 +141,13 @@
                             <div class="form-flex">
                                 <div class="col-lg-6">
                                     Start
-                                    @Html.EditorFor(model => model.EventModel.Start, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.EventModel.Start, new { htmlAttributes = new { @class = "form-control", @placeholder = "Exp: 15/04/2019 08:00" } })
                                     @Html.ValidationMessageFor(model => model.EventModel.Start, "", new { @class = "text-danger" })
 
                                 </div>
                                 <div class="col-lg-6">
                                     End
-                                    @Html.EditorFor(model => model.EventModel.End, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.EventModel.End, new { htmlAttributes = new { @class = "form-control", @placeholder = "Exp: 15/04/2019 17:00" } })
                                     @Html.ValidationMessageFor(model => model.EventModel.End, "", new { @class = "text-danger" })
 
                                 </div>

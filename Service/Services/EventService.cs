@@ -85,6 +85,10 @@ namespace Service.Services
             }
             return listEvent;
         }
+        public IEnumerable<Event> getEventsDesc()
+        {
+            return this.GetAll().OrderByDescending(e => e.Start.Date);
+        }
         
     
     }

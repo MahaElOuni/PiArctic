@@ -292,6 +292,12 @@
     <Reference Include="Owin.Security.Providers.Yammer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1328b8c16b108c43, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.Security.Providers.Yammer.2.26.0\lib\net45\Owin.Security.Providers.Yammer.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PreMailer.Net, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PreMailer.Net.1.2.7\lib\net40\PreMailer.Net.dll</HintPath>
     </Reference>
@@ -439,6 +445,7 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISatisfactionService.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
@@ -452,6 +459,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogLikeViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EventSchedulerViewModel.cs" />
@@ -459,6 +467,7 @@
     <Compile Include="Models\FormViewModel.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LikeViewModel.cs" />
     <Compile Include="Models\MaclasseViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PresidentModel.cs" />
@@ -1354,6 +1363,7 @@
     <Content Include="Content\mytemplate\vendor\select2\select2.min.css" />
     <Content Include="Content\mytemplate\vendor\select2\select2.min.js" />
     <Content Include="Content\mytemplate\vendor\wnumb\wNumb.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Upload\43117037_1825690054196868_60776849550082048_n.jpg" />
     <Content Include="Content\Upload\50583762_567757327034370_8467231224643977216_n.jpg" />
     <Content Include="Content\vendors\jquery-validation\dist\additional-methods.js" />
@@ -2332,6 +2342,9 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\MyTask.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Form\ViewConf.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
     <Content Include="Views\Form\Charge.cshtml" />
@@ -2349,6 +2362,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Karim\" />
+    <Folder Include="Views\Like\" />
     <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

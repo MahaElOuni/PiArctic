@@ -13,6 +13,7 @@ namespace Domain.Entities
 		public int BlogId { get; set; }
 		public String Contenu { get; set; }
 		public int NbrLike { get; set; }
+		public ICollection<Like> Likes { get; set; }
 		public int NbrComment { get; set; }
 		public String Des { get; set; }
 		public String Titre { get; set; }

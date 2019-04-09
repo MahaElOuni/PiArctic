@@ -26,6 +26,7 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
 
@@ -181,11 +182,11 @@
                         <input placeholder="Organizer Email" type="email" id="email" />
                         <select class="default-select" id="TaskId" name="TaskId">
                             <option>Select Task</option>
-                            <option>view Statistic</option>
-                            <option>Create Ticketing System</option>
-                            <option>Add Information</option>
                             <option>Fix Rewards</option>
-                            <option>Satisfaction Survey</option>
+                            <option>view Statistic</option>
+                            <option>Display rewards</option>
+                            <option>Add Recommendation</option>
+                            <option>Display Recommendation</option>
                         </select>
                         <button class="btn sub-btn" OnClick="addition()">+</button>
                         <script>

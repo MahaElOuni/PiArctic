@@ -12,9 +12,11 @@ namespace Web.Models
 		public String Contenu { get; set; }
 		public String Photo { get; set; }
 		public DateTime DatePost { get; set; }
+		public int likess { get; set; }
+		public int commentss { get; set; }
 		public int NbrLike { get; set; }
 		public int NbrComment { get; set; }
-
+		public virtual List<Blog> Blogs { get; set; }
 		public String Des { get; set; }
 		public String Titre { get; set; }
 		public int? UserId { get; set; }
