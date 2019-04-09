@@ -57,7 +57,7 @@
                             <li class="nav-item submenu dropdown">
                                 <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
                                 <ul>
-                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">show Profile</a></li>
 
                                 </ul>
                             </li>

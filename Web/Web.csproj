@@ -450,6 +450,7 @@
     <Compile Include="Models\EventSchedulerViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MaclasseViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -2323,7 +2324,6 @@
     <Content Include="Views\Tasks\MyTask.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
-
     <Content Include="Views\Scheduler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
