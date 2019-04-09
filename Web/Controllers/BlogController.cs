@@ -116,43 +116,43 @@ namespace Web.Controllers
 
 		// POST: Blog/Create
 		[HttpPost]
-		public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase Image)
-		{
-			String e ="" ;
-			int idUser = 0;
-			User u = new User();
-			UserService userService = new UserService();
-			foreach (User i in userService.GetAll())
-			{
-				if (i.UserName.Equals(User.Identity.Name))
-				{
-					idUser = i.Id;
-					e = i.FName;
-				}
-			}
-			var path = Path.Combine(Server.MapPath("~/Content/Upload/"), Image.FileName);
-			Image.SaveAs(path);
-			DateTime now = DateTime.Now;
-			Blog b = new Blog();
-			b.ne = e;
-			b.UserId = User.Identity.GetUserId<int>();
-			b.Contenu = bvm.Contenu;
-			b.Photo = Image.FileName;
-			b.Des = bvm.Des; 
-			b.Titre = bvm.Titre;
-			b.NbrComment = 0;
-			b.NbrLike = 0;
-			b.DatePost = now;
-			blogService.Add(b);
-			blogService.Commit();
+        public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase Image)
+        {
+            String e = "";
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    e = i.FName;
+                }
+            }
+            var path = Path.Combine(Server.MapPath("~/Content/Upload/"), Image.FileName);
+            Image.SaveAs(path);
+            DateTime now = DateTime.Now;
+            Blog b = new Blog();
+            b.ne = e;
+            b.UserId = User.Identity.GetUserId<int>();
+            b.Contenu = bvm.Contenu;
+            b.Photo = Image.FileName;
+            b.Des = bvm.Des;
+            b.Titre = bvm.Titre;
+            b.NbrComment = 0;
+            b.NbrLike = 0;
+            b.DatePost = now;
+            blogService.Add(b);
+            blogService.Commit();
 
-			return RedirectToAction("Index");
+            return RedirectToAction("Index");
 
 
-		}
+        }
 
-		// GET: Blog/Edit/5
-		public ActionResult Edit(int id)
+        // GET: Blog/Edit/5
+        public ActionResult Edit(int id)
 		{
 			return View();
 		}

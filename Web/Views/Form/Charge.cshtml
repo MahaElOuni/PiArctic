@@ -1,77 +1,71 @@
-﻿@model Web.Models.RewardViewModel
+﻿
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
 
-@{
-    ViewBag.Title = "Details";
-}
+                <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create","Form")">Participate</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-<!--================Welcome Home Banner Area =================-->
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a>
+                                @*<ul>
+
+                                        <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+
+                                    </ul>*@
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
+<!--================Home Banner Area =================-->
 <section class="banner_area">
-    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    <a href="about-us.html">LogIn</a>
                 </div>
-                <br />
-                <h2>The events that may interests you</h2>
+                <h2>Log In</h2>
             </div>
         </div>
     </div>
 </section>
+<!--================End Home Banner Area =================-->
 
 
-<div>
-    <h4>RewardViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RewardId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RewardId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.titre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.titre)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<h2>You successfully paid <strong>$5.00</strong></h2>
+<br /><br />
+<!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
         <div class="row">
@@ -91,9 +85,9 @@
                     </div>
                 </div>
             </div>
-            @*<div class="col-lg-1  col-md-6 col-sm-6">
-                </div>*@
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-1  col-md-6 col-sm-6">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="single-footer-widget news_widgets">
                     <h6 class="footer_title">CONTACT INFORMATION</h6>
                     <p>To join us, or for simple information do not hesitate to contact us </p>
@@ -101,24 +95,24 @@
                         <div class="contact_info">
                             <div class="info_item">
                                 <i class="lnr lnr-home"></i>
-                                <h6>The Berges Du Lac II, Tunise</h6>
-                                <p>Near the craftsman's palace</p>
+                                <h6>California, United States</h6>
+                                <p>Santa monica bullevard</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-phone-handset"></i>
-                                <h6><a href="#">00 (216) 52017580</a></h6>
+                                <h6><a href="#">00 (440) 9865 562</a></h6>
                                 <p>Mon to Fri 9am to 6 pm</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">support@colorlib.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 footer-social">
+            <div class="col-lg-4 col-md-4 footer-social">
                 <div class="single-footer-widget instafeed">
                     <h6 class="footer_title">FOLLOW US</h6>
                     <a href="#"><img src="~/img/fb.png" /></a>
@@ -144,3 +138,4 @@
             </div>*@
     </div>
 </footer>
+<!--================ End footer Area  =================-->

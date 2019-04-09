@@ -15,7 +15,16 @@ namespace Web.Controllers
         // GET: Scheduler
         public ActionResult Index()
         {
-            return View();
+            List<SchedulerViewModel> l = new List<SchedulerViewModel>();
+            foreach(Scheduler s in schedulerService.GetAll())
+            {
+                SchedulerViewModel se = new SchedulerViewModel();
+                se.Duration = s.Duration;
+                se.ProgramName = s.ProgramName;
+                l.Add(se);
+
+            }
+            return View(l);
         }
 
         // GET: Scheduler/Details/5

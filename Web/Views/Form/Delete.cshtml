@@ -1,9 +1,11 @@
-﻿@model Web.Models.RewardViewModel
+﻿@model Web.Models.FormViewModel
 
 @{
     ViewBag.Title = "Delete";
 }
-<!--================Header Menu Area =================-->
+
+@*<h2>Delete</h2>*@
+
 <header class="header_area">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -19,104 +21,164 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <
-
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
-
-                            </ul>
-                        </li>
-
-                        <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
-                            </ul>
-                        </li>
-
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Create","Form")">Participate</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-                   
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a>
+                                @*<ul>
+
+                                        <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+
+                                    </ul>*@
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
     </div>
 </header>
-<!--================Welcome Home Banner Area =================-->
+<!--================End Menu Area =================-->
+<!--================Home Banner Area =================-->
 <section class="banner_area">
-    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    <a href="about-us.html">LogIn</a>
                 </div>
-                <br />
-                <h2>The events that may interests you</h2>
+                <h2>Are you sure you want to delete this?</h2>
             </div>
         </div>
     </div>
 </section>
+<!--================End Home Banner Area =================-->
+
 
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>RewardViewModel</h4>
+    <h4>FormViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RewardId)
+            @Html.DisplayNameFor(model => model.Participant)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RewardId)
+            @Html.DisplayFor(model => model.Participant)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price1)
+            @Html.DisplayNameFor(model => model.FormId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price1)
+            @Html.DisplayFor(model => model.FormId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price2)
+            @Html.DisplayNameFor(model => model.Pseudo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price2)
+            @Html.DisplayFor(model => model.Pseudo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price3)
+            @Html.DisplayNameFor(model => model.photos)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price3)
+            @Html.DisplayFor(model => model.photos)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EventId)
+            @Html.DisplayNameFor(model => model.CIN)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EventId)
+            @Html.DisplayFor(model => model.CIN)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.titre)
+            @Html.DisplayNameFor(model => model.FormDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.titre)
+            @Html.DisplayFor(model => model.FormDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Countrie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Countrie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.EventId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+        *@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
         </dd>
 
     </dl>
@@ -131,6 +193,8 @@
         </div>
     }
 </div>
+<br /><br />
+<!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
         <div class="row">
@@ -150,9 +214,9 @@
                     </div>
                 </div>
             </div>
-            @*<div class="col-lg-1  col-md-6 col-sm-6">
-                </div>*@
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-1  col-md-6 col-sm-6">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="single-footer-widget news_widgets">
                     <h6 class="footer_title">CONTACT INFORMATION</h6>
                     <p>To join us, or for simple information do not hesitate to contact us </p>
@@ -160,24 +224,24 @@
                         <div class="contact_info">
                             <div class="info_item">
                                 <i class="lnr lnr-home"></i>
-                                <h6>The Berges Du Lac II, Tunise</h6>
-                                <p>Near the craftsman's palace</p>
+                                <h6>California, United States</h6>
+                                <p>Santa monica bullevard</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-phone-handset"></i>
-                                <h6><a href="#">00 (216) 52017580</a></h6>
+                                <h6><a href="#">00 (440) 9865 562</a></h6>
                                 <p>Mon to Fri 9am to 6 pm</p>
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">support@colorlib.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 footer-social">
+            <div class="col-lg-4 col-md-4 footer-social">
                 <div class="single-footer-widget instafeed">
                     <h6 class="footer_title">FOLLOW US</h6>
                     <a href="#"><img src="~/img/fb.png" /></a>
@@ -203,3 +267,4 @@
             </div>*@
     </div>
 </footer>
+<!--================ End footer Area  =================-->

@@ -14,16 +14,20 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = Model.UserEmail, id = Model.UserId } )">Home</a></li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
-                                <li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
-                                <li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
-                                <li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
-                            </ul>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+                                    @if (Model.UserRole.Equals("Organizor"))
+                                    {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
+                                }
+                                </ul>
                         </li>
 
                         <li class="nav-item submenu dropdown">
@@ -45,7 +49,7 @@
                             <li class="nav-item submenu dropdown">
                                 <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
                                 <ul>
-                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">Show Profile</a></li>
 
                                 </ul>
                             </li>
@@ -123,7 +127,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                        <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Send</a></li>
+
                     </div>
                 </form>
             </div>

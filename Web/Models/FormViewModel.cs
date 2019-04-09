@@ -8,257 +8,79 @@ using System.Web;
 
 namespace Web.Models
 {
-    public enum Sex
+    public enum MethodeDePayemmentVM { OnTheBoxOffice, OnLine }
+    public enum SexVM
     {
         Man, Women
     }
-    public enum Countries
-    {
 
-        Afghanistan,
-        Albania,
-        Algeria,
-        AmericanSamoa,
-        Andorra,
-        Angola,
-        Anguilla,
-        Antarctica,
-        AntiguaandBarbuda,
-        Argentina,
-        Armenia,
-        Aruba,
-        Australia,
-        Austria,
-        Azerbaijan,
-        Bahamas,
-        Bahrain,
-        Bangladesh,
-        Barbados,
-        Belarus,
-        Belgium,
-        Belize,
-        Benin,
-        Bermuda,
-        Bhutan,
-        Bolivia,
-        BosniaandHerzegovina,
-        Botswana,
-        Brazil,
-        Bulgaria,
-        BurkinaFaso,
-        Burundi,
-        Cambodia,
-        Cameroon,
-        Canada,
-        CapeVerde,
-        CaymanIslands,
-        CentralAfricanRepublic,
-        Chad,
-        Chile,
-        China,
-        Colombia,
-        Comoros,
-        Congo,
-        CookIslands,
-        CostaRica,
-        CoteDIvoire,
-        Croatia,
-        Cuba,
-        Cyprus,
-        CzechRepublic,
-        Denmark,
-        Djibouti,
-        Dominica,
-        DominicanRepublic,
-        Ecuador,
-        Egypt,
-        ElSalvador,
-        EquatorialGuinea,
-        Eritrea,
-        Estonia,
-        Ethiopia,
-        FaroeIslands,
-        Fiji,
-        Finland,
-        France,
-        FrenchGuiana,
-        Gabon,
-        Gambia,
-        Georgia,
-        Germany,
-        Ghana,
-        Gibraltar,
-        Greece,
-        Greenland,
-        Grenada,
-        Guadeloupe,
-        Guam,
-        Guatemala,
-        GuineaBissau,
-        Guyana,
-        Haiti,
-        Honduras,
-        HongKong,
-        Hungary,
-        Iceland,
-        India,
-        Indonesia,
-        Iran,
-        Iraq,
-        Ireland,
-        Israel,
-        Italy,
-        Jamaica,
-        Japan,
-        Jordan,
-        Kazakhstan,
-        Kenya,
-        Kiribati,
-        Korea, DemocraticPeoplesRepublicof,
-        Republicofkorea,
-        Kuwait,
-        Kyrgyzstan,
-        LaoPeoplsDemocraticRepublic,
-        Latvia,
-        Lebanon,
-        Lesotho,
-        Liberia,
-        Liechtenstein,
-        Lithuania,
-        Luxembourg,
-        Macao,
-        Macedonia, theFormerYugoslavRepublicof,
-        Madagascar,
-        Malawi,
-        Malaysia,
-        Maldives,
-        Mali,
-        Malta,
-        MarshallIslands,
-        Martinique,
-        Mauritania,
-        Mauritius,
-        Mayotte,
-        Mexico,
-        Micronesia, FederatedStatesof,
-        RepublicofMoldova,
-        Monaco,
-        Mongolia,
-        Montserrat,
-        Morocco,
-        Mozambique,
-        Myanmar,
-        Namibia,
-        Nauru,
-        Nepal,
-        Netherlands,
-        NetherlandsAntilles,
-        NewCaledonia,
-        NewZealand,
-        Nicaragua,
-        Niger,
-        Nigeria,
-        Niue,
-        NorfolkIsland,
-        NorthernMarianaIslands,
-        Norway,
-        Oman,
-        Pakistan,
-        Palau,
-        PalestinianTerritory, Occupied,
-        Panama,
-        PapuaNewGuinea,
-        Paraguay,
-        Peru,
-        Philippines,
-        Pitcairn,
-        Poland,
-        Portugal,
-        PuertoRico,
-        Qatar,
-        Reunion,
-        Romania,
-        RussianFederation,
-        Rwanda,
-        SaintKittsandNevis,
-        SaintLucia,
-        SaintPierreandMiquelon,
-        SaintVincentandtheGrenadines,
-        SanMarino,
-        SaoTomandPrincipe,
-        SaudiArabia,
-        Senegal,
-        SerbiaandMontenegro,
-        Seychelles,
-        SierraLeone,
-        Singapore,
-        Slovakia,
-        Slovenia,
-        SolomonIslands,
-        Somalia,
-        SouthAfrica,
-        Spain,
-        SriLanka,
-        Sudan,
-        Suriname,
-        Swaziland,
-        Sweden,
-        Switzerland,
-        Syria,
-        Taiwan, ProvinceofChina,
-        Tajikistan,
-        Tanzania,
-        Thailand,
-        TimorLeste,
-        Togo,
-        Tokelau,
-        Tonga,
-        TrinidadandTobago,
-        Tunisia,
-        Turkey,
-        Turkmenistan,
-        TurksandCaicosIslands,
-        Tuvalu,
-        Uganda,
-        Ukraine,
-        UnitedArabEmirates,
-        UnitedKingdom,
-        UnitedStates,
-        Uruguay,
-        Uzbekistan,
-        Vanuatu,
-        Venezuela,
-        VietNam,
-        VirginIslands,
-        US,
-        WesternSahara,
-        Yemen,
-        Zambia,
-        Zimbabwe
-    }
 
     public class FormViewModel
     {
-        [Key, Column(Order = 0)]
-        public int FormId { get; set; }
-        [EnumDataType(typeof(Sex))]
-        public Sex Sex { get; set; }
 
-        public int Age { get; set; }
+        public String par { get; set; }
+        public Boolean? Participant { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+
+        public int FormId { get; set; }
+        [Required]
+        public string Pseudo { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string photos { get; set; }
+        [MaxLength(8), MinLength(8)]
+        [Required]
+        public string CIN { get; set; }
+
+        [EnumDataType(typeof(Sex))]
+        public SexVM? Sex { get; set; }
+        public DateTime FormDate { get; set; }
+        public int? Age { get; set; }
         [DataType(DataType.MultilineText)]
         public String Profession { get; set; }
         [DataType(DataType.EmailAddress)]
         public String Mail { get; set; }
-        [EnumDataType(typeof(Countries))]
-        public Countries Countrie { get; set; }
+        public string Countrie { get; set; }
         public String Address { get; set; }
 
-        public UserModel UserModel { get; set; }
-        public int UserId { get; set; }
-        public EventViewModel EventView { get; set; }
-        public int EventId { get; set; }
+        //[Display(Name = "EventId")]
+        public int? EventId { get; set; }
+        public virtual EventViewModel p { get; set; }
+
+        public string Title { get; set; }
+        public MethodeDePayemment MethodeDePayemment { get; set; }
+
+
 
 
 
     }
+
+
+    public class IndexViewModel2
+    {
+        public string StripePublishableKey { get; set; }
+    }
+
+    public class ChargeViewModel
+    {
+        public string StripeToken { get; set; }
+        public string StripeEmail { get; set; }
+    }
+
+    public class CustomViewModel
+    {
+        public string StripePublishableKey { get; set; }
+        public string StripeToken { get; set; }
+        public string StripeEmail { get; set; }
+        public bool PaymentForHidden { get; set; }
+        public string PaymentForHiddenCss
+        {
+            get
+            {
+                return PaymentForHidden ? "hidden" : "";
+            }
+        }
+    }
+
 }

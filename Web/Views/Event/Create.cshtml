@@ -22,7 +22,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="background-color:transparent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = Model.UserEmail, id = Model.UserId })">Home</a></li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
@@ -31,10 +31,10 @@
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
-                                    @*   @if (Model.EventModel.President.Role.Equals("Organizor"))
+                        @if (Model.UserRole.Equals("Organizor"))
                         {
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
-                    }*@
+                        }
                             </ul>
                         </li>
 
@@ -56,7 +56,7 @@
                             <li class="nav-item submenu dropdown">
                                 <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
                                 <ul>
-                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Details","UserProfil",new { id = Model.UserId })">show Profile</a></li>
 
                                 </ul>
                             </li>
@@ -81,9 +81,9 @@
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">LogIn</a>
+                    <a href="about-us.html">Add Event</a>
                 </div>
-                <h2>Log In</h2>
+                <h2>Make Your Event</h2>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@
             <h3>Event info</h3>
             <fieldset>
                 <h2>Event information</h2>
-                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                <p class="desc">Please enter your infomation and proceed to next step so we can build your event</p>
                 <div class="fieldset-content">
                     @Html.ValidationSummary("", new { @class = "text-danger" })
 
@@ -182,7 +182,7 @@
 
             <fieldset>
                 <h2>Add your scheduler</h2>
-                <p class="desc">Set up your money limit to reach the future plan</p>
+                <p class="desc">Set up your scheduler plan</p>
                 <div class="fieldset-content">
                     <div class="form-group">
                         Duration
@@ -208,7 +208,7 @@
                         @Html.TextBox("file1", "", new { type = "file",id="imagePath"})
                         @Html.ValidationMessageFor(model => model.SchedulerModel.Photo)
                     </div>
-
+                    <br />
                     <a class="main_btn" OnClick="addition()">Add</a>
                     <script>
                         function addition() {
@@ -255,25 +255,25 @@
             <h3>Finish Event Info</h3>
             <fieldset>
                 <h2>Finish Your Event Information</h2>
-                <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                
                 <div class="fieldset-content">
-
+                    <br />
                     Make your slogan
                     <div class="form-flex">
                         <div class="form-group">
-                            @Html.EditorFor(model => model.EventModel.Title, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
-                            @Html.ValidationMessageFor(model => model.EventModel.Title, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.EventModel.Slogan, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
+                            @Html.ValidationMessageFor(model => model.EventModel.Slogan, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     Type's Event
                     <div class="form-flex">
                         <div class="form-group">
-                            @Html.EditorFor(model => model.EventModel.Title, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
-                            @Html.ValidationMessageFor(model => model.EventModel.Title, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.EventModel.Type, new { htmlAttributes = new { @class = "form-control", @id = "titleId" } })
+                            @Html.ValidationMessageFor(model => model.EventModel.Type, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="editor-field">
-                        Upload Image
+                        Upload your Event Image
                         @Html.TextBox("file2", "", new { type = "file" })
 
 

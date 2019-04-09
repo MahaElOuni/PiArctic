@@ -51,16 +51,30 @@ namespace Web.Controllers
         {
             
            EventViewModel eventSchedulerModel = new EventViewModel();
+
               List<EventViewModel> listEventScheduler = new List<EventViewModel>();
             List<SchedulerViewModel> listScheduer = new List<SchedulerViewModel>();
-            EventService eventService = new EventService();
+           
            
             var eventt = eventService.GetAll();
-             
-              foreach (var i in eventt)
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    eventSchedulerModel.UserId = i.Id;
+                    eventSchedulerModel.UserEmail = i.Email;
+                    eventSchedulerModel.UserRole = i.Role;
+
+
+                }
+            }
+
+            foreach (var i in eventt)
               {
                   if (i.EventId == id)
                   {
+                   
                     eventSchedulerModel.EventId = i.EventId;
                       eventSchedulerModel.Title = i.Title;
                       eventSchedulerModel.DateString = i.Start.ToString("MM/dd/yyyy hh:mm:ss");
@@ -70,7 +84,7 @@ namespace Web.Controllers
                     eventSchedulerModel.Photo = i.Photo;
                     eventSchedulerModel.Slogan = i.Slogan;
                     eventSchedulerModel.Type = i.Type;
-                    foreach (Scheduler s in i.ListScheduler)
+                    foreach (Scheduler s in schedulerService.GetSchedulesByEvent(id))
                     {
                         SchedulerViewModel sv = new SchedulerViewModel();
                         sv.SchedulerId = s.SchedulerId;
@@ -168,7 +182,22 @@ namespace Web.Controllers
         // GET: Event/Create
         public ActionResult Create()
         {
-            return View();
+
+            EventSchedulerViewModel evm = new EventSchedulerViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
+                    
+
+                }
+            }
+
+            return View(evm);
         }
 
         // POST: Event/Create
@@ -191,9 +220,9 @@ namespace Web.Controllers
                         i.Role = "President";
                         userService.Update(i);
                         userService.Commit();
-                        evm.EventModel.UserId = i.Id;
+                      /*  evm.EventModel.UserId = i.Id;
                         evm.EventModel.President.Email = i.Email;
-                        evm.EventModel.President.Role = "President";
+                        evm.EventModel.President.Role = "President";*/
 
                     }
                 }
@@ -230,9 +259,15 @@ namespace Web.Controllers
                 e.Photo = file2.FileName;
                 e.Slogan = evm.EventModel.Slogan;
                 e.Type = evm.EventModel.Type;
+                e.NumberPlaceReserve = 1;
+                e.IsFullDay = false;
+                e.ThemeColor = "red";
                 eventService.Add(e);
                 eventService.Commit();
-
+                foreach (User user in userService.GetParticipants())
+                {
+                    SendingMail("levio.lmp@gmail.com",user.Email, "New Event: " + e.Title, "There is new event may interest you Organized by: " + e.OrganizedBy + "  you can participate to this event by connecting to your account in ConsultTeck. Thank you for your trust");
+                }
                 foreach (Scheduler scheduler in schedulerService.GetAll())
                 {
                     if (scheduler.EventId == null)
@@ -244,10 +279,7 @@ namespace Web.Controllers
                         schedulerService.Commit();
                     }
                 }
-                foreach (User user in userService.GetParticipants())
-                {
-                    SendEmail("levio.lmp@gmail.com", user.Email, "New Event: " + e.Title, "There is new event may interest you Organized by: " + e.OrganizedBy + "  you can participate to this event by connecting to your account in ConsultTeck. Thank you for your trust");
-                }
+                
 
 
             }
@@ -262,8 +294,21 @@ namespace Web.Controllers
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
+
             Event e = eventService.GetById(id);
             EventViewModel eventModel = new EventViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    eventModel.UserId = i.Id;
+                    eventModel.UserEmail = i.Email;
+                    eventModel.UserRole = i.Role;
+
+
+                }
+            }
             eventModel.Title = e.Title;
             eventModel.Address = e.Address;
             eventModel.NumberPlaces = e.NumberPlaces;
@@ -336,10 +381,8 @@ namespace Web.Controllers
         }
         public JsonResult GetEvents()
         {
-            var e = eventService.GetAll();
-
-
-            return new JsonResult { Data = e, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
+            return new JsonResult { Data = eventService.getEventParticipate(User.Identity.Name), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
 
         }
@@ -425,6 +468,18 @@ namespace Web.Controllers
             List<EventViewModel> listEventScheduler = new List<EventViewModel>();
             var eventt = eventService.GetAll();
             var schedulers = schedulerService.GetAll();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    eventSchedulerModel.UserId = i.Id;
+                    eventSchedulerModel.UserEmail = i.Email;
+                    eventSchedulerModel.UserRole = i.Role;
+
+
+                }
+            }
             foreach (var i in eventt)
             {
                 if (i.EventId == id)
@@ -435,7 +490,9 @@ namespace Web.Controllers
                     eventSchedulerModel.Description = i.Description;
                     eventSchedulerModel.Address = i.Address;
                     eventSchedulerModel.OrganizedBy = i.OrganizedBy;
-                    foreach (Scheduler s in i.ListScheduler)
+                    eventSchedulerModel.Photo = i.Photo;
+                    eventSchedulerModel.Type = i.Type;
+                    foreach (Scheduler s in schedulerService.GetSchedulesByEvent(id))
                     {
                         SchedulerViewModel sv = new SchedulerViewModel();
                         sv.SchedulerId = s.SchedulerId;
@@ -453,7 +510,7 @@ namespace Web.Controllers
         [HttpPost]
         public void EditScheduler(String id,String duration,String progName)
         {
-            var scheduler = schedulerService.GetById(3);
+            var scheduler = schedulerService.GetById(Int32.Parse(id));
             scheduler.Duration = duration;
             scheduler.ProgramName = progName;
             schedulerService.Update(scheduler);
@@ -461,7 +518,7 @@ namespace Web.Controllers
             //return RedirectToAction("Index","Event");
             
         }
-        public void SendEmail(string From, string To, string Subject, string Body)
+        public void SendingMail(string From, string To, string Subject, string Body)
         {
             MailMessage mail = new MailMessage(From, To, Subject, Body);
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);

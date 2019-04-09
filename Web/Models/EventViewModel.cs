@@ -32,11 +32,15 @@ namespace Web.Models
         public String Photo { get; set; }
         public String Slogan { get; set; }
         public String Type { get; set; }
+        public int? NumberPlaceReserve { get; set; }
+
         public ICollection<SchedulerViewModel> listScheduler { get; set; }
         public int RewardId { get; set; }
         public virtual ICollection<Tasks> ListTask { get; set; }
         public int? UserId { get; set; }
         public PresidentModel President { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
 
     }
 
