@@ -16,6 +16,7 @@ namespace WebApiController1.Controllers
         [HttpGet]
         public IEnumerable<Event> Get()
         {
+			return eventService.GetAll();
             return eventService.GetAll().AsEnumerable();
         }
 

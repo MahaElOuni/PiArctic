@@ -1,4 +1,5 @@
-﻿using Service.Services;
+﻿using Domain.Entities;
+using Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,19 +55,45 @@ namespace Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            RewardViewModel evm = new RewardViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
 
-            return View();
+
+                }
+            }
+
+
+            return View(evm);
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            
+            RewardViewModel evm = new RewardViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
 
-            
-              SendingMail("levio.lmp@gmail.com", "khouloud.sma@esprit.tn", "Request problems", "problems ");
 
-            return View();
+                }
+            }
+
+
+            SendingMail("levio.lmp@gmail.com", "khouloud.sma@esprit.tn", "Request problems", "problems ");
+
+            return View(evm);
         }
         public void SendingMail(string From, string To, string Subject, string Body)
         {
