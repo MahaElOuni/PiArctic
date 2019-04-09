@@ -2341,11 +2341,9 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\MyTask.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Form\ViewConf.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Form\" />
-    <Folder Include="Views\Like\" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
     <Content Include="Views\Form\Charge.cshtml" />
@@ -2363,6 +2361,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Karim\" />
+    <Folder Include="Views\Like\" />
     <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
