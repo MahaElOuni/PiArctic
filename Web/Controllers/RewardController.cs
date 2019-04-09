@@ -116,38 +116,30 @@ namespace Web.Controllers
         }
 
         // GET: Reward/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
 
         {
-            Reward r = new Reward();
-           r = rewardService.GetById(id);
-            Reward rw = new Reward();
-            rw.Price1 = r.Price1;
-            rw.Price2 = r.Price2;
-            rw.Price3 = r.Price3;
-            rw.titre = r.titre;
-            rewardService.Update(r);
-            rewardService.Commit();
+          
 
-            return View(rw);
+            return View();
         }
 
         // POST: Reward/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Reward rw)
+        public ActionResult Edit(int id, RewardViewModel rw)
         {
 
-            Reward r = new Reward();
-            r = rewardService.GetById(id);
+            Reward r = rewardService.GetById(id);
+           
             
-            rw.Price1 = r.Price1;
-            rw.Price2 = r.Price2;
-            rw.Price3 = r.Price3;
-            rw.titre = r.titre;
+            r.Price1 = rw.Price1;
+            r.Price2 = rw.Price2;
+            r.Price3 = rw.Price3;
+            r.titre = rw.titre;
             rewardService.Update(r);
             rewardService.Commit();
 
-            return View("Index");
+            return View();
 
         }
 
@@ -155,25 +147,10 @@ namespace Web.Controllers
        
         public ActionResult Delete(int id)
         {
-            RewardViewModel rewardModel = new RewardViewModel();
+            rewardService.Delete(rewardService.GetById(id));
+            rewardService.Commit();
 
-            var Rewards = rewardService.GetAll();
-            foreach (var rp in Rewards)
-            {
-                if (rp.RewardId == id)
-                {
-                    rewardModel.RewardId = rp.RewardId;
-                    rewardModel.EventId = rp.EventId;
-                    rewardModel.Price1 = rp.Price1;
-                    rewardModel.Price2 = rp.Price2;
-                    rewardModel.Price3 = rp.Price3;
-                    rewardModel.titre = rp.titre;
-                    rewardService.Delete(rp);
-                    rewardService.Commit();
-                }
-            }
-
-             return View(); 
+            return View(); 
         }
 
            
