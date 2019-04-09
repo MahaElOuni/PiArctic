@@ -27,6 +27,7 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
                                     @if (Model.UserRole.Equals("Organizor"))
