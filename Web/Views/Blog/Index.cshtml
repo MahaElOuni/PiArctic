@@ -54,17 +54,26 @@
 							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
-								
+
 							</ul>
 						</li>
 
 						<li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="nav-item"><a href="@Url.Action("Login","Account")" class="tickets_btn">Log In</a></li>
-						<li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
-					</ul>
+
+					@if (User.Identity.IsAuthenticated)
+					{
+
+						<li class="nav-item submenu dropdown">
+							<a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+							
+						</li>
+					}
+					else
+					{
+						<li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
+					}
 				</div>
 			</div>
 		</nav>
@@ -91,8 +100,7 @@
 									<ul class="blog_meta list">
 										<li>@Html.DisplayFor(modelItem => item.ne) <i class="lnr lnr-user"></i></li>
 										<li>@Html.DisplayFor(modelItem => item.DatePost)          <i class="lnr lnr-calendar-full"></i></li>
-										<li>06 Comments         <i class="lnr lnr-bubble"></i></li>
-										<li>@Html.DisplayFor(modelItem => item.NbrLike)   <i class="lnr lnr-heart"></i></li>
+
 									</ul>
 								</div>
 							</div>
@@ -116,7 +124,7 @@
 							@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 						</ul>
 					</nav>
-					
+
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -130,7 +138,7 @@
 						</div><!-- /input-group -->
 						<div class="br"></div>
 					</aside>
-					
+
 					<aside class="single_sidebar_widget popular_post_widget">
 						<h3 class="widget_title">Popular Posts</h3>
 						<div class="media post_item">
@@ -140,7 +148,7 @@
 								<p>02 Hours ago</p>
 							</div>
 						</div>
-						
+
 						<div class="br"></div>
 					</aside>
 					@*POPULLAR POSt*@
@@ -153,3 +161,77 @@
 		</div>
 	</div>
 </section>
+<!--================ start footer Area  =================-->
+<footer class="footer-area p_120">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3  col-md-6 col-sm-6">
+				<div class="single-footer-widget tp_widgets">
+					<h6 class="footer_title">ABOUT US</h6>
+					<div>
+						<p>
+							ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
+
+							We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
+							Fin de la discussion
+							Écrivez un message...
+
+
+						</p>
+					</div>
+				</div>
+			</div>
+			@*<div class="col-lg-1  col-md-6 col-sm-6">
+				</div>*@
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="single-footer-widget news_widgets">
+					<h6 class="footer_title">CONTACT INFORMATION</h6>
+					<p>To join us, or for simple information do not hesitate to contact us </p>
+					<div class="col-lg-6">
+						<div class="contact_info">
+							<div class="info_item">
+								<i class="lnr lnr-home"></i>
+								<h6>The Berges Du Lac II, Tunise</h6>
+								<p>Near the craftsman's palace</p>
+							</div>
+							<div class="info_item">
+								<i class="lnr lnr-phone-handset"></i>
+								<h6><a href="#">00 (216) 52017580</a></h6>
+								<p>Mon to Fri 9am to 6 pm</p>
+							</div>
+							<div class="info_item">
+								<i class="lnr lnr-envelope"></i>
+								<h6><a href="#">Consultteck@gmail.com</a></h6>
+								<p>Send us your query anytime!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 footer-social">
+				<div class="single-footer-widget instafeed">
+					<h6 class="footer_title">FOLLOW US</h6>
+					<a href="#"><img src="~/img/fb.png" /></a>
+					<a href="#"><img src="~/img/twit.png" /></a>
+					<a href="#"><img src="~/img/insta.png" /></a>
+					<a href="#"><img src="~/img/link.png" /></a>
+				</div>
+			</div>
+		</div>
+		@*<div class="row footer-bottom d-flex justify-content-between align-items-center">
+				<p class="col-lg-8 col-md-8 footer-text m-0">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+				<div class="col-lg-4 col-md-4 footer-social">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-dribbble"></i></a>
+					<a href="#"><i class="fa fa-behance"></i></a>
+				</div>
+			</div>*@
+	</div>
+</footer>
+<!--================ End footer Area  =================-->

@@ -22,7 +22,7 @@ namespace Web.Controllers
 		public ActionResult Index(int? page)
 		{
 			List<BlogViewModel> list = new List<BlogViewModel>();
-			var a = blogService.GetAll();
+			var a = blogService.GetAll().Reverse();
 			foreach (var i in a)
 			{
 				BlogViewModel bvm = new BlogViewModel();
@@ -34,11 +34,26 @@ namespace Web.Controllers
 				bvm.Titre = i.Titre;
 				bvm.Contenu = i.Contenu;
 				bvm.Photo = i.Photo;
+				
 				bvm.DatePost = i.DatePost;
 				list.Add(bvm);
 			}
 			
 			return View(list.ToList().ToPagedList(page ?? 1,3));
+		}
+		public int likes(int id)
+		{
+			LikeService likeService = new LikeService();
+			
+			int likess= likeService.nbrLike(id).Count();
+			return likess;
+		}
+		public int comments(int id)
+		{
+			CommentService commentService = new CommentService();
+			
+			int commentss= commentService.nbrComment(id).Count();
+			return commentss;
 		}
 		public List<CommentViewModel> Affiche(int id)
 		{
@@ -100,7 +115,8 @@ namespace Web.Controllers
 					bvm.DatePost = i.DatePost;
 					bvm.Contenu = i.Contenu;
 					bvm.Photo = i.Photo;
-					
+					bvm.likess = likes(id);
+					bvm.commentss = comments(id);
 					bvm.Comments = Affiche(id);
 				}
 				
@@ -173,9 +189,10 @@ namespace Web.Controllers
 		}
 
 		// GET: Blog/Delete/5
-		public ActionResult Delete(int id, int userid)
+		public ActionResult Delete(int id)
 		{
 			var blogs = blogService.GetAll();
+			int userid = User.Identity.GetUserId<int>();
 			foreach (var i in blogs)
 			{
 				if (i.BlogId == id && i.UserId== userid)
@@ -187,10 +204,15 @@ namespace Web.Controllers
 					bvm.Photo = i.Photo;
 					blogService.Delete(i);
 					blogService.Commit();
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return RedirectToAction("Index");
 				}
 			}
+			return RedirectToAction("Index");
 
-			return View();
 		}
 
 		// POST: Blog/Delete/5

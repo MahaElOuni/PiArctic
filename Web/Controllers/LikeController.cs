@@ -12,8 +12,9 @@ namespace Web.Controllers
 {
     public class LikeController : Controller
     {
-        // GET: Like
-        public ActionResult Index()
+		LikeService likeService = new LikeService();
+		// GET: Like
+		public ActionResult Index()
         {
             return View();
         }
@@ -47,15 +48,48 @@ namespace Web.Controllers
         }
 		public ActionResult Like(int id, LikeViewModel lvm)
 		{
-			LikeService likeService = new LikeService();
-			Like l = new Like();
-			l.UserId = User.Identity.GetUserId<int>();
-			l.BlogId = id;
-			likeService.Add(l);
-			likeService.Commit();
 
-			return RedirectToAction("../Blog/Details");
+			
+			List<LikeViewModel> list = new List<LikeViewModel>();
+
+			int idu = User.Identity.GetUserId<int>();
+			if (Exist(id, idu) == true)
+			{
+				return RedirectToAction("Details", "Blog", new { id = id });
+			}
+			else
+
+			{
+				Like l = new Like();
+				l.UserId = idu;
+				l.BlogId = id;
+				likeService.Add(l);
+				likeService.Commit();
+				return RedirectToAction("Details", "Blog", new { id = id });
+
+
+			}
+
+			
 		}
+		public Boolean Exist(int id, int idu)
+		{
+			var a = likeService.GetAll();
+			foreach (var i in a)
+			{
+				if (i.BlogId == id && i.UserId == idu)
+				{
+					return true; 
+				}else
+				{
+					return false; 
+				}
+
+			}
+
+			return true;
+		}
+		
         // GET: Like/Edit/5
         public ActionResult Edit(int id)
         {
