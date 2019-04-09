@@ -339,6 +339,7 @@
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\Form.cs" />
+    <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Organizer.cs" />
     <Compile Include="Entities\Participant.cs" />
     <Compile Include="Entities\President.cs" />

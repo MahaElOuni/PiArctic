@@ -86,6 +86,7 @@
     <Compile Include="IServices\ICommentService.cs" />
     <Compile Include="IServices\IEventService.cs" />
     <Compile Include="IServices\IFormService.cs" />
+    <Compile Include="IServices\ILikeService.cs" />
     <Compile Include="IServices\IPresidentService.cs" />
     <Compile Include="IServices\IRecommandationService.cs" />
     <Compile Include="IServices\ISatisfactionService.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\FormService.cs" />
+    <Compile Include="Services\LikeService.cs" />
     <Compile Include="Services\PresidentService.cs" />
     <Compile Include="Services\RecommandationService.cs" />
     <Compile Include="Services\SatisfactionService.cs" />
