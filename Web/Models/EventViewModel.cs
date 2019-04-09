@@ -37,6 +37,8 @@ namespace Web.Models
         public virtual ICollection<Tasks> ListTask { get; set; }
         public int? UserId { get; set; }
         public PresidentModel President { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
 
     }
 

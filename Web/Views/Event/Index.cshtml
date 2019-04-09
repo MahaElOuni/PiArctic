@@ -74,13 +74,13 @@
                             <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
                         </div>
 
-                        <a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>
-                        <a id="btn" class="main_btn" href="@Url.Action("Create", "Reward", new {  id=item.EventId })">Ajouter Rewards</a>
+                        @*<a class="main_btn" href="@Url.Action("Details", "Event", new {  id=item.EventId })">View More Details</a>*@
+                        
 
                         <a class="main_btn" href="@Url.Action("disliker", "Event", new {  id=item.EventId  })">dislike</a>
 
                         <a class="main_btn" href="@Url.Action("liker", "Event", new {  id=item.EventId  })">like</a>
-                        <a class="main_btn" href="@Url.Action("statitique", "Event", new {  id=item.EventId  })">stat</a>
+                        
 
 
 
