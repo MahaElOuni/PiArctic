@@ -12,6 +12,7 @@ namespace Domain.Entities
 		public int NbrLike { get; set; }
 		public String Contenu { get; set; }
 		public int? UserId { get; set; }
+		public String Photoc { get; set; }
 		public DateTime DateCom { get; set; }
 		public Blog Blog { get; set; }
 		public String nom { get; set; }

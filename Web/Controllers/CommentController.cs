@@ -57,6 +57,7 @@ namespace Web.Controllers
 			DateTime nowc = DateTime.Now;
 			int idUser = 0;
 			String e = ""; 
+			String p = ""; 
 			User u = new User();
 			UserService userService = new UserService();
 			foreach (User i in userService.GetAll())
@@ -65,6 +66,7 @@ namespace Web.Controllers
 				{
 					idUser = i.Id;
 					e = i.FName;
+					p = i.Photo;
 					userService.Update(i);
 					userService.Commit();
 				}
@@ -74,6 +76,7 @@ namespace Web.Controllers
 			b.DateCom = nowc;
 			b.UserId = idUser;
 			b.BlogId = id;
+			b.Photoc = p; 
 			b.Contenu = cvm.Contenu;
 			b.NbrLike = 0;
 			commentService.Add(b);
