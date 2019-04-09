@@ -475,6 +475,7 @@
     <Content Include="Content\css\breadcrumb.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\khouloudtemplate.css" />
+    <Content Include="Content\mytemplate\vendor\nouislider\Poduim.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\_about.css" />
@@ -1631,6 +1632,8 @@
     <Content Include="img\logo1.png" />
     <Content Include="img\logo2.png" />
     <Content Include="img\map-bg.png" />
+    <Content Include="img\rew.png" />
+    <Content Include="img\reward.png" />
     <Content Include="img\schedule-1.jpg" />
     <Content Include="img\slider-1.jpg" />
     <Content Include="img\slider-2.jpg" />
@@ -2206,10 +2209,13 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\MyTask.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+
     <Content Include="Views\Scheduler\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\Karim\" />
     <Folder Include="Views\Form\" />
     <Folder Include="Views\Organizer\" />
     <Folder Include="Views\User\" />

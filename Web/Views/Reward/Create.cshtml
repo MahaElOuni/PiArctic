@@ -6,7 +6,7 @@
             <div class="container box_1620">
                 <!-- Brand and toggle get grouped for better mobile display -->
 
-                <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+                <img src="~/img/logo2.png" sizes="100px" alt="">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -15,103 +15,152 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home" , new { email = Model.UserEmail, id = Model.UserId } )">Home</a></li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
-
-                            </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+                                    @*@if (Model.UserRole.Equals("Organizor"))
+                                    {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Tasks")">My Tasks</a></li>
+                                }*@
+                                </ul>
                         </li>
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("BlogDetail","Home")">Blog Details</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-            
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="#">Show Profile</a></li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
     </div>
 </header>
-<!--================Welcome Home Banner Area =================-->
+<!--================End Menu Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
                 <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    @*<a href="index.html">Home</a>
+                        <a href="about-us.html">F</a>*@
+                    <p style="color:white">EVENT<img src="~/img/back .png" /> FIX REWARDS</p>
                 </div>
                 <br />
-                <h2>The events that may interests you</h2>
+                <h2>FIX REWARDS</h2>
             </div>
         </div>
     </div>
 </section>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<br /><br />
 
-    <div class="form-horizontal">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container register-form">
+    <div class="form">
+        <div class="note" style="text-align: center; height: 80px; background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+                                 color: #fff; font-weight: bold; line-height: 80px;">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price1, "", new { @class = "text-danger" })
-            </div>
+            <h3><img src="~/img/reward.png" />For this event we Fixed three rewards<img src="~/img/reward.png" /> </h3>
         </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price2, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-content" style="padding: 5%;border: 1px solid #ced4da; margin-bottom: 2%;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @* @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <label for="first_name" class="required">Description</label>
+                            <div class="col-md-10" style="margin-left:110px">
+                                @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="first_name" class="required"><img src="~/img/rew.png"/>First Price</label>
+                            <div class="col-md-10" style="margin-left:110px">
+                                @Html.EditorFor(model => model.Price1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="first_name" class="required" style="margin-left:120px"><img src="~/img/rew.png"/>Second Price</label>
+                            <div class="col-md-10" style="margin-left:180px">
+                                @Html.EditorFor(model => model.Price2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="first_name" class="required" style="margin-left:350px"><img src="~/img/rew.png"/>Third Price</label>
+                            <div class="col-md-10" style="margin-left:350px">
+                                @Html.EditorFor(model => model.Price3, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Attribute" class="tickets_btn" style="margin-left:450px" />
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price3, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        }
 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+</div>
 
+
+
+<!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
         <div class="row">
@@ -151,7 +200,7 @@
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">Consultteck@gmail.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
@@ -184,7 +233,5 @@
             </div>*@
     </div>
 </footer>
+<!--================ End footer Area  =================-->
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

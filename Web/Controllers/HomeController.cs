@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
@@ -59,8 +61,20 @@ namespace Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            
+
+            
+              SendingMail("levio.lmp@gmail.com", "khouloud.sma@esprit.tn", "Request problems", "problems ");
 
             return View();
+        }
+        public void SendingMail(string From, string To, string Subject, string Body)
+        {
+            MailMessage mail = new MailMessage(From, To, Subject, Body);
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("levio.lmp@gmail.com", "eudfdldhubmzuscf");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
         }
         public ActionResult Blog()
         {

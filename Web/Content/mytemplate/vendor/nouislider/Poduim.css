@@ -1,0 +1,10 @@
+﻿.first-place:hover {
+    transform: translate(0px,-20px) ;transition: ease-in-out 0.1s
+}
+.second-place:hover {
+    transform: translate(-20px,20px) ;transition: ease-in-out 0.1s
+}
+
+.third-place:hover {
+    transform: translate(20px,20px); transition: ease-in-out 0.1s
+}

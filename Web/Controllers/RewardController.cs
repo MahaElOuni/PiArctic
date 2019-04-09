@@ -16,6 +16,7 @@ namespace Web.Controllers
         // GET: Reward
         public ActionResult Index(int id)
         {
+           
             List<RewardViewModel> list = new List<RewardViewModel>();
             var r = rewardService.GetAll();
 
@@ -63,9 +64,21 @@ namespace Web.Controllers
         // GET: Reward/Create
         public ActionResult Create()
         {
-           
-    
-            return View();
+            RewardViewModel evm = new RewardViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
+
+
+                }
+            }
+
+            return View(evm);
         }
 
         // POST: Reward/Create
