@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace WebApiController1.Controllers
 {
     public class AdminAPIController : ApiController
@@ -29,6 +30,20 @@ namespace WebApiController1.Controllers
          
             return us.GetMany().Where(e => e.Etat=="Pending");
         }
+
+        [Route("GetUserId")]
+        [HttpGet]
+        public User getById(int id)
+        {
+            return (User)us.getUser(id);
+        }
+        [Route("changeState")]
+        [HttpGet]
+        public void ChangeState(int id, String state)
+        {
+             us.ChangeStateById(id,state);
+        }
+
 
         // POST: api/AdminAPI
         public void Post([FromBody]string value)

@@ -135,7 +135,7 @@ namespace Web.Controllers
                         {
                             return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
                         }
-                        else if (user3.Role == "Orgonizor")
+                        else if (user3.Role == "Organizor")
                         {
                             return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
                         }
