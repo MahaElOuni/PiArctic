@@ -88,6 +88,7 @@
     <Compile Include="IServices\IFormService.cs" />
     <Compile Include="IServices\ILikeService.cs" />
     <Compile Include="IServices\IPresidentService.cs" />
+    <Compile Include="IServices\IRatingService.cs" />
     <Compile Include="IServices\IRecommandationService.cs" />
     <Compile Include="IServices\ISatisfactionService.cs" />
     <Compile Include="IServices\ISchedulerService.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\FormService.cs" />
     <Compile Include="Services\LikeService.cs" />
     <Compile Include="Services\PresidentService.cs" />
+    <Compile Include="Services\RartingService.cs" />
     <Compile Include="Services\RecommandationService.cs" />
     <Compile Include="Services\SatisfactionService.cs" />
     <Compile Include="Services\SchedulerService.cs" />

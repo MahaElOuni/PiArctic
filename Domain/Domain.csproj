@@ -343,6 +343,7 @@
     <Compile Include="Entities\Organizer.cs" />
     <Compile Include="Entities\Participant.cs" />
     <Compile Include="Entities\President.cs" />
+    <Compile Include="Entities\Rating.cs" />
     <Compile Include="Entities\Recommendation.cs" />
     <Compile Include="Entities\Repport.cs" />
     <Compile Include="Entities\Reward.cs" />

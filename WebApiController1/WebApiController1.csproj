@@ -229,6 +229,7 @@
     <Compile Include="Controllers\IdentityAPIController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\SatisfactionController.cs" />
     <Compile Include="Controllers\UserProfilAPIController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
