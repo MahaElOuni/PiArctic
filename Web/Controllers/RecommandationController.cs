@@ -78,9 +78,13 @@ namespace Web.Controllers
                 if (i.UserName.Equals(User.Identity.Name))
                 {
                     idUser = i.Id;
+
                     i.Role = "Organizor";
                     userService.Update(i);
                     userService.Commit();
+
+                   
+
 
                 }
             }
@@ -121,23 +125,26 @@ namespace Web.Controllers
 
         // POST: Recommandation/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, RecommendationViewModel rm)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Recommendation r = rs.GetById(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+            r.EmailParticipent = rm.EmailParticipent;
+            r.Nom = rm.Nom;
+            r.Prenom = rm.Nom;
+            rs.Update(r);
+            rs.Commit();
+
+            return View();
         }
 
         // GET: Recommandation/Delete/5
         public ActionResult Delete(int id)
         {
+            rs.Delete(rs.GetById(id));
+            rs.Commit();
+
             return View();
         }
 

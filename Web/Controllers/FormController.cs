@@ -30,7 +30,7 @@ namespace Web.Controllers
             String part = null;
             foreach (Form f in listFilmsDomain)
             {
-                if (f.FormDate.AddDays(1).Equals(DateTime.Today))
+                if (f.FormDate.AddDays(3).Equals(DateTime.Today))
                 {
                     if (f.Participant == false)
                     {
@@ -94,7 +94,7 @@ namespace Web.Controllers
             {
                 if (f.Participant == false)
                 {
-                    if (f.FormDate.AddDays(1).Equals(DateTime.Today))
+                    if (f.FormDate.AddDays(3).Equals(DateTime.Today))
                     {
 
 

@@ -1,5 +1,5 @@
-﻿@using PagedList ;
-@using PagedList.Mvc ;
+﻿@using PagedList 
+@using PagedList.Mvc 
 @model IPagedList<Web.Models.BlogViewModel>
 
 @{
@@ -85,6 +85,63 @@
     </div>
 </section>
 <!--================End Home Banner Area =================-->
+
+<header class="header_area">
+	<div class="main_menu">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container box_1620">
+				<!-- Brand and toggle get grouped for better mobile display -->
+
+				<a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home" , new { email = "smakhouloud@gmail.com", id = 1 } )">Home</a></li>
+
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
+								<li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
+								<li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
+								<li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
+							</ul>
+						</li>
+
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+
+							</ul>
+						</li>
+
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+					</ul>
+
+					@if (User.Identity.IsAuthenticated)
+					{
+
+						<li class="nav-item submenu dropdown">
+							<a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+							
+						</li>
+					}
+					else
+					{
+						<li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
+					}
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
 
 <p>
     <div class="col-sm-4 md-form">
