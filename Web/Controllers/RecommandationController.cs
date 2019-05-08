@@ -78,7 +78,7 @@ namespace Web.Controllers
                 if (i.UserName.Equals(User.Identity.Name))
                 {
                     idUser = i.Id;
-                    i.Role = "Orgonizor";
+                    i.Role = "Organizor";
                     userService.Update(i);
                     userService.Commit();
 

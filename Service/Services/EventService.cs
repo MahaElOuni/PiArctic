@@ -89,7 +89,33 @@ namespace Service.Services
         {
             return this.GetAll().OrderByDescending(e => e.Start.Date);
         }
+        public IEnumerable<Event> getEventDescription()
+        {
+            List<String> list = new List<String>();
+            foreach(Event e in this.GetAll())
+            {
+
+            }
+            return this.GetAll();
+        }
         
-    
+        public IEnumerable<Event> getEventsPresident()
+        {
+            return this.GetMany().Where(e => e.UserId == 2);
+        }
+        public IEnumerable<Scheduler> getEventsScheduler(int eventId)
+        {
+            List<Scheduler> listS = new List<Scheduler>();
+            foreach(Scheduler s in this.GetById(eventId).ListScheduler)
+            {
+                Scheduler scheduler = new Scheduler { Duration = s.Duration, ProgramName = s.ProgramName, Speaker = s.Speaker, Photo = s.Photo };
+                listS.Add(scheduler);
+            }
+
+            return listS;
+        }
+        
+        
+
     }
 }

@@ -1,306 +1,267 @@
 ﻿@model Web.Models.BlogViewModel
 
 @{
-	ViewBag.Title = "Details";
+    ViewBag.Title = "Details";
 }
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
 
+                <img src="~/img/logo2.png" sizes="100px" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home" , new { email = "smakhouloud@gmail.com", id = 1 } )">Home</a></li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Create","Form")">Participate</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                               
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
 <!--================Welcome Home Banner Area =================-->
 <section class="banner_area">
-	<div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
-		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-		<div class="container">
-			<div class="banner_content text-center">
-				<div class="page_link">
-					<a href="index.html">Home</a>
-					<a href="about-us.html">Blog</a>
-				</div>
-				<br />
-				<h2>Welcome to the Blogs</h2>
-			</div>
-		</div>
-	</div>
+    <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">Blog</a>
+                </div>
+                <br />
+                <h2>Welcome to the Blogs</h2>
+            </div>
+        </div>
+    </div>
 </section>
 <!--================End Home Banner Area =================-->
-<header class="header_area">
-	<div class="main_menu">
-		<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container box_1620">
-				<!-- Brand and toggle get grouped for better mobile display -->
 
-				<a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-					<ul class="nav navbar-nav menu_nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
-
-						<li class="nav-item submenu dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
-								<li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
-								<li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
-								<li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
-							</ul>
-						</li>
-
-						<li class="nav-item submenu dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
-
-							</ul>
-						</li>
-
-						<li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-						<li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
-					</ul>
-
-					@if (User.Identity.IsAuthenticated)
-					{
-
-						<li class="nav-item submenu dropdown">
-							<a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
-							
-						</li>
-					}
-					else
-					{
-						<li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
-					}
-				</div>
-			</div>
-		</nav>
-	</div>
-</header>
-<header class="header_area">
-	<div class="main_menu">
-		<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container box_1620">
-				<!-- Brand and toggle get grouped for better mobile display -->
-
-				<a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo2.png" sizes="100px" alt=""></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-					<ul class="nav navbar-nav menu_nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
-
-						<li class="nav-item submenu dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="schedule.html">Conference</a>
-								<li class="nav-item"><a class="nav-link" href="venue.html">Party</a>
-								<li class="nav-item"><a class="nav-link" href="price.html">Exposure</a>
-								<li class="nav-item"><a class="nav-link" href="elements.html">Training</a></li>
-							</ul>
-						</li>
-
-						<li class="nav-item submenu dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="@Url.Action("Blog","Home")">Blog</a></li>
-
-							</ul>
-						</li>
-
-						<li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-						<li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="nav-item"><a href="@Url.Action("Login","Account")" class="tickets_btn">Log In</a></li>
-						<li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
-</header>
 
 
 
 <section class="blog_area single-post-area p_120">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 posts-list">
-				<div class="single-post row">
-					<div class="col-lg-12">
-						<div class="feature-img">
-							<img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(modelItem => Model.Photo)" style="max-width: 100%;width: 690px;height: 322px;" alt="">
-						</div>
-					</div>
-					<div class="col-lg-3  col-md-3">
-						<div class="blog_info text-right">
-							<ul class="blog_meta list">
-								<li>@Html.DisplayFor(modelItem => Model.ne)<i class="lnr lnr-user"></i></a></li>
-								<li>@Html.DisplayFor(modelItem => Model.DatePost)<i class="lnr lnr-calendar-full"></i></a></li>
-								<li>@Html.DisplayFor(modelItem => Model.commentss)     Comments     <i class="lnr lnr-bubble"></i></a></li>
-								<li>@Html.DisplayFor(modelItem => Model.likess)         Likes   <i class="lnr lnr-heart"></i></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-9 col-md-9 blog_details">
-						<h2>@Html.DisplayFor(modelItem => Model.Titre)</h2>
-						<p class="excert">
-							@Html.DisplayFor(modelItem => Model.Des)
-						</p>
-					</div>
-					<div class="col-lg-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post row">
+                    <div class="col-lg-12">
+                        <div class="feature-img">
+                            <img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(modelItem => Model.Photo)" style="max-width: 100%;width: 690px;height: 322px;" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-3  col-md-3">
+                        <div class="blog_info text-right">
+                            <ul class="blog_meta list">
+                                <li>@Html.DisplayFor(modelItem => Model.ne)<i class="lnr lnr-user"></i></a></li>
+                                <li>@Html.DisplayFor(modelItem => Model.DatePost)<i class="lnr lnr-calendar-full"></i></a></li>
+                                <li>@Html.DisplayFor(modelItem => Model.commentss)     Comments     <i class="lnr lnr-bubble"></i></a></li>
+                                <li>@Html.DisplayFor(modelItem => Model.likess)         Likes   <i class="lnr lnr-heart"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 blog_details">
+                        <h2>@Html.DisplayFor(modelItem => Model.Titre)</h2>
+                        <p class="excert">
+                            @Html.DisplayFor(modelItem => Model.Des)
+                        </p>
+                    </div>
+                    <div class="col-lg-12">
 
 
-					</div>
-				</div>
+                    </div>
+                </div>
 
-			</div>
-			<div class="col-lg-4">
-				<div class="blog_right_sidebar">
-					@*FOR THE JEE*@
-					<aside class="single_sidebar_widget search_widget">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search Posts">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-							</span>
-						</div><!-- /input-group -->
-						<div class="br"></div>
-					</aside>
-					@*FOR THE JEE*@
-					<aside class="single_sidebar_widget popular_post_widget">
-						<h3 class="widget_title">Popular Posts</h3>
-						<div class="media post_item">
-							<img src="~/img/blog/popular-post/post1.jpg" alt="post">
-							<div class="media-body">
-								<a href="blog-details.html"><h3>Space The Final Frontier</h3></a>
-								<p>02 Hours ago</p>
-							</div>
-						</div>
-						<div class="br"></div>
-					</aside>
-					@*FOR THE JEE*@
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"><img class="img-fluid" src="~/img/blog/add.jpg" alt=""></a>
-						<div class="br"></div>
-					</aside>
-					@*FOR THE JEE*@
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    @*FOR THE JEE*@
+                    <aside class="single_sidebar_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Posts">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        <div class="br"></div>
+                    </aside>
+                    @*FOR THE JEE*@
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Popular Posts</h3>
+                        <div class="media post_item">
+                            <img src="~/img/blog/popular-post/post1.jpg" alt="post">
+                            <div class="media-body">
+                                <a href="blog-details.html"><h3>Space The Final Frontier</h3></a>
+                                <p>02 Hours ago</p>
+                            </div>
+                        </div>
+                        <div class="br"></div>
+                    </aside>
+                    @*FOR THE JEE*@
+                    <aside class="single_sidebar_widget ads_widget">
+                        <a href="#"><img class="img-fluid" src="~/img/blog/add.jpg" alt=""></a>
+                        <div class="br"></div>
+                    </aside>
+                    @*FOR THE JEE*@
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <div class="comments-area">
-	<a class="main_btn" href="@Url.Action("Create", "Comment", new {  id=Model.BlogId })">Add a comment</a>
-	<a class="main_btn" href="@Url.Action("Like", "Like", new {  id=Model.BlogId })">like</a>
+    <a class="main_btn" href="@Url.Action("Create", "Comment", new {  id=Model.BlogId })">Add a comment</a>
+    <a class="main_btn" href="@Url.Action("Like", "Like", new {  id=Model.BlogId })">like</a>
 
-	<a class="main_btn" href="@Url.Action("Delete", "Blog", new {  id=Model.BlogId })">Delete</a>
-	<h4>NBR COMMENT</h4>
-	@foreach (var item in Model.Comments)
-	{
-		<div class="comment-list">
+    <a class="main_btn" href="@Url.Action("Delete", "Blog", new {  id=Model.BlogId })">Delete</a>
+    <h4>NBR COMMENT</h4>
+    @foreach (var item in Model.Comments)
+    {
+        <div class="comment-list">
 
-			<div class="single-comment justify-content-between d-flex">
+            <div class="single-comment justify-content-between d-flex">
 
-				<div class="user justify-content-between d-flex">
-					<div class="thumb">
-						<img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(modelItem => item.Photoc)" style="max-width: 100%;width: 89px;height: 70px;" alt="">
-					</div>
-					<div class="desc">
-						<h5><a href="#">@Html.DisplayFor(modelItem => item.nom)</a></h5>
-						<p class="date">@Html.DisplayFor(modelItem => item.DateCom) </p>
-						<p class="comment">
-							@Html.DisplayFor(modelItem => item.Contenu)
-						</p>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="@Url.Content("~/Content/Upload/")@Html.DisplayFor(modelItem => item.Photoc)" style="max-width: 100%;width: 89px;height: 70px;" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5><a href="#">@Html.DisplayFor(modelItem => item.nom)</a></h5>
+                        <p class="date">@Html.DisplayFor(modelItem => item.DateCom) </p>
+                        <p class="comment">
+                            @Html.DisplayFor(modelItem => item.Contenu)
+                        </p>
+                    </div>
+                </div>
 
 
-	}
+            </div>
+        </div>
+
+
+    }
 
 </div>
 <!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3  col-md-6 col-sm-6">
-				<div class="single-footer-widget tp_widgets">
-					<h6 class="footer_title">ABOUT US</h6>
-					<div>
-						<p>
-							ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="single-footer-widget tp_widgets">
+                    <h6 class="footer_title">ABOUT US</h6>
+                    <div>
+                        <p>
+                            ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
 
-							We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
-							Fin de la discussion
-							Écrivez un message...
+                            We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
+                            Fin de la discussion
+                            Écrivez un message...
 
 
-						</p>
-					</div>
-				</div>
-			</div>
-			@*<div class="col-lg-1  col-md-6 col-sm-6">
-				</div>*@
-			<div class="col-lg-6 col-md-6 col-sm-6">
-				<div class="single-footer-widget news_widgets">
-					<h6 class="footer_title">CONTACT INFORMATION</h6>
-					<p>To join us, or for simple information do not hesitate to contact us </p>
-					<div class="col-lg-6">
-						<div class="contact_info">
-							<div class="info_item">
-								<i class="lnr lnr-home"></i>
-								<h6>The Berges Du Lac II, Tunise</h6>
-								<p>Near the craftsman's palace</p>
-							</div>
-							<div class="info_item">
-								<i class="lnr lnr-phone-handset"></i>
-								<h6><a href="#">00 (216) 52017580</a></h6>
-								<p>Mon to Fri 9am to 6 pm</p>
-							</div>
-							<div class="info_item">
-								<i class="lnr lnr-envelope"></i>
-								<h6><a href="#">Consultteck@gmail.com</a></h6>
-								<p>Send us your query anytime!</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 footer-social">
-				<div class="single-footer-widget instafeed">
-					<h6 class="footer_title">FOLLOW US</h6>
-					<a href="#"><img src="~/img/fb.png" /></a>
-					<a href="#"><img src="~/img/twit.png" /></a>
-					<a href="#"><img src="~/img/insta.png" /></a>
-					<a href="#"><img src="~/img/link.png" /></a>
-				</div>
-			</div>
-		</div>
-		@*<div class="row footer-bottom d-flex justify-content-between align-items-center">
-				<p class="col-lg-8 col-md-8 footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
-				<div class="col-lg-4 col-md-4 footer-social">
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-dribbble"></i></a>
-					<a href="#"><i class="fa fa-behance"></i></a>
-				</div>
-			</div>*@
-	</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-1  col-md-6 col-sm-6">
+                </div>*@
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="single-footer-widget news_widgets">
+                    <h6 class="footer_title">CONTACT INFORMATION</h6>
+                    <p>To join us, or for simple information do not hesitate to contact us </p>
+                    <div class="col-lg-6">
+                        <div class="contact_info">
+                            <div class="info_item">
+                                <i class="lnr lnr-home"></i>
+                                <h6>The Berges Du Lac II, Tunise</h6>
+                                <p>Near the craftsman's palace</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-phone-handset"></i>
+                                <h6><a href="#">00 (216) 52017580</a></h6>
+                                <p>Mon to Fri 9am to 6 pm</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-envelope"></i>
+                                <h6><a href="#">Consultteck@gmail.com</a></h6>
+                                <p>Send us your query anytime!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 footer-social">
+                <div class="single-footer-widget instafeed">
+                    <h6 class="footer_title">FOLLOW US</h6>
+                    <a href="#"><img src="~/img/fb.png" /></a>
+                    <a href="#"><img src="~/img/twit.png" /></a>
+                    <a href="#"><img src="~/img/insta.png" /></a>
+                    <a href="#"><img src="~/img/link.png" /></a>
+                </div>
+            </div>
+        </div>
+        @*<div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-8 col-md-8 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-md-4 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>*@
+    </div>
 </footer>
 <!--================ End footer Area  =================-->
