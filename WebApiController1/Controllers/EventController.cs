@@ -93,7 +93,12 @@ namespace WebApiController1.Controllers
         public int GetOrganizerId(String email)
         {
             UserService user = new UserService();
-            return user.GetAll().Where(e => e.Email.equals(email)).Select(e => e.Id);
+            int id = 0;
+           foreach(int i in  user.GetAll().Where(e => e.Email.Equals(email)).Select(e => e.Id))
+            {
+                id = i;
+            }
+            return id;
                 }
 
         // POST: api/Event
