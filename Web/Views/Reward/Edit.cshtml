@@ -4,23 +4,86 @@
     ViewBag.Title = "Edit";
 }
 
-<!--================Welcome Home Banner Area =================-->
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                <img src="~/img/logo2.png" sizes="100px" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = "smakhouloud@gmail.com", id = 1 })">Home</a></li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
                 <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    @*<a href="index.html">Home</a>
+                        <a href="about-us.html">F</a>*@
+                    <p style="color:white">EVENT<img src="~/img/back .png" /> REWARDS</p>
                 </div>
                 <br />
-                <h2>The events that may interests you</h2>
+                <h2>REWARDS</h2>
             </div>
         </div>
     </div>
 </section>
-
 
 
 @using (Html.BeginForm())
@@ -31,13 +94,7 @@
         <h4>RewardViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.RewardId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RewardId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RewardId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Price1, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -63,13 +120,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -86,7 +136,7 @@
         </div>
     </div>
 }
-
+<!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
         <div class="row">
@@ -126,7 +176,7 @@
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">Consultteck@gmail.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
@@ -159,6 +209,4 @@
             </div>*@
     </div>
 </footer>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<!--================ End footer Area  =================-->

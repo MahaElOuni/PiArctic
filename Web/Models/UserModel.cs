@@ -19,7 +19,6 @@ namespace Web.Models
         public String Role { get; set; }
         public DateTime BirthDate { get; set; }
         public String Photo { get; set; }
-        public String EntrepriseTranscripts { get; set; }
         public String Etat { get; set; }
     }
 }

@@ -19,6 +19,10 @@ namespace Service.Services
         {
 
         }
+       public IEnumerable<Scheduler> GetSchedulesByEvent(int eventId)
+        {
+            return this.GetMany().Where(e => e.EventId == eventId);
+        }
 
     }
     

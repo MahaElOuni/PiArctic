@@ -19,7 +19,7 @@ namespace Web.Controllers
         {
 
            
-            int idOrganizer=0;
+            int idOrganizer=1;
 
             UserService userService = new UserService();
            // userService.FindRoleByName(user.UserName);
@@ -135,6 +135,9 @@ namespace Web.Controllers
                 if (u.Email.Equals(email))
                 {
                     organizerId = u.Id;
+                    u.Role = "Organizor";
+                    userService.Update(u);
+                    userService.Commit();
                 }
             }
             Tasks task = new Tasks() {UserId= organizerId ,TaskTitle=taskName,EventId=Int32.Parse(id)};

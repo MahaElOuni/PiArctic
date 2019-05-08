@@ -10,6 +10,5 @@ namespace Domain.Entities
     {
         public int ParicipantId { get; set; }
         public virtual ICollection<Recommendation> listRecommdendation { get; set; }
-        public virtual ICollection<Form> Forms { get; set; }
     }
 }

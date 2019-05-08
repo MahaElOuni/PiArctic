@@ -3,6 +3,71 @@
 @{
     ViewBag.Title = "Index";
 }
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                <img src="~/img/logo2.png" sizes="100px" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home" , new { email = "smakhouloud@gmail.com", id = 1 } )">Home</a></li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyCalendar","Event")">My Calendar</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="#">Show Profile</a></li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
 <!--================Welcome Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
@@ -11,10 +76,10 @@
             <div class="banner_content text-center">
                 <div class="page_link">
                     <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    <a href="about-us.html">My Event</a>
                 </div>
                 <br />
-                <h2>The events that may interests you</h2>
+                <h2>You Are President In This Events</h2>
             </div>
         </div>
     </div>
@@ -24,119 +89,226 @@
 
 @foreach (var item in Model)
 {
+
+
     <!--================Welcome Area =================-->
     <section class="welcome_area pad_btm">
         <div class="container">
             <div class="welcome_inner row">
-                <div class="col-lg-5">
-                    <div class="welcome_img">
-                        <img class="img-fluid" src="~/img/welcome-1.jpg" alt="">
-
+                <div class="col-lg-4">
+                    <div class="categories_post">
+                        <img src="~/Content/Upload/@Html.DisplayFor(modelItem => item.Photo)" alt="post" style="height:350px;width:450px">
+                        <div class="categories_details">
+                            <div class="categories_text">
+                                <a href="@Url.Action("DetailsMyEvent", "Event", new { id = item.EventId })">
+                                    <h5>@Html.DisplayFor(modelItem => item.Type)</h5>
+                                </a>
+                                <div class="border_line"></div>
+                                <p>@Html.DisplayFor(modelItem => item.Slogan)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="welcome_text">
 
+                <div class="col-lg-4 offset-lg-1">
+                    <div>
+                        <br />
+                        <br />
                         <div class="media-body">
-                            <h3> @Html.DisplayFor(modelItem => item.Title)</h3>
+                            <h2 style="color:black">
+                                <span> @Html.DisplayFor(modelItem => item.Title)</span>
+                            </h2>
+                            <br />
                             <div class="media">
                                 <img src="~/img/icons/iconCalendar.png" style="height:30px;width:30px;">
-                                <p><strong>@Html.DisplayFor(modelItem => item.Start)</strong></p>
+                                <p>
+                                    <strong>@Html.DisplayFor(modelItem => item.Start)</strong>
+                                </p>
                                 <label style="color:white">Hello</label>
                                 <img src="~/img/icons/locationIcon.png" style="height:27px;width:30px;">
-                                <p><strong>@Html.DisplayFor(modelItem => item.Address)</strong></p>
+                                <p>
+                                    <strong>@Html.DisplayFor(modelItem => item.Address)</strong>
+                                </p>
                             </div>
 
                             <p>@Html.DisplayFor(modelItem => item.Description)</p>
                             <h6>Organized by: @Html.DisplayFor(modelItem => item.OrganizedBy)</h6>
+
+                            <div style="display:none">@Html.EditorFor(modelItem => item.EventId, new { htmlAttributes = new { @class = "form-control", @id = "eventId", @name = "eventId" } })</div>
+
+
+
                         </div>
-                        <div style="display:none">@Html.EditorFor(modelItem => item.EventId, new { htmlAttributes = new { @class = "form-control", @id = "eventId", @name = "eventId" } })</div>
-                        <a class="main_btn" href="@Url.Action("DetailsMyEvent", "Event", new {  id=item.EventId })">View Details</a>
-                        <a class="main_btn" href="@Url.Action("Edit", "Event", new {  id=item.EventId })">Edit</a>
-
-
-
-                        <!--============================ Welcome Add Organizer ====================================-->
-                        <a class="main_btn" data-toggle="modal" data-target=".bootstrapmodal">Edit</a>
-
-
-                        <div class="modal fade bootstrapmodal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="model-header">
-                                        <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                                        <div class="modal-title"><h2>Designates an Organizer</h2></div>
-                                    </div>
-                                    <div class="modal-body">
-
-
-                                        <div class="switch-wrap d-flex justify-content-between">
-                                            <input placeholder="Organizer Email" type="email" id="email" />
-                                            <select class="default-select" id="TaskId" name="TaskId">
-                                                <option>Select Task</option>
-                                                <option>Create Form</option>
-                                                <option>Create Ticketing System</option>
-                                                <option>Add Information</option>
-                                                <option>Fix Rewards</option>
-                                                <option>Satisfaction Survey</option>
-                                            </select>
-                                            <button class="btn sub-btn" OnClick="addition()">+</button>
-                                            <script>
-                                                function addition() {
-                                                    var email = document.getElementById("email").value;
-                                                    var taskId = document.getElementById("TaskId");
-                                                    var task = taskId.options[taskId.selectedIndex].value;
-                                                    var eventId = document.getElementById("eventId").value;
-                                                    console.log(email);
-                                                    console.log(taskId);
-                                                    console.log(task);
-                                                    console.log(eventId);
-                                                    $('#tab tr:last').after("<tr><td>" + email + "</td><td> "  +"  -  "+ task +  "</td>");
-                                                    $.ajax({
-                                                        url: "/Tasks/AddTask",
-                                                        type: "POST",
-                                                        data: {
-                                                            'id': eventId, 'email': email, 'taskName': task
-                                                        }
-                                                    });
-
-
-                                                }
-                                            </script>
-
-                                        </div>
-                                        <table id="tab">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Organizer</th>
-                                                   
-                                                    <th scope="col">Task</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr></tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                            <div class="modal-footer">
-                                                
-                                               
-                                                <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                        <!--============================ Welcome Add Organizer ====================================-->
                     </div>
                 </div>
+                <div class="blog_info text-sm-left">
+                    <div class="post_tag">
+
+                        <br />
+                        <h4 style="color:darkred">Your Actions</h4>
+
+                    </div>
+                    <ul class="blog_meta list">
+
+                        <li><img src="~/img/iconEdit.png" style="height:20px;width:20px" /><a href="@Url.Action("Edit", "Event", new { id = item.EventId })" class="genric-btn default-border circle arrow">Edit Event<span class="lnr lnr-arrow-right"></span></a></li>
+                        <li><img src="~/img/iconOgranizer.png" style="height:20px;width:20px" /><a class="genric-btn default-border circle arrow" data-toggle="modal" data-target=".bootstrapmodal">Add Organizer<span class="lnr lnr-arrow-right"></span></a></li>
+                        <li><img src="~/img/iconOgranizer.png" style="height:20px;width:20px" /><a href="@Url.Action("Index", "Form")" class="genric-btn default-border circle arrow" >Participant List<span class="lnr lnr-arrow-right"></span></a></li>
+                        <li><img src="~/img/iconDelere.png" style="height:20px;width:20px" /><button class="genric-btn default-border circle arrow">@Html.ActionLink("Delete Event", "Delete", "Event", new { id = item.EventId }, new { onclick = "return confirm('Are sure wants to delete?');" })</button></li>
+                    </ul>
+
+                </div>
+
             </div>
+
         </div>
     </section>
     <!--================End Welcome Area =================-->
 
 
+    <!--============================ Welcome Add Organizer ====================================-->
+
+    <div class="modal fade bootstrapmodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="model-header">
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                    <div class="modal-title"><h2>Designates an Organizer</h2></div>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <input placeholder="Organizer Email" type="email" id="email" />
+                        <select class="default-select" id="TaskId" name="TaskId">
+                            <option>Select Task</option>
+                            <option>Fix Rewards</option>
+                            <option>view Statistic</option>
+                            <option>Display rewards</option>
+                            <option>Add Recommendation</option>
+                            <option>Display Recommendation</option>
+                        </select>
+                        <button class="btn sub-btn" OnClick="addition()">+</button>
+                        <script>
+                            function addition() {
+                                var email = document.getElementById("email").value;
+                                var taskId = document.getElementById("TaskId");
+                                var task = taskId.options[taskId.selectedIndex].value;
+                                var eventId = document.getElementById("eventId").value;
+                                console.log(email);
+                                console.log(taskId);
+                                console.log(task);
+                                console.log(eventId);
+                                $('#tab tr:last').after("<tr><td>" + email + "</td><td> " + "  -  " + task + "</td>");
+                                $.ajax({
+                                    url: "/Tasks/AddTask",
+                                    type: "POST",
+                                    data: {
+                                        'id': eventId, 'email': email, 'taskName': task
+                                    }
+                                });
+
+
+                            }
+                        </script>
+
+                    </div>
+                    <table id="tab">
+                        <thead>
+                            <tr>
+                                <th scope="col">Organizer</th>
+
+                                <th scope="col">Task</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+
+
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--============================ End Add Organizer ====================================-->
 }
 
+<!--================ start footer Area  =================-->
+<footer class="footer-area p_120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="single-footer-widget tp_widgets">
+                    <h6 class="footer_title">ABOUT US</h6>
+                    <div>
+                        <p>
+                            ConsultTeck is a specialized event agency which built its image on the success of your event within its human dimension or completely unreasonable.
 
+                            We guide you in thinking, planning, organization and design of your projects, which are based on learning and the integration of the culture of your company. Our work is the result of a clever mixture of listening and strong creative and professional skills.
+                            Fin de la discussion
+                            Écrivez un message...
+
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-1  col-md-6 col-sm-6">
+                </div>*@
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="single-footer-widget news_widgets">
+                    <h6 class="footer_title">CONTACT INFORMATION</h6>
+                    <p>To join us, or for simple information do not hesitate to contact us </p>
+                    <div class="col-lg-6">
+                        <div class="contact_info">
+                            <div class="info_item">
+                                <i class="lnr lnr-home"></i>
+                                <h6>The Berges Du Lac II, Tunise</h6>
+                                <p>Near the craftsman's palace</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-phone-handset"></i>
+                                <h6><a href="#">00 (216) 52017580</a></h6>
+                                <p>Mon to Fri 9am to 6 pm</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-envelope"></i>
+                                <h6><a href="#">Consultteck@gmail.com</a></h6>
+                                <p>Send us your query anytime!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 footer-social">
+                <div class="single-footer-widget instafeed">
+                    <h6 class="footer_title">FOLLOW US</h6>
+                    <a href="#"><img src="~/img/fb.png" /></a>
+                    <a href="#"><img src="~/img/twit.png" /></a>
+                    <a href="#"><img src="~/img/insta.png" /></a>
+                    <a href="#"><img src="~/img/link.png" /></a>
+                </div>
+            </div>
+        </div>
+        @*<div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-8 col-md-8 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-md-4 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>*@
+    </div>
+</footer>
+<!--================ End footer Area  =================-->

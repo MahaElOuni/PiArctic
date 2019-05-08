@@ -16,15 +16,15 @@
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Demarage")">Home</a></li>
 
-        
+
 
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Demarage")">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Demarage")">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
-                        
-                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
+
+                        <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>
 
                         <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
                     </ul>
@@ -34,15 +34,18 @@
     </div>
 </header>
 <!--================End Menu Area =================-->
-<!--================Welcome Home Banner Area =================-->
-<section class="home_banner_area" style="background-image:url(../../img/banner/home-banner.jpg)">
-    <div class="banner_inner">
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center" style="background:url(../../img/banner/home-banner.jpg)">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
-
-            <div class="banner_content">
-                <h2>International Digital <br />Business Event</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-                <a class="banner_btn" href="#">View More Details</a>
+            <div class="banner_content text-center">
+                <div class="page_link">
+                    @*<a href="index.html">Home</a>
+                        <a href="about-us.html">About</a>*@
+                    <p style="color:white">HOME<img src="~/img/back .png" /> CONTACT</p>
+                </div>
+                <h2>CONTACT US</h2>
             </div>
         </div>
     </div>
@@ -51,14 +54,7 @@
 <!--================Contact Area =================-->
 <section class="contact_area p_120">
     <div class="container">
-        @*<div id="mapBox" class="mapBox"
-             data-lat="40.701083"
-             data-lon="-74.1522848"
-             data-zoom="13"
-             data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
-             data-mlat="40.701083"
-             data-mlon="-74.1522848">
-        </div>*@
+
         <div class="row">
             <div class="col-lg-3">
                 <div class="contact_info">
@@ -74,11 +70,12 @@
                     </div>
                     <div class="info_item">
                         <i class="lnr lnr-envelope"></i>
-                        <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                        <h6><a href="#">Consultteck2019@gmail.com</a></h6>
                         <p>Send us your query anytime!</p>
                     </div>
                 </div>
             </div>
+            <br /> <br />
             <div class="col-lg-9">
                 <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
                     <div class="col-md-6">
@@ -127,7 +124,7 @@
                 </div>
             </div>
             @*<div class="col-lg-1  col-md-6 col-sm-6">
-            </div>*@
+                </div>*@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="single-footer-widget news_widgets">
                     <h6 class="footer_title">CONTACT INFORMATION</h6>
@@ -146,7 +143,7 @@
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">Consultteck2019@gmail.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>

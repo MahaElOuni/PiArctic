@@ -14,26 +14,20 @@ namespace Service.Services
 	public class CommentService : Service<Comment>, ICommentService
 	{
 		private static IDatabaseFactory dbfactor = new DatabaseFactory();
-		private static IUnitOfWork wow = new UnitOfWork(dbfactor);
+		private static IUnitOfWork uow = new UnitOfWork(dbfactor);
 		IDatabaseFactory dbfactory = null;
-		public CommentService() : base(wow)
+		public CommentService() : base(uow)
 		{
 
 		}
-		public List<Comment> BlogComment(int id)
+		public List<Comment> nbrComment(int id)
 		{
-			List<Comment> l = new List<Comment>();
-			var a = GetAll();
-			foreach (var i in a)
-			{
-				if (i.BlogId == id)
-				{
-					l.Add(i);
-				}
-			}
-			return l;
 
+			List<Comment> list = uow.getRepository<Comment>().GetAll().ToList();
+			list = list.FindAll(x => x.BlogId.Equals(id)).ToList();
+			return list;
 		}
+
 	}
 
 }

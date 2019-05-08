@@ -8,259 +8,49 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
+
+    public enum MethodeDePayemment { OnTheBoxOffice, OnLine }
     public enum Sex
     {
         Man, Women
     }
-    public enum Countries
+
+    public class Form
     {
-
-        Afghanistan,
-        Albania,
-        Algeria,
-        AmericanSamoa,
-        Andorra,
-        Angola,
-        Anguilla,
-        Antarctica,
-        AntiguaandBarbuda,
-        Argentina,
-        Armenia,
-        Aruba,
-        Australia,
-        Austria,
-        Azerbaijan,
-        Bahamas,
-        Bahrain,
-        Bangladesh,
-        Barbados,
-        Belarus,
-        Belgium,
-        Belize,
-        Benin,
-        Bermuda,
-        Bhutan,
-        Bolivia,
-        BosniaandHerzegovina,
-        Botswana,
-        Brazil,
-        Bulgaria,
-        BurkinaFaso,
-        Burundi,
-        Cambodia,
-        Cameroon,
-        Canada,
-        CapeVerde,
-        CaymanIslands,
-        CentralAfricanRepublic,
-        Chad,
-        Chile,
-        China,
-        Colombia,
-        Comoros,
-        Congo,
-        CookIslands,
-        CostaRica,
-        CoteDIvoire,
-        Croatia,
-        Cuba,
-        Cyprus,
-        CzechRepublic,
-        Denmark,
-        Djibouti,
-        Dominica,
-        DominicanRepublic,
-        Ecuador,
-        Egypt,
-        ElSalvador,
-        EquatorialGuinea,
-        Eritrea,
-        Estonia,
-        Ethiopia,
-        FaroeIslands,
-        Fiji,
-        Finland,
-        France,
-        FrenchGuiana,
-        Gabon,
-        Gambia,
-        Georgia,
-        Germany,
-        Ghana,
-        Gibraltar,
-        Greece,
-        Greenland,
-        Grenada,
-        Guadeloupe,
-        Guam,
-        Guatemala,
-        GuineaBissau,
-        Guyana,
-        Haiti,
-        Honduras,
-        HongKong,
-        Hungary,
-        Iceland,
-        India,
-        Indonesia,
-        Iran,
-        Iraq,
-        Ireland,
-        Israel,
-        Italy,
-        Jamaica,
-        Japan,
-        Jordan,
-        Kazakhstan,
-        Kenya,
-        Kiribati,
-        Korea, DemocraticPeoplesRepublicof,
-        Republicofkorea,
-        Kuwait,
-        Kyrgyzstan,
-        LaoPeoplsDemocraticRepublic,
-        Latvia,
-        Lebanon,
-        Lesotho,
-        Liberia,
-        Liechtenstein,
-        Lithuania,
-        Luxembourg,
-        Macao,
-        Macedonia, theFormerYugoslavRepublicof,
-        Madagascar,
-        Malawi,
-        Malaysia,
-        Maldives,
-        Mali,
-        Malta,
-        MarshallIslands,
-        Martinique,
-        Mauritania,
-        Mauritius,
-        Mayotte,
-        Mexico,
-        Micronesia, FederatedStatesof,
-        RepublicofMoldova,
-        Monaco,
-        Mongolia,
-        Montserrat,
-        Morocco,
-        Mozambique,
-        Myanmar,
-        Namibia,
-        Nauru,
-        Nepal,
-        Netherlands,
-        NetherlandsAntilles,
-        NewCaledonia,
-        NewZealand,
-        Nicaragua,
-        Niger,
-        Nigeria,
-        Niue,
-        NorfolkIsland,
-        NorthernMarianaIslands,
-        Norway,
-        Oman,
-        Pakistan,
-        Palau,
-        PalestinianTerritory, Occupied,
-        Panama,
-        PapuaNewGuinea,
-        Paraguay,
-        Peru,
-        Philippines,
-        Pitcairn,
-        Poland,
-        Portugal,
-        PuertoRico,
-        Qatar,
-        Reunion,
-        Romania,
-        RussianFederation,
-        Rwanda,
-        SaintKittsandNevis,
-        SaintLucia,
-        SaintPierreandMiquelon,
-        SaintVincentandtheGrenadines,
-        SanMarino,
-        SaoTomandPrincipe,
-        SaudiArabia,
-        Senegal,
-        SerbiaandMontenegro,
-        Seychelles,
-        SierraLeone,
-        Singapore,
-        Slovakia,
-        Slovenia,
-        SolomonIslands,
-        Somalia,
-        SouthAfrica,
-        Spain,
-        SriLanka,
-        Sudan,
-        Suriname,
-        Swaziland,
-        Sweden,
-        Switzerland,
-        Syria,
-        Taiwan, ProvinceofChina,
-        Tajikistan,
-        Tanzania,
-        Thailand,
-        TimorLeste,
-        Togo,
-        Tokelau,
-        Tonga,
-        TrinidadandTobago,
-        Tunisia,
-        Turkey,
-        Turkmenistan,
-        TurksandCaicosIslands,
-        Tuvalu,
-        Uganda,
-        Ukraine,
-        UnitedArabEmirates,
-        UnitedKingdom,
-        UnitedStates,
-        Uruguay,
-        Uzbekistan,
-        Vanuatu,
-        Venezuela,
-        VietNam,
-        VirginIslands,
-        US,
-        WesternSahara,
-        Yemen,
-        Zambia,
-        Zimbabwe
-    }
-
-
-public class Form
-    {
-        [Key, Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int FormId { get; set; }
+        [DataType(DataType.Date)]
+        // [Required]
+
+        public DateTime FormDate { get; set; }
+
+        [Required]
+        public string Pseudo { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string photos { get; set; }
+        [MaxLength(8), MinLength(8)]
+        [Required]
+        public string CIN { get; set; }
+
         [EnumDataType(typeof(Sex))]
-        public Sex Sex { get; set; }
-        
-        public int Age  { get; set; }
+        public Sex? Sex { get; set; }
+
+        public int? Age { get; set; }
         [DataType(DataType.MultilineText)]
         public String Profession { get; set; }
         [DataType(DataType.EmailAddress)]
         public String Mail { get; set; }
-        [EnumDataType(typeof(Countries))]
-        public Countries Countrie { get; set; }
+
+        public string Countrie { get; set; }
         public String Address { get; set; }
+        public Boolean? Participant { get; set; }
 
-        public User User { get; set; }
-        [Key, Column(Order = 1)]
-        public int UserId { get; set; }
-        public Event Event { get; set; }
-        [Key, Column(Order = 2)]
-        public int EventId { get; set; }
-
+        // [Key, Column(Order = 2)]
+        public int? EventId { get; set; }
+        public virtual Event Event { get; set; }
+        public string Title { get; set; }
+        public MethodeDePayemment MethodeDePayemment { get; set; }
 
 
     }

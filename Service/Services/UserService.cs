@@ -54,5 +54,15 @@ namespace Service.Services
 
             return new User();
         }
+        public IEnumerable<User> GetParticipants()
+        {
+            return this.GetMany().Where(u => u.Role.Equals("Participant"));
+        }
+
+        public User getUser(int id)
+        {
+            User u = this.GetById((long)id);
+            return u;
+        }
     }
 }

@@ -26,7 +26,6 @@ namespace Web.Controllers
 			CommentViewModel cvm = new CommentViewModel();
 			List<CommentViewModel> lcmv = new List<CommentViewModel>();
 			List<Comment> lc = new List<Comment>();
-			lc = commentService.BlogComment(id);
 			Icm = new CommentService();
 			foreach (var i in lc)
 			{
@@ -54,8 +53,29 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Create(int id, CommentViewModel cvm)
 		{
+			DateTime nowc = DateTime.Now;
+			int idUser = 0;
+			String e = ""; 
+			String p = ""; 
+			User u = new User();
+			UserService userService = new UserService();
+			foreach (User i in userService.GetAll())
+			{
+				if (i.UserName.Equals(User.Identity.Name))
+				{
+					idUser = i.Id;
+					e = i.FName;
+					p = i.Photo;
+					userService.Update(i);
+					userService.Commit();
+				}
+			}
 			Comment b = new Comment();
+			b.nom = e;
+			b.DateCom = nowc;
+			b.UserId = idUser;
 			b.BlogId = id;
+			b.Photoc = p; 
 			b.Contenu = cvm.Contenu;
 			b.NbrLike = 0;
 			commentService.Add(b);

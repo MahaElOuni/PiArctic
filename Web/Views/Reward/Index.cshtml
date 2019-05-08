@@ -1,33 +1,122 @@
 ﻿@model IEnumerable<Web.Models.RewardViewModel>
 
-@{
-    ViewBag.Title = "Index";
-}
 
-<!--================Welcome Home Banner Area =================-->
+@*@{
+        ViewBag.Title = "Index";
+    }*@
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container box_1620">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                <img src="~/img/logo2.png" sizes="100px" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home", new { email = "smakhouloud@gmail.com", id = 1 })">Home</a></li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Event")">All Events</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("MyEvent","Event")">My Event</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create","Event")">Add Event</a>
+                                   
+                                </ul>
+                        </li>
+
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Blog")">Blog</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item submenu dropdown">
+                                <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log Out</a>
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="#">Edite Profile</a></li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"> <a href="@Url.Action("Login", "Account")" class="tickets_btn">Log In</a></li>}
+
+                        <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================End Menu Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center" style="background-image:url(../../img/banner/home-banner.jpg)">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
                 <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="about-us.html">Events</a>
+                    @*<a href="index.html">Home</a>
+                        <a href="about-us.html">F</a>*@
+                    <p style="color:white">EVENT<img src="~/img/back .png" /> REWARDS</p>
                 </div>
                 <br />
-                <h2>The events that may interests you</h2>
+                <h2>REWARDS</h2>
             </div>
         </div>
     </div>
 </section>
 
+<link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")vendor/nouislider/Poduim.css">
+<body style="margin-top: 5em;background-color: #ecf0f1;text-align: center;font-family: Open Sans">
+    <h1 class="title" style="color: #2c3e50;text-transform: uppercase">Price podium</h1>
+    @foreach (var item in Model)
+    {
+        <label>Description:</label>
+        @Html.DisplayFor(modelItem => item.titre)
+        <br /><br />
+        <div class="first-place" style="background-color: #2ecc71;height: 100px;width: 100px;margin: 0 auto;line-height: 100px
+	                                ;font-size: 50px;font-weight: 800;color: #27ae60">
+            @Html.DisplayFor(modelItem => item.Price1)
+        </div>
+        <div class="second-place" style="background-color: #f1c40f;height: 100px;width: 100px;margin: 0 auto;line-height: 100px
+	                                                    ;font-size: 50px;font-weight: 800;color: #f39c12;display: inline-block">
+            @Html.DisplayFor(modelItem => item.Price2)
+        </div>
+        <div class="third-place" style="background-color: #e74c3c;height: 100px;width: 100px;margin: 0 auto;margin-left: -4px
+	                                                ;line-height: 100px;font-size: 50px;font-weight: 800;color: #c0392b;display: inline-block">
+            @Html.DisplayFor(modelItem => item.Price3)
+        </div>
+        <br />
+        @Html.ActionLink("Edit|", "Edit", new { id = item.RewardId })
+        @Html.ActionLink("Delete", "Delete", new { id = item.RewardId })
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+</body>
+<br /><br />
+
+@*<table class="table">
     <tr>
-      
+
         <th>
             @Html.DisplayNameFor(model => model.Price1)
         </th>
@@ -37,7 +126,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Price3)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.titre)
         </th>
@@ -47,7 +136,7 @@
     @foreach (var item in Model)
     {
         <tr>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.Price1)
             </td>
@@ -57,11 +146,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price3)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.titre)
             </td>
             <td>
+
                 @Html.ActionLink("Edit", "Edit", new { id = item.RewardId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.RewardId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.RewardId })
@@ -69,8 +159,9 @@
         </tr>
     }
 
-</table>
+</table>*@
 
+<!--================ start footer Area  =================-->
 <footer class="footer-area p_120">
     <div class="container">
         <div class="row">
@@ -110,7 +201,7 @@
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-envelope"></i>
-                                <h6><a href="#">Consultteck@colorlib.com</a></h6>
+                                <h6><a href="#">Consultteck@gmail.com</a></h6>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
@@ -143,3 +234,4 @@
             </div>*@
     </div>
 </footer>
+<!--================ End footer Area  =================-->

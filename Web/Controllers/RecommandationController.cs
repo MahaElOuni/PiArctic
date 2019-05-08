@@ -44,35 +44,48 @@ namespace Web.Controllers
         }
 
         // GET: Recommandation/Create
-        public ActionResult Create(int id, RecommendationViewModel rvm)
+        public ActionResult Create()
         {
+            RecommendationViewModel evm = new RecommendationViewModel();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    evm.UserId = i.Id;
+                    evm.UserEmail = i.Email;
+                    evm.UserRole = i.Role;
 
-            int i = 0;
-            Recommendation r = new Recommendation();
-            r.RecommendationId = rvm.RecommendationId;
-            r.RecommendationNum = 1;
-            //  r.Status = rvm.Status.;
-            r.UserId = 1;
-            r.EventId = rvm.EventId = id;
-            r.Nom = rvm.Nom;
-            r.Prenom = rvm.Prenom;
-            r.EmailParticipent = rvm.EmailParticipent;
-          
-            rs.Add(r);
-            rs.Commit();
-            return View(rvm);
+
+                }
+            }
+
+
+            return View(evm);
 
         }
         // POST: Recommandation/Create
         [HttpPost]
         public ActionResult Create(RecommendationViewModel rvm,int id)
         {
-            int i = 0;
+           
             Recommendation r = new Recommendation();
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                   
+
+                }
+            }
+
+            r.UserId = idUser;
             r.RecommendationId = rvm.RecommendationId;
             r.RecommendationNum = 1;
-          //  r.Status = rvm.Status.;
-            r.UserId = 1;
             r.EventId = rvm.EventId = id;
             r.Nom = rvm.Nom;
             r.Prenom = rvm.Prenom;
@@ -106,23 +119,26 @@ namespace Web.Controllers
 
         // POST: Recommandation/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, RecommendationViewModel rm)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Recommendation r = rs.GetById(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+            r.EmailParticipent = rm.EmailParticipent;
+            r.Nom = rm.Nom;
+            r.Prenom = rm.Nom;
+            rs.Update(r);
+            rs.Commit();
+
+            return View();
         }
 
         // GET: Recommandation/Delete/5
         public ActionResult Delete(int id)
         {
+            rs.Delete(rs.GetById(id));
+            rs.Commit();
+
             return View();
         }
 

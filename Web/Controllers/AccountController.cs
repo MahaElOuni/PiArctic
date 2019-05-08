@@ -21,6 +21,7 @@ using System.Net.Mail;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Routing;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Web.Controllers
 {
@@ -34,7 +35,7 @@ namespace Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -46,9 +47,9 @@ namespace Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -67,12 +68,12 @@ namespace Web.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl,string state)
+        public ActionResult Login(string returnUrl, string state)
         {
             if (User.Identity.IsAuthenticated == false)
             {
                 ViewBag.ReturnUrl = returnUrl;
-                
+
             }
             if (state != null)
             {
@@ -109,18 +110,18 @@ namespace Web.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var user = new User {UserName = model.Email, Email = model.Email, Role = model.Role };
-            
-            
+            var user = new User { UserName = model.Email, Email = model.Email, Role = model.Role };
+
+
             switch (result)
             {
                 case SignInStatus.Success:
                     UserService us = new UserService();
                     User user3 = us.FindRoleByName(user.UserName);
-                    User u = us.getUserByEmailAndPassword(user.Email,model.Password);
+                    User u = us.getUserByEmailAndPassword(user.Email, model.Password);
                     if (u.Etat.Equals("Pending"))
                     {
-                        return RedirectToAction("Login", "Account" , new { state= "Pending" });
+                        return RedirectToAction("Login", "Account", new { state = "Pending" });
                     }
                     else if (u.Etat.Equals("Rejected"))
                     {
@@ -134,7 +135,7 @@ namespace Web.Controllers
                         {
                             return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
                         }
-                        else if (user3.Role == "Orgonizor")
+                        else if (user3.Role == "Organizor")
                         {
                             return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
                         }
@@ -147,7 +148,7 @@ namespace Web.Controllers
                             return RedirectToAction("Index", "Home", new { email = user.Email, id = user.Id });
                         }
                     }
-                    
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -188,7 +189,7 @@ namespace Web.Controllers
             // Si un utilisateur entre des codes incorrects pendant un certain intervalle, le compte de cet utilisateur 
             // est alors verrouillé pendant une durée spécifiée. 
             // Vous pouvez configurer les paramètres de verrouillage du compte dans IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -212,8 +213,8 @@ namespace Web.Controllers
 
             //}
             List<SelectListItem> items = new List<SelectListItem>();
-                
-            items.Add(new SelectListItem { Text ="President", Value = "President" });
+
+            items.Add(new SelectListItem { Text = "President", Value = "President" });
             items.Add(new SelectListItem { Text = "Orgonizor", Value = "Orgonizor" });
             items.Add(new SelectListItem { Text = "Participant", Value = "Participant" });
 
@@ -239,7 +240,7 @@ namespace Web.Controllers
                 if (file2 != null && file2.ContentLength > 0)
                     try
                     {
-                        string path = Path.Combine(Server.MapPath("~/Content/Upload"),Path.GetFileName(file2.FileName));
+                        string path = Path.Combine(Server.MapPath("~/Content/Upload"), Path.GetFileName(file2.FileName));
                         file2.SaveAs(path);
                         ViewBag.Message = "Image uploaded successfully";
                     }
@@ -266,14 +267,14 @@ namespace Web.Controllers
                     Password = model.Password,
                     Role = model.Poste,
                     Photo = file2.FileName,
-                    Etat ="Pending"
+                    Etat = "Pending"
                     //EntrepriseTranscripts = file3.FileName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //result = await UserManager.AddToRoleAsync(user.Id);
-                  //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
@@ -321,25 +322,62 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
-                    return View("ForgotPasswordConfirmation");
-                
-                }
 
-                // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
-                // Envoyer un message électronique avec ce lien
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                SendingMail("levio.lmp@gmail.com", "khouloud.sma@esprit.tn", "Request levio", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return View("ForgotPasswordConfirmation");
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // SendingMail("levio.lmp@gmail.com", "khouloud.sma@esprit.tn", "Request levio", "we accept with enevt ");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
+        public void SendingMail(string From, string To, string Subject, string Body)
+        {
+            MailMessage mail = new MailMessage(From, To, Subject, Body);
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("levio.lmp@gmail.com", "eudfdldhubmzuscf");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+        }
+        //public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await UserManager.FindByEmailAsync(model.Email);
+        //        if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+        //        {
+        //            // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
+        //            return View("ForgotPasswordConfirmation");
+
+        //        }
+
+        //        // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
+        //        // Envoyer un message électronique avec ce lien
+        //        string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+        //        var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //        await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+        //        return RedirectToAction("ForgotPasswordConfirmation", "Account");
+        //    }
+
+        //    // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+        //    return View(model);
+        //}
 
         //
         // GET: /Account/ForgotPasswordConfirmation
@@ -487,7 +525,7 @@ namespace Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.UserName, Email = model.Email , FName= model.FName, LName= model.LName};
+                var user = new User { UserName = model.UserName, Email = model.Email, FName = model.FName, LName = model.LName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

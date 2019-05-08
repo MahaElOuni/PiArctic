@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class RecommandationService: Service<Recommendation>, IRecommandationService
+    public class RecommandationService : Service<Recommendation>, IRecommandationService
     {
         private static IDatabaseFactory dbfactor = new DatabaseFactory();
         private static IUnitOfWork uow = new UnitOfWork(dbfactor);
@@ -19,5 +19,14 @@ namespace Service.Services
         {
 
         }
+
+        public IEnumerable<Recommendation> ListOrgazateur(int id)
+        {
+            var list = GetAll().OrderByDescending(t => t.EventId==id);
+           
+                return list;
+        }
+       
+
     }
 }

@@ -18,20 +18,17 @@ namespace Domain.Entities
         public int RecommendationId { get; set; }
         public int RecommendationNum { get; set; }
         public State Status { get; set; }
-        //prop de navigation
-     
-        public int UserId { get; set; }
-
+        
         public String EmailParticipent { get; set; }
-        public virtual Participant Participant { get; set; }
+        
         public int? EventId { get; set; }
         public virtual Event Event { get; set; }
-      
-
+     
         public String Nom { get; set; }
         public String Prenom { get; set; }
-       
-        public virtual ICollection<User> User { get; set; }
+        public int? UserId { get; set; }
+
+        public virtual Organizer Organizer { get; set; }
 
 
     }

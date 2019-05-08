@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Service.Services;
 using Web.Models;
+using PagedList;
+using PagedList.Mvc;
+using System.Linq;
 
 namespace Web.Controllers
 {
@@ -15,31 +19,56 @@ namespace Web.Controllers
 		BlogViewModel bvm = new BlogViewModel();
 
 		// GET: Blog
-		public ActionResult Index()
+		public ActionResult Index(int? page)
 		{
 			List<BlogViewModel> list = new List<BlogViewModel>();
-			var a = blogService.GetAll();
+			var a = blogService.GetAll().Reverse();
 			foreach (var i in a)
 			{
 				BlogViewModel bvm = new BlogViewModel();
-
+				bvm.ne = i.ne;
+				bvm.Des = i.Des;
 				bvm.BlogId = i.BlogId;
 				bvm.NbrLike = i.NbrLike;
 				bvm.NbrComment = i.NbrComment;
 				bvm.Titre = i.Titre;
 				bvm.Contenu = i.Contenu;
 				bvm.Photo = i.Photo;
+				
 				bvm.DatePost = i.DatePost;
 				list.Add(bvm);
 			}
-
-			return View(list);
+			
+			return View(list.ToList().ToPagedList(page ?? 1,3));
+		}
+		public int likes(int id)
+		{
+			LikeService likeService = new LikeService();
+			
+			int likess= likeService.nbrLike(id).Count();
+			return likess;
+		}
+		public int comments(int id)
+		{
+			CommentService commentService = new CommentService();
+			
+			int commentss= commentService.nbrComment(id).Count();
+			return commentss;
 		}
 		public List<CommentViewModel> Affiche(int id)
 		{
 			BlogService blogService = new BlogService();
 			BlogViewModel bvm = new BlogViewModel();
-
+			String p = "";
+			User u = new User();
+			UserService userService = new UserService();
+			foreach (User i in userService.GetAll())
+			{
+				if (i.UserName.Equals(User.Identity.Name))
+				{
+					p = i.Photo;
+				}
+			}
 			List<CommentViewModel> lc = new List<CommentViewModel>();
 			lc.Clear();
 			Blog b = blogService.GetById(id);
@@ -50,6 +79,9 @@ namespace Web.Controllers
 
 					CommentViewModel cvm = new CommentViewModel();
 					cvm.Contenu = c.Contenu;
+					cvm.DateCom = c.DateCom;
+					cvm.nom = c.nom;
+					cvm.Photoc = p;
 					lc.Add(cvm);
 				}
 
@@ -74,15 +106,20 @@ namespace Web.Controllers
 			{
 				if (i.BlogId == id)
 				{
+					bvm.ne = i.ne;
 					bvm.BlogId = i.BlogId;
 					bvm.Titre = i.Titre;
+					bvm.Des = i.Des;
 					bvm.NbrLike = i.NbrLike;
 					bvm.NbrComment = i.NbrComment;
 					bvm.DatePost = i.DatePost;
 					bvm.Contenu = i.Contenu;
 					bvm.Photo = i.Photo;
+					bvm.likess = likes(id);
+					bvm.commentss = comments(id);
 					bvm.Comments = Affiche(id);
 				}
+				
 			}
 			return View(bvm);
 		}
@@ -95,27 +132,43 @@ namespace Web.Controllers
 
 		// POST: Blog/Create
 		[HttpPost]
-		public ActionResult Create(BlogViewModel bvm)
-		{
-			DateTime now = DateTime.Now;
-			Blog b = new Blog();
+        public ActionResult Create(BlogViewModel bvm, HttpPostedFileBase Image)
+        {
+            String e = "";
+            int idUser = 0;
+            User u = new User();
+            UserService userService = new UserService();
+            foreach (User i in userService.GetAll())
+            {
+                if (i.UserName.Equals(User.Identity.Name))
+                {
+                    idUser = i.Id;
+                    e = i.FName;
+                }
+            }
+            var path = Path.Combine(Server.MapPath("~/Content/Upload/"), Image.FileName);
+            Image.SaveAs(path);
+            DateTime now = DateTime.Now;
+            Blog b = new Blog();
+            b.ne = e;
+            b.UserId = User.Identity.GetUserId<int>();
+            b.Contenu = bvm.Contenu;
+            b.Photo = Image.FileName;
+            b.Des = bvm.Des;
+            b.Titre = bvm.Titre;
+            b.NbrComment = 0;
+            b.NbrLike = 0;
+            b.DatePost = now;
+            blogService.Add(b);
+            blogService.Commit();
 
-			b.Contenu = bvm.Contenu;
-			b.Titre = bvm.Titre;
-			b.NbrComment = 0;
-			b.NbrLike = 0;
-			b.DatePost = now;
-			b.Photo = bvm.Photo;
-			blogService.Add(b);
-			blogService.Commit();
-
-			return RedirectToAction("Index");
+            return RedirectToAction("Index");
 
 
-		}
+        }
 
-		// GET: Blog/Edit/5
-		public ActionResult Edit(int id)
+        // GET: Blog/Edit/5
+        public ActionResult Edit(int id)
 		{
 			return View();
 		}
@@ -139,9 +192,10 @@ namespace Web.Controllers
 		public ActionResult Delete(int id)
 		{
 			var blogs = blogService.GetAll();
+			int userid = User.Identity.GetUserId<int>();
 			foreach (var i in blogs)
 			{
-				if (i.BlogId == id)
+				if (i.BlogId == id && i.UserId== userid)
 				{
 					bvm.BlogId = i.BlogId;
 					bvm.Titre = i.Titre;
@@ -150,10 +204,15 @@ namespace Web.Controllers
 					bvm.Photo = i.Photo;
 					blogService.Delete(i);
 					blogService.Commit();
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return RedirectToAction("Index");
 				}
 			}
+			return RedirectToAction("Index");
 
-			return View();
 		}
 
 		// POST: Blog/Delete/5

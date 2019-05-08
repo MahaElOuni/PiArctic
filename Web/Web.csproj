@@ -292,22 +292,56 @@
     <Reference Include="Owin.Security.Providers.Yammer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1328b8c16b108c43, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.Security.Providers.Yammer.2.26.0\lib\net45\Owin.Security.Providers.Yammer.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PreMailer.Net, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PreMailer.Net.1.2.7\lib\net40\PreMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.10.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.10.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.3\lib\SendGrid.SmtpApi.dll</HintPath>
     </Reference>
     <Reference Include="SgmlReaderDll, Version=1.8.11.0, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
       <HintPath>..\packages\SgmlReader.1.8.11\lib\4.0\SgmlReaderDll.dll</HintPath>
     </Reference>
+    <Reference Include="Stripe.net, Version=25.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.25.4.0\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -350,8 +384,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
@@ -413,6 +445,7 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISatisfactionService.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RecommandationController.cs" />
@@ -426,12 +459,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogLikeViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EventSchedulerViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LikeViewModel.cs" />
     <Compile Include="Models\MaclasseViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PresidentModel.cs" />
@@ -456,6 +492,16 @@
     <Content Include="Content\css\breadcrumb.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\khouloudtemplate.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\util.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\fonts\Lato\OFL.txt" />
+    <Content Include="Content\fonts\montserrat\OFL.txt" />
+    <Content Include="Content\js1\main.js" />
+    <Content Include="Content\mytemplate\vendor\nouislider\Poduim.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\_about.css" />
@@ -791,6 +837,91 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\fonts\Lato\Lato-Black.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-BlackItalic.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-Bold.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-BoldItalic.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-Hairline.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-HairlineItalic.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-Italic.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-Light.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-LightItalic.ttf" />
+    <Content Include="Content\fonts\Lato\Lato-Regular.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Black.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Thin.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-Bold.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-BoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-ExtraBold.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-Italic.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-Light.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-LightItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-Regular.otf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-Regular.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-SemiBold.ttf" />
+    <Content Include="Content\fonts\OpenSans\OpenSans-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Black.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-BlackItalic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Italic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-LightItalic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-MediumItalic.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-ThinItalic.ttf" />
+    <Content Include="appsettings.json" />
     <None Include="Content\mytemplate\js\jquery.validate-vsdoc.js" />
     <Content Include="Content\mytemplate\js\jquery.validate.js" />
     <Content Include="Content\mytemplate\js\jquery.validate.min.js" />
@@ -1232,8 +1363,19 @@
     <Content Include="Content\mytemplate\vendor\select2\select2.min.css" />
     <Content Include="Content\mytemplate\vendor\select2\select2.min.js" />
     <Content Include="Content\mytemplate\vendor\wnumb\wNumb.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Upload\43117037_1825690054196868_60776849550082048_n.jpg" />
+    <Content Include="Content\Upload\43206433_1825690057530201_5762487797759868928_o.jpg" />
+    <Content Include="Content\Upload\46625860_217546765807967_3425613516688588800_n.jpg" />
+    <Content Include="Content\Upload\49937956_294560254583160_5973028593553375232_n.png" />
     <Content Include="Content\Upload\50583762_567757327034370_8467231224643977216_n.jpg" />
+    <Content Include="Content\Upload\52657718_376512492933516_2618532339352862720_n.jpg" />
+    <Content Include="Content\Upload\53034491_600997373661406_4200835090479054848_n.jpg" />
+    <Content Include="Content\Upload\56806534_355644785050893_7314941002920230912_n.jpg" />
+    <Content Include="Content\Upload\56806669_269165070626835_5865085443950772224_n.png" />
+    <Content Include="Content\Upload\56883546_433575360520057_3841344949119352832_n.jpg" />
+    <Content Include="Content\Upload\56962069_359250964798261_6202371931535048704_n.jpg" />
+    <Content Include="Content\Upload\56980642_2263870513828660_686660589392494592_n.jpg" />
     <Content Include="Content\vendors\jquery-validation\dist\additional-methods.js" />
     <Content Include="Content\vendors\jquery-validation\dist\additional-methods.min.js" />
     <Content Include="Content\vendors\jquery-validation\dist\jquery.validate.js" />
@@ -1365,6 +1507,18 @@
     <Content Include="Content\vendors\nouislider\nouislider.min.css" />
     <Content Include="Content\vendors\nouislider\nouislider.min.js" />
     <Content Include="Content\vendors\wnumb\wNumb.js" />
+    <Content Include="Content\vendor\animate\animate.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\tooltip.js" />
     <Content Include="Content\vendor\jquery-validation\dist\additional-methods.js" />
     <Content Include="Content\vendor\jquery-validation\dist\additional-methods.min.js" />
     <Content Include="Content\vendor\jquery-validation\dist\jquery.validate.js" />
@@ -1491,10 +1645,15 @@
     <Content Include="Content\vendor\jquery-validation\dist\localization\methods_nl.min.js" />
     <Content Include="Content\vendor\jquery-validation\dist\localization\methods_pt.js" />
     <Content Include="Content\vendor\jquery-validation\dist\localization\methods_pt.min.js" />
+    <Content Include="Content\vendor\jqueryy\jquery-3.2.1.min.js" />
     <Content Include="Content\vendor\jquery\jquery-ui.min.js" />
     <Content Include="Content\vendor\jquery\jquery.min.js" />
     <Content Include="Content\vendor\nouislider\nouislider.min.css" />
     <Content Include="Content\vendor\nouislider\nouislider.min.js" />
+    <Content Include="Content\vendor\select2\select2.css" />
+    <Content Include="Content\vendor\select2\select2.js" />
+    <Content Include="Content\vendor\select2\select2.min.css" />
+    <Content Include="Content\vendor\select2\select2.min.js" />
     <Content Include="Content\vendor\wnumb\wNumb.js" />
     <Content Include="fonts\material-icon\css\material-design-iconic-font.css" />
     <Content Include="fonts\material-icon\css\material-design-iconic-font.min.css" />
@@ -1515,6 +1674,7 @@
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-700italic.svg" />
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-italic.svg" />
     <Content Include="fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
+    <Content Include="images\icons\favicon.ico" />
     <Content Include="img\back .png" />
     <Content Include="img\banner\banner-2.jpg" />
     <Content Include="img\banner\banner-map.png" />
@@ -1548,6 +1708,7 @@
     <Content Include="img\blog\post-img1.jpg" />
     <Content Include="img\blog\post-img2.jpg" />
     <Content Include="img\blog\prev.jpg" />
+    <Content Include="img\calender.png" />
     <Content Include="img\clients-logo\c-logo-1.png" />
     <Content Include="img\clients-logo\c-logo-2.png" />
     <Content Include="img\clients-logo\c-logo-3.png" />
@@ -1591,6 +1752,9 @@
     <Content Include="img\google.png" />
     <Content Include="img\home-banner.jpg" />
     <Content Include="img\IBM-Logo.png" />
+    <Content Include="img\iconEdit.png" />
+    <Content Include="img\iconDelere.png" />
+    <Content Include="img\iconOgranizer.png" />
     <Content Include="img\icons\iconCalendar.png" />
     <Content Include="img\icons\locationIcon.png" />
     <Content Include="img\insta.png" />
@@ -1608,12 +1772,14 @@
     <Content Include="img\logo1.png" />
     <Content Include="img\logo2.png" />
     <Content Include="img\map-bg.png" />
+    <Content Include="img\rew.png" />
+    <Content Include="img\reward.png" />
     <Content Include="img\schedule-1.jpg" />
     <Content Include="img\slider-1.jpg" />
     <Content Include="img\slider-2.jpg" />
     <Content Include="img\sort-down-64.png" />
-    <Content Include="img\team\team-1.jpg" />
-    <Content Include="img\team\team-2.jpg" />
+    <Content Include="Content\Upload\team-1.jpg" />
+    <Content Include="Content\Upload\team-2.jpg" />
     <Content Include="img\team\team-3.jpg" />
     <Content Include="img\team\team-4.jpg" />
     <Content Include="img\testEvent.jpg" />
@@ -1944,88 +2110,6 @@
     <Content Include="Content\mytemplate\js\vendor\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Content\mytemplate\js\vendor\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Content\mytemplate\package.json" />
-    <Content Include="Content\mytemplate\sass\.sass-cache\deff34d1f5b7167181b556002c25068d6adc024d\styles.scssc" />
-    <Content Include="Content\mytemplate\sass\mdb.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\admin\_style.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_colors.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_functions.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_mixins.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_prefixer.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_variables-b4.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\data\_variables.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_animations.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_badge.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_breadcrumb.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_buttons.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_cards-basic.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_carousel-basic.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_collapse.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_deprecated.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_dropdowns.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_footer.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_forms-basic.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_global.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_helpers.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_jumbotron.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_list-group.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_masks.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_modals.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_msc.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_navbar.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_pagination.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_progress.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_tables.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_typography.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\free\_waves.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\date_picker\_default.date.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\date_picker\_default.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\date_picker\_default.time.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_blog.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_contacts.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_features.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_magazine.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_pricing.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_projects.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_social.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_team.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_templates.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\sections\_testimonials.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_animations-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_autocomplete.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_blog.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_buttons-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_cards-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_carousels-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_charts-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_checkbox.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_chips.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_deprecated.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_dropdowns-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_ecommerce.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_file-input.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_forms-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_input-group.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_light-box.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_material-select.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_msc.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_navbars-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_parallax.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_progress.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_radio.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_range.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_scrollbar.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_scrollspy.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_sections.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_side-nav.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_skins.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_social-buttons.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_stepper.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_switch.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_tabs.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_toasts.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\pro\_variables-pro.scss" />
-    <Content Include="Content\mytemplate\sass\mdb\_custom.scss" />
-    <Content Include="Content\mytemplate\sass\styles.scss" />
     <Content Include="Content\mytemplate\tables\data1.json" />
     <Content Include="Content\mytemplate\tables\data2.json" />
     <Content Include="Content\mytemplate\vendor\bootstrap\css\bootstrap-grid.css.map" />
@@ -2046,10 +2130,18 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\gmaps.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2160,35 +2252,45 @@
     <Content Include="Views\Event\MyCalendar.cshtml" />
     <Content Include="Views\Recommandation\Create.cshtml" />
     <Content Include="Views\Reward\Create.cshtml" />
-    <Content Include="Views\Reward\Delete.cshtml" />
-    <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Reward\Index.cshtml" />
-    <Content Include="Views\Satisfaction\Create.cshtml" />
-    <Content Include="Views\Satisfaction\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Approve.cshtml" />
     <Content Include="Views\Admin\Reject.cshtml" />
-    <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
-    <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Recommandation\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Approve.cshtml" />
     <Content Include="Views\Admin\Reject.cshtml" />
     <Content Include="Views\Event\MyEvent.cshtml" />
-    <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\statitique.cshtml" />
     <Content Include="Views\Event\DetailsMyEvent.cshtml" />
     <Content Include="Views\Scheduler\Edit.cshtml" />
-    <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Tasks\MyTask.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Form\ViewConf.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reward\Edit.cshtml" />
+    <Content Include="Views\Scheduler\Index.cshtml" />
+    <Content Include="Views\Form\Charge.cshtml" />
+    <Content Include="Views\Form\Confirmation.cshtml" />
+    <Content Include="Views\Form\Create.cshtml" />
+    <Content Include="Views\Form\Custom.cshtml" />
+    <Content Include="Views\Form\Delete.cshtml" />
+    <Content Include="Views\Form\full.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Form\Index2.cshtml" />
+    <Content Include="Views\Form\Index3.cshtml" />
+    <Content Include="Views\Form\Participant.cshtml" />
+    <Content Include="Views\Form\PartivipantEnAttente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Form\" />
+    <Folder Include="Content\css\Karim\" />
+    <Folder Include="Views\Like\" />
     <Folder Include="Views\Organizer\" />
+    <Folder Include="Views\Satisfaction\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

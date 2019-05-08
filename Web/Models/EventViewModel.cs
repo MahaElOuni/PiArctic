@@ -10,11 +10,11 @@ namespace Web.Models
     public class EventViewModel
     {
         public int EventId { get; set; }
-        [Required]
-        [StringLength(100, ErrorMessage = "You forgot to enter event title")]
+        [Required(ErrorMessage = "You forgot to enter event title")]
         public String Title { get; set; }
         public String Address { get; set; }
         [Display(Name = "Number of places")]
+       
         public int NumberPlaces { get; set; }
         public float Price { get; set; }
         public String Description { get; set; }
@@ -32,9 +32,15 @@ namespace Web.Models
         public String Photo { get; set; }
         public String Slogan { get; set; }
         public String Type { get; set; }
+        public int? NumberPlaceReserve { get; set; }
+
         public ICollection<SchedulerViewModel> listScheduler { get; set; }
         public int RewardId { get; set; }
         public virtual ICollection<Tasks> ListTask { get; set; }
+        public int? UserId { get; set; }
+        public PresidentModel President { get; set; }
+        public String UserEmail { get; set; }
+        public String UserRole { get; set; }
 
     }
 
