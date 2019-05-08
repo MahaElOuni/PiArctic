@@ -12,7 +12,7 @@ namespace WebAPIController.Controllers
     public class EventController : ApiController
     {
 
-        EventService e = new EventService();
+        EventService eventService = new EventService();
 
         // GET: api/Event
         public IEnumerable<Event> Get()
@@ -43,7 +43,7 @@ namespace WebAPIController.Controllers
         {
             List<Satisfaction> listSatisfaction = new List<Satisfaction>();
             SatisfactionService satisfactionService = new SatisfactionService();
-            foreach (Satisfaction s in satisfactionService.GetMany().Where(e => e.EventId==id))
+            foreach (Satisfaction s in satisfactionService.GetMany().Where(e => e.EventId == id))
             {
                 Satisfaction satisfaction = new Satisfaction { status = s.status };
                 listSatisfaction.Add(satisfaction);
@@ -55,14 +55,14 @@ namespace WebAPIController.Controllers
         {
             FormService form = new FormService();
 
-            return form.GetAll().Where(e=>e.EventId==id).Count();
+            return form.GetAll().Where(e => e.EventId == id).Count();
         }
         [HttpGet]
         public IEnumerable<Tasks> GetOrganizerTasks(int id)
         {
             TasksService tasks = new TasksService();
             List<Tasks> listTasks = new List<Tasks>();
-            foreach(Tasks t in tasks.GetAll().Where(e => e.EventId == id))
+            foreach (Tasks t in tasks.GetAll().Where(e => e.EventId == id))
             {
                 Tasks task1 = new Tasks { UserId = t.UserId, TaskTitle = t.TaskTitle };
                 listTasks.Add(task1);
@@ -75,7 +75,7 @@ namespace WebAPIController.Controllers
             UserService user = new UserService();
             return user.GetById(id).Email;
 
-           
+
         }
 
         // GET: api/Event/5
@@ -103,7 +103,7 @@ namespace WebAPIController.Controllers
         public IEnumerable<Recommendation> GetRecomByEvent()
         {
             List<Recommendation> listR = new List<Recommendation>();
-            
+
             foreach (Recommendation r in eventService.GetById(4).listRecommdendation)
             {
                 Recommendation recimmendation = new Recommendation { EmailParticipent = r.EmailParticipent, Nom = r.Nom, Prenom = r.Prenom };
@@ -112,5 +112,5 @@ namespace WebAPIController.Controllers
             return listR;
         }
     }
-   
+
 }
