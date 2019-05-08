@@ -316,6 +316,13 @@
     <Compile Include="Migrations\201904100531361_khouloudBD.cs" />
     <Compile Include="Migrations\201904100531361_khouloudBD.Designer.cs">
       <DependentUpon>201904100531361_khouloudBD.cs</DependentUpon>
+    <Compile Include="Migrations\201904091815488_v1.0.cs" />
+    <Compile Include="Migrations\201904091815488_v1.0.Designer.cs">
+      <DependentUpon>201904091815488_v1.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904092344416_v100.cs" />
+    <Compile Include="Migrations\201904092344416_v100.Designer.cs">
+      <DependentUpon>201904092344416_v100.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,6 +340,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904100531361_khouloudBD.resx">
       <DependentUpon>201904100531361_khouloudBD.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904091815488_v1.0.resx">
+      <DependentUpon>201904091815488_v1.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904092344416_v100.resx">
+      <DependentUpon>201904092344416_v100.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

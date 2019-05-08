@@ -102,6 +102,7 @@ namespace Web.Controllers
               return View(eventSchedulerModel);
         }
 
+
         public ActionResult liker(int id)
         {
             SatisfactionService ss = new SatisfactionService();
@@ -264,7 +265,7 @@ namespace Web.Controllers
                 e.ThemeColor = "red";
                 eventService.Add(e);
                 eventService.Commit();
-                foreach (User user in userService.GetParticipants())
+                foreach (User user in userService.GetAll())
                 {
                     SendingMail("levio.lmp@gmail.com",user.Email, "New Event: " + e.Title, "There is new event may interest you Organized by: " + e.OrganizedBy + "  you can participate to this event by connecting to your account in ConsultTeck. Thank you for your trust");
                 }
@@ -355,7 +356,7 @@ namespace Web.Controllers
         {
             eventService.Delete(eventService.GetById(id));
             eventService.Commit();
-            return View("Index");
+            return RedirectToAction("MyEvent");
         }
 
         // POST: Event/Delete/5
@@ -363,16 +364,17 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            return RedirectToAction("MyCalendar");
+            /*try
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+               
             }
             catch
             {
                 return View();
-            }
+            }*/
         }
         // GET: Event/Create
         public ActionResult MyCalendar()
