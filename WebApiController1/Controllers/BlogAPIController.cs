@@ -1,17 +1,15 @@
 ﻿using Service.Services;
-using System;
 using Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System.Linq;
 
 namespace WebApiController1.Controllers
 {
     public class BlogAPIController : ApiController
     {
 		BlogService blogService = new BlogService();
+		RatingService rs = new RatingService();
 		// GET: api/BlogAPI
 		public IEnumerable<Blog> Get()
 		{
@@ -42,5 +40,33 @@ namespace WebApiController1.Controllers
 			blogService.Delete(blogService.GetById(id));
 			blogService.Commit();
 		}
+
+
+
+        [Route("api/BlogAPI/rate")]
+        [HttpPost]
+        public IHttpActionResult ratings(Rating rat)
+        {
+            Rating r = new Rating();
+
+            r.nbrating = rat.nbrating;
+            r.UserName = rat.UserName;
+
+            rs.Add(r);
+            rs.Commit();
+            return Ok("Create Success");
+        }
+        [Route("api/BlogAPI/GetAllrat")]
+        [HttpGet]
+        // GET: api/ReclamationApi
+        public int GetAllRating()
+        {
+
+            int rattot = 0;
+            List<Rating> myList = rs.GetAll().ToList();
+            myList.ForEach(x => rattot = rattot + x.nbrating);
+            rattot = rattot / myList.Count;
+            return rattot;
+        }
     }
 }
