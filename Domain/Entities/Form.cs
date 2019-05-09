@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -48,6 +49,7 @@ namespace Domain.Entities
 
         // [Key, Column(Order = 2)]
         public int? EventId { get; set; }
+        [JsonIgnore]
         public virtual Event Event { get; set; }
         public string Title { get; set; }
         public MethodeDePayemment MethodeDePayemment { get; set; }
